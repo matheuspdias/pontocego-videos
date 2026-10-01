@@ -1040,6 +1040,8 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
         rrect(c, -hr - 4, -hr + 8, 2 * hr + 8, 20, 6)
         fs(c, hc, 5)
         circle(c, 0, -2 * hr + 12, 11, hc, 5)
+    elif hat == "pilot":
+        pilot_cap(c, hr)
     elif hat == "hood":
         hc = hat_col or COAT
         c.new_sub_path(); c.arc(0, 0, hr + 14, math.pi * 0.85, math.pi * 2.15)
@@ -1612,3 +1614,304 @@ def at(x, y, fn):
     def f(c):
         c.save(); c.translate(x, y); fn(c); c.restore()
     return f
+
+
+# ================================================================ MAPAS ESTILIZADOS (lon/lat -> tela)
+def make_proj(lon0, lon1, lat0, lat1, box=(160, 110, 1760, 1010)):
+    """projeção equiretangular simples centrada na caixa (x0,y0,x1,y1); retorna f(lon,lat)->(x,y)"""
+    x0, y0, x1, y1 = box
+    k = min((x1 - x0) / (lon1 - lon0), (y1 - y0) / (lat1 - lat0))
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    mlon, mlat = (lon0 + lon1) / 2, (lat0 + lat1) / 2
+    def f(lon, lat):
+        return cx + (lon - mlon) * k, cy - (lat - mlat) * k
+    f.k = k
+    return f
+
+
+LAND = {
+    "indochina_malaya": [(98.3, 8.0), (98.5, 7.8), (99.0, 7.0), (100.1, 6.4), (100.3, 5.4), (100.6, 4.2), (101.3, 2.8),
+                         (102.5, 1.9), (103.4, 1.3), (104.3, 1.4), (103.9, 2.6), (103.4, 3.9), (103.4, 4.9), (102.3, 6.2),
+                         (101.4, 6.9), (100.3, 7.4), (100.0, 8.5), (99.3, 9.5), (99.2, 10.6), (99.6, 11.8), (100.0, 12.5),
+                         (100.9, 13.4), (102.3, 12.2), (103.0, 11.0), (104.5, 10.4), (104.8, 8.6), (106.5, 9.5), (107.0, 10.5),
+                         (109.0, 11.3), (109.3, 12.5), (109.2, 13.8), (108.8, 15.3), (108.2, 16.5), (107.0, 17.5), (106.0, 19.0),
+                         (106.5, 20.5), (108.0, 21.5), (110.0, 21.5), (112.0, 21.8), (116.0, 22.8), (120.0, 24.5), (122.0, 30.0), (125.0, 50.0),
+                         (100.0, 50.0), (90.0, 50.0), (90.0, 30.0), (89.0, 22.0), (91.5, 22.5), (92.5, 20.5), (94.0, 18.5), (94.5, 16.0),
+                         (97.0, 16.5), (97.7, 16.0), (97.8, 14.5), (98.5, 12.5), (98.6, 10.5), (98.3, 8.0)],
+    "sumatra": [(95.3, 5.6), (97.5, 5.2), (98.7, 3.8), (100.4, 2.2), (101.4, 1.6), (102.8, 0.7), (103.8, -1.0), (104.6, -2.4),
+                (105.9, -4.0), (105.8, -5.8), (104.6, -5.9), (102.3, -4.0), (100.9, -2.0), (99.4, 0.2), (98.6, 1.7), (97.3, 2.9),
+                (96.0, 4.3), (95.3, 5.6)],
+    "borneo": [(109.0, 1.5), (109.6, 2.0), (111.0, 2.6), (113.0, 3.2), (114.5, 4.6), (115.5, 5.3), (116.5, 6.5), (117.5, 6.8),
+               (119.0, 5.2), (118.0, 4.3), (117.8, 1.0), (116.5, -1.0), (116.0, -3.5), (114.5, -3.8), (113.0, -3.2),
+               (111.0, -3.0), (110.0, -1.8), (109.0, -0.5), (109.0, 1.5)],
+    "java": [(105.2, -6.8), (106.5, -6.0), (108.3, -6.3), (110.5, -6.9), (112.6, -6.9), (114.5, -7.7), (114.4, -8.7),
+             (112.0, -8.4), (110.0, -8.1), (108.0, -7.8), (106.4, -7.4), (105.2, -6.8)],
+    "india": [(72.8, 24.0), (72.8, 20.0), (73.0, 17.0), (74.0, 14.5), (75.0, 12.0), (76.3, 9.5), (77.5, 8.1), (78.2, 8.9),
+              (79.3, 10.3), (80.2, 13.0), (80.3, 15.7), (82.2, 17.0), (84.5, 19.0), (86.5, 20.5), (89.0, 22.0), (90.0, 50.0),
+              (60.0, 50.0), (66.0, 25.0), (68.0, 24.0)],
+    "srilanka": [(79.9, 7.0), (80.0, 9.6), (80.9, 9.0), (81.9, 7.0), (80.6, 5.9)],
+    "australia": [(113.5, -22.0), (114.0, -26.0), (115.0, -30.0), (115.7, -33.5), (117.5, -35.0), (123.0, -34.0),
+                  (130.0, -32.0), (140.0, -38.0), (160.0, -45.0), (160.0, -8.0), (140.0, -10.0), (130.0, -11.0), (125.0, -14.0), (122.0, -17.0),
+                  (119.0, -20.0), (116.0, -20.5), (114.0, -21.8)],
+    "africa": [(-10.0, 50.0), (20.0, 50.0), (32.0, 31.0), (34.0, 28.0), (39.0, 15.0), (43.0, 12.0), (51.0, 11.8), (51.0, 10.4), (49.0, 6.0),
+               (46.0, 2.0), (42.0, -1.0), (40.0, -3.0), (39.3, -6.0), (39.5, -10.0), (40.5, -11.0), (40.6, -15.0), (37.0, -18.0),
+               (35.5, -21.0), (35.5, -24.0), (33.0, -26.0), (32.6, -28.5), (31.0, -30.0), (28.0, -33.0), (20.0, -35.0), (-10.0, -40.0)],
+    "arabia": [(34.5, 50.0), (34.5, 30.0), (36.0, 26.0), (39.0, 21.0), (43.0, 12.6), (45.0, 13.0), (52.0, 15.5), (55.5, 17.5),
+               (57.8, 20.5), (59.8, 22.5), (57.0, 25.0), (55.0, 50.0)],
+    "madagascar": [(49.3, -12.0), (50.4, -15.5), (49.5, -17.5), (48.7, -20.5), (47.2, -24.8), (45.2, -25.5), (43.7, -23.0),
+                   (43.5, -21.5), (44.3, -18.5), (44.0, -17.0), (46.5, -15.7), (48.0, -13.6), (49.3, -12.0)],
+}
+
+
+def draw_map(c, proj, lands=None, grid=10, land_col=(0.19, 0.21, 0.26), sea_col=(0.06, 0.09, 0.14), lw=3):
+    """mapa noturno estilizado: mar escuro, grade tracejada, terra em ardósia com contorno de giz"""
+    c.rectangle(0, 0, W, H); rgb(c, sea_col); c.fill()
+    if grid:
+        c.set_dash([4, 12])
+        for lon in range(-180, 181, grid):
+            x, _ = proj(lon, 0)
+            if 0 <= x <= W:
+                line(c, x, 0, x, H, 1.5, (0.25, 0.30, 0.38))
+        for lat in range(-90, 91, grid):
+            _, y = proj(0, lat)
+            if 0 <= y <= H:
+                line(c, 0, y, W, y, 1.5, (0.25, 0.30, 0.38))
+        c.set_dash([])
+    for name in (lands or LAND):
+        pts = [proj(*p) for p in LAND[name]]
+        poly(c, pts)
+        fs(c, land_col, lw)
+
+
+def map_label(c, proj, lon, lat, s, size=30, col=INK, font=TYPE, dx=0, dy=0):
+    x, y = proj(lon, lat)
+    text(c, s, x + dx, y + dy, size, font, col)
+
+
+def map_point(c, proj, lon, lat, col=AMBER, r=9, t=0, pulse=True):
+    x, y = proj(lon, lat)
+    if pulse:
+        ph = (t * 0.8) % 1.0
+        circle(c, x, y, r + ph * 30, None, 3 * (1 - ph) + 0.1, col)
+    circle(c, x, y, r, col, 3, INK)
+
+
+def map_path(c, proj, pts, p=1.0, col=AMBER, lw=5, dash=None):
+    """desenha a fração p (0..1) do caminho (lista de lon/lat)"""
+    xy = [proj(*q) for q in pts]
+    seg = [math.hypot(xy[i + 1][0] - xy[i][0], xy[i + 1][1] - xy[i][1]) for i in range(len(xy) - 1)]
+    tot = sum(seg) * clamp01(p)
+    c.move_to(*xy[0])
+    end = xy[0]
+    for i, L in enumerate(seg):
+        if tot <= 0:
+            break
+        k = min(1, tot / L) if L else 1
+        end = (xy[i][0] + (xy[i + 1][0] - xy[i][0]) * k, xy[i][1] + (xy[i + 1][1] - xy[i][1]) * k)
+        c.line_to(*end)
+        tot -= L
+    if dash:
+        c.set_dash(dash)
+    rgb(c, col); c.set_line_width(lw); c.stroke(); c.set_dash([])
+    # direção final
+    return end, (xy[min(len(xy) - 1, max(1, i + 1))] if len(xy) > 1 else end)
+
+
+def plane_top(c, col=(0.86, 0.86, 0.88), s=1.0):
+    """avião visto de cima apontando para a direita (gire com c.rotate)"""
+    c.save(); c.scale(s, s)
+    rrect(c, -46, -7, 92, 14, 7); fs(c, col, 3)
+    poly(c, [(8, 0), (-14, -40), (-24, -40), (-10, 0), (-24, 40), (-14, 40)]); fs(c, col, 3)
+    poly(c, [(-34, 0), (-44, -15), (-50, -15), (-44, 0), (-50, 15), (-44, 15)]); fs(c, col, 3)
+    c.restore()
+
+
+def plane_on_path(c, proj, pts, p, s=0.6, col=(0.92, 0.92, 0.94)):
+    end, nxt = map_path(c, proj, pts, p, (0, 0, 0), 0.01)
+    # recalcula direção pelo segmento atual
+    xy = [proj(*q) for q in pts]
+    seg = [math.hypot(xy[i + 1][0] - xy[i][0], xy[i + 1][1] - xy[i][1]) for i in range(len(xy) - 1)]
+    tot = sum(seg) * clamp01(p)
+    i = 0
+    while i < len(seg) - 1 and tot > seg[i]:
+        tot -= seg[i]; i += 1
+    a = math.atan2(xy[i + 1][1] - xy[i][1], xy[i + 1][0] - xy[i][0])
+    k = min(1, tot / seg[i]) if seg[i] else 1
+    x = xy[i][0] + (xy[i + 1][0] - xy[i][0]) * k
+    y = xy[i][1] + (xy[i + 1][1] - xy[i][1]) * k
+    glow(c, x, y, 70, (1, 1, 1), 0.10)
+    c.save(); c.translate(x, y); c.rotate(a); plane_top(c, col, s); c.restore()
+    return x, y
+
+
+# ================================================================ OBJETOS MH370
+def satellite(c, t=0):
+    for sx in (-1, 1):
+        c.save(); c.translate(sx * 95, 0)
+        rrect(c, -60, -28, 120, 56, 4); fs(c, (0.20, 0.30, 0.55), 4)
+        for k in (-30, 0, 30):
+            line(c, k, -28, k, 28, 2, INK)
+        line(c, -60, 0, 60, 0, 2, INK)
+        c.restore()
+        line(c, sx * 35, 0, sx * 35 * 1, 0, 4)
+    rrect(c, -35, -40, 70, 80, 8); fs(c, (0.75, 0.62, 0.30), 5)
+    line(c, 0, 40, 0, 70, 5)
+    c.new_sub_path(); c.arc(0, 85, 22, math.pi * 1.1, math.pi * 1.9)
+    rgb(c, INK); c.set_line_width(5); c.stroke()
+    circle(c, 0, -20, 6, (1, 0.3, 0.3) if int(t * 2) % 2 == 0 else DGRAY, 0)
+
+
+def ping(c, t, t0, x1, y1, x2, y2, col=ICE, d=0.9):
+    """pulso viajando de (x1,y1) até (x2,y2)"""
+    if t < t0 or t > t0 + d + 0.5:
+        return
+    p = clamp01((t - t0) / d)
+    x = x1 + (x2 - x1) * p; y = y1 + (y2 - y1) * p
+    c.set_dash([6, 10])
+    line(c, x1, y1, x, y, 2, col)
+    c.set_dash([])
+    glow(c, x, y, 40, col, 0.6 * (1 - prog(t, t0 + d, 0.5)))
+    circle(c, x, y, 7, col, 0)
+
+
+def radio_tower(c, t=0, waves=True):
+    poly(c, [(-40, 160), (0, -120), (40, 160)]); fs(c, DGRAY, 5)
+    for y in (0, 60, 120):
+        w = 40 * (y + 120) / 280
+        line(c, -w, y, w, y, 4)
+    circle(c, 0, -125, 10, RED if int(t * 1.5) % 2 == 0 else BLOOD, 3)
+    if waves:
+        for i in range(3):
+            ph = ((t * 0.7) + i / 3) % 1.0
+            r = 30 + ph * 110
+            for sx in (-1, 1):
+                c.new_sub_path()
+                a0 = -0.6 if sx > 0 else math.pi - 0.6
+                c.arc(0, -125, r, a0, a0 + 1.2)
+                rgb(c, ICE, 1 - ph); c.set_line_width(4); c.stroke()
+
+
+def sonar_ship(c, t=0):
+    c.move_to(-200, -10); c.line_to(200, -10); c.line_to(170, 40); c.line_to(-180, 40); c.close_path()
+    fs(c, (0.62, 0.20, 0.18), 6)
+    rrect(c, -60, -80, 140, 70, 6); fs(c, (0.85, 0.83, 0.76), 5)
+    for x in (-40, -5, 30):
+        c.rectangle(x, -65, 22, 18); fs(c, LYELLOW, 3)
+    line(c, 40, -80, 40, -140, 5)
+    line(c, 20, -120, 60, -120, 4)
+    circle(c, 40, -142, 6, RED if int(t * 2) % 2 == 0 else BLOOD, 0)
+
+
+def seabed(c, t=0, y=0, w=2200, seed=4, col=(0.13, 0.15, 0.18)):
+    """perfil de montanhas submarinas (desenhado a partir de y para baixo)"""
+    rnd = random.Random(seed)
+    c.move_to(-w / 2, y + 400)
+    x = -w / 2
+    pts = []
+    while x <= w / 2:
+        h = 60 + 120 * abs(math.sin(x / 210 + seed)) + rnd.uniform(0, 70)
+        pts.append((x, y - h))
+        x += 70
+    c.line_to(*pts[0])
+    for p in pts[1:]:
+        c.line_to(*p)
+    c.line_to(w / 2, y + 400)
+    c.close_path()
+    fs(c, col, 5)
+
+
+def sonar_beam(c, t, x, y, depth=520, spread=0.55, col=ICE):
+    a = math.pi / 2 + math.sin(t * 1.4) * 0.35
+    g = cairo.RadialGradient(x, y, 0, x, y, depth)
+    g.add_color_stop_rgba(0, col[0], col[1], col[2], 0.35)
+    g.add_color_stop_rgba(1, col[0], col[1], col[2], 0.0)
+    c.move_to(x, y)
+    c.arc(x, y, depth, a - spread / 2, a + spread / 2)
+    c.close_path()
+    c.set_source(g); c.fill()
+    for i in range(3):
+        ph = ((t * 0.9) + i / 3) % 1
+        c.new_sub_path(); c.arc(x, y, ph * depth, a - spread / 2, a + spread / 2)
+        rgb(c, col, 0.5 * (1 - ph)); c.set_line_width(3); c.stroke()
+
+
+def flaperon(c):
+    poly(c, [(-170, -30), (150, -45), (175, -20), (160, 25), (-160, 35), (-180, 10)])
+    fs(c, (0.80, 0.80, 0.76), 6)
+    for x in (-110, -40, 30, 100):
+        line(c, x, -36, x + 4, 30, 3, (0.55, 0.55, 0.52))
+    for x, y, r in ((-120, 0, 9), (60, -10, 7), (130, 5, 6)):
+        circle(c, x, y, r, (0.45, 0.50, 0.40), 0)
+
+
+def auv(c, t=0):
+    """robô submarino autônomo"""
+    rrect(c, -150, -32, 300, 64, 32); fs(c, LYELLOW, 6)
+    poly(c, [(-150, 0), (-195, -40), (-195, 40)]); fs(c, ORANGE, 5)
+    circle(c, 120, 0, 14, ICE, 4)
+    line(c, -20, -32, -20, -60, 5)
+    g = 0.5 + 0.5 * math.sin(t * 5)
+    glow(c, 160, 0, 120 * g + 40, ICE, 0.35)
+
+
+def black_box(c):
+    rrect(c, -110, -75, 220, 150, 10); fs(c, ORANGE, 6)
+    for y in (-40, 40):
+        c.rectangle(-110, y - 8, 220, 16); rgb(c, (0.9, 0.9, 0.85)); c.fill()
+    rrect(c, -110, -75, 220, 150, 10); rgb(c, INK); c.set_line_width(6); c.stroke()
+    text(c, "FLIGHT RECORDER", 0, 0, 22, TYPE, DARKTXT)
+
+
+def monitor(c, fn=None, w=420, h=270):
+    rrect(c, -w / 2, -h / 2, w, h, 12); fs(c, DGRAY, 6)
+    c.save()
+    c.rectangle(-w / 2 + 18, -h / 2 + 18, w - 36, h - 36); c.clip_preserve()
+    rgb(c, (0.04, 0.08, 0.10)); c.fill()
+    if fn:
+        fn(c)
+    c.restore()
+    poly(c, [(-30, h / 2), (30, h / 2), (50, h / 2 + 50), (-50, h / 2 + 50)]); fs(c, DGRAY, 5)
+
+
+def cockpit_door(c):
+    rrect(c, -110, -170, 220, 340, 8); fs(c, (0.30, 0.32, 0.36), 6)
+    rrect(c, -70, -130, 140, 90, 8); fs(c, (0.12, 0.14, 0.18), 4)
+    rrect(c, -18, -10, 36, 50, 6); fs(c, DGRAY, 4)
+    circle(c, 0, 10, 8, RED, 3)
+    circle(c, 70, 40, 12, (0.6, 0.6, 0.62), 4)
+
+
+def oxygen_mask(c, t=0):
+    sw = math.sin(t * 2.2) * 8
+    line(c, 0, -160, sw, -40, 3)
+    ellipse(c, sw, 0, 40, 46); fs(c, (0.86, 0.80, 0.70), 5)
+    rrect(c, sw - 22, -10, 44, 30, 10); fs(c, (0.70, 0.66, 0.58), 4)
+
+
+def crowd(c, t, t0, n=239, cols=24, sp=46, highlight=None, appear_d=2.2, s=0.18):
+    """grade de bonequinhos minúsculos; highlight(i)->cor opcional"""
+    for i in range(n):
+        if t < t0 + (i / n) * appear_d:
+            break
+        r, k = divmod(i, cols)
+        x = (k - (cols - 1) / 2) * sp
+        y = r * sp * 1.25
+        col = highlight(i) if highlight else LGRAY
+        c.save(); c.translate(x, y); c.scale(s * 5, s * 5)
+        circle(c, 0, -14, 6, FILL, 2.2)
+        line(c, 0, -8, 0, 4, 2.2); line(c, -6, -3, 6, -3, 2.2)
+        line(c, 0, 4, -4, 12, 2.2); line(c, 0, 4, 4, 12, 2.2)
+        if col:
+            circle(c, 0, -14, 6, col, 0)
+        c.restore()
+
+
+def pilot(c, t, x, y, s, poses=((0, "stand"),), exprs=((0, "neutral"),), fid=6, stripes=4, **kw):
+    """piloto: camisa branca, quepe"""
+    figure(c, t, x, y, s, poses=poses, exprs=exprs, shirt=(0.88, 0.88, 0.86), hair=None, fid=fid, hat="pilot", **kw)
+
+
+def pilot_cap(c, hr):
+    rrect(c, -50, -hr - 30, 100, 34, 10); fs(c, (0.12, 0.14, 0.22), 5)
+    ellipse(c, 6, -hr + 6, 56, 10); fs(c, (0.08, 0.08, 0.10), 4)
+    circle(c, 0, -hr - 14, 8, AMBER, 2)
