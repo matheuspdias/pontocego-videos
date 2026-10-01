@@ -1,0 +1,105 @@
+# Narração MH370 — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4)
+# Áudios (baixar e juntar nesta ordem, com 1,0 s de silêncio entre blocos):
+# bloco1 107.886s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f04e17f1-83d9-4524-b29a-5bb8cada5058.wav
+# bloco2 101.329s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=34977e6c-2aaf-4a4a-8298-2297c15af6a5.wav
+# bloco3  66.586s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f7ba8cf9-8437-4e24-9f46-b4f098faefe1.wav
+# bloco4 126.354s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=41146efe-f251-4240-b4b6-3b5b17c69f55.wav
+# Formato: bloco | início local (s, tempos de palavra do HeyGen) | frase
+1|0.08|Em 2014, um avião com duzentas e trinta e nove pessoas a bordo desapareceu no meio da noite.
+1|8.08|Não houve pedido de socorro.
+1|9.92|Não houve explosão.
+1|11.28|Não houve destroços no mar nos dias seguintes.
+1|14.00|E mesmo depois da maior busca da história da aviação, ninguém sabe onde ele está.
+1|20.32|Este é o mistério do voo MH370.
+1|25.04|Oito de março de dois mil e catorze.
+1|27.40|Kuala Lumpur, Malásia.
+1|29.36|Pouco depois da meia-noite e quarenta, um Boeing 777 da Malaysia Airlines decola rumo a Pequim.
+1|36.32|A viagem deveria durar seis horas.
+1|38.76|A bordo estão duzentos e vinte e sete passageiros e doze tripulantes.
+1|43.08|Mais da metade dos passageiros é chinesa.
+1|45.75|Famílias, empresários, um grupo de artistas voltando de uma exposição.
+1|50.20|No comando, o capitão Zaharie Ahmad Shah, com mais de dezoito mil horas de voo.
+1|55.68|Ao lado dele, o copiloto Fariq Abdul Hamid.
+1|58.96|Tudo parece normal.
+1|60.36|O avião sobe, atinge a altitude de cruzeiro e segue para o norte, sobre o Mar da China Meridional.
+1|67.04|À uma e dezenove da manhã, o controle de tráfego aéreo da Malásia avisa que o avião está entrando no espaço aéreo do Vietnã.
+1|74.36|Da cabine, vem a resposta:
+1|76.37|"Good night, Malaysian three seven zero."
+1|78.88|Boa noite, Malaysian três sete zero.
+1|81.41|Foram as últimas palavras ouvidas do voo MH370.
+1|86.40|Dois minutos depois, o transponder, o aparelho que identifica o avião nos radares civis, para de funcionar.
+1|92.84|Para os controladores, o MH370 simplesmente sumiu da tela.
+1|98.12|O Vietnã esperava receber o avião.
+1|100.36|A Malásia achava que ele já estava com o Vietnã.
+1|103.28|E, nessa confusão, horas se passaram antes que alguém desse o alarme.
+2|0.24|Só que o avião não tinha sumido.
+2|4.12|O radar militar da Malásia continuava captando um sinal.
+2|7.60|E o que ele mostrava não fazia sentido.
+2|10.54|O Boeing faz uma curva à esquerda.
+2|12.88|Volta.
+2|13.91|Cruza de novo a península da Malásia, passa perto da ilha de Penang e segue para o oeste, sobre o Estreito de Malaca.
+2|20.72|Tudo isso sem falar com ninguém.
+2|23.17|Às duas e vinte e dois da manhã, o avião sai do alcance do radar militar, sobre o Mar de Andamã.
+2|28.86|E então acontece algo estranho.
+2|31.44|Três minutos depois, o sistema de comunicação por satélite do avião, que estava desligado, volta a se conectar.
+2|38.08|Até hoje, ninguém sabe explicar por quê.
+2|41.28|Esse detalhe se tornaria a única pista sobre o destino do MH370.
+2|46.52|Mesmo sem ninguém enviar mensagens, o equipamento de satélite fazia uma espécie de "chamada" automática com um satélite da empresa Inmarsat, mais ou menos de hora em hora.
+2|56.88|Um simples "estou aqui".
+2|58.92|E o avião continuou respondendo.
+2|61.50|Por quase seis horas depois de sair do radar.
+2|64.64|O último sinal chegou às oito e dezenove da manhã.
+2|67.84|Depois disso, silêncio.
+2|70.47|Os engenheiros da Inmarsat analisaram o tempo e a frequência desses sinais.
+2|74.88|Não dava para saber a posição exata, mas dava para traçar um arco, uma linha enorme onde o avião poderia estar no momento do último contato.
+2|83.18|E essa linha apontava para um dos lugares mais isolados do planeta:
+2|87.68|o sul do Oceano Índico.
+2|89.92|Em vinte e quatro de março, o primeiro-ministro da Malásia anunciou ao mundo que o voo MH370 tinha terminado ali, longe de qualquer pista de pouso.
+2|100.08|Sem sobreviventes.
+3|0.08|O que veio depois foi a maior e mais cara busca da história da aviação.
+3|5.16|Navios com sonar varreram o fundo do oceano, a milhares de metros de profundidade, numa região de montanhas submarinas nunca mapeadas antes.
+3|13.76|Em três anos, foram cerca de cento e vinte mil quilômetros quadrados.
+3|18.29|Uma área maior que o estado de Pernambuco.
+3|21.76|Nada.
+3|22.93|Em janeiro de dois mil e dezessete, a busca oficial foi suspensa.
+3|27.52|Mas o oceano ainda tinha algo a dizer.
+3|30.76|Em julho de dois mil e quinze, mais de um ano depois do desaparecimento, um pedaço de asa apareceu numa praia da Ilha da Reunião, perto de Madagascar.
+3|39.40|Era um flaperon, uma peça móvel da asa.
+3|42.31|E ele era do MH370.
+3|46.08|Nos anos seguintes, outras peças foram encontradas em praias de Moçambique, da África do Sul, da Tanzânia e de Maurício.
+3|53.16|A prova era definitiva: o avião tinha mesmo caído no Oceano Índico.
+3|58.31|Só que as correntes marítimas tinham levado esses fragmentos por milhares de quilômetros.
+3|62.85|Eles diziam que o avião tinha caído.
+3|65.12|Mas não diziam onde.
+4|0.13|Em dois mil e dezoito, a investigação oficial publicou seu relatório final.
+4|4.52|Quase quinhentas páginas.
+4|6.60|E a conclusão foi esta:
+4|8.65|não foi possível determinar o que aconteceu.
+4|12.24|O relatório afirma que a volta do avião foi feita, muito provavelmente, com controle manual.
+4|17.64|E que não dá para descartar a interferência de alguém.
+4|20.54|A partir daí, surgiram as teorias.
+4|23.08|A primeira, e a mais discutida, aponta para alguém dentro da cabine.
+4|27.44|Investigadores encontraram, no simulador de voo que o capitão tinha em casa, uma rota que terminava no sul do Oceano Índico.
+4|34.54|Mas isso nunca foi tratado como prova.
+4|36.76|A família e os colegas do capitão sempre o defenderam, e nenhuma investigação encontrou um motivo.
+4|42.44|A segunda fala de um sequestro.
+4|44.64|Alguém que teria invadido a cabine e desligado os sistemas.
+4|48.16|Mas nenhum grupo jamais assumiu a autoria.
+4|50.92|A terceira fala de uma emergência.
+4|53.16|Um incêndio ou uma falha de pressurização que teria deixado todos inconscientes, enquanto o avião seguia voando sozinho até acabar o combustível.
+4|61.92|Um voo fantasma.
+4|63.68|O problema é que nenhuma dessas teorias explica tudo.
+4|67.44|Nem o silêncio, nem a curva, nem o satélite que voltou a se conectar.
+4|72.84|Em dois mil e dezoito, uma empresa privada chamada Ocean Infinity fez uma nova busca, com um acordo inusitado: só receberia se encontrasse o avião.
+4|82.24|Não encontrou.
+4|83.32|Em dois mil e vinte e cinco, ela voltou, com robôs submarinos e novas análises dos dados.
+4|88.52|A busca terminou em janeiro de dois mil e vinte e seis.
+4|91.76|De novo, sem nenhum sinal do avião.
+4|94.78|Hoje, mais de uma década depois, o MH370 continua no fundo do oceano.
+4|100.72|Em algum lugar ao longo de uma linha invisível traçada por um satélite.
+4|105.20|Com ele estão a caixa-preta, as respostas e duzentas e trinta e nove histórias que nunca terminaram.
+4|112.15|E você? O que acha que aconteceu naquela noite?
+4|115.11|Deixa a sua teoria nos comentários.
+4|116.92|Se você gosta de histórias como essa, se inscreve no canal e ativa o sininho.
+4|121.08|Eu sou o Historiador.
+4|122.36|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar.
