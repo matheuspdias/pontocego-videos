@@ -79,3 +79,6 @@ def s05(c, t):  # arquivos lacrados / pergunta
 
 
 SCENES = [(0.0, 5.0, s01), (5.0, 11.0, s02), (11.0, 17.0, s03), (17.0, 23.0, s04), (23.0, 999.0, s05)]
+
+# sons extras (além dos automáticos): impacto na abertura, rajadas de vento, batidas de coração no suspense
+SFX = [(0.4, "boom"), (11.0, "gust"), (17.3, "gust"), (19.6, "impact"), (25.3, "heartbeat"), (26.3, "heartbeat"), (27.3, "heartbeat")]

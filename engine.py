@@ -57,6 +57,15 @@ def prog(t, t0, d=0.4):
     return clamp01((t - t0) / d)
 
 
+# ---------------------------------------------------------------- eventos sonoros
+_CUES = None  # quando é uma lista, os eventos visuais são registrados aqui (ver sfx.py)
+
+
+def cue(t0, kind):
+    if _CUES is not None:
+        _CUES.append((round(float(t0), 3), kind))
+
+
 def rgb(c, col, a=1.0):
     c.set_source_rgba(col[0], col[1], col[2], a)
 
@@ -173,6 +182,7 @@ def hl(c, s, x, y, size=56, bg=PARCH, col=DARKTXT, font=TYPE, pad=24, rot=-0.015
 
 def show(c, t, t0, x, y, fn, s=1.0, anim="pop", d=0.45, t1=None, rot=0.0):
     """draw fn at (x,y) with an entrance animation starting at t0 (and optional fade-out at t1)"""
+    cue(t0, "anim:" + anim)
     if t < t0:
         return
     p = prog(t, t0, d)
@@ -239,6 +249,7 @@ def arrow(c, x1, y1, x2, y2, col=INK, lw=7, bend=0.15, head=26):
 
 def arrow_draw(c, t, t0, x1, y1, x2, y2, d=0.5, **kw):
     """arrow that grows from start"""
+    cue(t0, "arrow")
     if t < t0:
         return
     p = ease_out(prog(t, t0, d))
@@ -884,6 +895,7 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
     """draw stick figure with feet on ground y. poses/exprs are keyframe lists of (time, name)."""
     a_scale = 1.0
     if appear is not None:
+        cue(appear, "appear")
         if t < appear:
             return
         a_scale = ease_out_back(prog(t, appear, 0.45))
@@ -1141,6 +1153,9 @@ def stitle(c, s, x=0, y=0, size=72, col=INK, glow_col=None):
 
 def typewrite(c, t, t0, s, x, y, size=46, col=INK, cps=22, align="c", font=None):
     """texto aparecendo letra a letra (máquina de escrever)"""
+    for i, ch in enumerate(s):
+        if ch != " ":
+            cue(t0 + i / cps, "key")
     if t < t0:
         return
     n = int((t - t0) * cps)

@@ -47,3 +47,11 @@ Bonecos: poses `stand relax point_r point_ru point_l point_lu think think_l hips
 expressões `happy grin neutral worried shocked desperate think confident sad angry`.
 
 Precisa de algo novo (castelo, navio, símbolo)? Crie a função no `engine.py`, centrada em (0,0) e com contorno `INK` de 5-6 px, e documente aqui. Assim o motor cresce a cada vídeo.
+
+## Efeitos sonoros e ambiente
+Os efeitos são sintetizados por código (`sfx.py`), sem bancos de som, e entram **automaticamente** no `build`, no estilo sombrio:
+- Uma **cama ambiente** (grave contínuo + vento suave) toca baixinho o vídeo inteiro (`AMBIENCE = None` no scenes.py desliga).
+- **Teclas de máquina de escrever** em cada letra de `typewrite`, **impacto** grave nos carimbos (`anim="stamp"`), **whoosh escuro** na troca de cena e um tum suave nos `pop`.
+- O volume é ajustado sozinho para ficar 12 dB abaixo do pico da narração (`SFX_DB=8 python render.py build ...` deixa mais alto).
+- **Sons dramáticos** vão à mão, nos momentos certos da narração: `SFX = [(t, "boom"), (t, "heartbeat"), (t, "gust"), (t, "impact"), (t, "riser"), (t, "bell")]`.
+  Use `boom` na abertura e em revelações, `riser` antes de uma revelação, `heartbeat` no suspense, `gust` em cenas de frio/montanha e `bell` em igrejas/mortes antigas.

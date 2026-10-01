@@ -14,11 +14,50 @@ from engine import *
 XF = 0.28  # duração do crossfade entre cenas (s)
 
 
-def load_scenes(path):
+def load_module(path):
     spec = importlib.util.spec_from_file_location("scenes_mod", path)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
-    return m.SCENES
+    return m
+
+
+def load_scenes(path):
+    return load_module(path).SCENES
+
+
+SFX_STYLE = "dark"
+SFX_AMBIENCE = "dark"
+
+
+def make_sfx(scenes_path, dur, out_wav):
+    """roda cada cena no seu último instante para coletar os eventos visuais e sintetiza a trilha de efeitos"""
+    import engine, sfx
+    m = load_module(scenes_path)
+    S = m.SCENES
+    engine._CUES = []
+    surf = cairo.ImageSurface(cairo.FORMAT_RGB24, 32, 32); c = cairo.Context(surf)
+    for i, (st, en, fn) in enumerate(S):
+        fn(c, min(en, dur) - 0.001)
+        if i > 0:
+            engine._CUES.append((st, "transition"))
+    cues = engine._CUES
+    engine._CUES = None
+    if getattr(m, "SFX_OFF", False):
+        cues = []
+    track = sfx.build_track(cues, dur, getattr(m, "SFX_STYLE", SFX_STYLE), getattr(m, "SFX", ()),
+                            getattr(m, "AMBIENCE", SFX_AMBIENCE), getattr(m, "SFX_GAIN", 0.5))
+    sfx.write_wav(out_wav, track)
+    peak = float(np.max(np.abs(track))) or 1e-6
+    return len(cues), 20 * np.log10(peak)
+
+
+def max_db(path):
+    out = subprocess.run(["ffmpeg", "-hide_banner", "-i", path, "-af", "volumedetect", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    for ln in out.splitlines():
+        if "max_volume" in ln:
+            return float(ln.split("max_volume:")[1].split("dB")[0])
+    return -3.0
 
 
 def make_grain():
@@ -113,8 +152,17 @@ def build(scenes_path, audio, out_mp4, crf=26):
             f.write(f"file '{s}'\n")
     # concat + áudio + compressão final (fica ~20 MB para 4 min)
     ain = ["-f", "lavfi", "-t", str(dur), "-i", "anullsrc=r=44100:cl=stereo"] if silent else ["-i", audio]
+    sfx_wav = f"{tmp}/sfx.wav"
+    ncues, sfx_peak = make_sfx(scenes_path, dur, sfx_wav)
+    # efeitos ficam SFX_DB abaixo do pico da narração (padrão 12 dB) para nunca competir com a voz
+    narr_peak = -3.0 if silent else max_db(audio)
+    sfx_db = float(os.environ.get("SFX_DB", "12"))
+    vol = 10 ** ((narr_peak - sfx_db - sfx_peak) / 20)
+    print(f"efeitos sonoros: {ncues} eventos, volume {vol:.2f}")
+    mix = "[1:a]aformat=channel_layouts=stereo,volume=1.0[n];[2:a]aformat=channel_layouts=stereo,volume=SFXVOL[s];[n][s]amix=inputs=2:normalize=0:duration=first[a]"
+    mix = mix.replace("SFXVOL", f"{vol:.4f}")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
-                    *ain, "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
+                    *ain, "-i", sfx_wav, "-filter_complex", mix, "-map", "0:v", "-map", "[a]", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
                     "-tune", "animation", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-shortest",
                     "-movflags", "+faststart", out_mp4], check=True)
     print(out_mp4, os.path.getsize(out_mp4) // 1024 // 1024, "MB")
