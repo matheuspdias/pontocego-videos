@@ -1,0 +1,49 @@
+# pontocego-videos
+
+Motor de vídeos do canal **Ponto Cego**, sobre histórias e mistérios antigos e atuais (Biblioteca de Alexandria, Passo Dyatlov, MH370...).
+O estilo é **sombrio desenhado**: fundo noturno, traço de giz, vinheta, névoa, poeira, neve e luz de lanterna, com o narrador fixo **O Historiador**.
+
+Entrada: **transcrição com tempos** + **áudio da narração**. Saída: **MP4 1920x1080** (~20 MB a cada 4 min).
+
+## Instalação
+```bash
+./setup.sh   # pycairo, numpy e fontes (Cinzel, Special Elite, Patrick Hand). Requer ffmpeg.
+```
+
+## Fluxo de trabalho
+1. Crie `videos/<slug>/` e coloque nela `transcricao.txt` (formato `(m:ss) frase...`).
+2. Divida a narração em cenas de ~4 a 20 s. Vídeos de mistério pedem ritmo mais lento e atmosférico que vídeos explicativos.
+3. Escreva `videos/<slug>/scenes.py` (modelo: `examples/dyatlov-demo/scenes.py`). Use uma função `sNN(c, t)` por cena, em **tempo absoluto do áudio**, e termine com
+   `SCENES = [(inicio, fim, funcao), ...]`, onde a última cena termina em `999.0`.
+4. Gere as prévias: `python render.py sheet videos/<slug>/scenes.py out/preview.png t1 t2 ...`
+5. Gere o vídeo final: `python render.py build videos/<slug>/scenes.py audio.mp3 out/<slug>.mp4`
+   (prévia muda: `silent:30` no lugar do áudio).
+
+## Identidade visual
+- **Narrador fixo**: `historiador(c, t, x, y_pes, escala, poses, exprs, look=...)`. Usa chapéu fedora, sobretudo marrom, óculos redondos e lanterna acesa na mão esquerda. A lanterna some quando a mão esquerda sobe.
+  Ele aparece em quase toda cena, no canto esquerdo (x≈300-400, pés em y≈1000-1010, escala ~1.0), reagindo à narração.
+- **Outros personagens**: `hiker` (gorro + casaco, cor por pessoa), `scholar` (túnica + capuz, para a antiguidade) e `person` (genérico).
+- **Fontes**: `SERIF` (Cinzel, títulos antigos), `TYPE` (Special Elite, datas, documentos, legendas) e `HAND` (rótulos pequenos).
+- **Cores**: `INK` (giz creme, traço padrão), `AMBER` (luz, destaque), `RED`/`BLOOD` (perigo, carimbos), `ICE` (frio), `PARCH` (pergaminho), `DARKTXT` (texto sobre pergaminho).
+- Não use os glifos `≠ ≈ → ↓ ✓`, porque as fontes não têm.
+
+## Atmosfera (chame dentro da cena)
+`stars(c, t)`, `moon(c, r)`, `fog(c, t, y, alpha)`, `snow(c, t, n, vento, alpha)`, `glow(c, x, y, r, cor, a)`, `flames(c, t)`.
+O `overlay` (poeira, vinheta e flicker) e o fundo são aplicados automaticamente pelo renderizador.
+
+## Textos
+`stitle(c, "TÍTULO", x, y, size, cor, glow_col)`, `typewrite(c, t, t0, "texto", x, y, size)` (máquina de escrever),
+`date_stamp(c, "FEVEREIRO DE 1959", size, cor)` (carimbo), `chapter(c, "CAPÍTULO I", "A expedição")`,
+`caption_box(c, "fato curto")` (legenda escura), `hl(c, "texto", x, y, size)` (etiqueta de pergaminho), `title(c, t, t0, "texto", y, size)`.
+
+## Objetos
+- Mistério: `lantern candle book scroll old_map magnifier compass skull hourglass big_q newspaper folder photo pin evidence_board`
+- Cenários: `mountains tent(torn) pine footprints thermometer moon stars temple column lighthouse flames ancient_ship airplane radar`
+- Herdados do motor explicativo: `car bills coin calendar clock document house bank clipboard check_icon x_icon big_x arrow arrow_draw` etc.
+
+## Animação
+`show(c, t, t0, x, y, fn, s=1, anim="pop"|"fade"|"up"|"left"|"right"|"drop"|"stamp", d, t1)`; composição com `sc(fn, *args, s=)`, `group`, `at`, `T(...)`, `S(...)`.
+Bonecos: poses `stand relax point_r point_ru point_l point_lu think think_l hips shrug arms_up head thumb finger_up present present_l wave hold run`;
+expressões `happy grin neutral worried shocked desperate think confident sad angry`.
+
+Precisa de algo novo (castelo, navio, símbolo)? Crie a função no `engine.py`, centrada em (0,0) e com contorno `INK` de 5-6 px, e documente aqui. Assim o motor cresce a cada vídeo.
