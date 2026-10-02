@@ -159,11 +159,11 @@ def build(scenes_path, audio, out_mp4, crf=26):
     sfx_db = float(os.environ.get("SFX_DB", "12"))
     vol = 10 ** ((narr_peak - sfx_db - sfx_peak) / 20)
     print(f"efeitos sonoros: {ncues} eventos, volume {vol:.2f}")
-    mix = "[1:a]aformat=channel_layouts=stereo,volume=1.0[n];[2:a]aformat=channel_layouts=stereo,volume=SFXVOL[s];[n][s]amix=inputs=2:normalize=0:duration=first[a]"
+    mix = "[1:a]aresample=48000,pan=stereo|c0=c0|c1=c0[n];[2:a]aresample=48000,pan=stereo|c0=c0|c1=c0,volume=SFXVOL[s];[n][s]amix=inputs=2:normalize=0:duration=first[a]"
     mix = mix.replace("SFXVOL", f"{vol:.4f}")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
                     *ain, "-i", sfx_wav, "-filter_complex", mix, "-map", "0:v", "-map", "[a]", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
-                    "-tune", "animation", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-shortest",
+                    "-tune", "animation", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-shortest",
                     "-movflags", "+faststart", out_mp4], check=True)
     print(out_mp4, os.path.getsize(out_mp4) // 1024 // 1024, "MB")
 
