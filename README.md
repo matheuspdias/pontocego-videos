@@ -63,3 +63,15 @@ Os efeitos são sintetizados por código (`sfx.py`), sem bancos de som, e entram
 `make_proj(lon0, lon1, lat0, lat1)` cria uma projeção lon/lat → tela. `draw_map(c, proj)` desenha o mar noturno com grade e os continentes estilizados de `LAND` (Sudeste Asiático, Índia, África, Arábia, Madagascar, Austrália e o Atlântico Norte: `draw_map(c, proj, ATLANTIC)` com América do Norte, Europa, Ilhas Britânicas e noroeste da África; `azores(c, proj)` desenha os Açores). Adicione regiões novas quando precisar.
 Também há `map_point`, `map_label`, `map_path` (rota desenhada até a fração p) e `plane_on_path` (avião seguindo a rota).
 Objetos do MH370 que servem para outros vídeos: `satellite ping radio_tower sonar_ship seabed sonar_beam flaperon auv black_box monitor cockpit_door oxygen_mask crowd pilot`.
+
+## Cortes verticais (TikTok, YouTube Shorts, Reels)
+Depois do vídeo 16:9 pronto:
+```bash
+python cortes.py videos/<slug> out/<slug>.mp4 --audio <mp4 com o áudio final> --titulo "LINHA 1\NLINHA 2"
+```
+- Divide a história em partes de 62 s a 2:50 (o TikTok só paga vídeo com mais de 1 min; o Shorts aceita até 3 min), cortando no início de uma frase e preferindo começo de bloco ou de parágrafo do `roteiro.txt`.
+- Cada parte sai em 1080x1920: fundo com o próprio vídeo desfocado, título e "PARTE X DE N" no topo, o vídeo no meio e legendas grandes palavra por palavra (Montserrat ExtraBold, palavra falada em destaque). No fim entra "CONTINUA NA PARTE X" ou, na última, "HISTÓRIA COMPLETA NO YOUTUBE".
+- Tempos das palavras: `videos/<slug>/palavras.json` se existir; senão são estimados pelas frases e marcas `[palavra@t]` do `narracao_blocos.txt` (quanto mais marcas, melhor a sincronia).
+- Opções: `--partes N`, `--max 170`, `--cortes 160.5,308.2` (manual), `--so 1` (só uma parte, para prévia).
+- Saída: `out/<slug>_parteN.mp4` (~10 MB cada) e `out/<slug>_cortes.txt` com os tempos.
+- Tema (cores, fontes, nome do canal) em `THEME` no `cortes.py`, sobrescrito por `tema_cortes.json` quando existir.
