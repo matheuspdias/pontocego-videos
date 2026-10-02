@@ -26,7 +26,7 @@ def load_scenes(path):
 
 
 SFX_STYLE = "dark"
-SFX_AMBIENCE = None  # cama ambiente desligada: o vento era ruído e soava como chiado sob a voz
+SFX_AMBIENCE = "dark"
 
 
 def make_sfx(scenes_path, dur, out_wav):
@@ -49,6 +49,26 @@ def make_sfx(scenes_path, dur, out_wav):
     sfx.write_wav(out_wav, track)
     peak = float(np.max(np.abs(track))) or 1e-6
     return len(cues), 20 * np.log10(peak)
+
+
+def mix_graph(vol):
+    """narração + efeitos em float (nunca deixe o ffmpeg negociar formato: 8 bits gera chiado na voz)"""
+    f = "aformat=sample_fmts=fltp,aresample=48000,pan=stereo|c0=c0|c1=c0"
+    return f"[1:a]{f}[n];[2:a]{f},volume={vol:.4f}[s];[n][s]amix=inputs=2:normalize=0:duration=first[a]"
+
+
+def remix(scenes_path, audio, video_in, out_mp4, abr="160k"):
+    """refaz só o áudio (narração + efeitos) de um vídeo já renderizado, copiando a imagem"""
+    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", audio],
+                               capture_output=True, text=True).stdout)
+    tmp = tempfile.mkdtemp()
+    sfx_wav = f"{tmp}/sfx.wav"
+    ncues, sfx_peak = make_sfx(scenes_path, dur, sfx_wav)
+    vol = 10 ** ((max_db(audio) - float(os.environ.get("SFX_DB", "12")) - sfx_peak) / 20)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", video_in, "-i", audio, "-i", sfx_wav, "-filter_complex", mix_graph(vol),
+                    "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", abr, "-ar", "48000", "-shortest",
+                    "-movflags", "+faststart", out_mp4], check=True)
+    print(out_mp4, os.path.getsize(out_mp4) // 1024 // 1024, "MB")
 
 
 def max_db(path):
@@ -159,8 +179,7 @@ def build(scenes_path, audio, out_mp4, crf=26):
     sfx_db = float(os.environ.get("SFX_DB", "12"))
     vol = 10 ** ((narr_peak - sfx_db - sfx_peak) / 20)
     print(f"efeitos sonoros: {ncues} eventos, volume {vol:.2f}")
-    mix = "[1:a]aresample=48000,pan=stereo|c0=c0|c1=c0[n];[2:a]aresample=48000,pan=stereo|c0=c0|c1=c0,volume=SFXVOL[s];[n][s]amix=inputs=2:normalize=0:duration=first[a]"
-    mix = mix.replace("SFXVOL", f"{vol:.4f}")
+    mix = mix_graph(vol)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
                     *ain, "-i", sfx_wav, "-filter_complex", mix, "-map", "0:v", "-map", "[a]", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
                     "-tune", "animation", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-shortest",
@@ -176,5 +195,7 @@ if __name__ == "__main__":
         sheet(sys.argv[2], sys.argv[3], [float(x) for x in sys.argv[4:]])
     elif cmd == "build":
         build(sys.argv[2], sys.argv[3], sys.argv[4])
+    elif cmd == "remix":
+        remix(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     else:
         print(__doc__)

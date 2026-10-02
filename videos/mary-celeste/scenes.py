@@ -984,4 +984,3 @@ SFX = [(8.7, "bell"), (29.7, "heartbeat"), (46.3, "boom"), (156.5, "tum"), (B2(3
        (B2(125.4), "tum"), (B2(150.4), "tum"), (B3(69.1), "boom"), (B3(134.96), "tum"), (B3(139.3), "bell"),
        (B3(162.0), "tum"), (B3(190.6), "heartbeat"), (B3(205.5), "boom")]
 
-AMBIENCE = None  # sem cama ambiente (o vento de ruído soava como chiado sob a voz)

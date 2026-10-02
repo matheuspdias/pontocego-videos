@@ -14,6 +14,9 @@
 3. Gere cada bloco com `create_speech` e guarde os `word_timestamps` que vêm na resposta. Eles substituem a transcrição.
 4. O ambiente de render não baixa arquivos do HeyGen: passe os links dos `.wav` ao Matheus, que baixa e anexa.
 5. Junte os blocos em ordem, com **1,0 s de silêncio** entre eles, e calcule os tempos absolutos (offset de cada bloco = soma das durações anteriores + 1 s por bloco).
+   Use **sempre** `python juntar_blocos.py out/<slug>_narracao.wav bloco1.mp3 bloco2.mp3 ...`: ele força áudio em float e confere cada bloco contra o original.
+   Um concat improvisado no ffmpeg (com `anullsrc`) pode cair em 8 bits e criar um chiado que só aparece quando o narrador fala.
    Modelo: `videos/mh370/narracao_blocos.txt` → `transcricao.txt`.
+6. Para refazer só o áudio de um vídeo pronto (sem renderizar a imagem de novo): `python render.py remix videos/<slug>/scenes.py narracao.wav video.mp4 saida.mp4`.
 
 Referência de qualidade: `videos/mh370/` (primeiro vídeo com esta voz).
