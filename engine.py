@@ -1042,6 +1042,15 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
         circle(c, 0, -2 * hr + 12, 11, hc, 5)
     elif hat == "pilot":
         pilot_cap(c, hr)
+    elif hat == "tophat":
+        hc = hat_col or (0.10, 0.10, 0.12)
+        rrect(c, -36, -hr - 78, 72, 84, 6); fs(c, hc, 6)
+        c.rectangle(-36, -hr - 8, 72, 10); rgb(c, BLOOD); c.fill()
+        ellipse(c, 0, -hr + 6, 66, 11); fs(c, hc, 6)
+    elif hat == "sailor":
+        hc = hat_col or (0.85, 0.84, 0.80)
+        c.new_sub_path(); c.arc(0, -hr + 12, hr - 6, math.pi, 2 * math.pi); c.close_path(); fs(c, hc, 5)
+        rrect(c, -hr - 2, -hr + 4, 2 * hr + 4, 16, 6); fs(c, (0.16, 0.20, 0.32), 4)
     elif hat == "hood":
         hc = hat_col or COAT
         c.new_sub_path(); c.arc(0, 0, hr + 14, math.pi * 0.85, math.pi * 2.15)
@@ -1915,3 +1924,420 @@ def pilot_cap(c, hr):
     rrect(c, -50, -hr - 30, 100, 34, 10); fs(c, (0.12, 0.14, 0.22), 5)
     ellipse(c, 6, -hr + 6, 56, 10); fs(c, (0.08, 0.08, 0.10), 4)
     circle(c, 0, -hr - 14, 8, AMBER, 2)
+
+
+# ================================================================ OBJETOS MARÍTIMOS (Mary Celeste)
+SAIL = (0.80, 0.76, 0.66)
+HULL = (0.30, 0.21, 0.14)
+
+
+def sea(c, t, y=620, rough=0.0, col_top=(0.07, 0.12, 0.18), col_bot=(0.02, 0.04, 0.07), lines=True):
+    """mar noturno a partir de y até o fim da tela, com ondas que se movem (rough 0..1 = mar agitado)"""
+    g = cairo.LinearGradient(0, y, 0, H)
+    g.add_color_stop_rgb(0, *col_top)
+    g.add_color_stop_rgb(1, *col_bot)
+    c.rectangle(0, y, W, H - y); c.set_source(g); c.fill()
+    if not lines:
+        return
+    amp = 10 + 26 * rough
+    for row in range(4):
+        yy = y + 20 + row * (60 + row * 30)
+        if yy > H:
+            break
+        step = 140 + row * 60
+        sp = (25 + 30 * rough) * (1 + row * 0.6)
+        off = (t * sp + row * 57) % step
+        a = 0.9 - row * 0.15
+        for i in range(-1, int(W / step) + 2):
+            x = i * step + off - step
+            c.move_to(x, yy); c.curve_to(x + step * 0.25, yy - amp, x + step * 0.5, yy - amp, x + step * 0.75, yy)
+        rgb(c, BLUE, a); c.set_line_width(4 - row * 0.6); c.stroke()
+
+
+def _jag(c, x0, x1, y, n, seed, depth):
+    rnd = random.Random(seed)
+    for k in range(n + 1):
+        x = x1 + (x0 - x1) * k / n
+        c.line_to(x, y - (rnd.uniform(0.2, 1.0) * depth if 0 < k < n else 0))
+
+
+def brigantine(c, t=0, torn=0.0, name=None, sail=SAIL, hull=HULL, sails=True, rigging=True):
+    """bergantim (veleiro de dois mastros) visto de lado, proa para a direita; origem = linha d'água.
+    torn 0..1 rasga as velas (bordas irregulares e velas faltando)."""
+    sail_lw = 4
+    # mastros e gurupés
+    line(c, 175, -38, 330, -92, 7)
+    line(c, 70, -30, 70, -410, 8)
+    line(c, -80, -30, -80, -430, 8)
+    if rigging:
+        for a, b in (((-80, -430), (-228, -42)), ((70, -410), (215, -40)), ((70, -410), (-80, -400)),
+                     ((-80, -430), (60, -60)), ((70, -410), (330, -92))):
+            line(c, a[0], a[1], b[0], b[1], 2, (0.6, 0.57, 0.5))
+    if sails:
+        # velas redondas no mastro de vante (3 panos)
+        rows = [(-392, -305, 62, 78), (-298, -205, 80, 100), (-198, -84, 102, 120)]
+        for i, (y0, y1, w0, w1) in enumerate(rows):
+            line(c, 70 - w0 - 8, y0, 70 + w0 + 8, y0, 6)
+            if torn > 0.5 and i == 1:
+                # pano arrancado: só uma tira presa na verga
+                c.move_to(70 - w0, y0); c.line_to(70 + w0, y0)
+                _jag(c, 70 - w0, 70 + w0, y0 + 26, 7, 11, 18)
+                c.close_path(); fs(c, sail, sail_lw)
+                continue
+            c.move_to(70 - w0, y0); c.line_to(70 + w0, y0)
+            c.line_to(70 + w1, y1)
+            if torn > 0:
+                _jag(c, 70 - w1, 70 + w1, y1, 8, 20 + i, 40 * torn)
+            else:
+                c.curve_to(70 + w1 * 0.4, y1 - 14, 70 - w1 * 0.4, y1 - 14, 70 - w1, y1)
+            c.close_path(); fs(c, sail, sail_lw)
+        # vela grande latina no mastro principal (carangueja + retranca)
+        line(c, -80, -372, -232, -404, 6)
+        line(c, -80, -76, -262, -66, 6)
+        c.move_to(-86, -368); c.line_to(-226, -396)
+        if torn > 0:
+            c.line_to(-255, -72)
+            _jag(c, -255, -86, -80, 6, 31, 30 * torn) if False else None
+            c.line_to(-86, -82)
+        else:
+            c.curve_to(-262, -280, -270, -150, -255, -72); c.line_to(-86, -82)
+        c.close_path(); fs(c, sail, sail_lw)
+        if torn > 0:
+            # rasgo em diagonal
+            c.move_to(-120, -300); c.line_to(-160, -250); c.line_to(-140, -240); c.line_to(-190, -180)
+            rgb(c, (0.07, 0.08, 0.10)); c.set_line_width(10 * torn); c.stroke()
+        # bujarrona (triângulo na proa)
+        if torn < 0.8:
+            poly(c, [(76, -380), (318, -96), (170, -60)]); fs(c, sail, sail_lw)
+    # casco
+    c.move_to(-238, -46); c.line_to(228, -46)
+    c.curve_to(214, 0, 180, 34, 120, 44); c.line_to(-190, 44)
+    c.curve_to(-218, 30, -232, 0, -238, -46); c.close_path()
+    fs(c, hull, 6)
+    line(c, -232, -18, 214, -18, 3, (0.55, 0.42, 0.28))
+    line(c, -242, -56, 232, -56, 5)
+    for x in range(-220, 230, 34):
+        line(c, x, -56, x, -46, 3)
+    if name:
+        text(c, name, -40, 10, 24, TYPE, PARCH)
+
+
+def barrel(c, empty=False, col=BROWN, label=None):
+    """barril de madeira (~120 x 170)"""
+    c.move_to(-48, -82); c.curve_to(-70, -40, -70, 40, -48, 82); c.line_to(48, 82)
+    c.curve_to(70, 40, 70, -40, 48, -82); c.close_path()
+    fs(c, (0.15, 0.12, 0.10) if empty else col, 6)
+    for x in (-24, 0, 24):
+        line(c, x, -80, x, 80, 2, (0.30, 0.20, 0.12))
+    for y in (-52, 52):
+        c.move_to(-62, y); c.curve_to(-30, y + 6, 30, y + 6, 62, y)
+        rgb(c, (0.20, 0.20, 0.22)); c.set_line_width(9); c.stroke()
+    ellipse(c, 0, -82, 48, 12); fs(c, (0.52, 0.38, 0.24) if not empty else (0.12, 0.10, 0.09), 5)
+    if label:
+        text(c, label, 0, 4, 30, TYPE, DARKTXT if not empty else INK)
+
+
+def lifeboat(c, people=0, oars=False, col=(0.55, 0.40, 0.26)):
+    """bote salva-vidas (escaler) de lado; origem = linha d'água; people = cabeças a bordo"""
+    rnd = random.Random(5)
+    for i in range(people):
+        x = -95 + i * (190 / max(1, people - 1)) if people > 1 else 0
+        y = -48 - rnd.uniform(0, 8)
+        line(c, x, -18, x, y + 14, 5)
+        circle(c, x, y, 13, FILL, 4)
+    if oars:
+        line(c, -40, -30, -120, 30, 5); line(c, 40, -30, 120, 30, 5)
+    c.move_to(-140, -26); c.line_to(140, -26); c.curve_to(120, 12, 80, 22, 40, 24); c.line_to(-60, 24)
+    c.curve_to(-110, 20, -132, 4, -140, -26); c.close_path()
+    fs(c, col, 6)
+    line(c, -136, -14, 130, -14, 3, (0.35, 0.25, 0.16))
+
+
+def sextant(c):
+    br = (0.72, 0.58, 0.30)
+    poly(c, [(0, -110), (-92, 70), (92, 70)]); rgb(c, INK); c.set_line_width(7); c.stroke()
+    c.new_sub_path(); c.arc(0, -110, 190, math.pi * 0.36, math.pi * 0.64)
+    rgb(c, br); c.set_line_width(22); c.stroke()
+    for k in range(9):
+        a = math.pi * (0.37 + k * 0.03)
+        line(c, 180 * math.cos(a), -110 + 180 * math.sin(a), 198 * math.cos(a), -110 + 198 * math.sin(a), 2, DARKTXT)
+    line(c, 0, -110, 40, 76, 6, br)
+    c.rectangle(-14, -128, 28, 34); fs(c, ICE, 4)
+    rrect(c, -110, -40, 70, 26, 10); fs(c, (0.25, 0.25, 0.28), 4)
+    circle(c, 0, -110, 10, br, 4)
+
+
+def chronometer(c, t=0, wrong=False):
+    rrect(c, -120, -100, 240, 200, 14); fs(c, (0.42, 0.28, 0.17), 6)
+    circle(c, 0, 0, 74, (0.85, 0.82, 0.72), 6)
+    for k in range(12):
+        a = k * math.pi / 6
+        line(c, 60 * math.cos(a), 60 * math.sin(a), 68 * math.cos(a), 68 * math.sin(a), 3, DARKTXT)
+    a1 = t * (0.9 if wrong else 0.05) - math.pi / 2
+    a2 = t * (0.12 if wrong else 0.004) + 0.6
+    line(c, 0, 0, 52 * math.cos(a1), 52 * math.sin(a1), 4, DARKTXT)
+    line(c, 0, 0, 34 * math.cos(a2), 34 * math.sin(a2), 6, DARKTXT)
+    circle(c, 0, 0, 6, BLOOD, 0)
+
+
+def spyglass(c):
+    c.save(); c.rotate(-0.25)
+    for x0, x1, r, col in ((-150, -40, 22, (0.40, 0.28, 0.18)), (-40, 60, 18, (0.72, 0.58, 0.30)), (60, 150, 14, (0.72, 0.58, 0.30))):
+        c.rectangle(x0, -r, x1 - x0, 2 * r); fs(c, col, 5)
+    ellipse(c, -150, 0, 8, 24); fs(c, ICE, 4)
+    c.restore()
+
+
+def ship_wheel(c, t=0, spin=0.0):
+    c.save(); c.rotate(t * spin)
+    for k in range(8):
+        a = k * math.pi / 4
+        line(c, 0, 0, 125 * math.cos(a), 125 * math.sin(a), 9, (0.50, 0.36, 0.22))
+        circle(c, 125 * math.cos(a), 125 * math.sin(a), 10, (0.50, 0.36, 0.22), 4)
+    circle(c, 0, 0, 92, None, 16, (0.50, 0.36, 0.22))
+    circle(c, 0, 0, 100, None, 3, INK); circle(c, 0, 0, 84, None, 3, INK)
+    circle(c, 0, 0, 22, AMBER, 5)
+    c.restore()
+
+
+def sword(c, stains=False):
+    poly(c, [(-60, -9), (190, -6), (220, 0), (190, 6), (-60, 9)]); fs(c, (0.78, 0.80, 0.84), 4)
+    line(c, -50, 0, 180, 0, 2, (0.55, 0.57, 0.62))
+    rrect(c, -72, -46, 16, 92, 6); fs(c, AMBER, 4)
+    rrect(c, -150, -11, 80, 22, 8); fs(c, (0.30, 0.20, 0.14), 4)
+    circle(c, -156, 0, 14, AMBER, 4)
+    if stains:
+        rnd = random.Random(9)
+        for _ in range(7):
+            circle(c, rnd.uniform(20, 140), rnd.uniform(-5, 5), rnd.uniform(3, 7), (0.45, 0.28, 0.16), 0)
+
+
+def teacup(c, t=0, steam=True):
+    ellipse(c, 0, 40, 120, 18); fs(c, (0.85, 0.83, 0.78), 5)
+    c.move_to(-75, -30); c.curve_to(-70, 40, 70, 40, 75, -30); c.close_path(); fs(c, (0.90, 0.88, 0.82), 5)
+    c.new_sub_path(); c.arc(86, 0, 22, -math.pi / 2, math.pi / 2); rgb(c, INK); c.set_line_width(7); c.stroke()
+    ellipse(c, 0, -30, 75, 12); fs(c, (0.45, 0.28, 0.14), 4)
+    if steam:
+        for i, x in enumerate((-30, 0, 30)):
+            ph = t * 1.4 + i
+            c.move_to(x, -50)
+            for k in range(1, 5):
+                c.line_to(x + 12 * math.sin(ph + k), -50 - k * 28)
+            rgb(c, INK, 0.45); c.set_line_width(4); c.stroke()
+
+
+def stove(c, t=0):
+    rrect(c, -90, -60, 180, 140, 8); fs(c, (0.22, 0.22, 0.25), 6)
+    c.rectangle(-50, -10, 100, 60); fs(c, (0.12, 0.12, 0.14), 4)
+    glow(c, 0, 20, 60, ORANGE, 0.35 + 0.1 * math.sin(t * 5))
+    line(c, -70, 80, -70, 110, 8); line(c, 70, 80, 70, 110, 8)
+    rrect(c, -50, -110, 100, 50, 10); fs(c, (0.40, 0.40, 0.44), 5)
+    line(c, 50, -95, 90, -105, 6)
+
+
+def sea_chest(c):
+    rrect(c, -110, -50, 220, 110, 8); fs(c, (0.45, 0.31, 0.19), 6)
+    poly(c, [(-110, -50), (110, -50), (95, -100), (-95, -100)]); fs(c, (0.52, 0.37, 0.23), 6)
+    for x in (-70, 70):
+        c.rectangle(x - 8, -100, 16, 160); fs(c, (0.25, 0.25, 0.28), 3)
+    c.rectangle(-14, -30, 28, 30); fs(c, AMBER, 3)
+
+
+def folded_clothes(c):
+    for i, col in enumerate(((0.30, 0.36, 0.52), (0.62, 0.58, 0.50), (0.48, 0.24, 0.20))):
+        rrect(c, -90, -20 - i * 34, 180, 32, 8); fs(c, col, 5)
+
+
+def pump(c, broken=True):
+    rrect(c, -30, -120, 60, 200, 10); fs(c, (0.40, 0.42, 0.46), 6)
+    line(c, 0, -120, 0, -170, 8)
+    if broken:
+        c.save(); c.translate(120, 70); c.rotate(0.3)
+        line(c, -70, 0, 70, 0, 9); circle(c, -70, 0, 10, AMBER, 4)
+        c.restore()
+        for x, y in ((90, 10), (150, 30)):
+            circle(c, x, y, 14, (0.40, 0.42, 0.46), 4)
+    else:
+        line(c, 0, -170, 90, -200, 9)
+    rrect(c, -55, 70, 110, 22, 6); fs(c, (0.30, 0.31, 0.35), 5)
+
+
+def sounding_rod(c):
+    c.save(); c.rotate(-0.08)
+    rrect(c, -220, -9, 440, 18, 6); fs(c, (0.62, 0.48, 0.30), 4)
+    for k in range(1, 12):
+        x = -220 + k * 36
+        line(c, x, -9, x, 9 if k % 3 else 14, 3, DARKTXT)
+    line(c, 220, 0, 300, -40, 3, (0.7, 0.66, 0.56))
+    c.restore()
+
+
+def hatch(c, open_=True):
+    rrect(c, -130, -60, 260, 120, 6); fs(c, (0.05, 0.05, 0.06), 6)
+    if open_:
+        c.save(); c.translate(-130, -60); c.rotate(-0.5)
+        rrect(c, 0, -110, 260, 110, 6); fs(c, (0.50, 0.36, 0.22), 6)
+        c.restore()
+
+
+def waterspout(c, t=0, h=620):
+    """tromba d'água: funil do céu (y=-h) até o mar (y=0)"""
+    for i in range(3):
+        a = 0.18 - i * 0.05
+        c.move_to(-220 + i * 40, -h); c.curve_to(-60, -h * 0.55, -26, -h * 0.25, -18 - i * 4, 0)
+        c.line_to(18 + i * 4, 0); c.curve_to(26, -h * 0.25, 60, -h * 0.55, 220 - i * 40, -h); c.close_path()
+        rgb(c, (0.62, 0.66, 0.72), a); c.fill()
+    for k in range(9):
+        p = ((t * 0.6 + k / 9) % 1)
+        y = -h * p
+        w = 18 + 200 * p ** 2
+        c.save(); c.translate(0, y); c.scale(1, 0.18)
+        c.new_sub_path(); c.arc(0, 0, w, 0.2 + t * 3, 2.6 + t * 3)
+        c.restore(); rgb(c, INK, 0.35); c.set_line_width(3); c.stroke()
+    for k in range(10):
+        ph = (t * 1.3 + k * 0.37) % 1
+        x = (k - 4.5) * 22 * (1 + ph)
+        circle(c, x, -ph * 60, 4, None, 2, (0.75, 0.85, 0.95))
+    cloud_shape(c, 620, 140, (0.16, 0.17, 0.20), 6, 5) if False else None
+
+
+def storm_cloud(c, w=700, h=150):
+    cloud_shape(c, w, h, (0.16, 0.17, 0.20), 6, 5)
+
+
+def lightning(c, s=1.0):
+    c.save(); c.scale(s, s)
+    poly(c, [(0, -160), (-40, -10), (-6, -10), (-34, 150), (50, -40), (12, -40), (40, -160)])
+    fs(c, LYELLOW, 4)
+    c.restore()
+
+
+def flag(c, kind="us", t=0):
+    """bandeira num mastro (origem = topo do mastro). kind: us | ensign (red ensign britânico/canadense)"""
+    line(c, 0, -10, 0, 260, 6)
+    wv = lambda x: 6 * math.sin(t * 3 + x / 30)
+    w, h = 220, 140
+    def path():
+        c.move_to(0, 0)
+        for x in range(0, w + 1, 20):
+            c.line_to(x, wv(x))
+        for x in range(w, -1, -20):
+            c.line_to(x, h + wv(x))
+        c.close_path()
+    if kind == "us":
+        path(); fs(c, (0.88, 0.86, 0.80), 5)
+        for i in range(0, 7, 2):
+            y0 = i * h / 7
+            c.move_to(0, y0 + wv(0))
+            for x in range(0, w + 1, 20):
+                c.line_to(x, y0 + wv(x))
+            for x in range(w, -1, -20):
+                c.line_to(x, y0 + h / 7 + wv(x))
+            c.close_path(); rgb(c, RED); c.fill()
+        c.rectangle(2, 2 + wv(40), 92, 74); rgb(c, (0.18, 0.24, 0.45)); c.fill()
+        for i in range(3):
+            for j in range(4):
+                circle(c, 14 + j * 22, 16 + wv(40) + i * 22, 3.5, INK, 0)
+    else:
+        path(); fs(c, RED, 5)
+        c.rectangle(2, 2 + wv(40), 100, 66); rgb(c, (0.18, 0.24, 0.45)); c.fill()
+        line(c, 2, 2 + wv(40), 102, 68 + wv(40), 6, INK); line(c, 102, 2 + wv(40), 2, 68 + wv(40), 6, INK)
+        line(c, 52, 2 + wv(40), 52, 68 + wv(40), 10, INK); line(c, 2, 35 + wv(40), 102, 35 + wv(40), 10, INK)
+        line(c, 52, 2 + wv(40), 52, 68 + wv(40), 5, RED); line(c, 2, 35 + wv(40), 102, 35 + wv(40), 5, RED)
+
+
+def tombstone(c, label=""):
+    c.move_to(-80, 110); c.line_to(-80, -40); c.arc(0, -40, 80, math.pi, 2 * math.pi); c.line_to(80, 110); c.close_path()
+    fs(c, (0.32, 0.33, 0.36), 6)
+    line(c, 0, -60, 0, 10, 6); line(c, -24, -36, 24, -36, 6)
+    if label:
+        text(c, label, 0, 55, 26, TYPE, INK)
+
+
+def nameboard(c, s, size=46, w=None):
+    """placa de nome do navio (madeira com letras douradas)"""
+    w = w or text_w(c, s, size, SERIF) + 80
+    rrect(c, -w / 2, -size * 0.8, w, size * 1.6, 12); fs(c, (0.34, 0.23, 0.14), 6)
+    text(c, s, 0, 0, size, SERIF, AMBER)
+
+
+def coal(c):
+    rnd = random.Random(4)
+    for _ in range(26):
+        x, y = rnd.gauss(0, 60), -abs(rnd.gauss(0, 30))
+        r = rnd.uniform(14, 26)
+        poly(c, [(x + r * math.cos(a + 0.3), y + r * math.sin(a + 0.3) * 0.8) for a in [k * 1.2 for k in range(6)]])
+        fs(c, (0.10, 0.10, 0.11), 3)
+
+
+def gavel(c):
+    c.save(); c.rotate(-0.5)
+    rrect(c, -10, -20, 20, 180, 8); fs(c, (0.45, 0.30, 0.18), 4)
+    rrect(c, -70, -60, 140, 60, 14); fs(c, (0.40, 0.26, 0.15), 5)
+    c.restore()
+    rrect(c, -40, 150, 160, 30, 8); fs(c, (0.40, 0.26, 0.15), 5)
+
+
+def tree_rings(c, n=12, r=150):
+    rnd = random.Random(2)
+    circle(c, 0, 0, r + 14, (0.36, 0.25, 0.16), 6)
+    circle(c, 0, 0, r, (0.72, 0.58, 0.40), 3)
+    for k in range(1, n):
+        rr = r * k / n
+        c.new_sub_path()
+        for a in range(0, 361, 15):
+            q = rr + rnd.uniform(-3, 3)
+            x, y = q * math.cos(math.radians(a)), q * math.sin(math.radians(a))
+            (c.move_to if a == 0 else c.line_to)(x, y)
+        c.close_path(); rgb(c, (0.45, 0.32, 0.20)); c.set_line_width(2.5); c.stroke()
+
+
+def reef(c, t=0, w=700):
+    rnd = random.Random(6)
+    pts = [(-w / 2, 40)]
+    x = -w / 2
+    while x < w / 2:
+        x += rnd.uniform(40, 80)
+        pts.append((min(x, w / 2), -rnd.uniform(10, 70)))
+    pts.append((w / 2, 40))
+    poly(c, pts); fs(c, (0.20, 0.21, 0.23), 5)
+    for k in range(6):
+        ph = (t * 0.7 + k / 6) % 1
+        xx = -w / 2 + k * w / 6 + 40
+        circle(c, xx, -10 - ph * 40, 6 + ph * 12, None, 3 * (1 - ph) + 0.1, INK)
+
+
+def azores(c, proj, labels=False, col=(0.22, 0.25, 0.30), only=None):
+    """ilhas dos Açores (elipses estilizadas)"""
+    isl = {"Flores": (-31.2, 39.45, 0.35, 0.18), "Faial": (-28.7, 38.58, 0.25, 0.12), "Pico": (-28.3, 38.47, 0.45, 0.12),
+           "São Jorge": (-28.0, 38.65, 0.55, 0.08), "Terceira": (-27.2, 38.72, 0.32, 0.14),
+           "São Miguel": (-25.5, 37.78, 0.70, 0.15), "Santa Maria": (-25.1, 36.97, 0.18, 0.12)}
+    for nm, (lon, lat, rx, ry) in isl.items():
+        if only and nm not in only:
+            continue
+        x, y = proj(lon, lat)
+        ellipse(c, x, y, max(5, rx * proj.k), max(4, ry * proj.k)); fs(c, col, 3)
+        if labels:
+            text(c, nm, x, y + max(4, ry * proj.k) + 26, 24, TYPE, INK)
+
+
+LAND.update({
+    "n_america": [(-100, 62), (-64, 60), (-61, 56), (-56, 52), (-55.5, 49.5), (-59.5, 47.6), (-61, 45.6), (-60, 46.2), (-62.5, 45.6),
+                  (-66, 43.5), (-66.2, 45.1), (-67.5, 44.5), (-70, 43.8), (-70.6, 42.6), (-70, 41.7), (-72, 41.1), (-74, 40.6),
+                  (-74, 39.5), (-75.5, 37.5), (-76, 35), (-78, 33.8), (-81, 31.5), (-81.2, 29.5), (-80, 26.5), (-80.3, 25.2),
+                  (-81.5, 25.5), (-83, 28), (-85, 30), (-90, 30), (-100, 28)],
+    "newfoundland": [(-59.4, 47.6), (-56, 51.6), (-55.5, 49.6), (-53, 48.6), (-52.6, 47.5), (-53.6, 46.6), (-55.8, 47.0), (-59.4, 47.6)],
+    "europe": [(-5.6, 36.0), (-6.3, 36.8), (-7.4, 37.2), (-8.8, 37.0), (-8.8, 38.5), (-9.5, 38.8), (-8.8, 40.5), (-8.9, 42.0),
+               (-9.3, 43.0), (-8.0, 43.7), (-1.8, 43.4), (-1.2, 46.0), (-2.5, 47.3), (-4.7, 48.4), (-1.5, 48.8), (1.5, 50.1),
+               (3.0, 51.2), (5.0, 53.4), (8.0, 54.0), (9, 57), (10.5, 59), (12, 62), (40, 62), (40, 41), (29, 41), (26, 40.5),
+               (24, 38), (22.5, 36.5), (21, 38.5), (19.5, 41), (19.5, 42.2), (15.5, 44.5), (13.8, 45.6), (12.3, 45.4), (12.5, 44),
+               (14, 42), (16, 41.5), (18.5, 40.2), (16.5, 38.9), (15.7, 38), (15.6, 40), (12.3, 41.7), (10.5, 43), (8.9, 44.4),
+               (6, 43.1), (3.2, 43.3), (3.2, 42), (0.5, 40.5), (-0.3, 39.5), (-0.5, 38.3), (-2, 36.7), (-4.5, 36.7), (-5.6, 36.0)],
+    "britain": [(-5.7, 50.0), (1.4, 51.2), (1.7, 52.7), (0, 53.5), (-1.6, 55.6), (-2, 57.6), (-3.3, 58.6), (-5, 58.6), (-6.2, 56.8),
+                (-5.4, 55.0), (-3, 54.5), (-3.2, 53.4), (-4.6, 53.2), (-4.2, 52.2), (-5.2, 51.7), (-3.4, 51.4), (-5.7, 50.0)],
+    "ireland": [(-6, 52.2), (-6, 54), (-7.4, 55.3), (-10, 54.2), (-10.3, 51.7), (-8.2, 51.6), (-6, 52.2)],
+    "nw_africa": [(-5.9, 35.8), (-6.8, 34.0), (-9.6, 30.4), (-9.8, 29.0), (-13, 27.7), (-16, 23.5), (-17, 21), (-16.5, 19),
+                  (-17.5, 14.7), (-16.7, 12), (-15, 5), (20, 5), (20, 33), (11, 37), (10, 37.3), (3, 36.8), (-2, 35.1), (-5.3, 35.9)],
+    "sardinia_sicily": [(8.4, 39.0), (9.8, 39.2), (9.8, 41.0), (9.2, 41.2), (8.2, 40.9), (8.4, 39.0)],
+})
+ATLANTIC = ["n_america", "newfoundland", "europe", "britain", "ireland", "nw_africa", "sardinia_sicily"]

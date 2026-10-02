@@ -39,6 +39,8 @@ O `overlay` (poeira, vinheta e flicker) e o fundo são aplicados automaticamente
 ## Objetos
 - Mistério: `lantern candle book scroll old_map magnifier compass skull hourglass big_q newspaper folder photo pin evidence_board`
 - Cenários: `mountains tent(torn) pine footprints thermometer moon stars temple column lighthouse flames ancient_ship airplane radar`
+- Mar e navios (Mary Celeste): `sea(c, t, y, rough)` (mar noturno com ondas), `brigantine(c, t, torn, name)` (veleiro de 2 mastros; `torn` rasga as velas), `lifeboat(people)`, `barrel(empty, label)`, `sextant`, `chronometer(t, wrong)`, `spyglass`, `ship_wheel(t, spin)`, `sword(stains)`, `teacup(t)`, `stove(t)`, `sea_chest`, `folded_clothes`, `pump(broken)`, `sounding_rod`, `hatch`, `waterspout(t)`, `storm_cloud`, `lightning`, `flag("us"|"ensign", t)`, `tombstone(label)`, `nameboard("NOME")`, `coal`, `gavel`, `tree_rings`, `reef(t)`
+- Chapéus extras dos bonecos: `hat="tophat"` (cartola, séc. XIX) e `hat="sailor"` (marinheiro); `hat="pilot"` serve como quepe de capitão
 - Herdados do motor explicativo: `car bills coin calendar clock document house bank clipboard check_icon x_icon big_x arrow arrow_draw` etc.
 
 ## Animação
@@ -53,10 +55,11 @@ Os efeitos são sintetizados por código (`sfx.py`), sem bancos de som, e entram
 - Uma **cama ambiente** (grave contínuo + vento suave) toca baixinho o vídeo inteiro (`AMBIENCE = None` no scenes.py desliga).
 - **Teclas de máquina de escrever** em cada letra de `typewrite`, **impacto** grave nos carimbos (`anim="stamp"`), **whoosh escuro** na troca de cena e um tum suave nos `pop`.
 - O volume é ajustado sozinho para ficar 12 dB abaixo do pico da narração (`SFX_DB=8 python render.py build ...` deixa mais alto).
+- **Preferência do Matheus:** sem som em toda transição e sem som em cada ícone ("fica chato"). Desde o Mary Celeste o padrão é `SFX_OFF = True` (desliga os sons automáticos) + 10 a 15 toques à mão nos momentos-chave, com sons sem chiado (`tum boom heartbeat bell`). Evite `whoosh swish gust`, que são feitos de ruído.
 - **Sons dramáticos** vão à mão, nos momentos certos da narração: `SFX = [(t, "boom"), (t, "heartbeat"), (t, "gust"), (t, "impact"), (t, "riser"), (t, "bell")]`.
   Use `boom` na abertura e em revelações, `riser` antes de uma revelação, `heartbeat` no suspense, `gust` em cenas de frio/montanha e `bell` em igrejas/mortes antigas.
 
 ## Mapas
-`make_proj(lon0, lon1, lat0, lat1)` cria uma projeção lon/lat → tela. `draw_map(c, proj)` desenha o mar noturno com grade e os continentes estilizados de `LAND` (Sudeste Asiático, Índia, África, Arábia, Madagascar e Austrália; adicione regiões novas quando precisar).
+`make_proj(lon0, lon1, lat0, lat1)` cria uma projeção lon/lat → tela. `draw_map(c, proj)` desenha o mar noturno com grade e os continentes estilizados de `LAND` (Sudeste Asiático, Índia, África, Arábia, Madagascar, Austrália e o Atlântico Norte: `draw_map(c, proj, ATLANTIC)` com América do Norte, Europa, Ilhas Britânicas e noroeste da África; `azores(c, proj)` desenha os Açores). Adicione regiões novas quando precisar.
 Também há `map_point`, `map_label`, `map_path` (rota desenhada até a fração p) e `plane_on_path` (avião seguindo a rota).
 Objetos do MH370 que servem para outros vídeos: `satellite ping radio_tower sonar_ship seabed sonar_beam flaperon auv black_box monitor cockpit_door oxygen_mask crowd pilot`.

@@ -9,7 +9,7 @@
 | Velocidade | 1.0 (padrão) |
 
 ## Como gerar a narração
-1. Roteiro com tags do ElevenLabs v4: `[serious]`, `[sad]`, `[thoughtful]`, `[mysterious]`, `[whispers]`, `[curious]`, `[calm]` e as pausas `[short pause]` / `[long pause]`. Números escritos por extenso.
+1. Roteiro com tags do ElevenLabs v4: `[serious]`, `[sad]`, `[thoughtful]`, `[mysterious]`, `[curious]`, `[calm]` e as pausas `[short pause]` / `[long pause]`. **Não use `[whispers]`** (o Matheus não gostou do sussurro). Números escritos por extenso.
 2. Divida em blocos de até ~4.500 caracteres, cortando nas mudanças de assunto. Cada bloco começa com uma tag.
 3. Gere cada bloco com `create_speech` e guarde os `word_timestamps` que vêm na resposta. Eles substituem a transcrição.
 4. O ambiente de render não baixa arquivos do HeyGen: passe os links dos `.wav` ao Matheus, que baixa e anexa.
