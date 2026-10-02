@@ -26,7 +26,7 @@ def load_scenes(path):
 
 
 SFX_STYLE = "dark"
-SFX_AMBIENCE = "dark"
+SFX_AMBIENCE = None  # cama ambiente desligada: o vento era ruído e soava como chiado sob a voz
 
 
 def make_sfx(scenes_path, dur, out_wav):
