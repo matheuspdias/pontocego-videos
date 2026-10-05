@@ -2341,3 +2341,278 @@ LAND.update({
     "sardinia_sicily": [(8.4, 39.0), (9.8, 39.2), (9.8, 41.0), (9.2, 41.2), (8.2, 40.9), (8.4, 39.0)],
 })
 ATLANTIC = ["n_america", "newfoundland", "europe", "britain", "ireland", "nw_africa", "sardinia_sicily"]
+
+
+# ================================================================ América do Sul / Amazônia (Fawcett e a Cidade de Z)
+LAND.update({
+    "s_america": [(-77.3, 8.6), (-75.5, 10.5), (-72.0, 11.8), (-71.3, 12.4), (-70.0, 12.0), (-68.0, 10.6), (-64.0, 10.6),
+                  (-61.5, 10.7), (-60.0, 8.5), (-57.0, 6.0), (-54.0, 5.7), (-51.5, 4.4), (-50.0, 1.8), (-50.5, 0.0),
+                  (-48.5, -1.0), (-44.5, -2.5), (-41.0, -3.0), (-38.5, -3.7), (-35.3, -5.2), (-34.9, -8.0), (-35.6, -9.7),
+                  (-37.5, -12.0), (-38.9, -13.5), (-39.0, -17.5), (-40.0, -20.0), (-41.0, -22.0), (-43.2, -23.0),
+                  (-45.5, -23.8), (-48.5, -26.0), (-48.7, -28.5), (-50.5, -31.0), (-52.5, -33.5), (-54.0, -34.8),
+                  (-56.5, -34.9), (-58.4, -34.5), (-57.5, -36.5), (-57.6, -38.2), (-62.0, -39.0), (-62.3, -40.8),
+                  (-65.0, -41.0), (-65.0, -42.5), (-64.5, -43.0), (-65.5, -45.0), (-67.5, -46.5), (-66.0, -48.0),
+                  (-68.5, -50.5), (-69.0, -52.5), (-68.5, -54.5), (-70.5, -55.0), (-73.0, -53.0), (-75.0, -50.0),
+                  (-74.5, -46.0), (-73.5, -43.0), (-73.5, -38.0), (-71.5, -33.0), (-71.4, -29.0), (-70.4, -23.5),
+                  (-70.2, -18.3), (-71.5, -17.0), (-75.0, -15.5), (-76.3, -13.5), (-77.2, -12.0), (-79.0, -8.5),
+                  (-81.2, -6.0), (-81.0, -4.0), (-80.0, -2.5), (-80.9, -1.0), (-80.0, 1.0), (-78.9, 1.5), (-77.5, 4.0),
+                  (-77.3, 7.0), (-79.5, 9.0), (-83.0, 9.5), (-90.0, 15.0), (-100.0, 20.0), (-100.0, 30.0), (-60, 30)],
+})
+SOUTH_AMERICA = ["s_america"]
+# fronteira Brasil x Bolívia (aprox.), rios principais (aprox., lon/lat)
+BR_BO_BORDER = [(-69.6, -11.0), (-68.7, -11.0), (-66.0, -9.8), (-65.3, -10.9), (-63.0, -12.6), (-61.5, -13.5), (-60.3, -15.0),
+                (-60.2, -16.3), (-58.4, -16.3), (-58.0, -17.5), (-57.6, -19.0)]
+RIVER_XINGU = [(-53.3, -14.6), (-53.2, -13.2), (-52.9, -12.0), (-53.0, -10.5), (-52.6, -8.5), (-52.0, -6.5), (-52.3, -4.5),
+               (-52.2, -3.2), (-52.0, -1.6)]
+RIVER_AMAZONAS = [(-70.0, -4.2), (-65.0, -3.5), (-60.0, -3.1), (-56.0, -2.5), (-52.0, -1.6), (-50.5, -0.8)]
+
+
+def jungle_tree(c, h=320, col=(0.12, 0.20, 0.16), seed=1, edge=0.55):
+    """árvore de floresta tropical: tronco fino e copa em nuvem (base em 0,0)"""
+    rnd = random.Random(seed)
+    tw = h * 0.05
+    poly(c, [(-tw, 0), (-tw * 0.6, -h * 0.62), (tw * 0.6, -h * 0.62), (tw, 0)])
+    fs(c, (0.10, 0.09, 0.08), 4, (0.30, 0.28, 0.24))
+    cx, cy, R = 0, -h * 0.72, h * 0.30
+    for i in range(7):
+        a = i / 7 * 2 * math.pi + rnd.uniform(-0.3, 0.3)
+        r = R * rnd.uniform(0.45, 0.70)
+        x, y = cx + math.cos(a) * R * 0.75, cy + math.sin(a) * R * 0.45
+        circle(c, x, y, r, col, 4, (0.30 + edge * 0.25, 0.36 + edge * 0.25, 0.31 + edge * 0.2))
+    circle(c, cx, cy, R * 0.75, col, 0)
+    c.save(); c.translate(cx, cy)
+    rgb(c, INK, edge * 0.25)
+    for i in range(5):
+        a = rnd.uniform(3.4, 6.0)
+        c.new_sub_path(); c.arc(rnd.uniform(-R * 0.5, R * 0.5), rnd.uniform(-R * 0.3, R * 0.2), R * 0.25, a, a + 1.1)
+        c.set_line_width(3); c.stroke()
+    c.restore()
+
+
+def palm(c, h=300, col=(0.14, 0.24, 0.18), t=0):
+    """palmeira (base em 0,0)"""
+    c.move_to(-8, 0); c.curve_to(-10, -h * 0.4, 6, -h * 0.7, 14, -h)
+    rgb(c, (0.30, 0.26, 0.20)); c.set_line_width(14); c.stroke()
+    sw = math.sin(t * 0.7) * 6
+    for k in range(7):
+        a = -math.pi / 2 + (k - 3) * 0.45
+        ex, ey = 14 + math.cos(a) * h * 0.38 + sw, -h + math.sin(a) * h * 0.22 + h * 0.12
+        c.move_to(14, -h); c.curve_to(14 + math.cos(a) * h * 0.2, -h - 40, ex - 10, ey - 30, ex, ey)
+        rgb(c, col); c.set_line_width(16); c.stroke()
+
+
+def jungle(c, t, y=1000, w=W, n=12, h=(260, 420), col=(0.10, 0.17, 0.14), seed=5, palms=True, edge=0.5):
+    """faixa de floresta (silhuetas) com base em y"""
+    rnd = random.Random(seed)
+    for i in range(n):
+        x = (i + rnd.uniform(-0.3, 0.3)) * w / (n - 1) + (W - w) / 2
+        hh = rnd.uniform(*h)
+        c.save(); c.translate(x, y + rnd.uniform(0, 30))
+        if palms and rnd.random() < 0.28:
+            palm(c, hh * 0.9, col, t + i)
+        else:
+            jungle_tree(c, hh, col, seed * 31 + i, edge)
+        c.restore()
+
+
+def river(c, t, y=820, h=120, col=(0.08, 0.14, 0.16)):
+    """rio escuro horizontal com reflexos"""
+    c.rectangle(0, y, W, h); rgb(c, col); c.fill()
+    line(c, 0, y, W, y, 3, (0.30, 0.36, 0.34))
+    for i in range(14):
+        x = ((t * 30 + i * 170) % (W + 200)) - 100
+        yy = y + 18 + (i % 4) * (h - 30) / 4
+        line(c, x, yy, x + 60 + (i % 3) * 30, yy, 2, (0.40, 0.48, 0.50))
+
+
+def tepui(c, w=900, h=360, col=(0.20, 0.22, 0.24), forest=(0.12, 0.20, 0.16)):
+    """planalto de paredões verticais e topo achatado coberto de mata (base em 0,0)"""
+    pts = [(-w / 2 - 60, 0), (-w / 2, -h * 0.25), (-w / 2 + 10, -h * 0.85), (-w / 2 + 60, -h), (w / 2 - 40, -h),
+           (w / 2, -h * 0.9), (w / 2 + 10, -h * 0.3), (w / 2 + 80, 0)]
+    poly(c, pts); fs(c, col, 6)
+    for i in range(9):
+        x = -w / 2 + 70 + i * (w - 120) / 8
+        line(c, x, -h + 30, x + (i % 2) * 14 - 7, -h * 0.25, 2, (0.32, 0.33, 0.35))
+    rnd = random.Random(3)
+    for i in range(16):
+        x = -w / 2 + 70 + i * (w - 110) / 15
+        circle(c, x, -h - 8 - rnd.uniform(0, 14), rnd.uniform(26, 40), forest, 3)
+
+
+def dinosaur(c, col=(0.16, 0.18, 0.20)):
+    """saurópode em silhueta (pés em y=0, ~400 de largura)"""
+    for x in (-110, -60, 30, 80):
+        c.rectangle(x - 14, -80, 28, 80); fs(c, col, 5)
+    c.move_to(-200, -70)
+    c.curve_to(-150, -95, -90, -150, 0, -150)
+    c.curve_to(70, -150, 100, -130, 120, -170)
+    c.curve_to(140, -230, 150, -290, 175, -300)
+    c.curve_to(200, -305, 210, -290, 196, -284)
+    c.curve_to(178, -276, 168, -230, 158, -160)
+    c.curve_to(150, -100, 120, -70, 80, -60)
+    c.line_to(-120, -55); c.close_path()
+    fs(c, col, 5)
+
+
+def idol(c, glow_on=False, t=0):
+    """ídolo de basalto negro com placa no peito (base em 0,0)"""
+    if glow_on:
+        glow(c, 0, -120, 220, AMBER, 0.22 + 0.06 * math.sin(t * 3))
+    blk = (0.10, 0.10, 0.11)
+    rrect(c, -48, -40, 96, 40, 8); fs(c, blk, 5)
+    rrect(c, -40, -170, 80, 132, 18); fs(c, blk, 5)
+    circle(c, 0, -205, 36, blk, 5)
+    line(c, -14, -210, -4, -210, 3); line(c, 4, -210, 14, -210, 3)
+    rrect(c, -24, -150, 48, 50, 4); fs(c, (0.16, 0.16, 0.17), 3)
+    for i in range(3):
+        y = -140 + i * 14
+        line(c, -16, y, -6 + (i % 2) * 6, y, 2); line(c, 2, y, 14, y, 2)
+    line(c, -40, -120, -62, -70, 6); line(c, 40, -120, 62, -70, 6)
+
+
+def horse(c, col=(0.38, 0.28, 0.20)):
+    """cavalo/mula em pé, perfil para a direita (cascos em y=0)"""
+    rrect(c, -110, -190, 200, 80, 40); fs(c, col, 5)
+    for x in (-90, -60, 50, 74):
+        line(c, x, -120, x + (4 if x > 0 else -4), 0, 12, INK)
+        line(c, x, -120, x + (4 if x > 0 else -4), -4, 7, col)
+    poly(c, [(60, -185), (100, -240), (176, -214), (170, -190), (110, -200), (90, -160)]); fs(c, col, 5)
+    poly(c, [(102, -240), (108, -268), (118, -236)]); fs(c, col, 4)
+    c.move_to(-108, -170); c.curve_to(-140, -150, -150, -110, -138, -80)
+    rgb(c, INK); c.set_line_width(8); c.stroke()
+    circle(c, 128, -220, 4, INK, 0)
+
+
+def wood_cross(c, h=160):
+    """cruz de madeira de marcação (base em 0,0)"""
+    c.rectangle(-9, -h, 18, h); fs(c, (0.40, 0.29, 0.18), 4)
+    c.rectangle(-46, -h + 34, 92, 16); fs(c, (0.40, 0.29, 0.18), 4)
+    ellipse(c, 0, 0, 60, 12); fs(c, (0.20, 0.16, 0.12), 3)
+
+
+def signet_ring(c):
+    """anel de sinete"""
+    c.new_sub_path(); c.arc(0, 30, 56, 0, 2 * math.pi)
+    rgb(c, INK); c.set_line_width(22); c.stroke_preserve()
+    rgb(c, AMBER); c.set_line_width(14); c.stroke()
+    rrect(c, -42, -60, 84, 64, 14); fs(c, AMBER, 6)
+    rrect(c, -30, -50, 60, 44, 10); fs(c, (0.65, 0.46, 0.18), 3)
+    text(c, "F", 0, -28, 32, SERIF, DARKTXT)
+
+
+def theodolite(c):
+    """teodolito (instrumento de medição) num tripé, base em 0,0"""
+    for dx in (-90, 0, 90):
+        line(c, 0, -170, dx, 0, 8, (0.45, 0.33, 0.20))
+    rrect(c, -36, -200, 72, 34, 6); fs(c, (0.62, 0.54, 0.34), 5)
+    rrect(c, -18, -250, 36, 50, 6); fs(c, (0.55, 0.47, 0.30), 5)
+    rrect(c, -70, -270, 140, 30, 12); fs(c, (0.70, 0.62, 0.40), 5)
+    circle(c, 70, -255, 14, (0.30, 0.40, 0.50), 4)
+
+
+def smoke(c, t, x, y, h=420, a=0.22, seed=0):
+    """coluna de fumaça subindo (base em x,y)"""
+    for i in range(9):
+        ph = (t * 0.25 + i / 9 + seed * 0.13) % 1
+        xx = x + math.sin(t * 0.6 + i * 1.3 + seed) * (10 + ph * 40) + ph * 30
+        yy = y - ph * h
+        glow(c, xx, yy, 30 + ph * 70, (0.62, 0.62, 0.60), a * math.sin(math.pi * ph))
+
+
+def letter(c, lines=7, w=360, h=470, sign=True, col=PARCH):
+    """folha de carta manuscrita"""
+    c.save(); c.rotate(-0.03)
+    rrect(c, -w / 2, -h / 2, w, h, 6); fs(c, col, 5)
+    for i in range(lines):
+        y = -h / 2 + 70 + i * 46
+        xs = -w / 2 + 34
+        xe = w / 2 - 34 - (i * 37 % 60)
+        c.move_to(xs, y)
+        k = 0
+        while xs + k * 18 < xe:
+            c.line_to(xs + k * 18 + 9, y - 5 + (k % 3) * 3)
+            k += 1
+        rgb(c, (0.30, 0.22, 0.14)); c.set_line_width(3); c.stroke()
+    if sign:
+        c.move_to(w / 2 - 150, h / 2 - 50); c.curve_to(w / 2 - 120, h / 2 - 80, w / 2 - 90, h / 2 - 20, w / 2 - 50, h / 2 - 60)
+        rgb(c, (0.30, 0.22, 0.14)); c.set_line_width(3); c.stroke()
+    c.restore()
+
+
+def oca(c, w=220, h=150, col=(0.46, 0.38, 0.22)):
+    """casa indígena de palha (base em 0,0)"""
+    c.move_to(-w / 2, 0); c.curve_to(-w / 2, -h * 1.1, w / 2, -h * 1.1, w / 2, 0); c.close_path()
+    fs(c, col, 5)
+    for i in range(1, 6):
+        k = i / 6
+        c.move_to(-w / 2 * (1 - k * 0.15), -h * k * 0.8); c.line_to(w / 2 * (1 - k * 0.15), -h * k * 0.8)
+        rgb(c, (0.32, 0.26, 0.15)); c.set_line_width(2); c.stroke()
+    rrect(c, -20, -50, 40, 50, 6); fs(c, (0.10, 0.09, 0.08), 3)
+
+
+def pot(c, col=(0.62, 0.36, 0.22)):
+    """vaso de cerâmica com desenho geométrico (base em 0,0)"""
+    c.move_to(-40, -160); c.curve_to(-100, -120, -100, -10, -40, 0); c.line_to(40, 0)
+    c.curve_to(100, -10, 100, -120, 40, -160); c.close_path(); fs(c, col, 5)
+    rrect(c, -48, -178, 96, 22, 6); fs(c, col, 5)
+    c.move_to(-76, -90)
+    for k in range(8):
+        c.line_to(-76 + (k + 0.5) * 19, -90 + (16 if k % 2 == 0 else 0))
+    rgb(c, DARKTXT); c.set_line_width(4); c.stroke()
+    line(c, -84, -60, 84, -60, 3, DARKTXT)
+
+
+def denture(c, col=(0.92, 0.90, 0.84)):
+    """arcada dentária (vista de cima)"""
+    c.new_sub_path(); c.arc(0, 0, 80, math.pi * 1.05, math.pi * 1.95)
+    rgb(c, (0.74, 0.40, 0.40)); c.set_line_width(26); c.stroke()
+    for k in range(10):
+        a = math.pi * (1.1 + k * 0.08)
+        circle(c, math.cos(a) * 80, math.sin(a) * 80, 11, col, 3)
+
+
+def bone(c, L=260, col=(0.86, 0.83, 0.74)):
+    """osso longo (horizontal, centrado)"""
+    c.rectangle(-L / 2, -12, L, 24); fs(c, col, 4)
+    for sx in (-1, 1):
+        circle(c, sx * L / 2, -14, 20, col, 4); circle(c, sx * L / 2, 14, 20, col, 4)
+    c.rectangle(-L / 2 + 4, -10, L - 8, 20); rgb(c, col); c.fill()
+
+
+def lectern(c):
+    """púlpito de palestra (base em 0,0)"""
+    poly(c, [(-70, 0), (-50, -200), (50, -200), (70, 0)]); fs(c, (0.36, 0.25, 0.16), 5)
+    poly(c, [(-80, -200), (80, -200), (70, -240), (-70, -240)]); fs(c, (0.42, 0.30, 0.19), 5)
+
+
+def canoe(c, col=(0.40, 0.28, 0.18)):
+    """canoa vista de lado"""
+    c.move_to(-220, -40); c.curve_to(-140, 40, 140, 40, 220, -40)
+    c.curve_to(120, -20, -120, -20, -220, -40); c.close_path(); fs(c, col, 5)
+
+
+def pyramid(c, w=380, h=240):
+    """pirâmide (base em 0,0)"""
+    poly(c, [(-w / 2, 0), (0, -h), (w / 2, 0)]); fs(c, (0.62, 0.54, 0.38), 6)
+    for k in range(1, 6):
+        y = -h * k / 6
+        line(c, -w / 2 * (1 - k / 6), y, w / 2 * (1 - k / 6), y, 2, (0.45, 0.38, 0.26))
+
+
+def volcano(c, t=0, w=360, h=220):
+    poly(c, [(-w / 2, 0), (-50, -h), (50, -h), (w / 2, 0)]); fs(c, (0.25, 0.22, 0.22), 6)
+    glow(c, 0, -h, 160, ORANGE, 0.35 + 0.1 * math.sin(t * 5))
+    for k in range(3):
+        c.move_to(-20 + k * 20, -h); c.line_to(-40 + k * 30 + math.sin(t * 2 + k) * 8, -h * 0.4)
+        rgb(c, ORANGE); c.set_line_width(7); c.stroke()
+
+
+def ruined_arch(c, w=220, h=260, col=(0.52, 0.50, 0.46)):
+    """arco de pedra em ruína (base em 0,0)"""
+    R, r = w / 2, w / 2 - 44
+    c.new_sub_path(); c.arc(0, -h, R, math.pi, 1.82 * math.pi); c.arc_negative(0, -h, r, 1.82 * math.pi, math.pi); c.close_path()
+    fs(c, col, 5)
+    c.rectangle(-R, -h, 44, h); fs(c, col, 5)
+    c.rectangle(R - 44, -h * 0.80, 44, h * 0.80); fs(c, col, 5)
+    for k in range(4):
+        line(c, -R + 6, -h + 40 + k * 50, -R + 38, -h + 40 + k * 50, 2, (0.38, 0.36, 0.33))
