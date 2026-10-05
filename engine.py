@@ -1080,16 +1080,42 @@ def head_top(y, s):
 
 # ================================================================ PONTO CEGO — KIT DE MISTÉRIO
 # ---------------------------------------------------------------- atmosfera
+# ---------------------------------------------------------------- temas por vídeo
+# A identidade do canal (Historiador, voz, giz, âmbar, fontes, cartão final) é fixa.
+# O tema muda só o "cenário": tom do fundo, cor da névoa e o ambiente sonoro do meio do vídeo.
+#   wind  = nível da ventania no meio do vídeo (abertura e fechamento sempre têm a ventania cheia, é a assinatura)
+#   drone = frequência base do grave contínuo (Hz); swell = ondulação lenta do grave (mar)
+THEMES = {
+    "classico": dict(top=(0.055, 0.062, 0.085), bot=(0.095, 0.090, 0.100), fog=INK,                wind=1.00, drone=55.0, swell=0.0),
+    "selva":    dict(top=(0.035, 0.068, 0.056), bot=(0.072, 0.098, 0.082), fog=(0.70, 0.86, 0.72), wind=0.30, drone=49.0, swell=0.0),
+    "mar":      dict(top=(0.032, 0.055, 0.092), bot=(0.058, 0.086, 0.118), fog=(0.72, 0.83, 0.94), wind=0.35, drone=46.2, swell=0.09),
+    "neve":     dict(top=(0.062, 0.078, 0.104), bot=(0.112, 0.122, 0.142), fog=(0.88, 0.92, 1.00), wind=1.00, drone=55.0, swell=0.0),
+    "deserto":  dict(top=(0.082, 0.060, 0.042), bot=(0.124, 0.092, 0.064), fog=(0.96, 0.82, 0.60), wind=0.55, drone=51.9, swell=0.0),
+    "cidade":   dict(top=(0.058, 0.058, 0.072), bot=(0.096, 0.090, 0.094), fog=(0.82, 0.79, 0.74), wind=0.25, drone=58.3, swell=0.0),
+}
+THEME = THEMES["classico"]
+THEME_NAME = "classico"
+
+
+def set_theme(name):
+    """define o tema do vídeo (chamado pelo render a partir de THEME = "..." no scenes.py)"""
+    global THEME, THEME_NAME
+    if name not in THEMES:
+        raise ValueError(f"tema desconhecido: {name} (opções: {', '.join(THEMES)})")
+    THEME, THEME_NAME = THEMES[name], name
+
+
 def background(c, t):
-    """fundo noturno com leve gradiente"""
+    """fundo noturno com leve gradiente (tom do tema)"""
     g = cairo.LinearGradient(0, 0, 0, H)
-    g.add_color_stop_rgb(0, 0.055, 0.062, 0.085)
-    g.add_color_stop_rgb(1, 0.095, 0.090, 0.100)
+    g.add_color_stop_rgb(0, *THEME["top"])
+    g.add_color_stop_rgb(1, *THEME["bot"])
     c.set_source(g); c.paint()
 
 
-def fog(c, t, y=820, alpha=0.07, n=6, col=INK):
-    """névoa rasteira que se move devagar"""
+def fog(c, t, y=820, alpha=0.07, n=6, col=None):
+    """névoa rasteira que se move devagar (cor do tema se col não for passada)"""
+    col = col or THEME["fog"]
     for i in range(n):
         x = ((t * (14 + i * 5) + i * 420) % (W + 900)) - 450
         yy = y + math.sin(t * 0.3 + i) * 25 + (i % 3) * 60

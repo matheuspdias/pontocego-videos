@@ -27,6 +27,22 @@ Entrada: **transcrição com tempos** + **áudio da narração**. Saída: **MP4 
 - **Cores**: `INK` (giz creme, traço padrão), `AMBER` (luz, destaque), `RED`/`BLOOD` (perigo, carimbos), `ICE` (frio), `PARCH` (pergaminho), `DARKTXT` (texto sobre pergaminho).
 - Não use os glifos `≠ ≈ → ↓ ✓`, porque as fontes não têm.
 
+## Identidade fixa x tema do vídeo
+**Fixo em todo vídeo (marca do canal):** o Historiador, a voz do Pedro Lima, o traço de giz sobre fundo escuro, as fontes, o âmbar como destaque, a frase de encerramento, o cartão final "PONTO CEGO" e a **ventania como assinatura** (cheia nos primeiros e nos últimos ~25 s).
+
+**Muda por vídeo (cenário):** declare no topo do `scenes.py`, por exemplo `THEME = "selva"`. O tema ajusta sozinho:
+| Tema | Use em | Fundo / névoa | Ventania no meio | Grave |
+| --- | --- | --- | --- | --- |
+| `classico` (padrão) | temas sem cenário forte, antiguidade | azul-noite / creme | cheia | 55 Hz |
+| `selva` | Amazônia, florestas | verde-escuro / verde | baixa (30%) | 49 Hz |
+| `mar` | navios, oceano, ilhas | azul-marinho / azul | baixa (35%) | 46 Hz com ondulação lenta |
+| `neve` | montanha, gelo, Dyatlov | azul-gelo / branco | cheia | 55 Hz |
+| `deserto` | Egito, Oriente Médio, ruínas no deserto | ocre / areia | média (55%) | 52 Hz |
+| `cidade` | casos urbanos, crimes, prédios | cinza quente / cinza | baixa (25%) | 58 Hz |
+
+`fog(c, t, ...)` já usa a cor da névoa do tema (passe `col=` só para exceções). Sem chuva, ondas ou ruídos novos: o Matheus não gosta de sons de ruído/chiado. Vídeos antigos sem `THEME` continuam iguais (`classico`).
+Thumbnails: chame `set_theme("selva")` no `thumb.py` antes de `background(c, t)`.
+
 ## Atmosfera (chame dentro da cena)
 `stars(c, t)`, `moon(c, r)`, `fog(c, t, y, alpha)`, `snow(c, t, n, vento, alpha)`, `glow(c, x, y, r, cor, a)`, `flames(c, t)`.
 O `overlay` (poeira, vinheta e flicker) e o fundo são aplicados automaticamente pelo renderizador.

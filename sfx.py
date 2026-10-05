@@ -191,14 +191,25 @@ SOUNDS = dict(pop=pop, thud=thud, swish=swish, whoosh=whoosh, dark_whoosh=dark_w
               key=key, click=click, ding=ding, shimmer=shimmer, bell=bell, heartbeat=heartbeat, gust=gust, riser=riser, tum=tum, soft_ding=soft_ding)
 
 
-def ambience_dark(dur):
-    """cama sonora sombria: grave contínuo + vento suave com variação lenta"""
+def ambience_dark(dur, theme=None, sig=25.0):
+    """cama sonora sombria: grave contínuo + ventania.
+    A ventania é a assinatura do canal: cheia nos primeiros e nos últimos `sig` segundos;
+    no meio fica no nível do tema (theme["wind"]: 1.0 = cheia o vídeo todo, como em neve/montanha).
+    theme["drone"] muda o tom do grave e theme["swell"] adiciona uma ondulação lenta (mar)."""
+    theme = theme or dict(wind=1.0, drone=55.0, swell=0.0)
     n = int(SR * dur)
     t = np.arange(n) / SR
-    drone = (np.sin(2 * np.pi * 55 * t) + 0.7 * np.sin(2 * np.pi * 55.35 * t) + 0.4 * np.sin(2 * np.pi * 82.4 * t))
+    f0 = theme.get("drone", 55.0)
+    drone = (np.sin(2 * np.pi * f0 * t) + 0.7 * np.sin(2 * np.pi * (f0 + 0.35) * t) + 0.4 * np.sin(2 * np.pi * f0 * 1.498 * t))
     drone *= 0.5 + 0.2 * np.sin(2 * np.pi * 0.05 * t)
+    sw = theme.get("swell", 0.0)
+    if sw:
+        drone *= 0.65 + 0.35 * np.sin(2 * np.pi * sw * t) ** 2
     wind = _bp(_rng.standard_normal(n), 150, 900)
     wind *= 0.6 + 0.4 * np.sin(2 * np.pi * 0.11 * t) * np.sin(2 * np.pi * 0.037 * t + 1)
+    mid = theme.get("wind", 1.0)
+    edge = np.clip(np.maximum(1 - (t - sig) / 6.0, 1 - ((dur - sig) - t) / 6.0), 0, 1)  # 1 nas pontas, 0 no meio (6 s de transição)
+    wind *= mid + (1 - mid) * edge
     x = _norm(drone, 1) * 0.6 + _norm(wind, 1) * 0.4
     fade = np.minimum(1, t / 3.0) * np.minimum(1, (dur - t) / 3.0)
     return x * fade
@@ -226,7 +237,7 @@ STYLE_DARK = {
 }
 
 
-def build_track(cues, dur, style="light", extra=(), ambience=None, sfx_gain=0.5, amb_gain=0.10):
+def build_track(cues, dur, style="light", extra=(), ambience=None, sfx_gain=0.5, amb_gain=0.10, theme=None):
     """cues: lista de (t, evento). extra: lista de (t, nome_do_som). Retorna np.array mono float."""
     table = STYLE_DARK if style == "dark" else STYLE_LIGHT
     n = int(SR * (dur + 3))
@@ -248,7 +259,7 @@ def build_track(cues, dur, style="light", extra=(), ambience=None, sfx_gain=0.5,
         out[i:i + len(s)] += s[: n - i]
     out = out[: int(SR * dur)] * sfx_gain
     if ambience == "dark":
-        out += ambience_dark(dur) * amb_gain
+        out += ambience_dark(dur, theme) * amb_gain
     return np.clip(out, -1, 1)
 
 

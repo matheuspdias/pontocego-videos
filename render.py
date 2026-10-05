@@ -22,7 +22,10 @@ def load_module(path):
 
 
 def load_scenes(path):
-    return load_module(path).SCENES
+    m = load_module(path)
+    import engine
+    engine.set_theme(getattr(m, "THEME", "classico"))
+    return m.SCENES
 
 
 SFX_STYLE = "dark"
@@ -34,6 +37,8 @@ def make_sfx(scenes_path, dur, out_wav):
     import engine, sfx
     m = load_module(scenes_path)
     S = m.SCENES
+    theme = getattr(m, "THEME", "classico")
+    engine.set_theme(theme)
     engine._CUES = []
     surf = cairo.ImageSurface(cairo.FORMAT_RGB24, 32, 32); c = cairo.Context(surf)
     for i, (st, en, fn) in enumerate(S):
@@ -45,7 +50,7 @@ def make_sfx(scenes_path, dur, out_wav):
     if getattr(m, "SFX_OFF", False):
         cues = []
     track = sfx.build_track(cues, dur, getattr(m, "SFX_STYLE", SFX_STYLE), getattr(m, "SFX", ()),
-                            getattr(m, "AMBIENCE", SFX_AMBIENCE), getattr(m, "SFX_GAIN", 0.5))
+                            getattr(m, "AMBIENCE", SFX_AMBIENCE), getattr(m, "SFX_GAIN", 0.5), theme=engine.THEMES[theme])
     sfx.write_wav(out_wav, track)
     peak = float(np.max(np.abs(track))) or 1e-6
     return len(cues), 20 * np.log10(peak)
