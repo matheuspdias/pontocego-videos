@@ -92,3 +92,13 @@ python cortes.py videos/<slug> out/<slug>.mp4 --audio <mp4 com o áudio final> -
 - Opções: `--partes N`, `--max 170`, `--cortes 160.5,308.2` (manual), `--so 1` (só uma parte, para prévia).
 - Saída: `out/<slug>_parteN.mp4` (~10 MB cada) e `out/<slug>_cortes.txt` com os tempos.
 - Tema (cores, fontes, nome do canal) em `THEME` no `cortes.py`, sobrescrito por `tema_cortes.json` quando existir.
+
+## Capas dos cortes
+Depois dos cortes, crie `videos/<slug>/capas.json` (uma entrada por parte, na mesma ordem dos cortes):
+```json
+{"serie": "NOME CURTO DA SÉRIE", "partes": [{"t": 155, "gancho": ["LINHA 1", "LINHA 2", "LINHA 3"]}]}
+```
+e rode `python capas.py videos/<slug> out/<slug>.mp4 --grade`.
+- `t` é o segundo do vídeo 16:9 com a cena da capa (personagem + número ou imagem forte daquela parte); `gancho` tem 1 a 3 linhas curtas (a primeira sai na cor de destaque).
+- Cada capa (1080x1920): série, "PARTE X DE N" grande, a cena e o gancho, sobre o quadro desfocado. O essencial fica entre y 240 e 1680 (a grade do TikTok corta topo e rodapé).
+- Saída: `out/capas/<slug>_capa_parteN.png` e `out/capas/<slug>_capas_grade.png` (para conferir). Cores e fontes vêm do tema (`tema_cortes.json`, chave extra `capa_bg` para a cor do fundo).
