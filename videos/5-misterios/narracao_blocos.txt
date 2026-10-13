@@ -1,0 +1,225 @@
+# 5 mistérios que nunca foram resolvidos — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4)
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1   45.244s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e1f136f4-1c09-48f4-b1e2-b9d87c1b5305.wav
+# bloco2  155.507s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f9e90052-dc85-46c7-9088-6c44f082a484.wav
+# bloco3  164.467s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=6859b2b1-4ee3-4336-bcf4-bda61c861de1.wav
+# bloco4  181.185s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=82d01eff-5de5-4417-817c-2b8175bf3e10.wav
+# bloco5    0.000s PENDENTE
+# bloco6  175.987s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=711ea355-ba9a-44b6-aff0-5b5358963975.wav
+# bloco7   41.874s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=eb6d5bd9-de72-4f54-989c-f69e8cdfd7e6.wav
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.33|Existem histórias que terminam.
+1|2.84|E existem histórias que simplesmente param.
+1|6.79|Um assassino que mandou uma carta do inferno para uma cidade inteira. [do@8.44]
+1|11.20|Um sinal que veio do espaço, durou setenta e dois segundos... [durou@12.96]
+1|14.92|e nunca mais voltou.
+1|16.88|Um homem que saltou de um avião no meio da noite, com o dinheiro do resgate, e desapareceu. [avião@18.04] [o@19.48]
+1|22.36|Uma família morta numa fazenda onde, antes do crime, alguém parecia estar vivendo escondido. [antes@24.88] [vivendo@26.88]
+1|28.68|E o último caso aconteceu aqui no Brasil. [no@30.80]
+1|32.00|E até hoje, ninguém sabe explicar.
+1|35.04|Hoje são cinco mistérios que nunca foram resolvidos. [foram@37.44]
+1|38.72|Em contagem regressiva.
+1|40.64|E eu te aviso:
+1|41.64|quanto mais perto do número um, mais estranho fica. [mais@43.76]
+2|0.08|Número cinco.
+2|1.60|O Homem do Machado de Nova Orleans. [Orleans@3.20]
+2|4.80|Imagine abrir o jornal da manhã e encontrar uma carta do assassino que aterroriza a sua cidade. [e@6.88] [que@8.84]
+2|10.76|Uma carta dizendo exatamente quando ele vai voltar. [vai@13.33]
+2|14.39|E o que você precisa fazer para sobreviver. [para@15.84]
+2|17.88|Nova Orleans, Estados Unidos.
+2|20.00|Maio de mil novecentos e dezoito.
+2|22.28|Na madrugada do dia vinte e três, um dono de mercearia chamado Joseph Maggio e a esposa, Catherine, são atacados enquanto dormem. [três@23.60] [Joseph@25.84] [são@28.32]
+2|30.32|Os dois morrem.
+2|31.84|A polícia encontra um detalhe que vai se repetir nos meses seguintes. [vai@33.48]
+2|35.72|Um painel da porta dos fundos tinha sido arrancado com um formão. [tinha@37.40]
+2|39.64|Alguém entrou por ali, no escuro.
+2|42.23|E nada foi roubado.
+2|44.16|Em junho, outro dono de mercearia é atacado. [é@46.24]
+2|47.28|Em agosto, mais vítimas.
+2|49.40|Em março de mil novecentos e dezenove, do outro lado do rio, na cidade de Gretna, uma família inteira é atacada durante a noite, e uma bebê não sobrevive. [dezenove@50.92] [na@52.92] [inteira@54.84] [e@56.84]
+2|58.84|A arma, quase sempre, era um machado. [machado@60.72]
+2|61.73|Muitas vezes, um machado da própria casa. [casa@63.84]
+2|65.04|A cidade entra em pânico.
+2|66.84|Famílias passam a noite acordadas, vigiando as portas. [as@69.28]
+2|70.27|E então, no dia treze de março de mil novecentos e dezenove, os jornais publicam uma carta. [março@71.92] [os@74.08]
+2|76.31|Ela vinha assinada pelo Homem do Machado. [Machado@78.00]
+2|78.84|E no lugar do endereço, estava escrito: [escrito@80.52]
+2|81.85|inferno.
+2|83.20|Na carta, o autor diz que não é humano. [não@84.96]
+2|86.04|Que é um espírito, um demônio.
+2|88.28|E avisa que vai passar por Nova Orleans na noite da terça-feira seguinte, à meia-noite e quinze. [Nova@89.68] [seguinte@91.68]
+2|94.45|Mas faz uma promessa.
+2|95.73|Vai poupar toda casa onde houver uma banda de jazz tocando. [uma@97.84]
+2|100.30|Na noite marcada, Nova Orleans não dormiu. [dormiu@102.40]
+2|103.12|Os salões de dança lotaram.
+2|104.96|Em centenas de casas, havia música até de madrugada. [até@107.16]
+2|108.47|E naquela noite, ninguém foi atacado.
+2|111.44|Até hoje não se sabe se a carta foi escrita pelo assassino, ou por alguém aproveitando o medo da cidade. [a@112.84] [ou@114.80] [da@116.44]
+2|117.40|Vários homens foram presos e depois soltos. [soltos@119.40]
+2|120.12|Uma família chegou a ser condenada por um dos ataques, até a testemunha admitir que tinha mentido. [por@122.00] [testemunha@123.44]
+2|125.72|Pesquisadores apontaram suspeitos, mas nada foi provado. [provado@128.56]
+2|129.59|O último ataque atribuído a ele aconteceu em outubro de mil novecentos e dezenove. [aconteceu@131.36] [e@133.49]
+2|134.88|E é aí que está o detalhe que mais incomoda. [detalhe@135.84]
+2|138.05|Ele nunca foi pego.
+2|139.44|Não foi preso, não morreu num tiroteio, não confessou. [tiroteio@141.04]
+2|143.00|Ele simplesmente parou.
+2|145.48|E levou o próprio nome para o túmulo. [o@147.05]
+2|148.48|Mas se um assassino que escolhe as vítimas pela música já é estranho... [as@149.88] [estranho@151.72]
+2|152.80|o próximo mistério nem veio da Terra. [Terra@154.92]
+3|0.16|Número quatro.
+3|1.68|O Sinal Wow.
+3|4.32|Durante setenta e dois segundos, em mil novecentos e setenta e sete, a Terra pode ter ouvido alguma coisa lá de fora. [mil@6.56] [a@8.60] [coisa@10.48]
+3|12.32|E nunca mais ouviu de novo.
+3|15.28|Ohio, Estados Unidos.
+3|17.36|Num campo perto da cidade de Delaware, a Universidade Estadual de Ohio mantinha um radiotelescópio gigante, apelidado de Big Ear. [Delaware@19.04] [mantinha@21.76] [Big@25.04]
+3|26.00|O Grande Ouvido.
+3|27.92|Não era uma antena comum.
+3|29.36|Era uma estrutura enorme e plana, do tamanho de uns três campos de futebol, que ficava parada enquanto a rotação da Terra fazia o céu passar por cima dela. [do@31.56] [de@33.08] [a@35.24] [céu@36.92]
+3|38.88|O Big Ear fazia parte de uma das primeiras buscas de longo prazo por sinais de vida inteligente fora da Terra. [uma@40.48] [prazo@42.40] [fora@44.56]
+3|45.76|Noite após noite, um computador imprimia em papel o que o telescópio captava. [em@48.16] [captava@49.64]
+3|50.44|Quase sempre, só ruído.
+3|52.28|Números baixos, sem nada de especial.
+3|55.27|No dia quinze de agosto de mil novecentos e setenta e sete, o telescópio registrou algo diferente. [mil@56.80] [o@58.80]
+3|61.28|Mas ninguém viu na hora.
+3|63.20|Dias depois, o astrônomo Jerry Ehman revisava as folhas impressas quando, no meio da coluna de números, apareceu uma sequência de seis caracteres. [revisava@65.60] [meio@68.08] [uma@70.08]
+3|72.77|Seis, E, Q, U, J, cinco.
+3|77.50|Naquele código, aquilo significava um sinal que subia, chegava muito acima do ruído do céu, e descia. [que@79.76] [ruído@82.16]
+3|84.39|Ehman pegou uma caneta vermelha, circulou a sequência e escreveu na margem uma única palavra. [a@86.68] [uma@88.72]
+3|90.72|Wow.
+3|91.98|O que intrigou os cientistas foi a frequência. [a@93.57]
+3|94.64|O sinal estava muito perto de mil quatrocentos e vinte megahertz, a frequência natural do hidrogênio, o elemento mais comum do universo. [mil@96.48] [frequência@98.80] [mais@101.36]
+3|103.12|Justamente a frequência que muitos imaginavam que uma civilização usaria para chamar atenção. [que@105.68] [atenção@107.76]
+3|108.63|E ele vinha da direção da constelação de Sagitário. [constelação@110.00]
+3|112.16|Ehman e outros pesquisadores apontaram para aquela região de novo. [aquela@114.48]
+3|115.92|E de novo.
+3|116.96|Ao longo dos anos, outros telescópios também tentaram. [também@119.04]
+3|120.40|Nada.
+3|121.08|O sinal nunca se repetiu.
+3|123.20|Hoje existem hipóteses.
+3|125.04|Em dois mil e vinte e quatro, um grupo de cientistas propôs que uma nuvem fria de hidrogênio teria brilhado de repente, atingida pela energia de uma estrela extremamente magnética. [quatro@125.80] [que@127.96] [teria@129.80] [energia@132.32]
+3|135.08|Em dois mil e vinte e cinco, uma nova análise dos dados originais concluiu que o sinal era ainda mais forte do que se pensava. [cinco@135.92] [originais@137.84] [ainda@139.84] [pensava@141.36]
+3|142.59|Mas são hipóteses.
+3|143.95|Ninguém confirmou de onde ele veio.
+3|145.95|E o detalhe mais perturbador é justamente esse. [justamente@148.19]
+3|150.03|Se foi alguém tentando falar com a gente... [a@151.43]
+3|152.31|a mensagem chegou uma vez só.
+3|154.57|E quando percebemos, ela já tinha passado. [passado@156.67]
+3|157.83|Mas se esse mistério veio do céu... [céu@159.19]
+3|159.87|o próximo caiu dele.
+3|161.55|Com duzentos mil dólares amarrados ao corpo. [corpo@163.95]
+4|0.08|Número três.
+4|1.84|D. B. Cooper.
+4|4.29|Um homem sequestra um avião, recebe o resgate, e salta de paraquedas no meio da noite. [o@6.68] [no@8.92]
+4|10.68|Nunca foi encontrado.
+4|12.12|Nem vivo, nem morto.
+4|14.84|Vinte e quatro de novembro de mil novecentos e setenta e um, véspera do Dia de Ação de Graças. [mil@16.32] [véspera@18.24] [Graças@19.60]
+4|20.44|No aeroporto de Portland, no estado do Oregon, um homem de terno escuro, gravata e capa de chuva compra uma passagem só de ida para Seattle, no voo trezentos e cinco da Northwest Orient. [do@22.28] [escuro@23.96] [compra@26.32] [para@28.00] [cinco@29.96]
+4|31.81|Paga em dinheiro.
+4|32.84|E diz que se chama Dan Cooper. [Cooper@34.48]
+4|35.60|Logo depois da decolagem, ele entrega um bilhete à comissária de bordo Florence Schaffner. [um@37.56] [Florence@39.20]
+4|40.44|Ela acha que é um passageiro dando em cima dela e guarda o papel sem ler. [dando@41.76] [o@43.33]
+4|44.92|Então ele se inclina e diz:
+4|47.17|"Senhorita, é melhor ler esse bilhete.
+4|49.60|Eu tenho uma bomba."
+4|51.52|Ele abre a maleta e mostra cilindros, fios e uma bateria. [cilindros@53.12]
+4|55.72|E exige duzentos mil dólares em dinheiro e quatro paraquedas, entregues em Seattle. [dinheiro@57.76] [Seattle@60.32]
+4|61.44|O avião pousa em Seattle no começo da noite. [começo@63.00]
+4|64.05|O dinheiro chega em notas de vinte dólares, todas com os números de série registrados pelo FBI. [vinte@65.56] [de@67.52]
+4|69.81|Cooper libera os passageiros e duas comissárias. [comissárias@71.76]
+4|72.75|E manda decolar de novo, rumo à Cidade do México, com uma parada em Reno para abastecer. [à@74.37] [parada@75.84]
+4|78.00|As ordens são precisas.
+4|79.84|Voar baixo, devagar.
+4|81.73|E deixar a escada traseira aberta.
+4|83.92|Aquele modelo, o Boeing setecentos e vinte e sete, tinha uma escada que descia pela cauda. [vinte@85.89] [que@87.40]
+4|89.04|Por volta das oito da noite, uma luz no painel mostra que a escada foi baixada. [uma@90.64] [a@92.11]
+4|93.63|Alguns minutos depois, os pilotos sentem a cauda dar um tranco para cima. [a@95.84] [cima@97.16]
+4|97.83|Quando o avião pousa em Reno, a cabine está vazia. [a@99.41]
+4|101.28|Naquela noite chovia, ventava forte, e lá embaixo havia uma floresta fechada no sudoeste do estado de Washington. [lá@104.20] [no@106.24]
+4|108.40|Um salto no escuro, de terno, a cerca de trezentos quilômetros por hora. [a@110.59] [hora@112.40]
+4|113.28|Muitos investigadores acreditam que ele não sobreviveu. [sobreviveu@115.48]
+4|116.43|Mas nenhum corpo foi encontrado.
+4|118.32|Nenhum paraquedas.
+4|119.60|Nenhuma maleta.
+4|121.20|A imprensa errou o nome, e ele ficou conhecido como D. B. Cooper. [ele@122.80] [Cooper@124.72]
+4|125.44|Na poltrona, ficou uma gravata preta de prender. [de@127.48]
+4|128.32|Depois de quarenta e cinco anos e centenas de suspeitos, em dois mil e dezesseis o FBI encerrou a investigação ativa, sem nunca confirmar quem ele era. [e@129.96] [mil@132.04] [a@134.32] [quem@137.00]
+4|138.40|E então vem o detalhe que deixa tudo mais estranho. [deixa@139.96]
+4|141.79|Em fevereiro de mil novecentos e oitenta, um menino de oito anos, Brian Ingram, mexia na areia da beira do rio Columbia, num lugar chamado Tena Bar. [oitenta@143.50] [Brian@145.83] [beira@147.87] [chamado@149.63]
+4|151.18|E encontrou maços de notas de vinte dólares, apodrecidos. [vinte@153.07]
+4|155.43|Cerca de cinco mil e oitocentos dólares. [dólares@157.55]
+4|158.91|Os números de série batiam.
+4|160.87|Era o dinheiro de Cooper.
+4|163.43|Só uma parte.
+4|164.55|O resto nunca apareceu.
+4|166.46|E até hoje, ninguém conseguiu explicar como aquelas notas foram parar ali. [como@168.91]
+4|171.87|Mas se um homem que some no ar já é inquietante... [no@173.15]
+4|175.07|o próximo caso é sobre alguém que não sumiu. [que@176.83]
+4|178.03|Alguém que ficou.
+4|179.31|Escondido dentro de casa.
+6|0.08|Número um.
+6|1.44|As máscaras de chumbo.
+6|4.08|Dois homens mortos, lado a lado, no alto de um morro. [no@6.56]
+6|8.08|De terno.
+6|9.12|Com máscaras de chumbo sobre os olhos. [olhos@10.88]
+6|12.05|E um bilhete com instruções para algo que ninguém, até hoje, conseguiu explicar. [algo@13.80] [explicar@16.16]
+6|18.68|Agosto de mil novecentos e sessenta e seis. [e@20.64]
+6|21.60|Manoel Pereira da Cruz e Miguel José Viana eram técnicos em eletrônica, os dois com pouco mais de trinta anos, e moravam em Campos dos Goytacazes, no norte do estado do Rio. [José@23.44] [os@26.16] [trinta@27.56] [dos@29.68] [do@31.68]
+6|32.48|No dia dezessete de agosto, eles saem de casa dizendo que vão comprar material de trabalho. [saem@34.44] [comprar@36.00]
+6|37.76|E seguem para Niterói.
+6|39.99|Em Niterói, compram capas de chuva numa loja. [numa@42.16]
+6|43.20|Num bar, compram uma garrafa de água. [água@45.08]
+6|45.72|A atendente se lembraria depois de um detalhe. [um@47.48]
+6|48.52|Miguel parecia muito nervoso.
+6|50.84|E olhava o relógio o tempo todo. [todo@52.32]
+6|53.60|Depois disso, os dois seguem para o Morro do Vintém. [o@55.44]
+6|57.67|No dia vinte de agosto, um rapaz que soltava pipa no morro encontra os dois corpos. [rapaz@59.40] [encontra@61.28]
+6|63.32|A polícia e os bombeiros levam cerca de um dia para chegar ao local, de tão difícil o acesso. [cerca@65.00] [ao@66.40] [acesso@68.16]
+6|69.50|Os homens estão deitados lado a lado, sobre o mato. [lado@71.20]
+6|72.68|De terno, com as capas de chuva. [chuva@74.16]
+6|74.93|E sobre os olhos, máscaras de chumbo feitas à mão. [chumbo@76.88]
+6|79.33|Não havia sinal de luta.
+6|80.85|Nenhum ferimento grave.
+6|82.52|Perto deles, uma garrafa de água vazia e um pacote com toalhas molhadas. [vazia@84.40] [molhadas@86.24]
+6|87.23|E num caderninho, um bilhete escrito à mão. [à@89.36]
+6|90.32|Dizia assim:
+6|91.72|"Dezesseis e trinta, estar no local determinado. [determinado@93.76]
+6|95.18|Dezoito e trinta, ingerir cápsulas.
+6|98.13|Após efeito, proteger metais.
+6|100.70|Aguardar sinal.
+6|102.08|Máscara."
+6|103.67|Que cápsulas?
+6|104.68|Que sinal?
+6|105.60|Proteger quais metais?
+6|107.83|A necrópsia demorou, e os órgãos já estavam decompostos demais para exames confiáveis. [já@109.84] [confiáveis@112.08]
+6|113.12|Não foi feito exame toxicológico.
+6|115.40|A causa da morte nunca foi determinada. [determinada@117.20]
+6|118.39|E as teorias começaram.
+6|120.20|Uma testemunha relatou ter visto luzes vermelhas e alaranjadas no céu, sobre o Morro do Vintém, na noite em que eles teriam morrido. [vermelhas@122.40] [o@124.68] [em@126.24]
+6|127.80|Para uns, era um encontro marcado com algo vindo do céu. [com@129.68]
+6|131.52|Para outros, um crime disfarçado.
+6|134.56|Um amigo contou que os dois participavam de um grupo espiritualista que tentava contato com espíritos ou seres de outros mundos, e que teriam tomado alguma substância para isso. [participavam@136.00] [tentava@138.32] [de@140.68] [tomado@142.32]
+6|144.52|Nas casas deles, foram encontrados livros espíritas e material para fazer máscaras. [espíritas@146.88]
+6|149.47|É a explicação mais citada.
+6|152.03|Mas nunca foi comprovada.
+6|154.42|O caso foi arquivado sem solução.
+6|156.99|Quase sessenta anos depois, ninguém sabe o que eles tomaram, quem marcou aquele horário, nem que sinal estavam esperando. [o@159.71] [aquele@161.39] [esperando@163.47]
+6|164.67|E é isso que mais me perturba nesse caso. [perturba@166.03]
+6|167.83|Eles subiram aquele morro sabendo exatamente a hora. [a@170.47]
+6|171.23|Seguiram as instruções.
+6|172.91|Colocaram as máscaras.
+6|174.95|E esperaram.
+7|0.24|Cinco casos.
+7|1.72|Um assassino que parou do nada.
+7|4.00|Um sinal que chegou uma vez só. [só@5.68]
+7|6.40|Um homem que sumiu no céu com o dinheiro. [com@8.00]
+7|9.12|Alguém que viveu escondido numa fazenda.
+7|11.76|E dois homens que esperaram um sinal no alto de um morro. [sinal@13.44]
+7|15.44|Nenhum deles tem uma resposta oficial até hoje. [até@17.56]
+7|19.41|Agora eu quero saber de você.
+7|21.28|Qual desses cinco é o mais assustador? [assustador@22.96]
+7|23.91|E qual merece um vídeo só dele, com a história completa? [dele@25.44]
+7|27.12|Escreve aqui nos comentários.
+7|28.64|Os mais pedidos podem virar vídeo aqui no canal. [aqui@30.52]
+7|31.51|E se você gosta de histórias assim, se inscreve e ativa o sininho. [assim@32.80] [sininho@34.64]
+7|35.95|Eu sou o Historiador.
+7|37.59|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@38.96] [conseguiu@40.72]

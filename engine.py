@@ -2642,3 +2642,398 @@ def ruined_arch(c, w=220, h=260, col=(0.52, 0.50, 0.46)):
     c.rectangle(R - 44, -h * 0.80, 44, h * 0.80); fs(c, col, 5)
     for k in range(4):
         line(c, -R + 6, -h + 40 + k * 50, -R + 38, -h + 40 + k * 50, 2, (0.38, 0.36, 0.33))
+
+
+# ================================================================ 5 MISTÉRIOS (lista em contagem regressiva)
+def rank_card(c, n, title_, sub="", glow_col=AMBER):
+    """cartão de item de lista: número grande (contagem regressiva), título e local/ano"""
+    glow(c, 0, -60, 420, glow_col, 0.16)
+    text(c, "Nº", -150, -150, 64, SERIF, glow_col)
+    text(c, str(n), 40, -90, 300, SERIF, INK)
+    line(c, -420, 120, 420, 120, 3, glow_col)
+    text(c, title_, 0, 190, 70, SERIF, INK)
+    if sub:
+        text(c, sub, 0, 270, 40, TYPE, glow_col)
+
+
+def axe(c, col=(0.62, 0.64, 0.68), handle=(0.48, 0.33, 0.20)):
+    """machado (cabo vertical, lâmina à direita, centro no meio do cabo)"""
+    rrect(c, -11, -170, 22, 340, 10); fs(c, handle, 5)
+    c.move_to(8, -160); c.line_to(80, -190); c.curve_to(110, -140, 110, -80, 80, -40); c.line_to(8, -80); c.close_path()
+    fs(c, col, 6)
+    line(c, 78, -182, 80, -48, 3, (0.85, 0.86, 0.90))
+
+
+def chisel(c):
+    rrect(c, -14, -90, 28, 90, 8); fs(c, (0.50, 0.34, 0.20), 5)
+    poly(c, [(-9, 0), (9, 0), (7, 110), (0, 124), (-7, 110)]); fs(c, (0.66, 0.68, 0.72), 5)
+
+
+def door(c, panel_out=False, w=220, h=400, col=(0.36, 0.25, 0.16)):
+    """porta dos fundos de madeira (base em y=0); panel_out deixa o buraco do painel arrancado"""
+    c.rectangle(-w / 2 - 18, -h - 18, w + 36, h + 18); fs(c, (0.24, 0.17, 0.11), 6)
+    c.rectangle(-w / 2, -h, w, h); fs(c, col, 6)
+    for (x, y, pw, ph) in ((-w / 2 + 24, -h + 28, w - 48, h * 0.38), (-w / 2 + 24, -h * 0.5, w - 48, h * 0.38)):
+        c.rectangle(x, y, pw, ph); rgb(c, (0.20, 0.14, 0.09)); c.set_line_width(4); c.stroke()
+    if panel_out:
+        c.rectangle(-w / 2 + 24, -h * 0.5, w - 48, h * 0.38); fs(c, (0.02, 0.02, 0.03), 4)
+        for k in range(5):
+            x = -w / 2 + 30 + k * (w - 60) / 4
+            line(c, x, -h * 0.5, x + 6, -h * 0.5 + 14, 3, (0.55, 0.42, 0.28))
+    circle(c, w / 2 - 28, -h * 0.52, 9, AMBER, 3)
+
+
+def trumpet(c, col=AMBER):
+    """trompete (bocal à esquerda, campana à direita)"""
+    rrect(c, -150, -10, 220, 20, 8); fs(c, col, 4)
+    poly(c, [(60, -10), (150, -55), (150, 55), (60, 10)]); fs(c, col, 5)
+    for k in range(3):
+        rrect(c, -50 + k * 30, -42, 16, 34, 4); fs(c, col, 3)
+    rrect(c, -110, 10, 140, 28, 12); rgb(c, col); c.set_line_width(5); c.stroke()
+    circle(c, -160, 0, 10, col, 4)
+
+
+def note_glyph(c, col=AMBER, s=1.0):
+    c.save(); c.scale(s, s)
+    ellipse(c, 0, 0, 18, 13); rgb(c, col); c.fill()
+    line(c, 16, 0, 16, -70, 6, col); line(c, 16, -70, 42, -50, 6, col)
+    c.restore()
+
+
+def music_notes(c, t, x, y, n=5, col=AMBER, spread=160):
+    """notas musicais subindo a partir de (x, y)"""
+    for i in range(n):
+        k = (t * 0.45 + i / n) % 1.0
+        xx = x + math.sin(t * 1.5 + i * 2) * spread * 0.4 + (i - n / 2) * spread / n
+        yy = y - k * 300
+        a = math.sin(k * math.pi)
+        c.save(); c.translate(xx, yy); c.rotate(math.sin(t + i) * 0.2)
+        c.push_group(); note_glyph(c, col, 0.8); c.pop_group_to_source(); c.paint_with_alpha(a)
+        c.restore()
+
+
+def townhouse(c, w=230, h=300, col=(0.26, 0.24, 0.26), lit=0.0, seed=1, balcony=True):
+    """sobrado estreito de Nova Orleans (base em y=0); lit = janelas acesas (0..1)"""
+    rnd = random.Random(seed)
+    c.rectangle(-w / 2, -h, w, h); fs(c, col, 5)
+    poly(c, [(-w / 2 - 14, -h), (w / 2 + 14, -h), (w / 2, -h - 30), (-w / 2, -h - 30)]); fs(c, (0.18, 0.17, 0.19), 5)
+    for row in range(2):
+        for k in range(2):
+            x = -w / 2 + 30 + k * (w - 90)
+            y = -h + 40 + row * h * 0.48
+            on = lit > 0 and rnd.random() < 0.35 + lit * 0.65
+            if on:
+                glow(c, x + 15, y + 40, 90, AMBER, 0.25 * lit)
+            c.rectangle(x, y, 32, 80); fs(c, AMBER if on else (0.08, 0.08, 0.10), 4)
+    if balcony:
+        line(c, -w / 2 - 10, -h * 0.52, w / 2 + 10, -h * 0.52, 6)
+        for k in range(9):
+            x = -w / 2 - 6 + k * (w + 12) / 8
+            line(c, x, -h * 0.52, x, -h * 0.52 + 34, 3)
+        line(c, -w / 2 - 10, -h * 0.52 + 34, w / 2 + 10, -h * 0.52 + 34, 4)
+
+
+def gas_lamp(c, t=0, h=260):
+    line(c, 0, 0, 0, -h, 8, (0.30, 0.30, 0.32))
+    poly(c, [(-22, -h), (22, -h), (14, -h - 50), (-14, -h - 50)]); fs(c, AMBER, 4)
+    glow(c, 0, -h - 25, 160, AMBER, 0.25 + 0.05 * math.sin(t * 9))
+
+
+def big_ear(c, w=1300):
+    """radiotelescópio Big Ear (vista lateral): refletor plano inclinável, plano de terra e refletor parabólico fixo"""
+    gp = (0.36, 0.38, 0.42)
+    c.rectangle(-w / 2, -16, w, 16); fs(c, gp, 4)                                  # plano de terra (alumínio)
+    for k in range(14):
+        line(c, -w / 2 + k * w / 13, -16, -w / 2 + k * w / 13, 0, 2, (0.24, 0.25, 0.28))
+    x0 = -w / 2 + 40                                                                 # refletor plano inclinado (esq.)
+    poly(c, [(x0, -16), (x0 + 120, -16), (x0 + 210, -330), (x0 + 150, -340)]); fs(c, (0.44, 0.46, 0.50), 5)
+    for k in range(6):
+        y = -40 - k * 50
+        line(c, x0 + 12 - y * 0.27, y, x0 + 110 - y * 0.29, y, 2, (0.30, 0.31, 0.35))
+    for k in range(3):
+        line(c, x0 + 160 + k * 25, -16, x0 + 180 - k * 10, -230 + k * 60, 4, (0.30, 0.31, 0.35))
+    x1 = w / 2 - 40                                                                  # refletor parabólico (dir.)
+    c.move_to(x1, -16); c.curve_to(x1 - 40, -120, x1 - 40, -260, x1 - 20, -380)
+    c.line_to(x1 + 30, -380); c.line_to(x1 + 30, -16); c.close_path(); fs(c, (0.44, 0.46, 0.50), 5)
+    for k in range(7):
+        line(c, x1 - 30 + k * 2, -40 - k * 50, x1 + 30, -40 - k * 50, 2, (0.30, 0.31, 0.35))
+    c.rectangle(-30, -70, 60, 54); fs(c, (0.30, 0.30, 0.34), 4)                      # casinha do receptor (foco)
+    line(c, -30, -70, 30, -70, 4, AMBER)
+
+
+PRINT_CHARS = "1  1 1   12 1  1    1 1  2   1 1    11  1 2 1   1  "
+
+
+def printout(c, t=0, w=520, h=640, scroll=0.0, wow=None, cols=10, rows=18, size=26, highlight=False, seed=3):
+    """papel contínuo de impressora com colunas de caracteres (intensidade do sinal).
+    wow = coluna onde aparece 6EQUJ5 (lista de quantos caracteres já aparecem: int 0..6)"""
+    c.save()
+    c.rectangle(-w / 2, -h / 2, w, h); fs(c, (0.86, 0.85, 0.78), 5)
+    for side in (-1, 1):
+        x = side * (w / 2 - 20)
+        line(c, x - side * 18, -h / 2, x - side * 18, h / 2, 2, (0.70, 0.68, 0.60))
+        for k in range(14):
+            y = -h / 2 + 24 + ((k * 48 + scroll) % (h - 30))
+            circle(c, x, y, 8, (0.62, 0.60, 0.54), 0)
+    c.rectangle(-w / 2 + 44, -h / 2 + 6, w - 88, h - 12); c.clip()
+    rnd = random.Random(seed)
+    dx = (w - 120) / cols
+    seq = "6EQUJ5"
+    for r in range(rows + 2):
+        y = -h / 2 + 30 + r * (h - 40) / rows + (scroll % ((h - 40) / rows))
+        for k in range(cols):
+            x = -w / 2 + 70 + k * dx
+            ch = rnd.choice(PRINT_CHARS)
+            col = (0.30, 0.28, 0.25)
+            if wow is not None and k == 2 and 6 <= r < 12:
+                i = r - 6
+                ch = seq[i] if i < wow else " "
+                col = BLOOD if highlight else (0.12, 0.10, 0.08)
+            if ch.strip():
+                text(c, ch, x, y, size, TYPE, col)
+    c.restore()
+
+
+def signal_wave(c, t, w=900, amp=24, peak=0.0, px=0.5, pw=0.08, col=ICE, lw=4, seed=1, flat=False):
+    """linha de ruído com um pico gaussiano (peak = altura do pico em px, px = posição 0..1)"""
+    rnd = random.Random(seed + int(t * 12))
+    n = 160
+    for i in range(n + 1):
+        u = i / n
+        x = -w / 2 + u * w
+        noise = 0 if flat else rnd.uniform(-1, 1) * amp
+        y = noise - peak * math.exp(-((u - px) / pw) ** 2)
+        (c.move_to if i == 0 else c.line_to)(x, y)
+    rgb(c, col); c.set_line_width(lw); c.stroke()
+
+
+def hydrogen(c, t=0, col=ICE):
+    """átomo de hidrogênio: 1 próton + 1 elétron orbitando"""
+    circle(c, 0, 0, 34, RED, 5); text(c, "+", 0, -2, 40, TYPE, INK)
+    ellipse(c, 0, 0, 150, 60); rgb(c, col, 0.8); c.set_line_width(3); c.stroke()
+    a = t * 2.2
+    circle(c, 150 * math.cos(a), 60 * math.sin(a), 14, col, 4)
+
+
+SAGITTARIUS = [(-160, 40), (-80, 70), (0, 30), (60, 90), (140, 40), (100, -40), (20, -60), (-60, -20), (-150, -40)]
+
+
+def sagittarius(c, t=0, lines=True):
+    """constelação de Sagitário (o 'bule')"""
+    pts = SAGITTARIUS
+    if lines:
+        for (a, b) in ((0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 2), (6, 7), (7, 0), (7, 8), (8, 0)):
+            line(c, *pts[a], *pts[b], 2, (0.55, 0.62, 0.75))
+    for i, (x, y) in enumerate(pts):
+        r = 6 + (i % 3)
+        glow(c, x, y, 30, ICE, 0.35 + 0.15 * math.sin(t * 2 + i))
+        circle(c, x, y, r, (0.92, 0.94, 1.0), 0)
+
+
+def magnetar(c, t=0, flare=0.0):
+    """estrela de nêutrons magnética com linhas de campo; flare 0..1 = clarão"""
+    if flare > 0:
+        glow(c, 0, 0, 260 + flare * 300, (0.70, 0.60, 1.0), 0.45 * flare)
+    for k in range(4):
+        r = 70 + k * 45
+        for s in (-1, 1):
+            c.save(); c.scale(s, 1)
+            c.move_to(0, -18); c.curve_to(r, -r * 1.1, r, r * 1.1, 0, 18)
+            rgb(c, (0.60, 0.55, 0.95), 0.6 - k * 0.1); c.set_line_width(3); c.stroke()
+            c.restore()
+    glow(c, 0, 0, 80, (0.85, 0.85, 1.0), 0.6)
+    circle(c, 0, 0, 22, (0.95, 0.95, 1.0), 4)
+
+
+def h_cloud(c, t=0, bright=0.0, w=360, h=180):
+    """nuvem fria de hidrogênio; bright 0..1 faz ela brilhar"""
+    rnd = random.Random(9)
+    for i in range(16):
+        x, y = rnd.uniform(-w / 2, w / 2), rnd.uniform(-h / 2, h / 2)
+        r = rnd.uniform(60, 120)
+        glow(c, x + math.sin(t * 0.3 + i) * 8, y, r, ICE if bright < 0.5 else (0.75, 0.90, 1.0), 0.10 + 0.25 * bright)
+
+
+def b727(c, t=0, stair=0.0, col=(0.80, 0.81, 0.84), stripe=RED, windows=True):
+    """Boeing 727 (vista lateral, nariz à direita); stair 0..1 baixa a escada traseira sob a cauda"""
+    if stair > 0:                                                      # escada traseira (airstair)
+        a = stair * 0.95
+        c.save(); c.translate(-250, 26); c.rotate(a)
+        c.rectangle(-150, -10, 150, 20); fs(c, (0.55, 0.56, 0.60), 4)
+        for k in range(6):
+            line(c, -140 + k * 25, -10, -140 + k * 25, 10, 2, (0.35, 0.36, 0.40))
+        c.restore()
+        glow(c, -255, 30, 90, AMBER, 0.25 * stair)
+    c.move_to(330, 0); c.curve_to(330, -30, 300, -40, 260, -40)        # fuselagem
+    c.line_to(-260, -40); c.line_to(-330, -20); c.line_to(-330, 10); c.line_to(-250, 40)
+    c.line_to(260, 40); c.curve_to(300, 40, 330, 30, 330, 0); c.close_path(); fs(c, col, 6)
+    poly(c, [(-200, -40), (-300, -190), (-250, -190), (-130, -40)]); fs(c, col, 6)   # deriva em T
+    poly(c, [(-330, -190), (-210, -190), (-200, -176), (-330, -176)]); fs(c, col, 5)
+    rrect(c, -250, -78, 110, 30, 12); fs(c, (0.62, 0.63, 0.67), 5)                     # motores traseiros
+    rrect(c, -250, -30, 100, 28, 12); fs(c, (0.62, 0.63, 0.67), 5)
+    poly(c, [(20, 18), (120, 18), (-20, 90), (-70, 90)]); fs(c, (0.70, 0.71, 0.74), 5)  # asa
+    line(c, -240, 4, 300, 4, 6, stripe)
+    if windows:
+        for x in range(-180, 240, 26):
+            circle(c, x, -16, 5, (0.25, 0.32, 0.42), 0)
+    poly(c, [(280, -30), (312, -26), (318, -12), (284, -12)]); fs(c, (0.25, 0.32, 0.42), 3)
+
+
+def parachute(c, t=0, col=(0.82, 0.80, 0.74), open_=1.0):
+    """paraquedas com cordas até a origem (onde fica a pessoa)"""
+    w = 60 + 150 * open_
+    top = -260
+    sway = math.sin(t * 1.4) * 6
+    c.move_to(-w, top + 40)
+    c.curve_to(-w, top - 90 * open_, w, top - 90 * open_, w, top + 40)
+    for k in range(4):
+        x0 = w - k * w / 2
+        c.curve_to(x0 - w / 8, top + 18, x0 - 3 * w / 8, top + 18, x0 - w / 2, top + 40)
+    c.close_path(); fs(c, col, 5)
+    for k in range(5):
+        x = -w + k * w / 2
+        line(c, x, top + 40, sway, -10, 2, (0.70, 0.68, 0.62))
+
+
+def briefcase(c, open_=False, bomb=False):
+    """maleta; aberta mostra cilindros vermelhos e fios (estilizado)"""
+    if open_:
+        poly(c, [(-170, -10), (170, -10), (150, -150), (-150, -150)]); fs(c, (0.28, 0.20, 0.14), 6)
+    rrect(c, -170, -10, 340, 170, 12); fs(c, (0.34, 0.24, 0.16), 6)
+    rrect(c, -40, -36, 80, 30, 10); rgb(c, INK); c.set_line_width(6); c.stroke()
+    if open_ and bomb:
+        for k in range(4):
+            rrect(c, -130 + k * 52, 20, 40, 110, 8); fs(c, RED, 4)
+        rrect(c, 80, 40, 60, 80, 6); fs(c, (0.30, 0.30, 0.34), 4)
+        for k, col in enumerate((RED, YELLOW, BLUE)):
+            c.move_to(-110 + k * 52, 20); c.curve_to(-60, -30, 60, -20, 100 + k * 8, 40)
+            rgb(c, col); c.set_line_width(4); c.stroke()
+
+
+def clip_tie(c, col=(0.10, 0.10, 0.12)):
+    """gravata preta de prender com prendedor"""
+    poly(c, [(-24, -150), (24, -150), (16, -110), (-16, -110)]); fs(c, col, 5)
+    poly(c, [(-16, -110), (16, -110), (40, 120), (0, 160), (-40, 120)]); fs(c, col, 5)
+    rrect(c, -50, -20, 100, 14, 6); fs(c, (0.78, 0.74, 0.60), 3)
+
+
+def money_bag(c, label="$"):
+    c.move_to(-30, -120); c.curve_to(-140, -60, -150, 120, 0, 120); c.curve_to(150, 120, 140, -60, 30, -120); c.close_path()
+    fs(c, (0.62, 0.52, 0.34), 6)
+    line(c, -36, -112, 36, -112, 8, (0.40, 0.30, 0.20))
+    text(c, label, 0, 20, 70, SERIF, (0.25, 0.30, 0.18))
+
+
+def bill_stack(c, rotten=0.0, label="20"):
+    """maço de notas de dólar (rotten 0..1 = apodrecido)"""
+    col = (0.50 - 0.18 * rotten, 0.62 - 0.25 * rotten, 0.46 - 0.18 * rotten)
+    for k in range(4):
+        rrect(c, -110 + k * 3, -50 - k * 8, 220, 100, 6); fs(c, col, 4)
+    circle(c, 9, -24, 26, None, 3, (0.30, 0.38, 0.28))
+    text(c, label, -70, -64, 26, TYPE, (0.20, 0.26, 0.18))
+    if rotten > 0:
+        rnd = random.Random(4)
+        for _ in range(int(14 * rotten)):
+            x, y = rnd.uniform(-100, 110), rnd.uniform(-70, 40)
+            circle(c, x, y, rnd.uniform(5, 14), (0.22, 0.20, 0.14), 0)
+    rrect(c, -14, -84, 28, 112, 4); fs(c, (0.62, 0.30, 0.22), 3)
+
+
+def farmhouse(c, t=0, attic=0.0, snow_roof=True, w=760, smoke_on=False):
+    """fazenda bávara (casa + celeiro sob o mesmo telhado; base em y=0); attic 0..1 = luz no sótão"""
+    house_w = w * 0.42
+    c.rectangle(-w / 2, -220, w, 220); fs(c, (0.30, 0.27, 0.24), 6)                       # paredes
+    poly(c, [(-w / 2 - 30, -220), (-w / 2 + house_w / 2, -400), (-w / 2 + house_w + 30, -220)]); fs(c, (0.22, 0.17, 0.14), 6)
+    poly(c, [(-w / 2 + house_w - 30, -220), (-w / 2 + house_w + 60, -330), (w / 2 + 30, -330), (w / 2 + 40, -220)]); fs(c, (0.22, 0.17, 0.14), 6)
+    if snow_roof:
+        poly(c, [(-w / 2 - 30, -220), (-w / 2 + house_w / 2, -400), (-w / 2 + house_w / 2 + 14, -392), (-w / 2 - 6, -222)])
+        rgb(c, (0.88, 0.90, 0.94), 0.8); c.fill()
+        c.rectangle(-w / 2 + house_w + 60, -336, w / 2 - house_w - 20, 10); rgb(c, (0.88, 0.90, 0.94), 0.8); c.fill()
+    ax = -w / 2 + house_w / 2                                                                   # janela do sótão
+    c.rectangle(ax - 22, -330, 44, 50)
+    fs(c, AMBER if attic > 0.05 else (0.06, 0.06, 0.08), 4)
+    if attic > 0.05:
+        glow(c, ax, -305, 150, AMBER, 0.30 * attic)
+    for k in range(2):                                                                          # janelas da casa
+        c.rectangle(-w / 2 + 40 + k * (house_w - 130), -170, 50, 60); fs(c, (0.06, 0.06, 0.08), 4)
+    c.rectangle(-w / 2 + house_w * 0.42, -110, 60, 110); fs(c, (0.20, 0.14, 0.10), 4)             # porta
+    bx = -w / 2 + house_w + 60                                                                  # portão do celeiro
+    c.rectangle(bx + 60, -170, 200, 170); fs(c, (0.26, 0.19, 0.13), 5)
+    line(c, bx + 60, -170, bx + 260, 0, 4, (0.36, 0.27, 0.18)); line(c, bx + 260, -170, bx + 60, 0, 4, (0.36, 0.27, 0.18))
+    c.rectangle(-w / 2 + 70, -400, 30, 80); fs(c, (0.26, 0.22, 0.20), 4)                         # chaminé
+    if smoke_on:
+        smoke(c, t, -w / 2 + 85, -400, 260, 0.25)
+
+
+def morro(c, w=1600, h=420, col=(0.10, 0.15, 0.12), grass=True, seed=2):
+    """morro (base em y=0, topo em y=-h) com capim"""
+    c.move_to(-w / 2, 0)
+    c.curve_to(-w * 0.30, -h * 0.35, -w * 0.18, -h, 0, -h)
+    c.curve_to(w * 0.20, -h, w * 0.30, -h * 0.45, w / 2, 0); c.close_path()
+    fs(c, col, 5)
+    if grass:
+        rnd = random.Random(seed)
+        for _ in range(70):
+            u = rnd.uniform(-0.42, 0.42)
+            x = u * w
+            yt = -h * (1 - (abs(u) / 0.5) ** 2) + rnd.uniform(0, 18)
+            line(c, x, yt, x + rnd.uniform(-8, 8), yt - rnd.uniform(14, 30), 3, (0.30, 0.42, 0.28))
+
+
+def lead_mask(c, col=(0.52, 0.54, 0.56)):
+    """máscara de chumbo feita à mão (cobre os olhos), com cordão"""
+    c.move_to(-150, -10); c.curve_to(-150, -60, -40, -60, 0, -40); c.curve_to(40, -60, 150, -60, 150, -10)
+    c.curve_to(150, 40, 60, 50, 0, 30); c.curve_to(-60, 50, -150, 40, -150, -10); c.close_path()
+    fs(c, col, 6)
+    for x in (-75, 75):
+        ellipse(c, x, -6, 42, 24); rgb(c, (0.40, 0.42, 0.44)); c.set_line_width(3); c.stroke()
+    rnd = random.Random(2)
+    for _ in range(18):
+        circle(c, rnd.uniform(-130, 130), rnd.uniform(-35, 25), rnd.uniform(2, 5), (0.44, 0.46, 0.48), 0)
+    c.move_to(-150, -10); c.curve_to(-200, 0, -210, 60, -190, 90); rgb(c, (0.60, 0.50, 0.36)); c.set_line_width(4); c.stroke()
+    c.move_to(150, -10); c.curve_to(200, 0, 210, 60, 190, 90); c.stroke()
+
+
+def kite(c, t=0, col=RED):
+    c.save(); c.rotate(math.sin(t * 1.3) * 0.12)
+    poly(c, [(0, -70), (50, 0), (0, 90), (-50, 0)]); fs(c, col, 5)
+    line(c, 0, -70, 0, 90, 3); line(c, -50, 0, 50, 0, 3)
+    for k in range(4):
+        y = 90 + k * 40
+        line(c, math.sin(t * 3 + k) * 14, y, math.sin(t * 3 + k + 1) * 14, y + 40, 3)
+    c.restore()
+
+
+def raincoat(c, col=(0.70, 0.62, 0.36)):
+    poly(c, [(-40, -150), (40, -150), (90, -120), (120, 140), (-120, 140), (-90, -120)]); fs(c, col, 6)
+    line(c, 0, -150, 0, 140, 3, (0.45, 0.40, 0.24))
+    poly(c, [(-90, -120), (-150, 60), (-120, 70), (-70, -60)]); fs(c, col, 5)
+    poly(c, [(90, -120), (150, 60), (120, 70), (70, -60)]); fs(c, col, 5)
+    for y in (-90, -30, 30, 90):
+        circle(c, 12, y, 6, (0.30, 0.26, 0.16), 0)
+
+
+def water_bottle(c, empty=False):
+    rrect(c, -40, -110, 80, 220, 18); fs(c, (0.55, 0.70, 0.72), 5)
+    if not empty:
+        c.rectangle(-36, -40, 72, 146); rgb(c, (0.35, 0.55, 0.70), 0.7); c.fill()
+    rrect(c, -18, -150, 36, 44, 6); fs(c, (0.40, 0.40, 0.44), 4)
+    c.rectangle(-40, -20, 80, 50); fs(c, PARCH, 3)
+
+
+def notebook(c, w=300, h=380):
+    rrect(c, -w / 2, -h / 2, w, h, 8); fs(c, (0.84, 0.82, 0.74), 5)
+    for k in range(9):
+        circle(c, -w / 2 + 2, -h / 2 + 30 + k * 40, 9, None, 3)
+    for k in range(9):
+        line(c, -w / 2 + 30, -h / 2 + 50 + k * 38, w / 2 - 20, -h / 2 + 50 + k * 38, 2, (0.55, 0.65, 0.80))
+
+
+def lit_window_lights(c, t, x, y, n=3):
+    """luzes vermelhas e alaranjadas pairando no céu"""
+    for i in range(n):
+        xx = x + i * 90 + math.sin(t * 0.7 + i) * 20
+        yy = y + math.cos(t * 0.5 + i * 2) * 15
+        col = RED if i % 2 else ORANGE
+        glow(c, xx, yy, 120, col, 0.35 + 0.15 * math.sin(t * 3 + i))
+        circle(c, xx, yy, 10, col, 0)
