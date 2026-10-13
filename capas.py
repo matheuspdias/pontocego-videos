@@ -79,7 +79,7 @@ def frame(video, t, out):
     return Image.open(out).convert("RGB").resize((1920, 1080))
 
 
-def capa(fr, serie, p, n, gancho, th):
+def capa(fr, serie, p, n, gancho, th, rotulo=None):
     hl, bgc, white = ass_rgb(th["hl_col"]), hex_rgb(th.get("capa_bg", "#100E0C")), (255, 255, 255)
     tf, cf = th["title_font"], th["cap_font"]
     # fundo: o próprio quadro ampliado, desfocado e tingido com a cor do canal
@@ -88,7 +88,7 @@ def capa(fr, serie, p, n, gancho, th):
     d = ImageDraw.Draw(bg)
     ctext(d, 250, serie, fit(d, serie, tf, 70), white, 4)
     big, small = font(tf, 160), font(tf, 80)
-    a, b = f"PARTE {p}", f" DE {n}"
+    a, b = (rotulo, "") if rotulo else (f"PARTE {p}", f" DE {n}")
     wa, wb = d.textlength(a, font=big), d.textlength(b, font=small)
     if wa + wb > 1000:
         big, small = font(tf, 130), font(tf, 66)
@@ -125,7 +125,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         for i, part in enumerate(spec["partes"], 1):
             fr = frame(a.video, part["t"], os.path.join(tmp, f"f{i}.png"))
-            img = capa(fr, spec["serie"], i, n, part["gancho"], th)
+            img = capa(fr, spec["serie"], i, n, part["gancho"], th, part.get("rotulo"))
             out = os.path.join(outdir, f"{slug}_capa_parte{i}.png")
             img.save(out)
             imgs.append(img)

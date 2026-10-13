@@ -79,6 +79,8 @@ Os efeitos são sintetizados por código (`sfx.py`), sem bancos de som, e entram
 ## Mapas
 `make_proj(lon0, lon1, lat0, lat1)` cria uma projeção lon/lat → tela. `draw_map(c, proj)` desenha o mar noturno com grade e os continentes estilizados de `LAND` (Sudeste Asiático, Índia, África, Arábia, Madagascar, Austrália e o Atlântico Norte: `draw_map(c, proj, ATLANTIC)` com América do Norte, Europa, Ilhas Britânicas e noroeste da África; `azores(c, proj)` desenha os Açores). Adicione regiões novas quando precisar.
 Também há `map_point`, `map_label`, `map_path` (rota desenhada até a fração p) e `plane_on_path` (avião seguindo a rota).
+Objetos do vídeo 5 mistérios: `rank_card(n, título, sub)` (cartão de item de lista), `axe chisel door(panel_out) trumpet music_notes townhouse gas_lamp big_ear printout(wow, highlight) signal_wave hydrogen sagittarius magnetar h_cloud b727(stair) parachute briefcase clip_tie money_bag bill_stack(rotten) farmhouse(attic, smoke_on) morro lead_mask kite raincoat water_bottle notebook lit_window_lights old_key mattock bread`.
+Vídeo com vários blocos de narração: veja `videos/5-misterios/tempos.py` (gera narracao_blocos, transcricao e palavras.json a partir dos tempos de palavra) e a classe `Cx` no scenes.py (cenas em tempo local do bloco).
 Objetos do MH370 que servem para outros vídeos: `satellite ping radio_tower sonar_ship seabed sonar_beam flaperon auv black_box monitor cockpit_door oxygen_mask crowd pilot`.
 
 ## Cortes verticais (TikTok, YouTube Shorts, Reels)
@@ -92,6 +94,7 @@ python cortes.py videos/<slug> out/<slug>.mp4 --audio <mp4 com o áudio final> -
 - Opções: `--partes N`, `--max 170`, `--cortes 160.5,308.2` (manual), `--so 1` (só uma parte, para prévia).
 - Saída: `out/<slug>_parteN.mp4` (~10 MB cada) e `out/<slug>_cortes.txt` com os tempos.
 - Tema (cores, fontes, nome do canal) em `THEME` no `cortes.py`, sobrescrito por `tema_cortes.json` quando existir.
+- **Vídeos em lista (cortes independentes):** `--trechos "46.2-202.1,202.7-367.6" --titulos "TÍTULO 1|TÍTULO 2" --rotulos "Nº 5 DE 5|Nº 4 DE 5"`. Cada trecho vira `out/<slug>_corteN.mp4`, com o rótulo no lugar de "PARTE X DE N" e o cartão final "VÍDEO COMPLETO NO YOUTUBE" (nada de "continua na parte"). Shorts aceita até 3 min por trecho.
 
 ## Capas dos cortes
 Depois dos cortes, crie `videos/<slug>/capas.json` (uma entrada por parte, na mesma ordem dos cortes):
@@ -99,6 +102,7 @@ Depois dos cortes, crie `videos/<slug>/capas.json` (uma entrada por parte, na me
 {"serie": "NOME CURTO DA SÉRIE", "partes": [{"t": 155, "gancho": ["LINHA 1", "LINHA 2", "LINHA 3"]}]}
 ```
 e rode `python capas.py videos/<slug> out/<slug>.mp4 --grade`.
+- `"rotulo": "Nº 5"` (opcional) troca o "PARTE X DE N" da capa, para cortes independentes de vídeos em lista.
 - `t` é o segundo do vídeo 16:9 com a cena da capa (personagem + número ou imagem forte daquela parte); `gancho` tem 1 a 3 linhas curtas (a primeira sai na cor de destaque).
 - Cada capa (1080x1920): série, "PARTE X DE N" grande, a cena e o gancho, sobre o quadro desfocado. O essencial fica entre y 240 e 1680 (a grade do TikTok corta topo e rodapé).
 - Saída: `out/capas/<slug>_capa_parteN.png` e `out/capas/<slug>_capas_grade.png` (para conferir). Cores e fontes vêm do tema (`tema_cortes.json`, chave extra `capa_bg` para a cor do fundo).

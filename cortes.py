@@ -199,7 +199,7 @@ def chunks(words, maxw=3, maxc=20):
     return out
 
 
-def build_ass(path, words, t0, t1, idx, n, title):
+def build_ass(path, words, t0, t1, idx, n, title, label=None, card=None):
     th = THEME
     head = f"""[Script Info]
 ScriptType: v4.00+
@@ -221,9 +221,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     dur = t1 - t0
     ev = []
     ev.append(f"Dialogue: 1,{ass_time(0)},{ass_time(dur)},Title,,0,0,0,,{{\\pos(540,270)}}{esc(title)}")
-    ev.append(f"Dialogue: 1,{ass_time(0)},{ass_time(dur)},Part,,0,0,0,,{{\\pos(540,395)}}PARTE {idx} DE {n}")
+    ev.append(f"Dialogue: 1,{ass_time(0)},{ass_time(dur)},Part,,0,0,0,,{{\\pos(540,395)}}{label or f'PARTE {idx} DE {n}'}")
     card_t = dur - 2.6
-    if idx < n:
+    if card:
+        pass
+    elif idx < n:
         card = f"CONTINUA NA PARTE {idx + 1}"
     else:
         card = f"HISTÓRIA COMPLETA NO YOUTUBE\\N{th['brand']}"
@@ -279,7 +281,12 @@ def main():
     ap.add_argument("--max", type=float, default=MAX_PART)
     ap.add_argument("--cortes", default=None, help="tempos de corte manuais, separados por vírgula")
     ap.add_argument("--so", type=int, default=None, help="renderiza só esta parte (prévia)")
+    ap.add_argument("--trechos", default=None, help="cortes independentes (vídeos em lista): 't0-t1,t0-t1,...'")
+    ap.add_argument("--titulos", default=None, help="com --trechos: um título por trecho, separados por '|'")
+    ap.add_argument("--rotulos", default=None, help="com --trechos: rótulo no lugar de 'PARTE X DE N', separados por '|'")
     a = ap.parse_args()
+    if a.trechos:
+        return trechos(a)
     slug = os.path.basename(os.path.normpath(a.vdir))
     sents, total = read_blocks(a.vdir)
     words = load_words(a.vdir, sents)
@@ -298,6 +305,31 @@ def main():
         ass = os.path.join(ROOT, "out", f"{slug}_parte{i + 1}.ass")
         build_ass(ass, words, t0, t1, i + 1, n, title)
         out = os.path.join(ROOT, "out", f"{slug}_parte{i + 1}.mp4")
+        render_part(a.video, a.audio or a.video, ass, t0, t1, out)
+        print(out, os.path.getsize(out) // 1024 // 1024, "MB")
+    open(os.path.join(ROOT, "out", f"{slug}_cortes.txt"), "w", encoding="utf-8").write("\n".join(notes) + "\n")
+    print("\n".join(notes))
+
+
+def trechos(a):
+    """cada trecho vira um corte independente (ex.: um item de uma lista), sem 'continua na parte X'"""
+    slug = os.path.basename(os.path.normpath(a.vdir))
+    sents, total = read_blocks(a.vdir)
+    words = load_words(a.vdir, sents)
+    spans = [tuple(float(x) for x in tr.split("-")) for tr in a.trechos.split(",")]
+    n = len(spans)
+    titles = a.titulos.split("|") if a.titulos else [slug.replace("-", " ").upper()] * n
+    labels = a.rotulos.split("|") if a.rotulos else [None] * n
+    os.makedirs(os.path.join(ROOT, "out"), exist_ok=True)
+    notes = [f"Cortes independentes de {slug} ({n})"]
+    for i, (t0, t1) in enumerate(spans):
+        first = next((s["text"] for s in sents if s["t"] >= t0 - 0.3), "")
+        notes.append(f"Corte {i + 1}: {fmt(t0)} - {fmt(t1)} ({t1 - t0:.0f} s) | {titles[i]} | começa em: {first}")
+        if a.so and a.so != i + 1:
+            continue
+        ass = os.path.join(ROOT, "out", f"{slug}_corte{i + 1}.ass")
+        build_ass(ass, words, t0, t1, i + 1, n, titles[i], labels[i], f"VÍDEO COMPLETO NO YOUTUBE\\N{THEME['brand']}")
+        out = os.path.join(ROOT, "out", f"{slug}_corte{i + 1}.mp4")
         render_part(a.video, a.audio or a.video, ass, t0, t1, out)
         print(out, os.path.getsize(out) // 1024 // 1024, "MB")
     open(os.path.join(ROOT, "out", f"{slug}_cortes.txt"), "w", encoding="utf-8").write("\n".join(notes) + "\n")
