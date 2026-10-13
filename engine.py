@@ -3037,3 +3037,24 @@ def lit_window_lights(c, t, x, y, n=3):
         col = RED if i % 2 else ORANGE
         glow(c, xx, yy, 120, col, 0.35 + 0.15 * math.sin(t * 3 + i))
         circle(c, xx, yy, 10, col, 0)
+
+
+def old_key(c, col=AMBER):
+    """chave antiga de ferro"""
+    c.new_sub_path(); c.arc(-90, 0, 40, 0, 2 * math.pi); rgb(c, col); c.set_line_width(12); c.stroke()
+    line(c, -50, 0, 110, 0, 14, col)
+    line(c, 80, 0, 80, 34, 12, col); line(c, 104, 0, 104, 26, 12, col)
+
+
+def mattock(c, handle=(0.48, 0.33, 0.20), col=(0.55, 0.57, 0.60)):
+    """enxadão (cabo vertical, lâmina larga na ponta de cima)"""
+    rrect(c, -10, -150, 20, 320, 9); fs(c, handle, 5)
+    poly(c, [(-20, -175), (20, -175), (24, -145), (-24, -145)]); fs(c, col, 5)
+    poly(c, [(20, -170), (130, -150), (130, -120), (20, -150)]); fs(c, col, 5)
+    poly(c, [(-20, -170), (-90, -190), (-95, -170), (-20, -150)]); fs(c, col, 5)
+
+
+def bread(c, col=(0.72, 0.52, 0.30)):
+    c.move_to(-110, 30); c.curve_to(-120, -60, 120, -60, 110, 30); c.close_path(); fs(c, col, 5)
+    for x in (-50, 0, 50):
+        line(c, x - 15, -10, x + 15, -30, 4, (0.50, 0.34, 0.18))

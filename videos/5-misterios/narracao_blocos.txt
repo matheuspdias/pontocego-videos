@@ -4,7 +4,7 @@
 # bloco2  155.507s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f9e90052-dc85-46c7-9088-6c44f082a484.wav
 # bloco3  164.467s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=6859b2b1-4ee3-4336-bcf4-bda61c861de1.wav
 # bloco4  181.185s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=82d01eff-5de5-4417-817c-2b8175bf3e10.wav
-# bloco5    0.000s PENDENTE
+# bloco5  163.265s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b96212c7-ea08-4686-b026-c12199e02268.wav
 # bloco6  175.987s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=711ea355-ba9a-44b6-aff0-5b5358963975.wav
 # bloco7   41.874s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=eb6d5bd9-de72-4f54-989c-f69e8cdfd7e6.wav
 # Formato: bloco | início local (s) | frase [palavra@t local]
@@ -156,6 +156,56 @@
 4|175.07|o próximo caso é sobre alguém que não sumiu. [que@176.83]
 4|178.03|Alguém que ficou.
 4|179.31|Escondido dentro de casa.
+5|0.08|Número dois.
+5|1.60|Hinterkaifeck.
+5|4.38|Imagine encontrar pegadas na neve, vindas da floresta, levando até a sua casa. [da@6.80] [casa@8.92]
+5|9.99|E não encontrar ninguém.
+5|12.63|Baviera, sul da Alemanha, mil novecentos e vinte e dois. [e@15.28]
+5|16.52|Hinterkaifeck era uma fazenda isolada perto da vila de Waidhofen, a uns setenta quilômetros de Munique. [da@19.20] [setenta@20.88]
+5|22.96|Ali morava a família Gruber.
+5|24.92|Andreas, de sessenta e três anos.
+5|27.15|A esposa, Cäzilia.
+5|28.68|A filha, Viktoria, viúva.
+5|30.83|E os dois filhos dela:
+5|32.12|a pequena Cäzilia, de sete anos, e o bebê Josef, de dois. [e@34.19]
+5|36.68|Meses antes, a empregada da fazenda foi embora. [foi@38.72]
+5|39.60|Segundo o que se conta até hoje, ela dizia ouvir barulhos no sótão e acreditava que a casa era assombrada. [hoje@40.80] [sótão@42.84] [era@44.64]
+5|46.21|Em março de mil novecentos e vinte e dois, as coisas começaram a ficar estranhas. [vinte@47.68] [a@49.48]
+5|50.88|Andreas contou aos vizinhos que tinha encontrado pegadas na neve fresca, vindas da floresta até uma porta da fazenda, com a fechadura quebrada. [encontrado@52.64] [da@55.20] [fazenda@56.96]
+5|59.12|Naquela mesma noite, a família ouviu passos no sótão. [passos@61.28]
+5|62.52|Andreas subiu para procurar.
+5|64.40|Não havia ninguém.
+5|65.99|Uma chave da casa desapareceu.
+5|68.12|E Andreas encontrou na fazenda um jornal de Munique que ninguém ali comprava. [jornal@69.92] [comprava@71.84]
+5|72.93|Mesmo assim, ele não chamou a polícia. [polícia@74.40]
+5|75.36|No dia trinta e um de março, chega uma nova empregada, Maria Baumgartner. [março@76.40] [Baumgartner@78.96]
+5|79.97|Ela passa uma única tarde na fazenda. [fazenda@81.60]
+5|82.72|Naquela noite, as seis pessoas da casa foram mortas. [casa@85.07]
+5|86.63|Quatro foram encontradas no celeiro.
+5|88.68|A empregada e o bebê, dentro de casa. [de@90.56]
+5|91.67|Os corpos só foram descobertos quatro dias depois, quando vizinhos estranharam o sumiço da família e entraram. [dias@93.84] [sumiço@96.28]
+5|98.21|E aí vem a parte mais perturbadora. [perturbadora@99.96]
+5|101.20|Durante esses dias, alguém continuou na fazenda. [fazenda@103.60]
+5|104.32|O gado tinha sido alimentado.
+5|106.19|O pão da casa tinha sido comido. [comido@107.60]
+5|108.36|Cortaram carne da despensa.
+5|110.40|Um homem que passou por ali numa daquelas noites contou que viu fumaça saindo da chaminé... [numa@111.60] [fumaça@113.44]
+5|115.25|e foi ofuscado pela luz de uma lanterna. [uma@116.84]
+5|118.23|A polícia interrogou dezenas de pessoas.
+5|120.92|A arma, um enxadão da própria família, só apareceu quando a fazenda foi demolida, um ano depois, escondida no sótão. [família@122.68] [foi@124.76] [no@127.36]
+5|128.24|O caso foi encerrado oficialmente em mil novecentos e cinquenta e cinco, sem nenhum culpado. [mil@130.36] [sem@132.28]
+5|133.68|Em dois mil e sete, alunos de uma academia de polícia revisaram tudo com técnicas modernas. [de@135.24] [tudo@137.12]
+5|138.96|Também não chegaram a um nome.
+5|140.75|E fica a pergunta que ninguém responde. [responde@142.79]
+5|144.11|Os passos no sótão.
+5|145.63|As pegadas na neve.
+5|147.31|A chave que sumiu.
+5|148.98|Quanto tempo alguém viveu dentro daquela casa, em silêncio, observando a família... [casa@151.04]
+5|154.27|antes daquela noite?
+5|156.19|Mas o número um...
+5|157.59|o número um aconteceu aqui.
+5|159.27|No Brasil.
+5|160.19|Numa tarde de agosto, no alto de um morro em Niterói. [de@161.95]
 6|0.08|Número um.
 6|1.44|As máscaras de chumbo.
 6|4.08|Dois homens mortos, lado a lado, no alto de um morro. [no@6.56]

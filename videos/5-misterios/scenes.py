@@ -719,11 +719,187 @@ def b4_12(c, t):  # 171.9 - fim transição p/ Hinterkaifeck
     fog(c, t, 980, 0.08)
 
 
-# ====================================================================== BLOCO 5 — Nº 2 Hinterkaifeck (aguardando a narração)
+# ====================================================================== BLOCO 5 — Nº 2 Hinterkaifeck
 def b5_01(c, t):
     X = Cx(c, t, 5)
     rank_scene(X, 2, "Hinterkaifeck", "Baviera, Alemanha  •  1922",
                extra=lambda c, t: (c.save(), c.translate(1600, 1000), c.scale(0.45, 0.45), farmhouse(c, t, attic=1.0), c.restore()))
+
+
+def snowfield(c, t, y=930, n=50):
+    night(c, t, 650, 90, (1600, 170))
+    snow(c, t, n, 30, 0.5)
+    c.rectangle(0, y, W, H - y); rgb(c, (0.70, 0.74, 0.80), 0.18); c.fill()
+
+
+def forest_edge(c, x0=0, n=5, y=930):
+    for i in range(n):
+        c.save(); c.translate(x0 + 60 + i * 95, y + (i % 2) * 20); pine(c, 260 + (i % 3) * 50, (0.10, 0.17, 0.14)); c.restore()
+
+
+FAM = [("Andreas, 63", 23.2, (0.40, 0.34, 0.26), "tuft", 1.0), ("Cäzilia", 27.15, (0.36, 0.28, 0.32), "long", 0.95),
+       ("Viktoria", 28.68, (0.30, 0.34, 0.44), "long", 0.95), ("Cäzilia, 7", 32.6, (0.60, 0.40, 0.30), "long", 0.6),
+       ("Josef, 2", 34.6, (0.45, 0.55, 0.65), "tuft", 0.42)]
+
+
+def b5_02(c, t):  # 4.3 - 12.6 pegadas
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    forest_edge(c, 0, 5)
+    c.save(); c.translate(1400, 930); farmhouse(c, t, attic=0.0, w=700); c.restore()
+    c.save(); c.translate(480, 1010); footprints(c, 10, 75, -6, t, 4.5 + O[5], (0.55, 0.60, 0.70)); c.restore()
+    X.sh(10.0, 960, 160, lambda c: caption_box(c, "e não encontrar ninguém", 46), anim="up")
+
+
+def b5_03(c, t):  # 12.6 - 36.6 a fazenda e a família
+    X = Cx(c, t, 5)
+    snowfield(c, t, 980)
+    X.tw(12.7, "Baviera, Alemanha", 960, 100, 44, INK)
+    X.sh(14.5, 960, 190, lambda c: date_stamp(c, "1922", 54, RED), anim="stamp", t1=22.8)
+    if X.u < 22.9:
+        X.sh(16.5, 1000, 900, lambda c: farmhouse(c, t, w=820), anim="fade", d=0.8)
+        X.sh(17.0, 1000, 360, lambda c: hl(c, "HINTERKAIFECK", 0, 0, 52), anim="up")
+        X.sh(19.8, 1000, 470, lambda c: caption_box(c, "perto de Waidhofen  •  ~70 km de Munique", 38), anim="up")
+    else:
+        X.sh(23.0, 960, 200, lambda c: stitle(c, "a família Gruber", 0, 0, 60, INK, AMBER), anim="up")
+        for i, (lab, t0, col, hair, sc_) in enumerate(FAM):
+            x = 380 + i * 300
+            X.fig(person, x, 960, sc_, [(0, "stand")], [(0, "neutral")], appear=t0, col=col, hair=hair, fid=200 + i,
+                  mustache=(i == 0))
+            X.sh(t0 + 0.2, x, 1030, T(lab, 34, INK), anim="fade")
+        X.sh(30.2, 980, 1066, T("(viúva)", 26, AMBER), anim="fade")
+
+
+def b5_04(c, t):  # 36.6 - 46.2 a empregada foi embora
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    c.save(); c.translate(900, 930); farmhouse(c, t, attic=0.25 + 0.15 * math.sin(t * 3) if X.u > 41.8 else 0.0, w=760); c.restore()
+    k = X.p(37.4, 4.0)
+    X.fig(person, 1450 + k * 300, 1000, 0.8, [(0, "stand"), (37.4, "run")], [(0, "worried")], col=(0.50, 0.40, 0.45), hair="long", fid=210)
+    X.sh(36.7, 960, 120, lambda c: caption_box(c, "meses antes, a empregada foi embora", 40), anim="up")
+    X.sh(42.0, 650, 330, lambda c: text(c, "barulhos no sótão?", 0, 0, 40, HAND, AMBER), anim="fade")
+    X.sh(44.4, 960, 230, lambda c: text(c, "\"a casa é assombrada\"", 0, 0, 40, HAND, INK), anim="fade")
+
+
+def b5_05(c, t):  # 46.2 - 62.4 pegadas até a porta, passos no sótão
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    forest_edge(c, 0, 5)
+    c.save(); c.translate(1300, 930); farmhouse(c, t, attic=X.p(59.2, 0.6) * (0.6 + 0.4 * math.sin(t * 6)), w=760); c.restore()
+    X.sh(46.3, 960, 110, lambda c: date_stamp(c, "MARÇO DE 1922", 54, RED), anim="stamp")
+    X.sh(51.0, 960, 220, lambda c: hl(c, "Andreas contou aos vizinhos", 0, 0, 40), anim="up")
+    c.save(); c.translate(500, 1010); footprints(c, 9, 70, -2, t, 53.3 + O[5], (0.55, 0.60, 0.70)); c.restore()
+    X.sh(57.8, 1300, 1040, lambda c: text(c, "fechadura quebrada", 0, 0, 34, HAND, RED), anim="fade")
+    X.sh(59.3, 1080, 420, lambda c: stitle(c, "passos no sótão", 0, 0, 52, AMBER, AMBER), anim="up")
+
+
+def b5_06(c, t):  # 62.4 - 75.3 sótão vazio, chave, jornal
+    X = Cx(c, t, 5)
+    poly(c, [(0, 1080), (960, 120), (1920, 1080)]); fs(c, (0.14, 0.11, 0.09), 6)
+    for k in range(5):
+        y = 300 + k * 160
+        line(c, 960 - (y - 120) * 1.0, y, 960 + (y - 120) * 1.0, y, 6, (0.30, 0.22, 0.15))
+    glow(c, 700, 760, 320, AMBER, 0.22)
+    X.fig(person, 700, 1000, 0.95, [(0, "hold")], [(0, "worried"), (64.4, "shocked")], col=(0.40, 0.34, 0.26), fid=200, mustache=True,
+          prop=("r", lambda c, tt: lantern(c, tt, 0.6)))
+    X.sh(64.5, 1200, 520, lambda c: stitle(c, "ninguém", 0, 0, 64, INK), anim="fade")
+    if X.u > 65.9:
+        c.rectangle(0, 0, W, H); rgb(c, (0.03, 0.03, 0.04), 0.99 * X.p(65.9, 0.5)); c.fill()
+        X.sh(66.0, 500, 450, lambda c: (old_key(c), at(0, 120, T("uma chave sumiu", 38))(c)), anim="pop")
+        X.sh(68.2, 1300, 440, lambda c: newspaper(c, "MUNIQUE", "jornal que ninguém ali comprava"), s=1.3, anim="drop")
+        X.sh(73.0, 960, 900, lambda c: nope(c, "não chamou a polícia", 44), anim="up")
+
+
+def b5_07(c, t):  # 75.3 - 82.7 a nova empregada
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    c.save(); c.translate(1250, 930); farmhouse(c, t, w=760); c.restore()
+    X.sh(75.4, 960, 110, lambda c: date_stamp(c, "31 DE MARÇO DE 1922", 54, RED), anim="stamp")
+    k = X.p(77.0, 3.0)
+    X.fig(person, 300 + k * 450, 1000, 0.9, [(0, "run"), (80.0, "stand")], [(0, "neutral")], appear=76.8,
+          col=(0.55, 0.42, 0.40), hair="long", fid=211)
+    X.sh(78.7, 600, 330, lambda c: hl(c, "Maria Baumgartner", 0, 0, 42), anim="up")
+    X.sh(80.0, 1650, 380, lambda c: (sc(hourglass, t, s=0.6)(c), at(0, 110, T("uma única tarde", 36, AMBER))(c)), anim="pop")
+
+
+def b5_08(c, t):  # 82.7 - 91.6 a noite
+    X = Cx(c, t, 5)
+    night(c, t, 1080, 70)
+    for i in range(6):
+        x = 460 + i * 200
+        out_t = 83.9 + i * 0.25
+        if X.u < out_t:
+            c.save(); c.translate(x, 560); candle(c, t + i); c.restore()
+        else:
+            c.save(); c.translate(x, 560); c.push_group(); candle(c, 0); c.pop_group_to_source(); c.paint_with_alpha(0.25); c.restore()
+            if X.u < out_t + 2.5:
+                smoke(c, t, x, 480, 160, 0.18 * (1 - (X.u - out_t) / 2.5), seed=i)
+    X.sh(82.8, 960, 180, lambda c: stitle(c, "Naquela noite", 0, 0, 64, INK, RED), anim="fade")
+    X.sh(86.7, 760, 830, lambda c: caption_box(c, "4 no celeiro", 40), anim="up")
+    X.sh(88.7, 1220, 830, lambda c: caption_box(c, "2 dentro de casa", 40), anim="up")
+
+
+def b5_09(c, t):  # 91.6 - 110.4 alguém ficou
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    c.save(); c.translate(1300, 930); farmhouse(c, t, attic=0.4, w=760, smoke_on=X.u > 101.2); c.restore()
+    X.sh(91.7, 600, 150, lambda c: date_stamp(c, "4 DIAS DEPOIS", 54, RED), anim="stamp")
+    X.sh(98.3, 600, 280, lambda c: caption_box(c, "a parte mais perturbadora", 40), anim="up")
+    X.sh(101.3, 600, 400, lambda c: stitle(c, "alguém continuou lá", 0, 0, 54, AMBER, AMBER), anim="up")
+    items = [(104.4, "gado alimentado"), (106.2, "pão comido"), (108.4, "carne cortada")]
+    for i, (t0, lab) in enumerate(items):
+        X.sh(t0, 420, 560 + i * 110, lambda c, lab=lab: (sc(check_icon, 22)(c), text(c, lab, 40, 0, 40, TYPE, INK, align="l")), anim="left")
+    X.sh(106.4, 760, 670, lambda c: sc(bread, s=0.5)(c), anim="pop")
+
+
+def b5_10(c, t):  # 110.4 - 118.2 a lanterna
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    c.save(); c.translate(1250, 930); farmhouse(c, t, w=760, smoke_on=True); c.restore()
+    k = X.p(110.5, 4.0)
+    X.fig(person, 200 + k * 380, 1000, 0.85, [(0, "run"), (114.6, "head")], [(0, "neutral"), (115.3, "shocked")],
+          col=(0.35, 0.38, 0.30), fid=212)
+    X.sh(110.6, 960, 140, lambda c: caption_box(c, "um homem que passou por ali", 40), anim="up")
+    X.sh(113.5, 1050, 340, lambda c: text(c, "fumaça na chaminé", 0, 0, 38, HAND, INK), anim="fade")
+    if X.u > 115.3:
+        a = X.p(115.3, 0.4) * (1 - 0.5 * X.p(116.5, 1.5))
+        glow(c, 1000, 820, 700, (1.0, 0.92, 0.70), 0.75 * a)
+        glow(c, 1000, 820, 200, (1.0, 1.0, 0.95), 0.9 * a)
+
+
+def b5_11(c, t):  # 118.2 - 140.7 investigação
+    X = Cx(c, t, 5)
+    X.sh(118.3, 420, 500, lambda c: folder(c, "INTERROGATÓRIOS", True), s=1.2, anim="drop")
+    X.sh(121.0, 960, 560, lambda c: (glow(c, 0, -60, 220, RED, 0.12), mattock(c)), s=1.1, anim="pop")
+    X.sh(123.4, 960, 860, lambda c: text(c, "escondido no sótão", 0, 0, 38, HAND, INK), anim="fade")
+    X.sh(125.0, 960, 940, lambda c: text(c, "achado na demolição, 1923", 0, 0, 34, TYPE, AMBER), anim="fade")
+    X.sh(128.3, 1480, 300, lambda c: date_stamp(c, "1955: CASO ENCERRADO", 44, RED), anim="stamp")
+    X.sh(133.7, 1480, 480, lambda c: date_stamp(c, "2007", 48, AMBER), anim="stamp")
+    for i in range(3):
+        X.fig(person, 1330 + i * 150, 900, 0.55, [(0, "stand"), (137.0, "think")], [(0, "think")], appear=134.8 + i * 0.2,
+              col=(0.25, 0.30, 0.45), fid=220 + i, hat="pilot")
+    X.sh(139.0, 1480, 1010, lambda c: nope(c, "nenhum nome", 40), anim="up")
+
+
+def b5_12(c, t):  # 140.7 - 156.0 a pergunta
+    X = Cx(c, t, 5)
+    snowfield(c, t)
+    c.save(); c.translate(1250, 930); farmhouse(c, t, attic=0.6 + 0.3 * math.sin(t * 2), w=760); c.restore()
+    X.sh(140.8, 960, 110, lambda c: caption_box(c, "a pergunta que ninguém responde", 42), anim="up")
+    for i, (t0, lab) in enumerate(((144.1, "os passos no sótão"), (145.6, "as pegadas na neve"), (147.3, "a chave que sumiu"))):
+        X.sh(t0, 640, 260 + i * 80, lambda c, lab=lab: text(c, lab, 0, 0, 40, HAND, INK), anim="left", t1=148.8)
+    X.sh(149.0, 960, 300, lambda c: stitle(c, "Quanto tempo alguém viveu ali?", 0, 0, 58, INK, AMBER), anim="up")
+    X.hist([(0, "stand"), (144.1, "think"), (149.0, "point_r")], [(0, "worried"), (149.0, "think")], x=260)
+    fog(c, t, 980, 0.08)
+
+
+def b5_13(c, t):  # 156.0 - fim: rumo ao Brasil
+    X = Cx(c, t, 5)
+    hill_bg(c, t, 1080, dusk=True)
+    X.sh(156.2, 960, 180, lambda c: stitle(c, "O número um", 0, 0, 64, INK, RED), anim="up")
+    X.sh(159.3, 960, 320, lambda c: stitle(c, "aconteceu no Brasil", 0, 0, 70, AMBER, AMBER), anim="up")
+    X.sh(161.6, 960, 460, lambda c: caption_box(c, "Niterói  •  agosto", 40), anim="up")
+    fog(c, t, 1000, 0.08)
 
 
 # ====================================================================== BLOCO 6 — Nº 1 Máscaras de chumbo
@@ -942,7 +1118,8 @@ _LOCAL = [
          (91.9, b3_08), (112.2, b3_09), (123.2, b3_10), (145.9, b3_11), (157.8, b3_12)]),
     (4, [(0.0, b4_01), (4.3, b4_02), (14.8, b4_03), (35.6, b4_04), (51.5, b4_05), (61.4, b4_06), (78.0, b4_07),
          (97.8, b4_08), (113.3, b4_09), (128.3, b4_10), (141.8, b4_11), (171.9, b4_12)]),
-    (5, [(0.0, b5_01)]),
+    (5, [(0.0, b5_01), (4.3, b5_02), (12.6, b5_03), (36.6, b5_04), (46.2, b5_05), (62.4, b5_06), (75.3, b5_07),
+         (82.7, b5_08), (91.6, b5_09), (110.4, b5_10), (118.2, b5_11), (140.7, b5_12), (156.0, b5_13)]),
     (6, [(0.0, b6_01), (4.1, b6_02), (18.6, b6_03), (39.9, b6_04), (57.6, b6_05), (79.3, b6_06), (90.3, b6_07),
          (103.6, b6_08), (118.4, b6_09), (134.5, b6_10), (154.4, b6_11), (164.7, b6_12)]),
     (7, [(0.0, b7_01), (19.4, b7_02)]),
@@ -967,6 +1144,6 @@ SFX = [(B(1, 28.6), "boom"), (B(1, 41.6), "heartbeat"),
        (B(2, 0.1), "boom"), (B(2, 81.85), "boom"), (B(2, 108.5), "bell"), (B(2, 138.1), "heartbeat"),
        (B(3, 0.1), "boom"), (B(3, 90.72), "boom"), (B(3, 120.4), "tum"),
        (B(4, 0.1), "boom"), (B(4, 47.2), "heartbeat"), (B(4, 98.0), "boom"), (B(4, 155.5), "tum"),
-       (B(5, 0.1), "boom"),
+       (B(5, 0.1), "boom"), (B(5, 59.2), "heartbeat"), (B(5, 82.8), "bell"), (B(5, 101.3), "boom"),
        (B(6, 0.1), "boom"), (B(6, 91.7), "heartbeat"), (B(6, 115.5), "tum"), (B(6, 174.95), "bell"),
        (B(7, 37.6), "boom")]
