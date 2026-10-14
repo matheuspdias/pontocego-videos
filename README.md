@@ -84,20 +84,49 @@ Vídeo com vários blocos de narração: veja `videos/5-misterios/tempos.py` (ge
 Objetos do MH370 que servem para outros vídeos: `satellite ping radio_tower sonar_ship seabed sonar_beam flaperon auv black_box monitor cockpit_door oxygen_mask crowd pilot`.
 
 ## Cortes verticais (TikTok, YouTube Shorts, Reels)
-Depois do vídeo 16:9 pronto:
-```bash
-python cortes.py videos/<slug> out/<slug>.mp4 --audio <mp4 com o áudio final> --titulo "LINHA 1\NLINHA 2"
+O padrão são **cortes selecionados e independentes**: 3 a 5 trechos fortes da história, cada um entendido sozinho,
+com um gancho no começo. Nada de "PARTE X DE N": quem chega pelo Para Você no meio de uma série pula o vídeo.
+
+1. **Escolher os trechos** (já no roteiro): partes que se entendem sem o resto, com começo forte e um fecho
+   (uma revelação, uma pergunta sem resposta) e de 1 a 3 min. Critério: alguém que nunca viu o canal entende a
+   situação nos primeiros 5 s? O trecho fecha com algo? Tem mais de 1 min? Os melhores costumam ser a abertura,
+   a virada e as teorias.
+2. **Gancho de cada corte**: uma frase de 4 a 7 s com o fato mais estranho daquele trecho, escrita para quem não
+   viu o vídeo ("Um avião com duzentas e trinta e nove pessoas sumiu do radar e continuou voando."). Todos os
+   ganchos vão num **bloco extra no HeyGen** (mesma voz), um depois do outro com `[long pause]` entre eles; guarde
+   os `word_timestamps` para saber onde cada um começa e termina.
+3. `python cortes.py videos/<slug> --frases` lista as frases com o tempo (¶ = começo de parágrafo).
+4. Crie `videos/<slug>/cortes.json` (formato completo no topo do `cortes.py`):
+```json
+{"serie": "O VOO MH370", "cortes": [
+ {"id": "radar", "inicio": 0, "fim": 96.3, "titulo": "O MISTÉRIO\\NDO MH370",
+  "gancho": "Um avião com duzentas e trinta e nove pessoas sumiu do radar e continuou voando.",
+  "gancho_audio": [0.0, 5.2], "gancho_tela": "SUMIU DO RADAR\\NE CONTINUOU VOANDO", "gancho_t": 30.0,
+  "capa": ["SUMIU DO RADAR", "E CONTINUOU", "VOANDO"], "post": "Gancho do post... #misterio #historia #pontocego"}
+]}
 ```
-- Divide a história em partes de 62 s a 2:50 (o TikTok só paga vídeo com mais de 1 min; o Shorts aceita até 3 min), cortando no início de uma frase e preferindo começo de bloco ou de parágrafo do `roteiro.txt`.
-- Cada parte sai em 1080x1920: fundo com o próprio vídeo desfocado, título e "PARTE X DE N" no topo, o vídeo no meio e legendas grandes palavra por palavra (Montserrat ExtraBold, palavra falada em destaque). No fim entra "CONTINUA NA PARTE X" ou, na última, "HISTÓRIA COMPLETA NO YOUTUBE".
+5. Gere:
+```bash
+python cortes.py videos/<slug> out/<slug>.mp4 --audio <mp4 com o áudio final> --ganchos <bloco_ganchos.mp3>
+python capas.py videos/<slug> out/<slug>.mp4 --grade
+```
+- Cada corte (1080x1920): fundo desfocado, título do corte no topo, o vídeo no meio, legendas palavra por palavra.
+  Abre com o gancho falado sobre o quadro `gancho_t` parado, com `gancho_tela` grande na tela; depois entra o
+  trecho e, no fim, "VÍDEO COMPLETO NO YOUTUBE". Sem `--ganchos`, o texto do gancho fica nos primeiros 3,5 s.
+- `inicio` e `fim` são ajustados sozinhos para o silêncio antes da frase mais próxima (até 2 s).
+- Saída: `out/<slug>_corte_<id>.mp4` e `out/<slug>_cortes.txt` (duração, avisos fora de 62 s a 2:58 e o post).
+  `--so <id>` gera só um corte.
 - Tempos das palavras: `videos/<slug>/palavras.json` se existir; senão são estimados pelas frases e marcas `[palavra@t]` do `narracao_blocos.txt` (quanto mais marcas, melhor a sincronia).
-- Opções: `--partes N`, `--max 170`, `--cortes 160.5,308.2` (manual), `--so 1` (só uma parte, para prévia).
-- Saída: `out/<slug>_parteN.mp4` (~10 MB cada) e `out/<slug>_cortes.txt` com os tempos.
-- Tema (cores, fontes, nome do canal) em `THEME` no `cortes.py`, sobrescrito por `tema_cortes.json` quando existir.
+- **Modo antigo** (partes em sequência, "PARTE X DE N"): sem `cortes.json`, ou com `--sequencial`. Opções:
+  `--titulo`, `--partes N`, `--max 170`, `--cortes 160.5,308.2`, `--so 1`.
 - **Vídeos em lista (cortes independentes):** `--trechos "46.2-202.1,202.7-367.6" --titulos "TÍTULO 1|TÍTULO 2" --rotulos "Nº 5 DE 5|Nº 4 DE 5"`. Cada trecho vira `out/<slug>_corteN.mp4`, com o rótulo no lugar de "PARTE X DE N" e o cartão final "VÍDEO COMPLETO NO YOUTUBE" (nada de "continua na parte"). Shorts aceita até 3 min por trecho.
+- Tema (cores, fontes, nome do canal) em `THEME` no `cortes.py`, sobrescrito por `tema_cortes.json` quando existir.
 
 ## Capas dos cortes
-Depois dos cortes, crie `videos/<slug>/capas.json` (uma entrada por parte, na mesma ordem dos cortes):
+Com `cortes.json`, as capas saem dele (chave `capa` de cada corte; a cena é `gancho_t`): primeira linha grande no
+topo, a cena no meio e as outras linhas embaixo, sem "PARTE X DE N". Saída `out/capas/<slug>_capa_<id>.png`.
+
+Modo antigo: depois dos cortes, crie `videos/<slug>/capas.json` (uma entrada por parte, na mesma ordem dos cortes):
 ```json
 {"serie": "NOME CURTO DA SÉRIE", "partes": [{"t": 155, "gancho": ["LINHA 1", "LINHA 2", "LINHA 3"]}]}
 ```

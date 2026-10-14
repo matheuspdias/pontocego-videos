@@ -2,6 +2,12 @@
 
     python capas.py videos/<slug> <video_16x9.mp4> [--grade]
 
+Se existir videos/<slug>/cortes.json (cortes selecionados, independentes), as capas saem dele, sem "PARTE X DE N":
+cada corte com "capa": ["LINHA 1", "LINHA 2", ...] vira uma capa com a primeira linha grande no topo, a cena de
+"gancho_t" (ou "inicio") no meio e as outras linhas embaixo. O nome da série vem de "serie" no cortes.json (opcional).
+Saída: out/capas/<slug>_capa_<id>.png.
+
+Modo antigo (sequencial) — o resto desta descrição:
 Lê videos/<slug>/capas.json:
     {"serie": "JUNTAR R$ 100 MIL",
      "partes": [{"t": 155, "gancho": ["POR QUE", "DEMORA TANTO", "NO COMEÇO?"]}, ...]}
@@ -86,6 +92,19 @@ def capa(fr, serie, p, n, gancho, th, rotulo=None):
     bg = fr.resize((3413, 1920)).crop((1166, 0, 1166 + W, H)).filter(ImageFilter.GaussianBlur(40))
     bg = Image.blend(bg, Image.new("RGB", bg.size, bgc), 0.78)
     d = ImageDraw.Draw(bg)
+    lines = [l.strip() for l in gancho if l.strip()]
+    if p is None and not rotulo:
+        # corte independente: a primeira linha do gancho ocupa o lugar do "PARTE X DE N"
+        if serie:
+            ctext(d, 250, serie, fit(d, serie, tf, 70), white, 4)
+        ctext(d, 360 if serie else 300, lines[0], fit(d, lines[0], tf, 150, 980), hl, 6)
+        bg.paste(fr.resize((1210, 681)).crop((65, 0, 65 + W, 681)), (0, 640))
+        y = 1370
+        for line in lines[1:4]:
+            ctext(d, y, line, fit(d, line, cf, 92), white)
+            y += 112
+        ctext(d, 1740, th["brand"], font(tf, 60), hl, 3)
+        return bg
     ctext(d, 250, serie, fit(d, serie, tf, 70), white, 4)
     big, small = font(tf, 160), font(tf, 80)
     a, b = (rotulo, "") if rotulo else (f"PARTE {p}", f" DE {n}")
@@ -116,17 +135,26 @@ def main():
     ap.add_argument("--grade", action="store_true", help="salva também uma grade com todas as capas, para conferir")
     a = ap.parse_args()
     slug = os.path.basename(os.path.normpath(a.vdir))
-    spec = json.load(open(os.path.join(a.vdir, "capas.json"), encoding="utf-8"))
     th = theme()
     outdir = os.path.join(ROOT, "out", "capas")
     os.makedirs(outdir, exist_ok=True)
-    n = len(spec["partes"])
+    sel = os.path.join(a.vdir, "cortes.json")
+    if os.path.exists(sel):
+        cs = json.load(open(sel, encoding="utf-8"))
+        jobs = [(c.get("gancho_t", float(c["inicio"]) + 0.5), cs.get("serie", ""), None, None, c["capa"], None,
+                 f"{slug}_capa_{c['id']}.png") for c in cs["cortes"] if c.get("capa")]
+    else:
+        spec = json.load(open(os.path.join(a.vdir, "capas.json"), encoding="utf-8"))
+        n = len(spec["partes"])
+        jobs = [(part["t"], spec["serie"], i, n, part["gancho"], part.get("rotulo"), f"{slug}_capa_parte{i}.png")
+                for i, part in enumerate(spec["partes"], 1)]
+    n = len(jobs)
     imgs = []
     with tempfile.TemporaryDirectory() as tmp:
-        for i, part in enumerate(spec["partes"], 1):
-            fr = frame(a.video, part["t"], os.path.join(tmp, f"f{i}.png"))
-            img = capa(fr, spec["serie"], i, n, part["gancho"], th, part.get("rotulo"))
-            out = os.path.join(outdir, f"{slug}_capa_parte{i}.png")
+        for i, (t, serie, p, np_, gancho, rot, name) in enumerate(jobs, 1):
+            fr = frame(a.video, t, os.path.join(tmp, f"f{i}.png"))
+            img = capa(fr, serie, p, np_, gancho, th, rot)
+            out = os.path.join(outdir, name)
             img.save(out)
             imgs.append(img)
             print(out)
