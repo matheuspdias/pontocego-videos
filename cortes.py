@@ -16,6 +16,7 @@ sozinho, com um gancho no começo e o cartão "VÍDEO COMPLETO NO YOUTUBE" no fi
        "gancho_tela": "SUMIU DO RADAR\\NE CONTINUOU VOANDO",  # texto grande na tela durante o gancho (padrão: o próprio gancho)
        "gancho_t": 96.0,                       # quadro do vídeo 16:9 que fica de fundo no gancho (padrão: inicio)
        "capa": ["SUMIU DO RADAR", "E VOOU 7 HORAS"],  # linhas da capa (capas.py); a cena da capa é gancho_t
+       "titulo_post": "Título do Shorts/Reels (até ~60 caracteres, com a curiosidade)",
        "post": "Texto do post + #misterio #pontocego"}
     ]}
   * Com --ganchos e "gancho_audio": o vídeo abre com o gancho falado sobre o quadro parado, e só então entra o trecho.
@@ -458,7 +459,8 @@ def run_selecao(a, slug, sents, total, words, spec):
         notes += [f"=== {cid}: {fmt(t0)} - {fmt(t1)} do vídeo | {dur:.0f} s no corte" + (" | " + "; ".join(warn) if warn else ""),
                   f"Gancho: {c.get('gancho', '(nenhum)')}",
                   f"Trecho começa em: {first}",
-                  f"Post: {c.get('post', '')}", ""]
+                  f"Título (Shorts): {c.get('titulo_post', '(faltando)')}",
+                  f"Descrição: {c.get('post', '')}", ""]
         if a.so and a.so != cid:
             continue
         title = c.get("titulo") or a.titulo or slug.replace("-", " ").upper()

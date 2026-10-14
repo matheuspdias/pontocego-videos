@@ -102,6 +102,7 @@ com um gancho no começo. Nada de "PARTE X DE N": quem chega pelo Para Você no 
  {"id": "radar", "inicio": 0, "fim": 96.3, "titulo": "O MISTÉRIO\\NDO MH370",
   "gancho": "Um avião com duzentas e trinta e nove pessoas sumiu do radar e continuou voando.",
   "gancho_audio": [0.0, 5.2], "gancho_tela": "SUMIU DO RADAR\\NE CONTINUOU VOANDO", "gancho_t": 30.0,
+  "titulo_post": "Título curto do Shorts/Reels",
   "capa": ["SUMIU DO RADAR", "E CONTINUOU", "VOANDO"], "post": "Gancho do post... #misterio #historia #pontocego"}
 ]}
 ```
@@ -114,7 +115,7 @@ python capas.py videos/<slug> out/<slug>.mp4 --grade
   Abre com o gancho falado sobre o quadro `gancho_t` parado, com `gancho_tela` grande na tela; depois entra o
   trecho e, no fim, "VÍDEO COMPLETO NO YOUTUBE". Sem `--ganchos`, o texto do gancho fica nos primeiros 3,5 s.
 - `inicio` e `fim` são ajustados sozinhos para o silêncio antes da frase mais próxima (até 2 s).
-- Saída: `out/<slug>_corte_<id>.mp4` e `out/<slug>_cortes.txt` (duração, avisos fora de 62 s a 2:58 e o post).
+- Saída: `out/<slug>_corte_<id>.mp4` e `out/<slug>_cortes.txt` (duração, avisos fora de 62 s a 2:58, título do Shorts e descrição).
   `--so <id>` gera só um corte.
 - Tempos das palavras: `videos/<slug>/palavras.json` se existir; senão são estimados pelas frases e marcas `[palavra@t]` do `narracao_blocos.txt` (quanto mais marcas, melhor a sincronia).
 - **Modo antigo** (partes em sequência, "PARTE X DE N"): sem `cortes.json`, ou com `--sequencial`. Opções:
