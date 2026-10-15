@@ -1652,14 +1652,16 @@ def at(x, y, fn):
 
 
 # ================================================================ MAPAS ESTILIZADOS (lon/lat -> tela)
-def make_proj(lon0, lon1, lat0, lat1, box=(160, 110, 1760, 1010)):
-    """projeção equiretangular simples centrada na caixa (x0,y0,x1,y1); retorna f(lon,lat)->(x,y)"""
+def make_proj(lon0, lon1, lat0, lat1, box=(160, 110, 1760, 1010), coslat=False):
+    """projeção equiretangular simples centrada na caixa (x0,y0,x1,y1); retorna f(lon,lat)->(x,y).
+    coslat=True encolhe a longitude pelo cosseno da latitude média (mapas de altas latitudes, como o Ártico)."""
     x0, y0, x1, y1 = box
-    k = min((x1 - x0) / (lon1 - lon0), (y1 - y0) / (lat1 - lat0))
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     mlon, mlat = (lon0 + lon1) / 2, (lat0 + lat1) / 2
+    fx = math.cos(math.radians(mlat)) if coslat else 1.0
+    k = min((x1 - x0) / ((lon1 - lon0) * fx), (y1 - y0) / (lat1 - lat0))
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     def f(lon, lat):
-        return cx + (lon - mlon) * k, cy - (lat - mlat) * k
+        return cx + (lon - mlon) * k * fx, cy - (lat - mlat) * k
     f.k = k
     return f
 
@@ -3058,3 +3060,414 @@ def bread(c, col=(0.72, 0.52, 0.30)):
     c.move_to(-110, 30); c.curve_to(-120, -60, 120, -60, 110, 30); c.close_path(); fs(c, col, 5)
     for x in (-50, 0, 50):
         line(c, x - 15, -10, x + 15, -30, 4, (0.50, 0.34, 0.18))
+
+
+# ================================================================ Ártico (A Expedição Franklin)
+# Mapas do Ártico canadense (contornos estilizados, aprox. lon/lat). Use make_proj(..., coslat=True).
+LAND.update({
+    "canada_n": [(-135, 69.0), (-130, 69.8), (-125, 69.6), (-120, 69.0), (-115, 68.0), (-110, 68.0), (-106, 68.4),
+                 (-102, 68.0), (-100.5, 67.8), (-99.2, 67.7), (-98.7, 68.0), (-98.6, 68.45), (-97.5, 68.5), (-96.9, 68.3),
+                 (-96.6, 67.9), (-96.0, 67.3), (-95.2, 67.6), (-94.6, 68.4), (-95.0, 69.3), (-95.2, 70.5), (-95.8, 71.4),
+                 (-95.4, 72.0), (-94.0, 71.6), (-92.2, 70.6), (-91.6, 69.6), (-90.6, 68.8), (-89.0, 68.2), (-87.0, 67.6),
+                 (-85.5, 68.6), (-84.0, 69.6), (-82.0, 69.6), (-81.5, 68.5), (-83.0, 66.5), (-86.0, 66.2), (-88.0, 64.0),
+                 (-94.0, 61.0), (-94.0, 58.0), (-90.0, 57.0), (-82.0, 55.0), (-78.0, 58.0), (-78.0, 62.0), (-72.0, 62.0),
+                 (-64.0, 60.0), (-61.0, 56.0), (-56.0, 52.0), (-60.0, 45.0), (-60.0, 35.0), (-140.0, 35.0)],
+    "king_william": [(-97.8, 69.95), (-98.4, 69.75), (-98.75, 69.6), (-99.2, 69.3), (-99.5, 69.05), (-99.1, 68.85),
+                     (-98.6, 68.7), (-97.8, 68.62), (-97.0, 68.6), (-96.2, 68.6), (-95.7, 68.8), (-95.6, 69.2),
+                     (-96.1, 69.55), (-97.0, 69.85)],
+    "victoria_is": [(-119, 71.5), (-117, 73.0), (-112, 73.2), (-106, 73.3), (-104.5, 72.0), (-102, 70.5), (-100.8, 69.5),
+                    (-101.5, 68.9), (-104, 68.8), (-108, 68.7), (-113, 68.4), (-117, 69.0), (-118.5, 70.3)],
+    "prince_wales": [(-101.5, 71.7), (-98.5, 71.6), (-97.2, 72.3), (-96.8, 73.2), (-97.5, 74.0), (-99.5, 74.0),
+                     (-101.2, 73.4), (-102.5, 72.5)],
+    "somerset": [(-95.0, 72.2), (-93.0, 72.0), (-91.0, 72.5), (-90.5, 73.5), (-91.5, 74.1), (-94.0, 74.1), (-95.3, 73.7),
+                 (-95.4, 72.8)],
+    "devon": [(-91.9, 74.65), (-88, 74.45), (-84, 74.45), (-80.2, 74.9), (-79.8, 75.8), (-83, 76.4), (-89, 76.4),
+              (-93, 76.0), (-95.5, 75.5), (-93.5, 75.0)],
+    "cornwallis": [(-96.5, 74.9), (-93.8, 74.75), (-93.4, 75.5), (-95.0, 75.9), (-96.5, 75.5)],
+    "bathurst": [(-101, 75.4), (-97.5, 75.2), (-97, 76.3), (-99.5, 76.6), (-101.5, 76.0)],
+    "baffin": [(-89.5, 73.3), (-85, 73.7), (-80, 73.6), (-77, 72.5), (-72, 71.2), (-68.5, 70.2), (-67, 69), (-64, 67.2),
+               (-62, 66.6), (-64.5, 65), (-65, 63), (-66, 61.9), (-70, 62.6), (-72, 63.8), (-75, 64.5), (-78, 64.4),
+               (-74.5, 66), (-73, 67.2), (-75, 68.4), (-78.5, 69.8), (-82, 69.8), (-85, 69.9), (-88.5, 70.5), (-89.8, 71.6)],
+    "ellesmere": [(-90, 76.8), (-80, 76.3), (-76, 77.5), (-74, 79), (-70, 81), (-62, 82.5), (-90, 82.5)],
+    "greenland": [(-73, 78.0), (-68, 76.2), (-60, 75.8), (-57, 74.5), (-55.5, 72.5), (-54, 70.5), (-52.5, 69), (-53.5, 67),
+                  (-52, 65), (-50.5, 63), (-48.5, 61.5), (-44.5, 60), (-43, 60.2), (-41, 62.5), (-39.8, 65.3), (-35, 66.5),
+                  (-30, 68.3), (-24, 70.2), (-22, 72), (-20, 75), (-18.5, 77.5), (-20, 80), (-40, 83), (-62, 83), (-70, 80)],
+    "iceland": [(-24, 65.5), (-22.5, 66.4), (-18, 66.2), (-14.5, 65.5), (-13.5, 64.8), (-17.5, 63.6), (-21, 63.8), (-22.8, 64.1)],
+    "scandinavia": [(5, 58), (5.5, 60), (5, 62), (8, 63.5), (12, 66), (15, 68.5), (20, 70), (28, 71), (40, 70), (40, 50), (10, 50),
+                    (8, 54), (8.5, 57), (10.5, 57.7), (12, 56), (11, 59)],
+})
+ARCTIC = ["canada_n", "king_william", "victoria_is", "prince_wales", "somerset", "devon", "cornwallis", "bathurst",
+          "baffin", "ellesmere", "greenland"]
+NORTH_ATLANTIC = ARCTIC + ["iceland", "britain", "ireland", "scandinavia"]
+ICE_LAND = (0.30, 0.34, 0.40)      # terra coberta de neve (mapas do Ártico)
+ICE_SEA = (0.05, 0.08, 0.13)
+
+
+def bomb_ship(c, t=0, name=None, sails=True, furled=False, funnel=True, frost=0.0, hull=(0.11, 0.11, 0.13),
+              band=(0.78, 0.66, 0.40), sail=(0.80, 0.77, 0.70)):
+    """navio-bombarda de três mastros (Erebus/Terror) visto de lado, proa à direita; origem = linha d'água.
+    furled=True recolhe as velas (navio parado no gelo); frost 0..1 cobre o navio de gelo e neve."""
+    # gurupés e mastros
+    line(c, 210, -60, 380, -120, 7)
+    masts = [(150, -380), (10, -440), (-150, -360)]
+    for x, h in masts:
+        line(c, x, -55, x, h, 8)
+    rig = (0.58, 0.56, 0.52)
+    for (x, h) in masts:
+        line(c, x, h, x - 95, -60, 2, rig); line(c, x, h, x + 95, -60, 2, rig)
+    line(c, 150, -380, 380, -120, 2, rig); line(c, 10, -440, 150, -380, 2, rig); line(c, -150, -360, 10, -440, 2, rig)
+    for x, h in masts:
+        rows = [(h + 20, h + 95, 46, 58), (h + 102, h + 190, 62, 78), (h + 197, -110, 80, 96)] if h < -400 else \
+               [(h + 20, h + 90, 42, 52), (h + 96, h + 175, 56, 70), (h + 182, -110, 70, 86)]
+        for i, (y0, y1, w0, w1) in enumerate(rows):
+            line(c, x - w0 - 10, y0, x + w0 + 10, y0, 6)
+            if not sails:
+                continue
+            if furled:
+                rrect(c, x - w0 - 4, y0 - 4, 2 * w0 + 8, 16, 8); fs(c, sail, 3)
+                continue
+            c.move_to(x - w0, y0); c.line_to(x + w0, y0); c.line_to(x + w1, y1)
+            c.curve_to(x + w1 * 0.4, y1 - 12, x - w1 * 0.4, y1 - 12, x - w1, y1); c.close_path()
+            fs(c, sail, 4)
+    if sails and not furled:
+        poly(c, [(156, -360), (372, -126), (230, -70)]); fs(c, sail, 4)
+    if funnel:
+        rrect(c, 52, -150, 34, 100, 4); fs(c, (0.20, 0.19, 0.20), 5)
+        line(c, 48, -150, 90, -150, 6)
+    # casco (proa reforçada)
+    c.move_to(-262, -60); c.line_to(232, -60)
+    c.curve_to(226, -10, 196, 30, 140, 46); c.line_to(-210, 46)
+    c.curve_to(-240, 30, -256, 0, -262, -60); c.close_path()
+    fs(c, hull, 6)
+    c.rectangle(-256, -40, 478, 16); rgb(c, band); c.fill()
+    for x in range(-220, 200, 46):
+        c.rectangle(x, -38, 18, 12); rgb(c, hull); c.fill()
+    line(c, -268, -70, 238, -70, 5)
+    if frost > 0:
+        a = clamp01(frost)
+        for x, h in masts:
+            line(c, x - 3, -60, x - 3, h, 4, (0.92, 0.95, 1.0))
+        c.move_to(-262, -66); c.line_to(232, -66)
+        _jag(c, -262, 232, -82, 14, 9, 14)
+        c.close_path(); rgb(c, (0.92, 0.95, 1.0), 0.85 * a); c.fill()
+        rnd = random.Random(4)
+        for _ in range(int(18 * a)):
+            x = rnd.uniform(-240, 200)
+            poly(c, [(x, -60), (x + 5, -60), (x + 2, -60 + rnd.uniform(12, 34))]); rgb(c, (0.85, 0.92, 1.0), 0.9); c.fill()
+    if name:
+        text(c, name, -60, 12, 26, TYPE, band)
+
+
+def ice_field(c, t, y=760, w=None, seed=2, col=(0.80, 0.85, 0.92), crack=(0.48, 0.56, 0.66), ridges=True):
+    """campo de gelo marinho de y até o fim da tela, com placas, rachaduras e cristas de pressão"""
+    w = w or W
+    g = cairo.LinearGradient(0, y, 0, H)
+    g.add_color_stop_rgb(0, *col)
+    g.add_color_stop_rgb(1, col[0] * 0.72, col[1] * 0.74, col[2] * 0.80)
+    c.rectangle(0, y, w, H - y); c.set_source(g); c.fill()
+    rnd = random.Random(seed)
+    for _ in range(14):
+        x0 = rnd.uniform(-100, w)
+        yy = y + rnd.uniform(20, H - y)
+        c.move_to(x0, yy)
+        for k in range(5):
+            x0 += rnd.uniform(60, 160); yy += rnd.uniform(-25, 25)
+            c.line_to(x0, yy)
+        rgb(c, crack, 0.8); c.set_line_width(2.5); c.stroke()
+    if ridges:
+        for i in range(7):
+            x = rnd.uniform(0, w); sz = rnd.uniform(30, 70)
+            poly(c, [(x - sz, y + 6), (x - sz * 0.3, y - sz * 0.7), (x, y - sz * 0.35), (x + sz * 0.45, y - sz * 0.9), (x + sz, y + 6)])
+            fs(c, (0.86, 0.90, 0.96), 3, crack)
+    line(c, 0, y, w, y, 4, (0.92, 0.95, 1.0))
+
+
+def ice_ridge(c, w=300, h=90, seed=1, col=(0.86, 0.90, 0.96)):
+    """bloco/crista de gelo de pressão (origem = base central)"""
+    rnd = random.Random(seed)
+    pts = [(-w / 2, 0)]
+    n = 6
+    for k in range(1, n):
+        pts.append((-w / 2 + w * k / n, -h * rnd.uniform(0.4, 1.0)))
+    pts.append((w / 2, 0))
+    poly(c, pts); fs(c, col, 4, (0.48, 0.56, 0.66))
+
+
+def coffin(c, open_=0.0, cloth=(0.17, 0.22, 0.40), w=150, h=420):
+    """caixão visto de cima, coberto de pano azul; open_ 0..1 desliza a tampa revelando gelo azulado"""
+    shape = [(-w * 0.32, -h / 2), (w * 0.32, -h / 2), (w / 2, -h * 0.22), (w * 0.36, h / 2), (-w * 0.36, h / 2), (-w / 2, -h * 0.22)]
+    poly(c, shape); fs(c, (0.10, 0.10, 0.12), 6)
+    if open_ > 0:
+        c.save(); poly(c, shape); c.clip()
+        g = cairo.RadialGradient(0, -h * 0.1, 10, 0, -h * 0.1, h * 0.6)
+        g.add_color_stop_rgba(0, 0.70, 0.85, 1.0, 0.55 * open_)
+        g.add_color_stop_rgba(1, 0.20, 0.30, 0.45, 0.15)
+        c.set_source(g); c.paint()
+        # silhueta discreta sob o gelo (sem detalhes)
+        ellipse(c, 0, -h * 0.30, 30, 38); rgb(c, (0.55, 0.62, 0.70), 0.35 * open_); c.fill()
+        c.restore()
+    dy = -open_ * h * 0.75
+    c.save(); c.translate(open_ * w * 0.55, dy)
+    poly(c, shape); fs(c, cloth, 6)
+    for k in range(1, 4):
+        line(c, -w * 0.3, -h / 2 + k * h / 4, w * 0.3, -h / 2 + k * h / 4, 2, (0.28, 0.34, 0.55))
+    c.restore()
+
+
+def grave_board(c, label="", h=220, col=(0.40, 0.32, 0.22)):
+    """lápide de madeira (tábua) cravada no chão; origem = base"""
+    c.move_to(-55, 0); c.line_to(-55, -h + 40); c.curve_to(-55, -h - 6, 55, -h - 6, 55, -h + 40); c.line_to(55, 0); c.close_path()
+    fs(c, col, 5)
+    for k in range(3):
+        line(c, -38, -h + 70 + k * 30, 38, -h + 70 + k * 30, 2, (0.25, 0.20, 0.14))
+    if label:
+        text(c, label, 0, -h + 40, 22, TYPE, DARKTXT)
+
+
+def cairn(c, w=240, h=200, col=(0.36, 0.36, 0.38)):
+    """monte de pedras (marco); origem = base"""
+    rnd = random.Random(8)
+    rows = 5
+    for r in range(rows):
+        n = rows - r + 1
+        ww = w * (1 - r / (rows + 1))
+        for k in range(n):
+            x = -ww / 2 + ww * (k + 0.5) / n + rnd.uniform(-6, 6)
+            y = -h * (r + 0.5) / rows
+            rx, ry = ww / n / 2 + 4, h / rows / 2 + 4
+            c.save(); c.translate(x, y); c.scale(1, ry / rx); c.new_sub_path(); c.arc(0, 0, rx, 0, 6.283); c.restore()
+            fs(c, tuple(v + rnd.uniform(-0.04, 0.04) for v in col), 4)
+
+
+def tin_can(c, label="", seam=True, open_=False, col=(0.62, 0.64, 0.66)):
+    """lata de conserva do séc. XIX (cilindro); seam mostra a solda de chumbo"""
+    c.rectangle(-60, -75, 120, 150); fs(c, col, 5)
+    ellipse(c, 0, 75, 60, 14); fs(c, col, 5)
+    c.rectangle(-58, -70, 116, 140); rgb(c, col); c.fill()
+    ellipse(c, 0, -75, 60, 14); fs(c, (0.20, 0.20, 0.22) if open_ else (0.70, 0.72, 0.74), 5)
+    for y in (-40, 40):
+        line(c, -60, y, 60, y, 2, (0.48, 0.50, 0.52))
+    if seam:
+        line(c, 22, -72, 22, 72, 6, (0.36, 0.38, 0.42))
+        rnd = random.Random(2)
+        for k in range(7):
+            circle(c, 22 + rnd.uniform(-4, 4), -60 + k * 20, 5, (0.38, 0.40, 0.44), 0)
+    if label:
+        c.rectangle(-60, -28, 120, 56); rgb(c, PARCH); c.fill()
+        text(c, label, -10, 0, 24, TYPE, DARKTXT)
+
+
+def navy_form(c, t=0, margin=0.0, w=520, h=680, col=(0.86, 0.82, 0.70)):
+    """formulário da Marinha (bilhete de Victory Point): texto impresso e, com margin 0..1,
+    a segunda mensagem rabiscada em volta da margem"""
+    rrect(c, -w / 2, -h / 2, w, h, 6); fs(c, col, 5)
+    rnd = random.Random(6)
+    line(c, -w / 2 + 50, -h / 2 + 70, w / 2 - 50, -h / 2 + 70, 5, DARKTXT)
+    for k in range(9):
+        y = -h / 2 + 120 + k * 34
+        line(c, -w / 2 + 70, y, -w / 2 + 70 + rnd.uniform(0.5, 1.0) * (w - 140), y, 3, (0.45, 0.40, 0.32))
+    # mensagem de 1847 (manuscrita, curta) no centro
+    for k in range(4):
+        y = 70 + k * 30
+        c.move_to(-w / 2 + 80, y)
+        for x in range(int(-w / 2 + 80), int(w / 2 - 120), 18):
+            c.line_to(x, y + rnd.uniform(-5, 5))
+        rgb(c, (0.20, 0.22, 0.40)); c.set_line_width(2.5); c.stroke()
+    if margin > 0:
+        # rabiscos ao redor das bordas (percorre o contorno até a fração margin)
+        path = [(-w / 2 + 18, h / 2 - 20), (-w / 2 + 18, -h / 2 + 20), (w / 2 - 18, -h / 2 + 20), (w / 2 - 18, h / 2 - 20),
+                (-w / 2 + 40, h / 2 - 20)]
+        segs = [(path[i], path[i + 1]) for i in range(len(path) - 1)]
+        tot = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in segs) * clamp01(margin)
+        c.move_to(*path[0])
+        for (a, b) in segs:
+            L = math.hypot(b[0] - a[0], b[1] - a[1])
+            if tot <= 0:
+                break
+            k = min(1, tot / L)
+            n = max(2, int(L * k / 9))
+            for j in range(1, n + 1):
+                f = j / n * k
+                x = a[0] + (b[0] - a[0]) * f; y = a[1] + (b[1] - a[1]) * f
+                ox = rnd.uniform(-6, 6)
+                c.line_to(x + (ox if a[0] == b[0] else 0), y + (ox if a[1] == b[1] else 0))
+            tot -= L
+        rgb(c, (0.30, 0.18, 0.12)); c.set_line_width(3); c.stroke()
+
+
+def sledge_boat(c, people=0, cargo=True, col=(0.50, 0.38, 0.26)):
+    """barco montado sobre um trenó pesado (madeira e ferro); origem = chão"""
+    line(c, -230, 0, 210, 0, 9, (0.40, 0.40, 0.44))
+    c.move_to(210, 0); c.curve_to(250, 0, 260, -30, 240, -46); rgb(c, (0.40, 0.40, 0.44)); c.set_line_width(9); c.stroke()
+    for x in (-180, -60, 60, 170):
+        line(c, x, 0, x, -40, 7, (0.36, 0.28, 0.20))
+    line(c, -220, -40, 220, -40, 8, (0.36, 0.28, 0.20))
+    c.save(); c.translate(0, -76); lifeboat(c, people, False, col); c.restore()
+    if cargo:
+        for x, h, cc in ((-90, 26, (0.40, 0.20, 0.18)), (-40, 34, (0.25, 0.30, 0.45)), (30, 22, PARCH)):
+            c.rectangle(x, -102 - h, 46, h); fs(c, cc, 3)
+    line(c, 240, -46, 330, -30, 3, (0.70, 0.66, 0.58))
+
+
+def inuk(c, t, x, y, s, poses=((0, "stand"),), exprs=((0, "neutral"),), col=(0.52, 0.42, 0.30), fid=7, **kw):
+    """caçador inuíte com parka de capuz de pele"""
+    figure(c, t, x, y, s, poses=poses, exprs=exprs, coat=col, shirt=col, hat="hood", hat_col=(0.70, 0.62, 0.50),
+           hair=None, fid=fid, **kw)
+
+
+def silver_fork(c, col=(0.80, 0.82, 0.86)):
+    rrect(c, -10, -20, 20, 150, 8); fs(c, col, 4)
+    c.rectangle(-26, -70, 52, 54); fs(c, col, 4)
+    for x in (-18, -6, 6, 18):
+        line(c, x, -70, x, -120, 7, col)
+    circle(c, 0, 100, 10, None, 3, (0.55, 0.50, 0.30))
+
+
+def silver_spoon(c, col=(0.80, 0.82, 0.86)):
+    rrect(c, -10, -20, 20, 150, 8); fs(c, col, 4)
+    ellipse(c, 0, -70, 34, 52); fs(c, col, 4)
+    circle(c, 0, 100, 10, None, 3, (0.55, 0.50, 0.30))
+
+
+def silver_plate(c, label="SIR JOHN FRANKLIN", r=150, col=(0.78, 0.80, 0.84)):
+    circle(c, 0, 0, r, col, 6)
+    circle(c, 0, 0, r * 0.72, None, 3, (0.58, 0.60, 0.64))
+    if label:
+        text(c, label, 0, 0, int(r * 0.15), SERIF, (0.30, 0.30, 0.34))
+
+
+def cook_pot(c, col=(0.32, 0.32, 0.34)):
+    """panela de ferro"""
+    c.move_to(-110, -60); c.line_to(110, -60); c.curve_to(110, 40, 80, 70, 0, 70); c.curve_to(-80, 70, -110, 40, -110, -60)
+    c.close_path(); fs(c, col, 6)
+    ellipse(c, 0, -60, 110, 18); fs(c, (0.12, 0.12, 0.13), 5)
+    c.new_sub_path(); c.arc(0, -60, 130, math.pi * 1.1, math.pi * 1.9); rgb(c, INK); c.set_line_width(4); c.stroke()
+
+
+def lemon(c, col=(0.92, 0.80, 0.24)):
+    c.save(); c.scale(1, 0.75); c.new_sub_path(); c.arc(0, 0, 70, 0, 6.283); c.restore(); fs(c, col, 5)
+    circle(c, 74, 0, 10, col, 4); circle(c, -74, 0, 8, col, 4)
+
+
+def lime_bottle(c, level=1.0):
+    """garrafa de suco de limão (concentrado)"""
+    rrect(c, -40, -60, 80, 170, 14); fs(c, (0.30, 0.36, 0.30), 5)
+    c.rectangle(-14, -110, 28, 52); fs(c, (0.30, 0.36, 0.30), 5)
+    if level > 0:
+        hh = 150 * level
+        c.rectangle(-34, 104 - hh, 68, hh); rgb(c, (0.85, 0.78, 0.30), 0.7); c.fill()
+    c.rectangle(-36, -10, 72, 50); fs(c, PARCH, 3)
+
+
+def dna(c, t=0, h=420, col=ICE, col2=AMBER):
+    """dupla hélice de DNA girando"""
+    n = 28
+    for i in range(n):
+        y = -h / 2 + h * i / (n - 1)
+        a = t * 1.6 + i * 0.45
+        x1, x2 = math.sin(a) * 70, -math.sin(a) * 70
+        if i % 2 == 0:
+            line(c, x1, y, x2, y, 3, (0.55, 0.58, 0.64))
+        circle(c, x1, y, 9, col if math.cos(a) > 0 else (0.35, 0.45, 0.55), 0)
+        circle(c, x2, y, 9, col2 if math.cos(a) < 0 else (0.50, 0.40, 0.20), 0)
+
+
+def lead_chart(c, t=0, p=1.0, w=560, h=300, spike=True):
+    """gráfico simples: chumbo estável e subida no fim (p 0..1 desenha a curva)"""
+    rrect(c, -w / 2, -h / 2, w, h, 8); fs(c, (0.10, 0.11, 0.13), 4)
+    line(c, -w / 2 + 40, h / 2 - 40, w / 2 - 30, h / 2 - 40, 3)
+    line(c, -w / 2 + 40, h / 2 - 40, -w / 2 + 40, -h / 2 + 30, 3)
+    c.set_dash([8, 8]); line(c, -w / 2 + 40, -10, w / 2 - 30, -10, 2, RED); c.set_dash([])
+    pts = []
+    N = 40
+    for i in range(N + 1):
+        f = i / N
+        x = -w / 2 + 40 + f * (w - 80)
+        v = 0.25 + 0.03 * math.sin(i * 1.7)
+        if spike and f > 0.85:
+            v += (f - 0.85) / 0.15 * 0.6
+        pts.append((x, h / 2 - 40 - v * (h - 80)))
+    k = max(2, int(len(pts) * clamp01(p)))
+    c.move_to(*pts[0])
+    for q in pts[1:k]:
+        c.line_to(*q)
+    rgb(c, AMBER); c.set_line_width(5); c.stroke()
+
+
+def locomotive_engine(c, col=(0.24, 0.24, 0.26)):
+    """motor a vapor de locomotiva (caldeira, cilindro e volante)"""
+    rrect(c, -170, -70, 260, 120, 50); fs(c, col, 6)
+    for x in (-110, -40, 30):
+        line(c, x, -70, x, 50, 3, (0.40, 0.40, 0.44))
+    c.rectangle(90, -40, 70, 60); fs(c, (0.30, 0.30, 0.32), 5)
+    rrect(c, -120, -130, 40, 60, 6); fs(c, (0.20, 0.20, 0.22), 5)
+    circle(c, 60, 90, 60, None, 7)
+    for k in range(6):
+        a = k * math.pi / 3
+        line(c, 60, 90, 60 + math.cos(a) * 58, 90 + math.sin(a) * 58, 4)
+    line(c, 125, -10, 60, 90, 6, AMBER)
+
+
+def propeller(c, t=0, spin=1.0, col=(0.72, 0.58, 0.32)):
+    a0 = t * 6 * spin
+    for k in range(2):
+        a = a0 + k * math.pi
+        c.save(); c.rotate(a); c.save(); c.scale(1, 0.38); c.new_sub_path(); c.arc(55, 0, 55, 0, 6.283); c.restore()
+        fs(c, col, 4); c.restore()
+    circle(c, 0, 0, 16, (0.40, 0.34, 0.24), 4)
+
+
+def mast_stub(c, h=170, col=(0.36, 0.28, 0.20)):
+    """pedaço de mastro de madeira saindo do gelo; origem = superfície"""
+    poly(c, [(-14, 0), (-12, -h), (-2, -h - 14), (12, -h + 4), (14, 0)]); fs(c, col, 5)
+    for y in (-h * 0.3, -h * 0.65):
+        line(c, -14, y, 14, y, 3, (0.25, 0.20, 0.14))
+    ellipse(c, 0, 4, 60, 12); rgb(c, (0.92, 0.95, 1.0), 0.9); c.fill()
+
+
+def camera_compact(c, col=(0.24, 0.25, 0.28)):
+    """câmera digital compacta"""
+    rrect(c, -90, -55, 180, 110, 14); fs(c, col, 5)
+    circle(c, 15, 0, 38, (0.12, 0.12, 0.14), 5); circle(c, 15, 0, 18, ICE, 3)
+    rrect(c, -78, -46, 30, 18, 4); fs(c, (0.80, 0.80, 0.78), 3)
+
+
+def cabin_corridor(c, t=0, n=6, closed=None, w=1300, h=420):
+    """corredor de cabines do navio afundado: portas abertas (escuras), uma fechada"""
+    rrect(c, -w / 2, -h / 2, w, h, 6); fs(c, (0.10, 0.13, 0.16), 5)
+    for i in range(n):
+        x = -w / 2 + (i + 0.5) * w / n
+        dw, dh = w / n * 0.62, h * 0.74
+        if i == closed:
+            rrect(c, x - dw / 2, -dh / 2, dw, dh, 4); fs(c, (0.36, 0.25, 0.16), 5)
+            line(c, x - dw / 2 + 12, -dh / 2 + 16, x + dw / 2 - 12, -dh / 2 + 16, 2, (0.25, 0.18, 0.12))
+            circle(c, x + dw / 2 - 22, 10, 7, AMBER, 2)
+        else:
+            rrect(c, x - dw / 2, -dh / 2, dw, dh, 4); fs(c, (0.02, 0.03, 0.04), 4)
+            poly(c, [(x + dw / 2, -dh / 2), (x + dw / 2 + 22, -dh / 2 + 18), (x + dw / 2 + 22, dh / 2 - 6), (x + dw / 2, dh / 2)])
+            fs(c, (0.30, 0.22, 0.14), 3)
+    c.rectangle(-w / 2, h / 2 - 50, w, 50); rgb(c, (0.24, 0.22, 0.18), 0.85); c.fill()
+
+
+def shelf_plates(c, w=460):
+    """prateleira com pratos empilhados"""
+    line(c, -w / 2, 0, w / 2, 0, 8, (0.36, 0.25, 0.16))
+    for i, n in enumerate((5, 7, 4, 6)):
+        x = -w / 2 + 60 + i * (w - 120) / 3
+        for k in range(n):
+            ellipse(c, x, -10 - k * 9, 46, 8); fs(c, (0.80, 0.80, 0.76), 3)
+
+
+def slipper(c, col=(0.45, 0.20, 0.24)):
+    c.move_to(-80, 20); c.curve_to(-80, -30, 40, -40, 80, 0); c.curve_to(90, 20, 60, 28, 0, 28); c.close_path(); fs(c, col, 5)
+    ellipse(c, -20, -6, 40, 10); rgb(c, (0.20, 0.10, 0.12)); c.fill()
+
+
+def soap_bar(c, col=(0.86, 0.80, 0.66)):
+    rrect(c, -60, -30, 120, 60, 20); fs(c, col, 5)
+    text(c, "SOAP", 0, 0, 22, SERIF, (0.55, 0.48, 0.36))
+
+
+def lantern_glow_ice(c, t, x, y, r=420):
+    """brilho azulado de gelo (para cenas internas/submersas)"""
+    glow(c, x, y, r, ICE, 0.12 + 0.03 * math.sin(t * 1.3))

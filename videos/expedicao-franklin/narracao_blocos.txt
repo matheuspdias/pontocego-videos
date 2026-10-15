@@ -1,0 +1,205 @@
+# A Expedição Franklin — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  187.847s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=21c70729-2eda-4c7f-818a-cdf8362456c7.wav
+# bloco2  182.387s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=a2c307da-2c9d-4011-bccf-848dde20eb55.wav
+# bloco3  202.318s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=998a98e7-fc93-4636-aafc-4b4f4f1aeb44.wav
+# bloco4  136.359s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=ad64738f-9ef1-47ec-b8d5-c6895909922f.wav
+# bloco5  121.626s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=dd522adf-d13e-48e9-b9d6-ae48bdbc3ff2.wav
+# Offsets absolutos: B1=0.000  B2=188.847  B3=372.234  B4=575.552  B5=712.911  (fim ~834.54)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Agosto de mil novecentos e oitenta e quatro. [e@2.12]
+1|3.12|Numa ilha deserta do Ártico canadense, um grupo de cientistas cava o chão congelado ao lado de velhos túmulos de madeira. [um@5.52] [chão@7.32] [túmulos@9.40]
+1|10.96|Um metro e meio abaixo da superfície, eles encontram um caixão coberto de pano azul. [superfície@12.40] [de@15.12]
+1|16.86|Lá dentro, preso num bloco de gelo, está um rapaz de vinte anos. [gelo@18.64] [anos@20.48]
+1|21.24|O rosto intacto.
+1|22.52|O cabelo comprido.
+1|23.92|Os olhos entreabertos, como se ainda estivessem olhando de volta para quem abriu a tampa. [estivessem@25.92] [abriu@27.76]
+1|29.26|Ele estava morto havia cento e trinta e oito anos. [trinta@30.84]
+1|32.95|O nome dele era John Torrington.
+1|35.15|E ele foi o primeiro a morrer na expedição mais bem equipada que a Marinha Britânica já tinha mandado para o gelo. [morrer@36.20] [que@38.56] [mandado@40.08]
+1|41.68|Cento e vinte e nove homens partiram. [partiram@43.28]
+1|44.32|Nenhum voltou.
+1|46.24|Mas Torrington teve sorte.
+1|48.00|Ele ganhou um túmulo, uma lápide e um nome. [e@50.16]
+1|51.34|Os últimos sobreviventes dessa história não tiveram nada disso. [tiveram@53.44]
+1|55.02|E o que aconteceu com eles foi muito pior do que o frio. [foi@56.48] [frio@58.00]
+1|59.20|Esta é a história da Expedição Franklin. [Franklin@61.28]
+1|62.71|Para entender como tudo deu tão errado, a gente precisa voltar ao momento em que tudo parecia perfeito. [errado@64.40] [momento@66.32]
+1|69.18|Inglaterra, maio de mil oitocentos e quarenta e cinco. [quarenta@71.60]
+1|73.11|Fazia séculos que os europeus procuravam a Passagem do Noroeste, uma rota pelo norte do Canadá ligando o Atlântico ao Pacífico. [a@75.36] [pelo@77.52] [Atlântico@79.33]
+1|80.88|Quem a encontrasse mudaria o comércio do mundo. [do@83.12]
+1|83.99|E o Império Britânico, a maior potência naval da época, queria ser o primeiro. [potência@85.76] [o@87.80]
+1|89.03|Para comandar a missão, o Almirantado escolheu Sir John Franklin. [escolheu@91.04]
+1|93.08|Cinquenta e nove anos, oficial respeitado, veterano de outras viagens ao Ártico. [veterano@95.76]
+1|98.30|Na primeira delas, décadas antes, a comida acabou e os homens chegaram a comer o couro das próprias botas. [comida@100.48] [a@102.28] [botas@104.04]
+1|104.72|Franklin sobreviveu, e voltou para casa como herói. [como@107.12]
+1|107.91|Na Inglaterra, ganhou um apelido:
+1|109.97|o homem que comeu as botas.
+1|112.24|Desta vez, ninguém ia passar fome.
+1|114.96|Esse era o plano.
+1|116.24|Ele recebeu dois navios, o Erebus e o Terror. [e@118.72]
+1|119.76|Navios de guerra com cascos reforçados para enfrentar o gelo. [para@122.04]
+1|123.28|E cada um ganhou algo que quase nenhum navio tinha: [quase@124.84]
+1|126.61|um motor a vapor de locomotiva, ligado a uma hélice que podia ser recolhida. [ligado@128.64] [ser@130.16]
+1|131.24|Havia aquecimento no convés de baixo, um sistema para transformar água do mar em água potável, e uma biblioteca com cerca de mil e duzentos livros em cada navio. [um@133.52] [mar@135.32] [biblioteca@137.24] [duzentos@138.96]
+1|141.85|Nos porões, comida para três anos.
+1|144.84|Mais de quinze toneladas de carne, dezenas de toneladas de farinha. [dezenas@147.04]
+1|149.04|E milhares de latas de comida em conserva, uma tecnologia ainda nova na época. [em@150.56] [na@153.08]
+1|154.20|Franklin achava que, economizando, aquilo duraria até cinco anos. [até@157.32]
+1|159.32|No dia dezenove de maio de mil oitocentos e quarenta e cinco, os navios deixaram o rio Tâmisa com cento e trinta e quatro homens. [mil@160.84] [os@162.84] [com@164.72] [homens@166.20]
+1|167.16|Na Groenlândia, cinco foram mandados de volta para casa, doentes ou dispensados. [volta@169.40]
+1|172.76|Sem saber, aqueles cinco tinham acabado de ganhar a vida. [de@175.40]
+1|177.16|No fim de julho, dois baleeiros cruzaram com o Erebus e o Terror na Baía de Baffin, esperando o gelo abrir. [cruzaram@179.12] [Terror@180.52] [o@182.79]
+1|184.01|Foi a última vez que alguém de fora viu aqueles homens vivos. [de@185.60]
+2|0.08|Durante dois anos, não chegou nenhuma notícia. [notícia@2.36]
+2|3.63|Em Londres, isso não preocupou ninguém.
+2|5.96|Os navios tinham comida de sobra, e no Ártico o silêncio era normal. [e@7.80] [normal@9.68]
+2|11.18|Só em mil oitocentos e quarenta e oito começaram as buscas. [e@12.85]
+2|14.76|E foram muitas.
+2|16.72|Ao longo dos anos seguintes, mais de trinta expedições foram mandadas atrás de Franklin. [de@18.40] [de@20.64]
+2|21.56|Navios da Marinha, da Companhia da Baía de Hudson, e de particulares, várias delas pagas pela esposa dele, Lady Jane Franklin. [Baía@23.28] [várias@25.52] [Lady@27.84]
+2|29.98|A primeira pista apareceu em mil oitocentos e cinquenta, na Ilha Beechey. [oitocentos@31.68]
+2|34.60|Ali estavam os restos de um acampamento de inverno. [acampamento@35.84]
+2|37.25|Pilhas de latas de comida vazias.
+2|39.67|E três túmulos de madeira.
+2|42.51|John Torrington, foguista do Terror, vinte anos, morto no primeiro dia de mil oitocentos e quarenta e seis. [anos@45.36] [mil@47.52]
+2|49.84|John Hartnell, marinheiro do Erebus, vinte e cinco anos, morto quatro dias depois. [e@52.56] [depois@54.72]
+2|55.82|E William Braine, fuzileiro naval, morto em abril. [em@58.56]
+2|60.15|Três mortes no primeiro inverno.
+2|62.28|Para uma expedição daquele tamanho, não era absurdo. [era@64.32]
+2|65.58|Mas havia algo estranho na Ilha Beechey. [Beechey@67.04]
+2|67.98|Os homens tinham passado meses ali.
+2|70.04|E não deixaram nenhum bilhete.
+2|71.84|Nenhuma pista de para onde iam.
+2|73.90|Os navios simplesmente tinham partido.
+2|77.04|Mas essa nem é a parte mais perturbadora. [mais@78.92]
+2|80.88|Em mil oitocentos e cinquenta e nove, catorze anos depois da partida, uma expedição paga por Lady Franklin chegou à Ilha do Rei Guilherme. [nove@82.40] [uma@85.08] [chegou@87.24]
+2|89.12|Num monte de pedras, num lugar chamado Victory Point, o tenente William Hobson encontrou uma lata. [chamado@90.80] [Hobson@93.16]
+2|95.00|E dentro dela, um formulário da Marinha. [Marinha@96.88]
+2|98.16|A primeira mensagem era de maio de mil oitocentos e quarenta e sete. [de@100.00] [sete@101.52]
+2|102.24|Dizia que os navios estavam presos no gelo, ao norte da ilha. [no@104.04]
+2|105.88|Que Sir John Franklin estava no comando. [comando@107.60]
+2|108.39|E terminava com duas palavras.
+2|110.84|Tudo bem.
+2|112.29|Mas nas margens do mesmo papel, alguém tinha escrito uma segunda mensagem. [alguém@114.20]
+2|116.68|Onze meses depois.
+2|118.24|A letra era apressada.
+2|119.79|E o que ela dizia mudou tudo. [tudo@121.36]
+2|122.71|Os navios estavam presos no gelo desde setembro de mil oitocentos e quarenta e seis. [desde@124.64] [quarenta@126.68]
+2|127.80|Fazia mais de um ano e meio que não se moviam. [meio@129.04]
+2|130.72|Sir John Franklin tinha morrido em onze de junho de mil oitocentos e quarenta e sete. [onze@132.64] [e@134.56]
+2|135.71|Até ali, nove oficiais e quinze marinheiros também estavam mortos. [marinheiros@138.35]
+2|141.67|No dia vinte e dois de abril de mil oitocentos e quarenta e oito, os sobreviventes abandonaram o Erebus e o Terror. [abril@142.75] [e@144.47] [Erebus@146.83]
+2|148.67|Eram cento e cinco homens.
+2|150.72|Sob o comando do capitão Francis Crozier, eles iam caminhar para o sul, até o Rio Back, no continente. [Crozier@152.27] [sul@154.15] [continente@155.87]
+2|157.15|Centenas de quilômetros de gelo e pedra, puxando barcos em trenós. [pedra@159.35]
+2|162.19|A mensagem foi assinada por Crozier e pelo capitão James Fitzjames. [e@164.19]
+2|166.56|E terminava com uma frase curta:
+2|168.75|partimos amanhã.
+2|170.55|Vinte e quatro mortos em menos de três anos, em navios cheios de comida. [de@172.19] [de@174.43]
+2|175.47|Era um número alto demais.
+2|177.51|Alguma coisa estava matando aqueles homens antes mesmo de eles deixarem os navios. [antes@179.95] [navios@181.63]
+3|0.07|A mesma expedição de mil oitocentos e cinquenta e nove seguiu a pista dos sobreviventes pela costa da ilha. [e@2.12] [pista@3.71] [ilha@5.60]
+3|6.32|E encontrou um dos barcos.
+3|8.85|Ele estava sobre um trenó pesado, de madeira e ferro. [de@10.88]
+3|12.80|Dentro, dois esqueletos.
+3|15.11|E uma carga que não fazia sentido. [sentido@16.72]
+3|17.68|Livros, talheres de prata, sabonetes, chinelos, lenços de seda. [lenços@21.52]
+3|22.87|Coisas inúteis para quem atravessa o gelo a pé, carregadas por homens que mal conseguiam andar. [gelo@24.64] [que@26.68]
+3|28.95|E tinha mais um detalhe.
+3|30.68|O barco não apontava para o sul, rumo ao continente. [sul@32.20]
+3|34.00|Apontava de volta para o norte, para os navios. [para@35.96]
+3|37.18|Como se alguém tivesse desistido da marcha. [marcha@39.12]
+3|40.32|Mas a parte mais sombria dessa história não foi encontrada por nenhum oficial britânico. [história@42.00] [oficial@44.32]
+3|45.83|Ela foi contada pelos inuítes.
+3|48.40|Em mil oitocentos e cinquenta e quatro, cinco anos antes do bilhete aparecer, o explorador escocês John Rae fazia um levantamento de mapas no norte do Canadá. [quatro@49.88] [aparecer@51.96] [fazia@54.72] [norte@56.40]
+3|57.76|Rae era diferente dos oficiais da Marinha. [Marinha@59.60]
+3|60.32|Ele viajava leve, caçava, e tinha aprendido com os inuítes a sobreviver no Ártico. [aprendido@62.88] [no@65.04]
+3|66.31|Na Baía de Pelly, ele conversou com caçadores inuítes. [com@68.08]
+3|69.76|E eles contaram o que tinham ouvido de outras famílias. [ouvido@71.24]
+3|73.20|Alguns anos antes, um grupo de cerca de quarenta homens brancos tinha sido visto caminhando para o sul sobre o gelo, puxando um barco. [cerca@74.96] [sido@77.08] [sobre@78.76]
+3|81.09|Estavam magros.
+3|82.21|Trocaram comida com os caçadores, e deram a entender que os navios tinham sido esmagados pelo gelo. [deram@84.32] [tinham@85.76]
+3|88.46|Mais tarde, naquela mesma estação, foram encontrados cerca de trinta corpos no continente, perto da foz de um grande rio. [encontrados@90.92] [continente@93.12] [grande@95.04]
+3|96.20|Alguns em barracas.
+3|97.76|Outros debaixo de um barco virado.
+3|100.56|E então veio a parte que Rae hesitou em escrever. [Rae@102.20]
+3|104.39|Pelo estado de vários corpos, e pelo que havia dentro das panelas, os inuítes concluíram que os últimos sobreviventes tinham recorrido ao canibalismo para continuar vivos. [pelo@106.40] [os@108.36] [sobreviventes@110.24] [continuar@113.20]
+3|114.80|Para provar o que tinha ouvido, Rae comprou objetos que estavam com os inuítes. [Rae@116.48] [os@118.40]
+3|119.44|Garfos e colheres de prata com brasões de oficiais. [brasões@121.20]
+3|122.64|E um prato de prata gravado com um nome: [com@124.24]
+3|125.36|Sir John Franklin.
+3|127.36|Quando o relatório chegou a Londres, a reação foi de fúria. [a@129.20]
+3|131.12|Não contra o que tinha acontecido, mas contra quem tinha contado. [mas@133.04]
+3|135.20|Lady Franklin recusou a versão.
+3|137.40|O escritor Charles Dickens publicou textos defendendo que marinheiros britânicos jamais fariam aquilo, e jogando a suspeita sobre os próprios inuítes. [defendendo@140.04] [aquilo@143.20] [os@145.28]
+3|147.24|John Rae foi tratado quase como um traidor. [um@149.40]
+3|151.37|Por mais de cem anos, muita gente preferiu acreditar que os inuítes estavam errados. [gente@153.40] [estavam@155.48]
+3|157.16|Até que os ossos começaram a falar. [falar@159.00]
+3|160.43|Em mil novecentos e noventa e sete, a antropóloga Anne Keenleyside analisou centenas de ossos encontrados num ponto da costa sudoeste da Ilha do Rei Guilherme, numa baía que hoje se chama Baía Erebus. [sete@161.92] [centenas@165.00] [da@167.48] [Rei@169.28] [se@171.40]
+3|173.71|Quase um quarto deles tinha marcas de corte feitas por lâminas. [de@175.80]
+3|178.04|Marcas compatíveis com a retirada de carne. [carne@180.04]
+3|181.56|Em dois mil e vinte e quatro, um teste de DNA identificou um dos homens daquele lugar. [quatro@182.40] [um@185.16]
+3|187.08|Era James Fitzjames.
+3|188.84|O capitão que tinha assinado o bilhete de Victory Point. [bilhete@190.44]
+3|192.28|E a mandíbula dele também tinha marcas de corte. [marcas@194.36]
+3|196.28|Os inuítes estavam certos.
+3|198.28|Desde o começo.
+3|199.72|E a patente não salvou ninguém no fim. [no@201.72]
+4|0.16|Sobra a pergunta que persegue essa história há quase dois séculos. [história@1.96]
+4|4.56|Como cento e vinte e nove homens, nos navios mais modernos da época, com comida para anos, morreram todos? [homens@5.76] [época@7.84] [todos@10.84]
+4|12.36|A primeira resposta é a mais óbvia: [óbvia@13.92]
+4|14.60|o gelo.
+4|15.92|Em mil oitocentos e quarenta e seis, os navios ficaram presos numa corrente de gelo que desce do norte e quase nunca derrete. [seis@17.36] [corrente@19.44] [norte@21.12]
+4|23.44|Os verões seguintes foram frios demais, e o gelo não soltou. [e@25.80]
+4|27.52|E junto com o frio veio o escorbuto, a doença da falta de vitamina C. [o@28.99] [de@31.08]
+4|32.28|As gengivas sangram, os dentes caem, feridas antigas voltam a abrir. [feridas@34.80]
+4|37.04|O suco de limão levado a bordo perdia a força com o tempo. [bordo@38.36] [tempo@40.08]
+4|40.64|Depois de dois ou três anos, quase não protegia mais. [quase@42.36]
+4|44.63|A segunda teoria surgiu justamente da exumação daquele rapaz, em mil novecentos e oitenta e quatro. [exumação@47.04] [e@49.84]
+4|51.12|A equipe do antropólogo Owen Beattie encontrou níveis altíssimos de chumbo no cabelo e no corpo de Torrington. [encontrou@53.20] [cabelo@55.60]
+4|57.92|A suspeita caiu sobre as latas de comida, fechadas às pressas com solda de chumbo por um fornecedor que entregou o pedido em cima da hora. [de@59.60] [solda@61.84] [que@63.72] [da@65.20]
+4|65.99|O chumbo enfraquece o corpo e pode confundir a mente. [pode@68.00]
+4|69.60|Isso explicaria decisões estranhas, como arrastar talheres de prata pelo gelo. [talheres@72.16]
+4|74.55|Mas estudos mais recentes complicaram essa história. [história@76.88]
+4|77.82|Em dois mil e dezesseis, uma análise da unha de John Hartnell mostrou que o chumbo dele ficou normal durante quase toda a viagem, e só subiu nas últimas semanas, quando o corpo, faminto e doente, começou a consumir as próprias reservas. [análise@79.32] [mostrou@81.24] [normal@82.96] [e@85.15] [quando@87.17] [começou@89.44]
+4|92.06|Outros estudos mostraram que marinheiros britânicos da época tinham níveis de chumbo parecidos. [da@94.60] [parecidos@96.52]
+4|97.66|Hoje, muitos pesquisadores acham que o chumbo pode ter piorado as coisas, mas que dificilmente foi o assassino principal. [chumbo@99.80] [mas@102.00] [principal@104.20]
+4|105.19|E a terceira teoria aponta para as decisões do comando. [as@107.12]
+4|108.95|A rota escolhida descia por um estreito que acumulava gelo de ano para ano. [estreito@110.48] [para@112.68]
+4|113.41|Uma passagem mais protegida, pelo outro lado da Ilha do Rei Guilherme, ficou de fora, em parte porque os mapas da época não mostravam que aquilo era uma ilha. [lado@115.72] [ficou@117.28] [os@119.12] [que@120.99]
+4|122.39|Quando decidiram abandonar os navios, os homens partiram carregando barcos pesados e objetos inúteis, em vez de viajar leves como os inuítes. [homens@124.72] [objetos@127.32] [leves@129.28]
+4|130.96|Mas é preciso ser justo:
+4|132.69|eles seguiam o que a Marinha ensinava, com o conhecimento que tinham. [ensinava@134.04]
+5|0.08|Por mais de cento e cinquenta anos, os dois navios continuaram desaparecidos. [anos@1.76]
+5|5.72|Até que as histórias dos inuítes voltaram a apontar o caminho. [voltaram@7.52]
+5|10.06|Em setembro de dois mil e catorze, guiada por relatos orais inuítes, uma expedição canadense encontrou o Erebus. [catorze@11.12] [uma@14.24]
+5|17.58|Ele estava a apenas onze metros de profundidade, mais de cem quilômetros ao sul do lugar onde tinha sido abandonado. [de@19.32] [ao@21.84] [sido@23.28]
+5|24.62|Como se alguém tivesse voltado a bordo e levado o navio adiante. [bordo@26.12]
+5|29.12|Dois anos depois, veio a descoberta mais assustadora. [mais@31.60]
+5|33.68|Anos antes, um caçador inuíte chamado Sammy Kogvik tinha visto um pedaço de madeira, parecido com um mastro, saindo do gelo numa baía da ilha. [Sammy@36.16] [de@38.20] [saindo@40.40] [ilha@42.08]
+5|42.72|Ele tirou uma foto abraçado ao mastro. [mastro@44.53]
+5|45.28|Mas perdeu a câmera no caminho de volta, e guardou a história por anos. [de@46.72] [por@48.64]
+5|50.00|Em setembro de dois mil e dezesseis, ele contou tudo à tripulação de um navio de pesquisa. [dezesseis@51.23] [de@53.64]
+5|55.16|Eles desviaram a rota até aquela baía. [baía@57.36]
+5|58.39|E o Terror estava lá.
+5|60.08|Exatamente onde ele disse.
+5|62.40|O nome do lugar, nos mapas, já era Baía do Terror. [já@64.48]
+5|67.01|O navio estava de pé no fundo do mar, a uns vinte e quatro metros. [fundo@68.48] [e@69.88]
+5|71.08|Quase intacto.
+5|72.32|As escotilhas fechadas.
+5|73.92|Vidros ainda nas claraboias.
+5|75.92|Pratos empilhados nas prateleiras.
+5|78.72|Anos depois, um robô submarino entrou nos corredores. [nos@81.16]
+5|82.24|Todas as portas das cabines estavam abertas. [abertas@84.16]
+5|85.41|Menos uma.
+5|86.20|A porta da cabine do capitão Crozier. [Crozier@87.84]
+5|89.28|Os arqueólogos acreditam que dentro das gavetas, protegidos pelo frio e pela lama, ainda podem estar diários e mapas legíveis. [gavetas@91.36] [lama@93.76] [mapas@96.08]
+5|97.73|As últimas palavras escritas por aqueles homens podem estar esperando no escuro, até hoje. [homens@99.68] [até@102.16]
+5|103.95|Então eu deixo a pergunta para você. [você@105.20]
+5|106.08|O que matou a tripulação de Franklin? [Franklin@107.60]
+5|108.40|O gelo, o chumbo, ou as decisões do comando? [decisões@110.32]
+5|111.82|Escreve aqui nos comentários a sua teoria. [teoria@113.36]
+5|114.00|Eu leio todas.
+5|115.89|Eu sou o Historiador.
+5|117.47|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@118.72] [conseguiu@120.48]
