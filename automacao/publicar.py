@@ -254,10 +254,22 @@ def registrar(caminho, m, vid, quando, avisos):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("fila")
+    ap.add_argument("fila", nargs="?")
     ap.add_argument("--sem-upload", action="store_true")
     ap.add_argument("--audio", nargs="+")
+    ap.add_argument("--testar-credenciais", action="store_true")
     a = ap.parse_args()
+
+    if a.testar_credenciais:
+        r = youtube().channels().list(part="snippet", mine=True).execute()
+        nomes = [c["snippet"]["title"] for c in r.get("items", [])]
+        log("credenciais ok. Canal:", ", ".join(nomes) or "(nenhum canal encontrado)")
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+                f.write(f"### Credenciais ok\n\nCanal: **{', '.join(nomes) or 'nenhum'}**\n")
+        return
+    if not a.fila:
+        ap.error("informe o arquivo da fila")
 
     with open(a.fila, encoding="utf-8") as f:
         m = json.load(f)

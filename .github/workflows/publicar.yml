@@ -14,6 +14,10 @@ on:
         description: "só renderizar, sem enviar ao YouTube"
         type: boolean
         default: false
+      testar_credenciais:
+        description: "só testar o acesso ao canal (não renderiza nem envia nada)"
+        type: boolean
+        default: false
 
 concurrency:
   group: publicar
@@ -42,6 +46,7 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: |
+          if [ "${{ inputs.testar_credenciais }}" = "true" ]; then python automacao/publicar.py --testar-credenciais; exit 0; fi
           shopt -s nullglob
           if [ -n "${{ inputs.slug }}" ]; then itens=("fila/${{ inputs.slug }}.json"); else itens=(fila/*.json); fi
           if [ ${#itens[@]} -eq 0 ]; then echo "fila vazia"; exit 0; fi
