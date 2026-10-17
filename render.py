@@ -21,10 +21,16 @@ def load_module(path):
     return m
 
 
+def theme_of(m):
+    """nome do tema do scenes.py; cenas antigas sem THEME herdam o dict do engine via import *"""
+    t = getattr(m, "THEME", "classico")
+    return t if isinstance(t, str) else "classico"
+
+
 def load_scenes(path):
     m = load_module(path)
     import engine
-    engine.set_theme(getattr(m, "THEME", "classico"))
+    engine.set_theme(theme_of(m))
     return m.SCENES
 
 
@@ -37,7 +43,7 @@ def make_sfx(scenes_path, dur, out_wav):
     import engine, sfx
     m = load_module(scenes_path)
     S = m.SCENES
-    theme = getattr(m, "THEME", "classico")
+    theme = theme_of(m)
     engine.set_theme(theme)
     engine._CUES = []
     surf = cairo.ImageSurface(cairo.FORMAT_RGB24, 32, 32); c = cairo.Context(surf)

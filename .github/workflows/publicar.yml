@@ -1,0 +1,73 @@
+name: Publicar no YouTube
+
+# Dispara quando um vídeo novo entra na fila (fila/<slug>.json) ou à mão pela aba Actions.
+on:
+  push:
+    branches: [main]
+    paths: ["fila/*.json"]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "slug do vídeo na fila (vazio = todos)"
+        required: false
+      sem_upload:
+        description: "só renderizar, sem enviar ao YouTube"
+        type: boolean
+        default: false
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dependências
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q ffmpeg libcairo2-dev pkg-config fontconfig
+          pip install -q -r automacao/requirements.txt
+          mkdir -p ~/.fonts && cp fonts/*.ttf ~/.fonts/ && fc-cache -f
+
+      - name: Renderizar e enviar
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          shopt -s nullglob
+          if [ -n "${{ inputs.slug }}" ]; then itens=("fila/${{ inputs.slug }}.json"); else itens=(fila/*.json); fi
+          if [ ${#itens[@]} -eq 0 ]; then echo "fila vazia"; exit 0; fi
+          extra=""
+          if [ "${{ inputs.sem_upload }}" = "true" ]; then extra="--sem-upload"; fi
+          for f in "${itens[@]}"; do
+            echo "::group::$f"
+            python automacao/publicar.py "$f" $extra
+            echo "::endgroup::"
+          done
+
+      - name: Guardar o MP4 (7 dias)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: out/*.mp4
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Registrar na fila
+        if: always()
+        run: |
+          git config user.name "pontocego-bot"
+          git config user.email "pontocego-bot@users.noreply.github.com"
+          git add -A fila
+          git diff --cached --quiet && exit 0
+          git commit -m "Publicador: vídeo enviado ao YouTube [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
