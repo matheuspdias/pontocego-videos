@@ -1,0 +1,180 @@
+# O Túmulo Perdido de Alexandre — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  169.509s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=962a09b4-1dac-4cab-8eba-0a00aff502cc.wav
+# bloco2  192.653s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=95bf49ea-cf77-470a-8763-7f1a7b02f9e5.wav
+# bloco3  201.195s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=30ff578c-91ee-44c9-b8ff-ad27ddc9569a.wav
+# bloco4  211.905s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=429d8c9b-f812-4453-9fe4-3ea4b8b34a83.wav
+# Offsets absolutos: B1=0.000  B2=170.509  B3=364.162  B4=566.357  (fim ~778.26)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Por volta do ano quatrocentos depois de Cristo. [de@2.16]
+1|3.68|Um bispo chamado João Crisóstomo faz uma pergunta aos fiéis, no meio de um sermão. [uma@5.92] [de@7.60]
+1|8.88|Onde está o túmulo de Alexandre?
+1|11.83|Ninguém soube responder.
+1|13.99|E isso é estranho, porque aquele túmulo tinha sido, durante mais de quinhentos anos, um dos lugares mais famosos do mundo. [túmulo@15.68] [quinhentos@17.48] [famosos@19.84]
+1|21.36|Reis viajaram até ele.
+1|23.04|Imperadores romanos entraram lá dentro e olharam o rosto do morto. [olharam@25.28]
+1|27.44|E então, em algum momento entre um imperador e um bispo, o túmulo do homem mais poderoso da Antiguidade simplesmente sumiu do mapa. [um@29.40] [túmulo@31.20] [Antiguidade@33.04]
+1|36.16|Até hoje, mais de cento e quarenta buscas oficiais foram registradas. [quarenta@37.84]
+1|40.71|Nenhuma encontrou o corpo.
+1|43.17|Esta é a história do túmulo perdido de Alexandre, o Grande. [perdido@44.68]
+1|47.51|Para entender como um túmulo desse tamanho desaparece, a gente precisa voltar ao dia em que tudo começou. [tamanho@49.20] [ao@51.64]
+1|53.92|Babilônia, junho de trezentos e vinte e três antes de Cristo. [e@56.16]
+1|58.45|Alexandre tinha trinta e dois anos.
+1|60.56|Em pouco mais de uma década, tinha saído da Macedônia e conquistado o maior império que o mundo já tinha visto, da Grécia até a Índia, passando pelo Egito e pela Pérsia. [tinha@62.20] [o@64.32] [já@65.84] [a@68.00] [pela@69.84]
+1|71.12|Nunca tinha perdido uma batalha.
+1|73.59|E então, depois de um banquete, ele caiu doente. [ele@75.76]
+1|77.04|Febre alta, dores, fraqueza.
+1|80.16|Em cerca de duas semanas, estava morto. [morto@82.24]
+1|83.28|Até hoje os historiadores discutem a causa. [causa@85.28]
+1|86.04|Malária, febre tifoide, uma infecção, ou veneno, como alguns autores antigos sugeriram. [veneno@89.20]
+1|92.46|Segundo os relatos antigos, quando os generais perguntaram a quem ele deixava o império, Alexandre respondeu com três palavras. [generais@94.36] [o@96.35] [palavras@98.80]
+1|99.98|Ao mais forte.
+1|101.51|Foi o começo de uma guerra que durou quarenta anos. [que@102.80]
+1|104.51|E o primeiro prêmio disputado nessa guerra não foi uma cidade, nem um exército. [guerra@106.24] [um@108.00]
+1|109.11|Foi o próprio corpo de Alexandre.
+1|111.68|Na Antiguidade, quem enterrava o rei era visto como o seu herdeiro. [era@113.76]
+1|115.48|O corpo era um símbolo de poder. [poder@117.04]
+1|117.84|Quem tivesse Alexandre, tinha um pedaço da autoridade dele. [da@120.00]
+1|121.60|Os autores antigos contam que o corpo foi preparado por embalsamadores egípcios e caldeus, e colocado num caixão de ouro batido. [corpo@123.36] [e@125.92] [de@128.00]
+1|129.49|Depois, os macedônios passaram quase dois anos construindo o carro fúnebre. [anos@131.84]
+1|133.88|O historiador Diodoro deixou uma descrição dele. [dele@136.36]
+1|136.96|Um templo dourado sobre rodas, com colunas, um teto coberto de pedras preciosas, sinos que tocavam a cada passo e estátuas de vitórias aladas nos cantos. [colunas@139.24] [preciosas@141.72] [passo@144.36] [nos@146.84]
+1|147.88|Era puxado por sessenta e quatro mulas, cada uma com uma coroa de ouro. [mulas@149.72] [de@151.96]
+1|153.40|O destino oficial era a Macedônia, a terra natal de Alexandre. [a@155.84]
+1|158.00|Há quem diga que ele mesmo tinha pedido outra coisa: [tinha@159.80]
+1|161.40|ser enterrado no Egito, no oásis de Siwa, no templo do deus Amon. [de@163.44] [Amon@165.24]
+1|166.20|Mas o cortejo não chegou nem a um lugar nem ao outro. [a@167.76]
+2|0.08|Trezentos e vinte e um antes de Cristo. [de@1.76]
+2|2.76|O carro fúnebre atravessa a Síria, a caminho do oeste. [a@4.93]
+2|6.56|E ali, no meio da estrada, ele é interceptado. [ele@8.64]
+2|11.04|Quem esperava o cortejo era Ptolomeu, um dos generais mais próximos de Alexandre, que tinha ficado com o governo do Egito. [um@13.48] [Alexandre@15.24] [governo@16.80]
+2|18.54|Ptolomeu não atacou.
+2|20.12|Ele convenceu a escolta.
+2|21.99|E o corpo do rei mudou de direção, rumo ao sul. [de@23.32]
+2|25.48|Rumo ao Egito.
+2|27.36|Em termos de hoje, foi um sequestro. [sequestro@28.96]
+2|30.07|E o homem que mandava no império depois da morte de Alexandre, o regente Perdicas, entendeu exatamente o que aquilo significava. [império@31.12] [o@33.31] [que@36.12]
+2|38.12|Perdicas reuniu um exército e marchou contra o Egito. [contra@40.40]
+2|41.60|Mas na travessia do Nilo, as coisas deram muito errado. [coisas@43.28]
+2|45.20|Segundo Diodoro, cerca de dois mil soldados morreram, levados pela correnteza ou atacados por crocodilos. [soldados@47.28] [atacados@50.20]
+2|52.05|Os próprios oficiais dele se revoltaram.
+2|54.60|E Perdicas foi morto pelos seus homens, dentro do acampamento. [homens@56.48]
+2|58.88|Ptolomeu ficou com o corpo.
+2|60.88|E fundou uma dinastia que governaria o Egito por quase trezentos anos. [o@62.84]
+2|65.55|A última rainha dessa família seria Cleópatra. [Cleópatra@67.52]
+2|68.80|Primeiro, Alexandre foi enterrado em Mênfis, a antiga capital dos faraós. [a@71.48]
+2|73.68|Anos depois, provavelmente no reinado do filho de Ptolomeu, o corpo foi levado para a cidade que o próprio Alexandre tinha fundado no litoral: [filho@76.08] [levado@77.96] [próprio@79.28]
+2|81.76|Alexandria.
+2|83.20|E ali começa a parte da história que todo mundo conhece. [história@84.64]
+2|86.80|Os Ptolomeus construíram um mausoléu no centro da cidade, perto do palácio real. [centro@89.16] [real@91.04]
+2|91.60|Os gregos chamavam o lugar de Soma, que quer dizer corpo, ou Sema, o túmulo. [Soma@93.28] [Sema@95.60]
+2|97.18|Com o tempo, os próprios Ptolomeus passaram a ser enterrados ao redor dele. [passaram@99.20] [dele@100.96]
+2|101.76|O geógrafo Estrabão, que visitou Alexandria uns trezentos anos depois da morte do rei, conta um detalhe estranho. [uns@104.24] [do@106.08]
+2|108.40|O caixão de ouro já não estava lá. [estava@109.92]
+2|110.92|Um dos últimos Ptolomeus, sem dinheiro, tinha mandado derreter o ouro. [tinha@113.36]
+2|115.43|O corpo foi colocado num caixão de vidro, ou de cristal. [de@117.12]
+2|119.12|Ou seja, durante séculos, quem entrava no túmulo podia ver Alexandre. [no@122.08]
+2|124.88|E muita gente entrou.
+2|126.71|Em quarenta e oito antes de Cristo, foi Júlio César. [Cristo@128.00]
+2|129.96|Depois, Cleópatra teria tirado ouro do túmulo para pagar a guerra contra Roma. [túmulo@132.40] [Roma@134.16]
+2|134.92|Quando Roma venceu, quem chegou foi Otávio, o futuro imperador Augusto. [Otávio@137.24]
+2|140.34|Ele mandou abrir o caixão, colocou uma coroa de ouro sobre a cabeça do morto e jogou flores. [uma@142.36] [cabeça@143.64]
+2|146.19|E o historiador Cássio Dio conta que, ao tocar o rosto do rei, Augusto quebrou sem querer um pedaço do nariz. [que@148.12] [rei@149.68] [pedaço@151.80]
+2|153.95|Quando perguntaram se ele também queria ver os túmulos dos Ptolomeus, Augusto respondeu que tinha vindo ver um rei. [ver@155.80] [respondeu@158.20] [rei@159.64]
+2|160.28|Não cadáveres.
+2|162.09|Depois dele, vieram outros.
+2|164.20|O imperador Calígula levou a couraça de Alexandre para Roma e a usava em público. [de@166.24] [usava@167.80]
+2|169.16|Em cento e noventa e nove depois de Cristo, Septímio Severo visitou o túmulo e mandou fechá-lo, para que ninguém mais o visse. [depois@170.36] [o@173.08] [que@175.04]
+2|176.67|E em duzentos e quinze, o filho dele, Caracala, entrou mesmo assim, e deixou sobre o caixão o próprio manto, anéis e um cinto. [filho@178.28] [e@181.12] [próprio@182.52]
+2|185.56|Essa é a última visita registrada.
+2|188.49|Depois de Caracala, o túmulo de Alexandre desaparece das fontes. [Alexandre@190.36]
+3|0.08|O que aconteceu nos duzentos anos seguintes ninguém sabe ao certo. [seguintes@1.92]
+3|4.32|Mas a gente sabe o que aconteceu com Alexandria. [aconteceu@5.36]
+3|8.16|Nas décadas seguintes, a cidade foi cenário de revoltas e guerras. [cenário@10.24]
+3|12.60|Por volta de duzentos e setenta e dois, nas lutas entre o imperador Aureliano e a rainha Zenóbia, o bairro do palácio real foi devastado. [e@14.08] [imperador@15.63] [o@17.92] [devastado@19.72]
+3|20.96|Justamente o bairro onde ficava o túmulo. [túmulo@22.80]
+3|24.56|Em trezentos e sessenta e cinco, veio a natureza. [veio@26.56]
+3|27.72|Um terremoto no Mediterrâneo provocou um tsunami. [tsunami@29.68]
+3|30.60|O historiador Amiano Marcelino descreve o mar recuando, os navios encalhados na lama, e depois a onda voltando sobre a cidade. [mar@32.96] [lama@35.44] [sobre@37.76]
+3|39.19|Com os séculos, parte do bairro real afundou e hoje está debaixo d'água, no porto de Alexandria. [real@40.96] [dágua@43.04]
+3|45.68|E havia uma terceira mudança, mais lenta. [lenta@47.84]
+3|48.52|O Império Romano se tornou cristão.
+3|50.96|No fim do século quatro, templos antigos foram fechados, saqueados ou destruídos em Alexandria. [antigos@52.80] [em@56.00]
+3|57.20|Um autor cristão chega a dizer que o imperador Teodósio mandou abrir e saquear o túmulo. [que@58.80] [e@60.96]
+3|62.40|Mas não há como confirmar.
+3|64.48|E então, por volta de quatrocentos, João Crisóstomo faz a sua pergunta. [João@66.88]
+3|69.36|Onde está o túmulo de Alexandre?
+3|72.07|Ninguém sabe.
+3|73.91|Só que a história não termina aí. [aí@75.12]
+3|75.64|Ela fica mais estranha.
+3|78.08|Séculos depois, viajantes árabes e europeus continuaram ouvindo falar de um pequeno santuário em Alexandria, onde os moradores diziam que estava o profeta e rei Iskandar, o nome árabe de Alexandre. [continuaram@80.96] [santuário@83.04] [diziam@85.44] [rei@87.32] [Alexandre@89.40]
+3|90.32|No século dezesseis, o viajante Leão, o Africano, descreve uma pequena construção, como uma capela, visitada por estrangeiros. [o@92.69] [como@95.44]
+3|98.63|No século dezoito, a lenda se fixou numa mesquita. [fixou@100.48]
+3|101.96|Dentro dela havia um sarcófago enorme de pedra verde escura, coberto de hieróglifos. [de@104.32] [hieróglifos@106.44]
+3|107.48|Os moradores diziam que era a fonte de Alexandre. [fonte@109.20]
+3|111.25|Em mil e oitocentos e um, depois de expulsar os franceses do Egito, os ingleses levaram esse sarcófago para Londres, convencidos de que tinham em mãos o caixão de Alexandre, o Grande. [depois@112.72] [Egito@114.40] [para@117.04] [em@119.24] [o@121.09]
+3|121.92|Ele está até hoje no Museu Britânico. [Britânico@123.20]
+3|124.56|Mas quando os hieróglifos foram finalmente decifrados, veio a decepção. [decifrados@126.72]
+3|129.27|O sarcófago tinha sido feito para Nectanebo Segundo, o último faraó egípcio nativo, que fugiu do Egito pouco mais de dez anos antes de Alexandre chegar. [Nectanebo@131.12] [nativo@134.00] [mais@136.20] [Alexandre@137.80]
+3|138.96|E nunca chegou a ser usado por ele. [por@140.48]
+3|141.25|Só que existe um detalhe que intriga alguns pesquisadores até hoje. [intriga@143.33]
+3|146.40|Por que um sarcófago vazio de faraó era venerado, por tanto tempo, como o de Alexandre? [faraó@148.05] [como@150.61]
+3|152.05|Será que o corpo do rei, no começo, em Mênfis, foi colocado justamente nele? [no@153.29] [justamente@155.49]
+3|157.17|Não há prova.
+3|158.13|Mas a pergunta continua no ar.
+3|161.12|Outro lugar que atraiu caçadores de tesouro foi a Mesquita do Profeta Daniel, no centro de Alexandria. [tesouro@162.77] [Daniel@164.69]
+3|167.16|Em mil oitocentos e cinquenta, um funcionário do consulado russo disse ter visto, num porão debaixo dela, um corpo com um diadema na cabeça, dentro de uma espécie de caixa de vidro. [funcionário@169.01] [visto@171.17] [corpo@173.53] [dentro@175.57] [de@176.93]
+3|177.96|Ninguém conseguiu confirmar.
+3|180.25|Em mil oitocentos e setenta e nove, um trabalhador abriu sem querer uma passagem para uma câmara abobadada debaixo da mesquita. [nove@181.89] [uma@184.17] [debaixo@186.45]
+3|187.84|A entrada foi fechada com tijolos e ele foi orientado a não falar sobre aquilo. [e@189.89] [falar@191.33]
+3|192.77|E em mil oitocentos e oitenta e oito, o homem que tinha encontrado Troia, Heinrich Schliemann, pediu para escavar ali. [e@194.29] [encontrado@195.65] [escavar@198.41]
+3|199.49|O pedido foi negado.
+4|0.08|No século vinte, a busca virou quase uma obsessão. [quase@2.28]
+4|4.12|O Conselho Supremo de Antiguidades do Egito reconhece mais de cento e quarenta tentativas de encontrar o túmulo. [Egito@6.00] [quarenta@8.04]
+4|10.60|Algumas sérias.
+4|11.96|Outras, nem tanto.
+4|14.48|As teorias se dividem, basicamente, em quatro caminhos. [quatro@17.28]
+4|19.20|O primeiro:
+4|20.20|ele nunca saiu de Alexandria.
+4|22.28|O túmulo estaria lá até hoje, debaixo dos prédios da cidade moderna, que cresceu exatamente em cima da antiga. [debaixo@24.20] [que@26.32] [antiga@28.61]
+4|29.68|Um mapa feito no século dezenove pelo astrônomo Mahmud el Falaki ajudou a localizar as ruas antigas, e muitos pesquisadores apontam o cruzamento das duas avenidas principais como o lugar mais provável. [pelo@31.60] [a@34.19] [muitos@36.20] [duas@38.80] [mais@40.96]
+4|42.44|O problema é que ali hoje existem ruas, prédios e uma mesquita. [existem@44.16]
+4|47.12|Escavar é quase impossível.
+4|50.22|Há mais de vinte anos, a arqueóloga grega Calíope Papakosta escava os Jardins de Shallalat, no antigo bairro real. [arqueóloga@51.68] [Jardins@54.64] [real@56.80]
+4|57.59|Ela encontrou uma estátua de mármore do período certo e restos de construções antigas. [do@59.36] [construções@61.20]
+4|62.88|Não encontrou o túmulo.
+4|64.40|Mas acredita estar no caminho certo.
+4|67.36|O segundo caminho é o deserto.
+4|69.76|Em mil novecentos e noventa e cinco, a arqueóloga grega Liana Suvaltzi anunciou que tinha encontrado o túmulo de Alexandre no oásis de Siwa, o lugar onde ele teria pedido para ser enterrado. [cinco@71.20] [anunciou@73.92] [de@75.88] [o@77.96] [para@79.60]
+4|80.87|A notícia correu o mundo.
+4|83.20|Mas uma comissão de especialistas foi até lá e discordou. [até@85.04]
+4|86.80|Para eles, a construção era um templo, e não um túmulo. [templo@88.64]
+4|90.47|A licença dela foi cancelada.
+4|93.52|O terceiro caminho é o mais estranho de todos. [estranho@95.40]
+4|96.92|Ele passa por Veneza.
+4|99.42|Em oitocentos e vinte e oito, dois mercadores venezianos roubaram de Alexandria o corpo de São Marcos, o evangelista, e o levaram para Veneza, escondido sob carne de porco, para que os guardas muçulmanos não revistassem a carga. [dois@101.00] [o@104.00] [evangelista@105.52] [escondido@107.92] [que@110.08] [a@112.24]
+4|113.12|É por isso que a famosa Basílica de São Marcos tem esse nome. [Basílica@114.40] [nome@116.28]
+4|117.50|O pesquisador britânico Andrew Chugg levantou uma hipótese ousada. [uma@120.16]
+4|121.99|E se, no fim da Antiguidade, para salvar o corpo de Alexandre da destruição, alguém o tivesse identificado como o de São Marcos? [para@123.92] [da@125.56] [como@128.24]
+4|129.84|Nesse caso, o corpo que está hoje em Veneza seria o do conquistador. [hoje@131.60] [conquistador@133.12]
+4|134.39|A maioria dos historiadores não aceita essa ideia. [essa@136.48]
+4|137.28|Ela nunca foi testada.
+4|138.67|E a Igreja não tem nenhuma razão para abrir o túmulo. [razão@140.24]
+4|141.79|O quarto caminho leva de volta para a Grécia. [para@143.67]
+4|144.83|Em dois mil e catorze, arqueólogos encontraram em Anfípolis, no norte do país, o maior túmulo antigo já descoberto na Grécia. [encontraram@146.75] [país@148.91] [descoberto@151.31]
+4|152.83|Esfinges, cariátides, um mosaico enorme e ossos humanos. [ossos@156.11]
+4|157.59|Por alguns meses, o mundo achou que era Alexandre. [que@159.51]
+4|161.04|Hoje, a equipe que escavou acredita que o monumento foi feito para Heféstion, o amigo mais próximo do rei. [que@162.99] [Heféstion@164.35] [rei@166.43]
+4|167.43|Então, sobram as perguntas.
+4|169.87|O túmulo foi destruído nas guerras, e o corpo virou pó entre as ruínas? [e@171.91] [as@173.27]
+4|174.19|Está debaixo d'água, no porto de Alexandria? [Alexandria@175.87]
+4|176.75|Debaixo de uma mesquita, esperando há séculos atrás de uma parede de tijolos? [séculos@178.75] [tijolos@180.31]
+4|181.30|Ou está numa basílica em Veneza, sendo venerado com outro nome? [sendo@183.23]
+4|185.54|O homem que conquistou o mundo antes dos trinta e três anos, que foi disputado como um troféu depois de morto, e visitado por Júlio César e por Augusto, terminou do único jeito que nenhum deles imaginou. [antes@187.15] [que@188.95] [depois@190.67] [Júlio@192.59] [do@194.99] [imaginou@196.83]
+4|198.00|Esquecido.
+4|199.22|E você?
+4|199.95|Onde acha que está o corpo de Alexandre, o Grande? [de@201.19]
+4|202.63|Deixa a sua teoria aqui nos comentários. [comentários@203.83]
+4|204.81|Eu leio todas.
+4|206.33|Eu sou o Historiador.
+4|207.71|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@209.07] [conseguiu@210.75]

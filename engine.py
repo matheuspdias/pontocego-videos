@@ -1051,6 +1051,32 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
         hc = hat_col or (0.85, 0.84, 0.80)
         c.new_sub_path(); c.arc(0, -hr + 12, hr - 6, math.pi, 2 * math.pi); c.close_path(); fs(c, hc, 5)
         rrect(c, -hr - 2, -hr + 4, 2 * hr + 4, 16, 6); fs(c, (0.16, 0.20, 0.32), 4)
+    elif hat == "helmet":
+        # elmo grego/romano de bronze com crista
+        hc = hat_col or (0.72, 0.55, 0.28)
+        c.move_to(-hr * 0.9, -hr * 0.62); c.curve_to(-hr * 0.4, -2.05 * hr, hr * 0.4, -2.05 * hr, hr * 0.9, -hr * 0.62)
+        c.line_to(hr * 1.04, -hr * 0.62); c.curve_to(hr * 1.05, -hr * 0.2, hr * 0.98, hr * 0.2, hr * 0.85, hr * 0.32)
+        c.line_to(hr * 0.70, -hr * 0.30); c.line_to(-hr * 0.70, -hr * 0.30); c.line_to(-hr * 0.85, hr * 0.32)
+        c.curve_to(-hr * 0.98, hr * 0.2, -hr * 1.05, -hr * 0.2, -hr * 1.04, -hr * 0.62); c.close_path()
+        fs(c, hc, 5)
+        c.move_to(-hr * 0.95, -1.52 * hr); c.curve_to(-hr * 0.3, -2.75 * hr, hr * 0.6, -2.6 * hr, hr * 1.05, -1.55 * hr)
+        c.curve_to(hr * 0.5, -2.05 * hr, -hr * 0.3, -2.1 * hr, -hr * 0.95, -1.52 * hr); c.close_path()
+        fs(c, (0.66, 0.14, 0.12), 4)
+    elif hat == "laurel":
+        # coroa de louros dourada
+        hc = hat_col or (0.86, 0.68, 0.26)
+        for sx in (-1, 1):
+            for k in range(5):
+                a = math.pi * (1.05 + 0.09 * k) if sx < 0 else math.pi * (1.95 - 0.09 * k)
+                px, py = math.cos(a) * (hr + 2), math.sin(a) * (hr + 2) + 4
+                c.save(); c.translate(px, py); c.rotate(a + sx * 0.9)
+                ellipse(c, 0, 0, 13, 6); fs(c, hc, 3)
+                c.restore()
+    elif hat == "mitre":
+        # mitra de bispo
+        hc = hat_col or (0.86, 0.84, 0.78)
+        poly(c, [(-hr * 0.8, -hr + 8), (-hr * 0.7, -hr - 52), (0, -hr - 86), (hr * 0.7, -hr - 52), (hr * 0.8, -hr + 8)]); fs(c, hc, 5)
+        line(c, 0, -hr - 70, 0, -hr + 4, 5, (0.80, 0.62, 0.24)); line(c, -22, -hr - 40, 22, -hr - 40, 5, (0.80, 0.62, 0.24))
     elif hat == "hood":
         hc = hat_col or COAT
         c.new_sub_path(); c.arc(0, 0, hr + 14, math.pi * 0.85, math.pi * 2.15)
@@ -3471,3 +3497,422 @@ def soap_bar(c, col=(0.86, 0.80, 0.66)):
 def lantern_glow_ice(c, t, x, y, r=420):
     """brilho azulado de gelo (para cenas internas/submersas)"""
     glow(c, x, y, r, ICE, 0.12 + 0.03 * math.sin(t * 1.3))
+
+
+# ================================================================== O Túmulo de Alexandre (Egito, Mediterrâneo)
+GOLD = (0.86, 0.66, 0.26)
+GOLD_D = (0.62, 0.45, 0.16)
+MARBLE = (0.80, 0.78, 0.72)
+SANDSTONE = (0.66, 0.56, 0.40)
+BASALT = (0.20, 0.27, 0.24)      # pedra verde-escura do sarcófago de Nectanebo II
+MED_LAND = (0.30, 0.25, 0.17)    # terra ocre dos mapas do Mediterrâneo
+MED_SEA = (0.05, 0.08, 0.13)
+
+# Mapas: aqui o mar é que é desenhado por cima da terra (litoral mais fácil de acertar).
+MED_SEAS = {
+    "mediterraneo": [(5, 43.3), (8.9, 44.4), (10.5, 43), (12.3, 41.7), (15.6, 40), (15.7, 38), (16.5, 38.9), (18.5, 40.2),
+                     (16, 41.5), (14, 42), (12.5, 44), (12.3, 45.4), (13.8, 45.6), (15.5, 44.5), (19.5, 42.2), (19.5, 41),
+                     (21, 38.5), (22.5, 36.5), (23.2, 37.4), (24, 38), (23, 39.5), (22.6, 40.5), (23.8, 40.75), (26, 40.7),
+                     (26.4, 40.0), (26.6, 39.0), (27.2, 37.8), (27.6, 36.9), (28.2, 36.7), (30.5, 36.3), (32.5, 36.1),
+                     (34.5, 36.8), (36.0, 36.8), (36.0, 35.5), (35.9, 34.5), (35.5, 33.5), (35.0, 32.6), (34.5, 31.5),
+                     (33.4, 31.15), (32.3, 31.25), (31.4, 31.55), (30.4, 31.5), (29.9, 31.2), (29, 30.9), (25, 31.6),
+                     (23, 32.6), (21.5, 32.9), (20, 30.9), (19, 30.3), (17, 31.0), (15.5, 31.5), (13, 32.9), (11, 33.2),
+                     (10, 34.5), (11, 37), (9.8, 37.3), (3, 36.8), (0, 35.8), (-2, 35.1), (-5.3, 35.9), (-5.6, 36),
+                     (-2, 36.7), (0.5, 40.5), (3.2, 42), (3.2, 43.3)],
+    "mar_negro": [(28, 41.3), (29, 41.2), (31, 41.1), (34, 42), (36, 41.6), (38, 41), (41.5, 41.5), (41.6, 42.6), (40, 43.5),
+                  (37.5, 44.7), (36.5, 45.3), (33.5, 44.5), (32.5, 45.4), (30, 45.8), (30.5, 46.6), (29.6, 45.2),
+                  (28.6, 44), (28, 42)],
+    "mar_vermelho": [(32.5, 29.9), (32.6, 29.5), (33.5, 28), (35, 25), (37.2, 21), (38.5, 18), (40, 16), (43.3, 12.7),
+                     (43.6, 12.6), (42.7, 15), (41, 18), (39, 21.5), (37, 25), (35, 28), (34.4, 29.0), (34.9, 29.5),
+                     (34.2, 28.0), (33.4, 28.8), (32.7, 30.0)],
+    "golfo_persico": [(48, 30), (50, 29.5), (52, 27.5), (56, 27), (56.5, 26), (55, 25.5), (52, 24.2), (51, 26), (50, 26),
+                      (48.5, 28.5)],
+    "mar_arabia": [(56.4, 26.3), (57.0, 25.0), (58.5, 23.6), (59.8, 22.5), (57.8, 20.5), (55.5, 17.5), (52, 15.5),
+                   (45, 13), (43.6, 12.6), (43.4, 11.5), (51, 11.8), (51, 4), (80, 4), (77.5, 8.1), (76.3, 9.5), (75, 12),
+                   (74, 14.5), (73, 17), (72.8, 20), (72.6, 21.6), (70.2, 22.4), (68.6, 23.6), (67.2, 24.8), (66.5, 25.4),
+                   (62, 25.2), (58, 25.6)],
+    "caspio": [(49, 46.5), (51, 45.5), (50.5, 44.5), (51.5, 43), (53, 41.5), (54, 40), (53.5, 38), (51, 36.8),
+               (49.5, 37.5), (49.2, 40), (48.5, 41.8), (47.5, 43), (47.5, 45.5)],
+}
+MED_ISLANDS = {
+    "creta": [(23.5, 35.3), (24.5, 35.45), (26.3, 35.25), (26.0, 35.0), (24.5, 34.95), (23.5, 35.2)],
+    "chipre": [(32.3, 35.0), (33.0, 35.4), (34.6, 35.7), (34.0, 34.9), (33.0, 34.6), (32.3, 34.8)],
+    "sicilia": [(12.4, 38.1), (15.6, 38.3), (15.1, 36.7), (12.4, 37.7)],
+    "rodes": [(27.7, 36.1), (28.2, 36.45), (28.25, 36.0), (27.8, 35.9)],
+}
+NILE = [(31.1, 31.45), (31.05, 30.6), (31.25, 30.05), (31.25, 29.85), (31.0, 28.6), (30.85, 27.6), (31.2, 27.0),
+        (32.0, 26.1), (32.7, 25.7), (32.9, 24.1)]
+EUPHRATES = [(38.5, 37.0), (38.3, 36.0), (40.0, 35.3), (41.5, 34.4), (43.3, 33.4), (44.4, 32.5), (46.0, 31.2), (47.6, 30.5)]
+TIGRIS = [(41.0, 37.6), (42.6, 36.4), (43.2, 35.0), (44.4, 33.3), (46.3, 32.0), (47.6, 30.5)]
+
+
+def draw_med_map(c, proj, grid=5, land_col=MED_LAND, sea_col=MED_SEA, rivers=True, lw=3):
+    """mapa do Mediterrâneo oriental / Oriente Médio: terra ocre, mares desenhados por cima, Nilo, Eufrates e Tigre"""
+    c.rectangle(0, 0, W, H); rgb(c, land_col); c.fill()
+    for name, pts in MED_SEAS.items():
+        poly(c, [proj(*p) for p in pts]); fs(c, sea_col, lw)
+    if grid:
+        c.set_dash([4, 12])
+        for lon in range(-180, 181, grid):
+            x, _ = proj(lon, 0)
+            if 0 <= x <= W:
+                line(c, x, 0, x, H, 1.5, (0.38, 0.34, 0.28))
+        for lat in range(-90, 91, grid):
+            _, y = proj(0, lat)
+            if 0 <= y <= H:
+                line(c, 0, y, W, y, 1.5, (0.38, 0.34, 0.28))
+        c.set_dash([])
+    for name, pts in MED_ISLANDS.items():
+        poly(c, [proj(*p) for p in pts]); fs(c, land_col, lw)
+    if rivers:
+        for r in (NILE, EUPHRATES, TIGRIS):
+            xy = [proj(*p) for p in r]
+            c.move_to(*xy[0])
+            for p in xy[1:]:
+                c.line_to(*p)
+            rgb(c, (0.30, 0.48, 0.62)); c.set_line_width(4); c.stroke()
+
+
+def funeral_cart(c, t=0, glow_on=True, w=440):
+    """carro fúnebre de Alexandre (Diodoro): templo dourado sobre rodas, colunas, teto com pedras, sinos e vitórias aladas"""
+    if glow_on:
+        glow(c, 0, -230, 380, AMBER, 0.20)
+    # plataforma e rodas
+    c.rectangle(-w / 2, -120, w, 34); fs(c, GOLD_D, 6)
+    for x in (-w / 2 + 70, w / 2 - 70):
+        circle(c, x, -50, 52, (0.30, 0.22, 0.14), 6)
+        for k in range(6):
+            a = k * math.pi / 3 + t * 0.0
+            line(c, x, -50, x + math.cos(a) * 46, -50 + math.sin(a) * 46, 4)
+        circle(c, x, -50, 12, GOLD, 4)
+    # colunas
+    n = 4
+    for i in range(n):
+        x = -w / 2 + 40 + i * (w - 80) / (n - 1)
+        c.rectangle(x - 12, -300, 24, 180); fs(c, GOLD, 5)
+        c.rectangle(x - 20, -312, 40, 14); fs(c, GOLD_D, 4)
+    # caixão dentro (vulto)
+    rrect(c, -90, -190, 180, 70, 10); fs(c, GOLD, 5)
+    # teto abobadado com pedras preciosas
+    c.rectangle(-w / 2 - 14, -332, w + 28, 22); fs(c, GOLD_D, 5)
+    c.move_to(-w / 2 - 6, -332); c.curve_to(-w / 3, -440, w / 3, -440, w / 2 + 6, -332); c.close_path(); fs(c, GOLD, 6)
+    for k, col in enumerate((RED, (0.30, 0.55, 0.40), (0.35, 0.45, 0.80), RED, (0.30, 0.55, 0.40))):
+        x = -w / 3 + k * w / 6
+        y = -360 - 40 * math.sin(math.pi * (k + 0.5) / 5)
+        circle(c, x, y, 9, col, 3)
+    # sinos (balançam)
+    for i in range(5):
+        x = -w / 2 + 20 + i * (w - 40) / 4
+        a = math.sin(t * 3 + i) * 0.25
+        c.save(); c.translate(x, -310); c.rotate(a)
+        line(c, 0, 0, 0, 22, 3, GOLD_D)
+        c.move_to(-10, 34); c.curve_to(-10, 18, 10, 18, 10, 34); c.close_path(); fs(c, GOLD, 3)
+        c.restore()
+    # vitórias aladas nos cantos
+    for sx in (-1, 1):
+        c.save(); c.translate(sx * (w / 2 + 2), -350)
+        circle(c, 0, -28, 9, GOLD, 3)
+        poly(c, [(-8, -18), (8, -18), (12, 20), (-12, 20)]); fs(c, GOLD, 3)
+        c.move_to(0, -14); c.curve_to(sx * -40, -50, sx * -50, -10, sx * -30, 6); c.close_path(); fs(c, GOLD_D, 3)
+        c.restore()
+
+
+def mule(c, t=0, crown=True, col=(0.42, 0.38, 0.34)):
+    """mula de perfil para a direita, com coroa de ouro (cascos em y=0)"""
+    bob = math.sin(t * 6) * 3
+    rrect(c, -95, -160 + bob, 170, 66, 30); fs(c, col, 5)
+    ph = t * 6
+    for i, x in enumerate((-78, -54, 44, 64)):
+        sw = math.sin(ph + (i % 2) * math.pi) * 10
+        line(c, x, -104 + bob, x + sw, 0, 12, INK)
+        line(c, x, -104 + bob, x + sw, -4, 7, col)
+    poly(c, [(50, -156 + bob), (84, -206 + bob), (148, -186 + bob), (144, -164 + bob), (96, -170 + bob), (78, -134 + bob)]); fs(c, col, 5)
+    for dx in (0, 14):
+        poly(c, [(84 + dx, -204 + bob), (78 + dx, -250 + bob), (96 + dx, -206 + bob)]); fs(c, col, 4)
+    circle(c, 112, -190 + bob, 3.5, INK, 0)
+    c.move_to(-92, -146 + bob); c.curve_to(-118, -128, -122, -96, -114, -74)
+    rgb(c, INK); c.set_line_width(6); c.stroke()
+    if crown:
+        poly(c, [(76, -214 + bob), (82, -232 + bob), (90, -218 + bob), (98, -234 + bob), (104, -216 + bob)]); fs(c, GOLD, 3)
+        glow(c, 90, -222 + bob, 40, AMBER, 0.25)
+
+
+def sarcophagus(c, w=420, h=170, col=BASALT, glyphs=True, lid=0.0, seed=7):
+    """sarcófago de pedra visto de lado, coberto de hieróglifos (lid: 0 fechado .. 1 tampa deslocada)"""
+    rrect(c, -w / 2, -h, w, h, 12); fs(c, col, 6)
+    if glyphs:
+        rnd = random.Random(seed)
+        gc = (col[0] + 0.28, col[1] + 0.30, col[2] + 0.26)
+        for row in range(3):
+            y = -h + 34 + row * (h - 50) / 3
+            x = -w / 2 + 26
+            while x < w / 2 - 30:
+                k = rnd.randint(0, 5)
+                if k == 0:
+                    circle(c, x + 8, y, 7, None, 2.5, gc)
+                elif k == 1:
+                    line(c, x, y + 8, x + 16, y - 8, 2.5, gc)
+                elif k == 2:
+                    ellipse(c, x + 8, y - 3, 8, 5); rgb(c, gc); c.set_line_width(2.5); c.stroke()
+                    line(c, x + 8, y + 2, x + 8, y + 10, 2.5, gc); line(c, x + 2, y + 5, x + 14, y + 5, 2.5, gc)
+                elif k == 3:
+                    line(c, x, y, x + 16, y, 2.5, gc); line(c, x + 4, y - 7, x + 4, y + 7, 2.5, gc)
+                elif k == 4:
+                    poly(c, [(x, y + 8), (x + 8, y - 8), (x + 16, y + 8)]); rgb(c, gc); c.set_line_width(2.5); c.stroke()
+                else:
+                    c.move_to(x, y); c.curve_to(x + 5, y - 10, x + 11, y + 10, x + 16, y); rgb(c, gc); c.set_line_width(2.5); c.stroke()
+                x += 24
+            line(c, -w / 2 + 16, y + 18, w / 2 - 16, y + 18, 1.5, gc)
+    c.save(); c.translate(lid * 120, -lid * 30); c.rotate(-lid * 0.12)
+    rrect(c, -w / 2 - 10, -h - 34, w + 20, 34, 10); fs(c, (col[0] * 0.9, col[1] * 0.9, col[2] * 0.9), 6)
+    c.restore()
+
+
+def royal_coffin(c, kind="gold", w=380, h=120, body=True, diadem=True, t=0, nose_chip=False):
+    """caixão do rei visto de lado/cima: kind 'gold' (ouro batido) ou 'glass' (vidro/cristal, deixa ver o vulto)"""
+    if kind == "gold":
+        glow(c, 0, -h / 2, w * 0.7, AMBER, 0.18)
+        rrect(c, -w / 2, -h, w, h, 18); fs(c, GOLD, 6)
+        for k in range(1, 5):
+            x = -w / 2 + k * w / 5
+            line(c, x, -h + 14, x, -14, 3, GOLD_D)
+        rrect(c, -w / 2 - 10, -h - 26, w + 20, 30, 12); fs(c, GOLD_D, 6)
+        for k in range(6):
+            circle(c, -w / 2 + 30 + k * (w - 60) / 5, -h - 11, 5, LYELLOW, 2)
+        return
+    # vidro: vulto deitado com diadema
+    rrect(c, -w / 2, -h, w, h, 14); fs(c, (0.10, 0.12, 0.14), 6)
+    if body:
+        c.save(); c.translate(-w / 2 + 60, -h / 2)
+        circle(c, 0, 0, 30, (0.66, 0.58, 0.44), 4)
+        if diadem:
+            c.new_sub_path(); c.arc(0, 0, 32, math.pi * 0.6, math.pi * 1.4); rgb(c, GOLD); c.set_line_width(7); c.stroke()
+        if nose_chip:
+            circle(c, 30, 4, 4, (0.10, 0.12, 0.14), 0)
+        poly(c, [(28, -26), (w - 130, -30), (w - 110, 0), (w - 130, 30), (28, 26)]); fs(c, (0.52, 0.40, 0.30), 4)
+        c.restore()
+    g = cairo.LinearGradient(-w / 2, -h, w / 2, 0)
+    g.add_color_stop_rgba(0, 0.75, 0.88, 0.95, 0.22)
+    g.add_color_stop_rgba(0.5, 0.75, 0.88, 0.95, 0.06)
+    g.add_color_stop_rgba(1, 0.75, 0.88, 0.95, 0.20)
+    rrect(c, -w / 2, -h, w, h, 14); c.set_source(g); c.fill()
+    rrect(c, -w / 2, -h, w, h, 14); rgb(c, ICE); c.set_line_width(5); c.stroke()
+    for k in range(3):
+        line(c, -w / 2 + 40 + k * 30, -h + 14, -w / 2 + 10 + k * 30, -h + 50, 3, (0.85, 0.94, 1.0))
+
+
+def mausoleum(c, w=520, h=420, col=MARBLE):
+    """o Soma: mausoléu helenístico de base escalonada, colunata e teto em pirâmide (base em 0,0)"""
+    for k in range(3):
+        ww = w + 60 - k * 30
+        c.rectangle(-ww / 2, -30 - k * 30, ww, 30); fs(c, (col[0] * 0.85, col[1] * 0.85, col[2] * 0.85), 5)
+    base = -90
+    c.rectangle(-w / 2, base - 40, w, 40); fs(c, col, 5)
+    n = 6
+    for i in range(n):
+        x = -w / 2 + 34 + i * (w - 68) / (n - 1)
+        c.rectangle(x - 14, base - 200, 28, 160); fs(c, col, 4)
+        line(c, x, base - 190, x, base - 50, 2, (0.55, 0.53, 0.48))
+    c.rectangle(-w / 2 - 10, base - 236, w + 20, 36); fs(c, col, 5)
+    poly(c, [(-w / 2 + 10, base - 236), (0, -h), (w / 2 - 10, base - 236)]); fs(c, (col[0] * 0.92, col[1] * 0.9, col[2] * 0.85), 6)
+    c.rectangle(-46, base - 150, 92, 110); fs(c, (0.08, 0.07, 0.06), 4)
+    glow(c, 0, base - 100, 90, AMBER, 0.30)
+
+
+def mosque(c, w=420, h=300, col=(0.62, 0.56, 0.46), minaret=True):
+    """mesquita: corpo, cúpula e minarete (base em 0,0)"""
+    c.rectangle(-w / 2, -h * 0.5, w, h * 0.5); fs(c, col, 5)
+    c.new_sub_path(); c.arc(0, -h * 0.5, w * 0.26, math.pi, 2 * math.pi); c.close_path(); fs(c, col, 5)
+    line(c, 0, -h * 0.5 - w * 0.26, 0, -h * 0.5 - w * 0.26 - 30, 4)
+    c.new_sub_path(); c.arc(0, -h * 0.5 - w * 0.26 - 36, 7, math.pi * 0.3, math.pi * 1.7); rgb(c, INK); c.set_line_width(3); c.stroke()
+    for k in range(3):
+        x = -w / 2 + 70 + k * (w - 140) / 2
+        c.move_to(x - 22, -20); c.line_to(x - 22, -90); c.curve_to(x - 22, -120, x + 22, -120, x + 22, -90); c.line_to(x + 22, -20)
+        c.close_path(); fs(c, (0.10, 0.09, 0.08), 3)
+    if minaret:
+        mx = w / 2 + 40
+        c.rectangle(mx - 22, -h - 60, 44, h + 60); fs(c, col, 5)
+        c.rectangle(mx - 34, -h * 0.75, 68, 14); fs(c, col, 4)
+        c.rectangle(mx - 30, -h - 74, 60, 14); fs(c, col, 4)
+        poly(c, [(mx - 22, -h - 74), (mx, -h - 130), (mx + 22, -h - 74)]); fs(c, col, 5)
+
+
+def basilica(c, w=640, h=380, col=(0.66, 0.60, 0.50)):
+    """basílica de cinco cúpulas e arcos (base em 0,0)"""
+    c.rectangle(-w / 2, -h * 0.55, w, h * 0.55); fs(c, col, 5)
+    for k in range(5):
+        x = -w / 2 + 64 + k * (w - 128) / 4
+        c.move_to(x - 40, 0); c.line_to(x - 40, -h * 0.30); c.curve_to(x - 40, -h * 0.48, x + 40, -h * 0.48, x + 40, -h * 0.30)
+        c.line_to(x + 40, 0); c.close_path(); fs(c, (0.12, 0.10, 0.08) if k != 2 else (0.20, 0.16, 0.10), 4)
+    for k, (x, r) in enumerate(((-w * 0.36, 52), (-w * 0.18, 60), (0, 78), (w * 0.18, 60), (w * 0.36, 52))):
+        y = -h * 0.55
+        c.rectangle(x - r * 0.8, y - 34, r * 1.6, 34); fs(c, col, 4)
+        c.new_sub_path(); c.arc(x, y - 34, r, math.pi, 2 * math.pi); c.close_path(); fs(c, (0.40, 0.42, 0.40), 5)
+        line(c, x, y - 34 - r, x, y - 34 - r - 26, 4)
+        line(c, x - 9, y - 34 - r - 16, x + 9, y - 34 - r - 16, 4)
+
+
+def tumulus(c, w=900, h=230, col=(0.36, 0.33, 0.24), wall=True):
+    """grande túmulo macedônio (monte de terra com muro circular de mármore) - base em 0,0"""
+    c.move_to(-w / 2, 0); c.curve_to(-w / 3, -h, w / 3, -h, w / 2, 0); c.close_path(); fs(c, col, 6)
+    if wall:
+        c.rectangle(-w / 2 + 20, -60, w - 40, 60); fs(c, MARBLE, 5)
+        for k in range(1, 12):
+            x = -w / 2 + 20 + k * (w - 40) / 12
+            line(c, x, -58, x, -2, 2, (0.55, 0.53, 0.48))
+    c.rectangle(-50, -150, 100, 90); fs(c, (0.08, 0.07, 0.06), 4)
+
+
+def sphinx(c, col=MARBLE, head=False):
+    """esfinge grega sentada (Anfípolis: sem cabeça) - base em 0,0"""
+    c.rectangle(-70, -24, 140, 24); fs(c, (col[0] * 0.8, col[1] * 0.8, col[2] * 0.8), 4)
+    c.move_to(-60, -24); c.curve_to(-62, -90, -10, -110, 20, -100); c.line_to(40, -150); c.line_to(52, -96)
+    c.line_to(60, -24); c.close_path(); fs(c, col, 5)
+    c.move_to(-10, -100); c.curve_to(-50, -150, -60, -120, -70, -160); c.curve_to(-30, -150, -10, -130, 4, -104); fs(c, col, 4)
+    if head:
+        circle(c, 46, -168, 20, col, 4)
+
+
+def caryatid(c, col=MARBLE):
+    """cariátide (mulher-coluna) - base em 0,0"""
+    c.rectangle(-36, -20, 72, 20); fs(c, col, 4)
+    poly(c, [(-30, -20), (-22, -200), (22, -200), (30, -20)]); fs(c, col, 5)
+    for x in (-14, 0, 14):
+        line(c, x, -190, x * 1.3, -26, 2, (0.55, 0.53, 0.48))
+    circle(c, 0, -226, 24, col, 5)
+    c.rectangle(-30, -270, 60, 20); fs(c, col, 4)
+
+
+def cuirass(c, col=(0.74, 0.58, 0.30)):
+    """couraça (peitoral) de bronze"""
+    c.move_to(-90, -110); c.curve_to(-40, -130, 40, -130, 90, -110); c.line_to(80, 40); c.curve_to(40, 70, -40, 70, -80, 40)
+    c.close_path(); fs(c, col, 6)
+    for sx in (-1, 1):
+        c.move_to(sx * 70, -100); c.curve_to(sx * 50, -60, sx * 30, -60, sx * 10, -80); rgb(c, GOLD_D); c.set_line_width(4); c.stroke()
+    c.move_to(-50, -10); c.curve_to(-20, 10, 20, 10, 50, -10); rgb(c, GOLD_D); c.set_line_width(4); c.stroke()
+    for x in range(-60, 70, 24):
+        rrect(c, x - 9, 48, 18, 44, 4); fs(c, (0.50, 0.22, 0.16), 3)
+    circle(c, 0, -50, 16, GOLD, 3)
+
+
+def laurel_crown(c, r=90, col=GOLD):
+    """coroa/diadema de louros de ouro"""
+    glow(c, 0, 0, r * 1.6, AMBER, 0.2)
+    for sx in (-1, 1):
+        for k in range(9):
+            a = math.pi * (0.62 + 0.085 * k) if sx < 0 else math.pi * (0.38 - 0.085 * k)
+            px, py = math.cos(a) * r, math.sin(a) * r
+            c.save(); c.translate(px, py); c.rotate(a + sx * 1.2)
+            ellipse(c, 0, 0, 22, 9); fs(c, col, 3)
+            c.restore()
+
+
+def flower(c, col=(0.78, 0.30, 0.32)):
+    for k in range(5):
+        a = k * 2 * math.pi / 5
+        circle(c, math.cos(a) * 12, math.sin(a) * 12, 10, col, 3)
+    circle(c, 0, 0, 7, LYELLOW, 2)
+
+
+def marble_bust(c, col=MARBLE, nose=True):
+    """busto de mármore helenístico (cabelo cacheado) - base em 0,0"""
+    rrect(c, -70, -40, 140, 40, 6); fs(c, (col[0] * 0.8, col[1] * 0.8, col[2] * 0.8), 5)
+    c.move_to(-90, -40); c.curve_to(-90, -120, 90, -120, 90, -40); c.close_path(); fs(c, col, 5)
+    rrect(c, -22, -150, 44, 50, 10); fs(c, col, 4)
+    ellipse(c, 0, -205, 58, 70); fs(c, col, 5)
+    for k in range(9):
+        a = math.pi * (1.0 + k / 8)
+        circle(c, math.cos(a) * 54, -215 + math.sin(a) * 62, 14, col, 3)
+    if nose:
+        poly(c, [(4, -214), (14, -186), (2, -184)]); rgb(c, INK); c.set_line_width(3); c.stroke()
+    line(c, -24, -222, -8, -220, 3); line(c, 14, -220, 30, -222, 3)
+    line(c, -8, -168, 12, -168, 3)
+
+
+def tsunami_wave(c, t=0, w=1400, h=520, col=(0.20, 0.32, 0.42)):
+    """onda gigante quebrando, da esquerda para a direita (base em 0,0)"""
+    c.move_to(-w / 2, 0); c.line_to(-w / 2, -h * 0.55)
+    c.curve_to(-w * 0.2, -h * 0.8, w * 0.15, -h * 1.05, w * 0.32, -h * 0.9)
+    c.curve_to(w * 0.45, -h * 0.8, w * 0.42, -h * 0.55, w * 0.30, -h * 0.58)
+    c.curve_to(w * 0.25, -h * 0.4, w * 0.35, -h * 0.15, w / 2, 0); c.close_path(); fs(c, col, 6)
+    for k in range(4):
+        y = -h * (0.2 + 0.14 * k)
+        c.move_to(-w / 2 + 40, y); c.curve_to(-w * 0.1, y - 30 + math.sin(t * 2 + k) * 8, w * 0.1, y + 10, w * 0.25, y - 20)
+        rgb(c, (0.55, 0.70, 0.80)); c.set_line_width(3); c.stroke()
+    for k in range(10):
+        x = w * 0.2 + k * 14 + math.sin(t * 4 + k) * 6
+        circle(c, x, -h * 0.85 + k * 10, 6, (0.85, 0.92, 0.96), 2)
+
+
+def crocodile(c, col=(0.24, 0.32, 0.22)):
+    """crocodilo de perfil, nadando (linha d'água em 0)"""
+    c.move_to(-200, -6); c.curve_to(-120, -40, 60, -46, 120, -26); c.line_to(220, -20); c.line_to(220, -6); c.line_to(120, 0)
+    c.close_path(); fs(c, col, 5)
+    for k in range(7):
+        x = -140 + k * 34
+        poly(c, [(x, -34), (x + 10, -48), (x + 20, -36)]); fs(c, col, 3)
+    circle(c, 138, -32, 6, LYELLOW, 3)
+    for k in range(5):
+        line(c, 160 + k * 12, -20, 164 + k * 12, -12, 2)
+
+
+def brick_wall(c, w=300, h=260, p=1.0, col=(0.52, 0.32, 0.22)):
+    """parede de tijolos subindo de baixo para cima (p 0..1); base em 0,0"""
+    rows = int(h / 30)
+    shown = int(math.ceil(rows * clamp01(p)))
+    for r in range(shown):
+        y = -(r + 1) * 30
+        off = 0 if r % 2 == 0 else 30
+        x = -w / 2 - off
+        while x < w / 2:
+            x0, x1 = max(x, -w / 2), min(x + 60, w / 2)
+            if x1 > x0:
+                c.rectangle(x0, y, x1 - x0, 30); fs(c, col, 3)
+            x += 60
+
+
+def modern_city(c, t=0, w=1920, seed=5, col=(0.17, 0.16, 0.15)):
+    """prédios da cidade moderna (base em 0,0, de -w/2 a w/2) com janelas acesas"""
+    rnd = random.Random(seed)
+    x = -w / 2
+    while x < w / 2:
+        bw = rnd.randint(90, 170)
+        bh = rnd.randint(180, 420)
+        c.rectangle(x, -bh, bw - 8, bh); fs(c, col, 4)
+        for yy in range(-bh + 26, -20, 44):
+            for xx in range(int(x) + 16, int(x + bw - 30), 34):
+                if rnd.random() < 0.35:
+                    c.rectangle(xx, yy, 14, 18); rgb(c, (0.95, 0.78, 0.42), 0.7 + 0.2 * math.sin(t + xx)); c.fill()
+        x += bw
+
+
+def palm_oasis(c, t=0):
+    """palmeira de oásis curvada (base em 0,0)"""
+    c.move_to(-10, 0); c.curve_to(-14, -120, 10, -220, 40, -300); c.line_to(54, -296); c.curve_to(26, -220, 6, -120, 10, 0)
+    c.close_path(); fs(c, (0.42, 0.32, 0.20), 4)
+    for k in range(7):
+        a = math.pi * (1.05 + k * 0.15) + math.sin(t * 0.8 + k) * 0.04
+        c.move_to(47, -298); c.curve_to(47 + math.cos(a) * 60, -298 + math.sin(a) * 60 - 20,
+                                      47 + math.cos(a) * 130, -298 + math.sin(a) * 110, 47 + math.cos(a) * 150, -298 + math.sin(a) * 150 + 40)
+        rgb(c, (0.24, 0.36, 0.20)); c.set_line_width(14); c.stroke_preserve(); rgb(c, INK); c.set_line_width(3); c.stroke()
+
+
+def dunes(c, t=0, y=820, col=(0.42, 0.33, 0.20)):
+    """dunas no horizonte (de y até o fim da tela)"""
+    for k, (yy, cc) in enumerate(((y, col), (y + 80, (col[0] * 0.8, col[1] * 0.8, col[2] * 0.8)))):
+        c.move_to(0, yy)
+        for x in range(0, W + 120, 120):
+            c.line_to(x, yy + math.sin(x / (230 + k * 80) + k) * 34)
+        c.line_to(W, H); c.line_to(0, H); c.close_path(); fs(c, cc, 4)
+
+
+def alexandria_skyline(c, t=0, w=1600):
+    """Alexandria antiga vista do mar: farol, muralha, colunatas e o palácio (base em 0,0)"""
+    c.rectangle(-w / 2, -60, w, 60); fs(c, (0.46, 0.40, 0.30), 4)
+    for k in range(9):
+        x = -w / 2 + 140 + k * (w - 300) / 8
+        hh = 90 + (k * 37 % 70)
+        c.rectangle(x - 50, -60 - hh, 100, hh); fs(c, (0.56, 0.50, 0.40), 4)
+        for j in range(4):
+            line(c, x - 36 + j * 24, -60 - hh + 14, x - 36 + j * 24, -66, 2, (0.40, 0.35, 0.28))
+    c.save(); c.translate(w / 2 - 80, -50); c.scale(0.8, 0.8); lighthouse(c, t); c.restore()
