@@ -169,18 +169,17 @@ def thumb_jpeg(path):
     return saida
 
 
-def enviar(m, video):
+def subir(yt, arquivo, titulo, descricao, tags, quando, categoria="27"):
+    """envia um vídeo agendado (privado até publishAt) e devolve a resposta da API"""
     from googleapiclient.errors import HttpError
     from googleapiclient.http import MediaFileUpload
 
-    yt = youtube()
-    quando = horario(m)
     corpo = {
         "snippet": {
-            "title": limpar_texto(m["titulo"], 100),
-            "description": limpar_texto(m["descricao"], 5000),
-            "tags": limpar_tags(m.get("tags")),
-            "categoryId": str(m.get("categoria", "27")),
+            "title": limpar_texto(titulo, 100),
+            "description": limpar_texto(descricao, 5000),
+            "tags": limpar_tags(tags),
+            "categoryId": str(categoria),
             "defaultLanguage": "pt-BR",
             "defaultAudioLanguage": "pt-BR",
         },
@@ -192,25 +191,38 @@ def enviar(m, video):
             "embeddable": True,
         },
     }
-    media = MediaFileUpload(video, mimetype="video/mp4", chunksize=16 * 1024 * 1024, resumable=True)
+    media = MediaFileUpload(arquivo, mimetype="video/mp4", chunksize=16 * 1024 * 1024, resumable=True)
     req = yt.videos().insert(part="snippet,status", body=corpo, media_body=media, notifySubscribers=True)
     resp, tentativa = None, 0
     while resp is None:
         try:
             status, resp = req.next_chunk()
             if status:
-                log(f"enviando: {int(status.progress() * 100)}%")
+                log(f"enviando {os.path.basename(arquivo)}: {int(status.progress() * 100)}%")
         except HttpError as e:
             if e.resp.status in (500, 502, 503, 504) and tentativa < 6:
                 tentativa += 1
                 time.sleep(2 ** tentativa)
                 continue
             raise
+    return resp
+
+
+def travado(resp):
+    st = resp.get("status", {})
+    return st.get("privacyStatus") == "private" and not st.get("publishAt")
+
+
+def enviar(m, video, yt):
+    from googleapiclient.http import MediaFileUpload
+
+    quando = horario(m)
+    resp = subir(yt, video, m["titulo"], m["descricao"], m.get("tags"), quando, m.get("categoria", "27"))
     vid = resp["id"]
     log(f"enviado: https://youtu.be/{vid}  (publica em {quando.astimezone(FUSO).isoformat()})")
 
     avisos = []
-    if resp.get("status", {}).get("privacyStatus") == "private" and not resp.get("status", {}).get("publishAt"):
+    if travado(resp):
         avisos.append("o YouTube travou o vídeo como privado (projeto não verificado?): publique à mão no Studio")
 
     if m.get("thumbnail"):
@@ -233,23 +245,112 @@ def enviar(m, video):
     return vid, quando, avisos
 
 
-def registrar(caminho, m, vid, quando, avisos):
-    """tira o vídeo da fila e guarda em fila/publicados/ (o workflow faz o commit)"""
-    destino_dir = os.path.join(RAIZ, "fila", "publicados")
-    os.makedirs(destino_dir, exist_ok=True)
-    m = dict(m)
-    m.pop("audio_blocos", None)  # links temporários, não precisam ficar no histórico
-    m.update({
-        "video_id": vid,
-        "url": f"https://youtu.be/{vid}",
-        "agendado_para": quando.astimezone(FUSO).isoformat(),
-        "enviado_em": dt.datetime.now(FUSO).replace(microsecond=0).isoformat(),
-        "avisos": avisos,
-    })
-    with open(os.path.join(destino_dir, os.path.basename(caminho)), "w", encoding="utf-8") as f:
-        json.dump(m, f, ensure_ascii=False, indent=2)
-        f.write("\n")
-    os.remove(caminho)
+# ------------------------------------------------------------------ Shorts
+SHORT_HORA = 12          # horário dos Shorts (Brasília)
+SHORT_MAX = 3            # cortes por vídeo longo
+SHORT_LIMITE = 179.0     # o YouTube só trata como Short até 3 min
+
+
+def dias_ocupados():
+    """datas (Brasília) que já têm Short agendado, lidas de fila/publicados/"""
+    ocupados = set()
+    pasta = os.path.join(RAIZ, "fila", "publicados")
+    for nome in os.listdir(pasta) if os.path.isdir(pasta) else []:
+        if not nome.endswith(".json"):
+            continue
+        try:
+            with open(os.path.join(pasta, nome), encoding="utf-8") as f:
+                for s in json.load(f).get("shorts", []):
+                    ocupados.add(dt.datetime.fromisoformat(s["agendado_para"]).astimezone(FUSO).date())
+        except Exception:  # noqa: BLE001
+            continue
+    return ocupados
+
+
+def horarios_shorts(quando_longo, n, ocupados=None):
+    """um Short por dia às 12h, a partir do dia seguinte ao vídeo longo, pulando dias que já têm Short.
+    Com o longo na terça e na quinta: cortes de terça em qua/qui/sex, cortes de quinta em sáb/dom/seg."""
+    ocupados = set(ocupados if ocupados is not None else dias_ocupados())
+    dia = quando_longo.astimezone(FUSO).date() + dt.timedelta(days=1)
+    minimo = dt.datetime.now(dt.timezone.utc) + dt.timedelta(minutes=FOLGA_MIN)
+    saida = []
+    while len(saida) < n:
+        alvo = dt.datetime(dia.year, dia.month, dia.day, SHORT_HORA, tzinfo=FUSO)
+        if dia not in ocupados and alvo > minimo:
+            saida.append(alvo.astimezone(dt.timezone.utc))
+            ocupados.add(dia)
+        dia += dt.timedelta(days=1)
+    return saida
+
+
+def renderizar_cortes(m, video):
+    """roda o cortes.py com o áudio dos ganchos (se houver) e devolve [(corte, mp4)]"""
+    slug = m["slug"]
+    cj = os.path.join(RAIZ, "videos", slug, "cortes.json")
+    with open(cj, encoding="utf-8") as f:
+        cortes = json.load(f)["cortes"][:SHORT_MAX]
+    cmd = [sys.executable, os.path.join(RAIZ, "cortes.py"), os.path.join("videos", slug), video]
+    if m.get("ganchos_audio"):
+        url = m["ganchos_audio"]
+        destino = os.path.join(RAIZ, "out", slug, "ganchos" + (os.path.splitext(url.split("?")[0])[1] or ".wav"))
+        os.makedirs(os.path.dirname(destino), exist_ok=True)
+        log("baixando o bloco de ganchos")
+        baixar(url, destino)
+        if m.get("ganchos_duracao") and abs(duracao(destino) - m["ganchos_duracao"]) > 0.6:
+            raise RuntimeError("a duração do bloco de ganchos não bate com o ganchos.txt")
+        cmd += ["--ganchos", destino]
+    log(f"renderizando {len(cortes)} cortes verticais")
+    t0 = time.time()
+    for c in cortes:
+        subprocess.run(cmd + ["--so", c["id"]], check=True, cwd=RAIZ)
+    log(f"cortes prontos em {(time.time() - t0) / 60:.1f} min")
+    return [(c, os.path.join(RAIZ, "out", f"{slug}_corte_{c['id']}.mp4")) for c in cortes]
+
+
+def enviar_shorts(m, video, yt, vid_longo, quando_longo):
+    shorts, avisos = [], []
+    if m.get("shorts") is False:
+        return shorts, avisos
+    if not os.path.exists(os.path.join(RAIZ, "videos", m["slug"], "cortes.json")):
+        avisos.append("sem cortes.json: nenhum Short foi gerado")
+        return shorts, avisos
+    try:
+        prontos = renderizar_cortes(m, video)
+    except Exception as e:  # noqa: BLE001
+        avisos.append(f"os cortes não foram gerados ({e}); o vídeo longo seguiu normal")
+        return shorts, avisos
+
+    validos = []
+    for c, mp4 in prontos:
+        if not os.path.exists(mp4):
+            avisos.append(f"corte {c['id']} não foi gerado")
+            continue
+        d = duracao(mp4)
+        if d > SHORT_LIMITE:
+            avisos.append(f"corte {c['id']} tem {d:.0f}s (acima de 3 min, não vira Short): ficou de fora")
+            continue
+        validos.append((c, mp4, d))
+
+    for (c, mp4, d), quando in zip(validos, horarios_shorts(quando_longo, len(validos))):
+        titulo = c.get("titulo_post") or c.get("titulo", "").replace("\\N", " ").title()
+        if "#shorts" not in titulo.lower() and len(titulo) <= 91:
+            titulo += " #Shorts"
+        descricao = (f"{c.get('post', '').strip()}\n\nHistória completa: https://youtu.be/{vid_longo}\n\n"
+                     "Narração gerada com voz de IA.")
+        try:
+            resp = subir(yt, mp4, titulo, descricao, m.get("tags"), quando, m.get("categoria", "27"))
+        except Exception as e:  # noqa: BLE001
+            avisos.append(f"Short {c['id']} não foi enviado: {e}")
+            continue
+        sid = resp["id"]
+        log(f"Short {c['id']} ({d:.0f}s): https://youtu.be/{sid}  (publica em {quando.astimezone(FUSO):%d/%m %H:%M})")
+        if travado(resp):
+            avisos.append(f"o YouTube travou o Short {c['id']} como privado: publique à mão no Studio")
+        shorts.append({"id": c["id"], "video_id": sid, "url": f"https://youtu.be/{sid}", "titulo": titulo,
+                       "duracao": round(d, 1), "agendado_para": quando.astimezone(FUSO).isoformat()})
+    for a in avisos:
+        log("AVISO:", a)
+    return shorts, avisos
 
 
 def main():
@@ -278,12 +379,24 @@ def main():
     if a.sem_upload:
         log("modo teste: sem upload", video)
         return
-    vid, quando, avisos = enviar(m, video)
+    yt = youtube()
+    vid, quando, avisos = enviar(m, video, yt)
+    # o vídeo longo já subiu: registra antes dos Shorts, para nunca reenviar o longo se algo falhar depois
     registrar(a.fila, m, vid, quando, avisos)
+    caminho_pub = os.path.join(RAIZ, "fila", "publicados", os.path.basename(a.fila))
+    shorts, avisos_s = enviar_shorts(m, video, yt, vid, quando)
+    with open(caminho_pub, encoding="utf-8") as f:
+        reg = json.load(f)
+    reg["shorts"], reg["avisos"] = shorts, avisos + avisos_s
+    with open(caminho_pub, "w", encoding="utf-8") as f:
+        json.dump(reg, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
             f.write(f"### {m['titulo']}\n\nhttps://youtu.be/{vid}\n\nAgendado para {quando.astimezone(FUSO):%d/%m %H:%M}\n\n")
-            for av in avisos:
+            for sh in shorts:
+                f.write(f"- Short **{sh['titulo']}**: {sh['url']} ({sh['agendado_para'][8:10]}/{sh['agendado_para'][5:7]} às {SHORT_HORA}h)\n")
+            for av in avisos + avisos_s:
                 f.write(f"- ⚠️ {av}\n")
 
 

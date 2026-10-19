@@ -10,8 +10,9 @@ Siga a skill `pontocego-video` (ou o `README.md` + `VOZ.md` deste repo) com as d
 ```
 tarefa agendada (Claude)                     GitHub Actions (.github/workflows/publicar.yml)
 pesquisa, roteiro, narração no HeyGen,  -->  baixa os áudios do HeyGen, junta os blocos,
-cenas, prévias, thumbnail, textos,           renderiza o MP4, envia ao YouTube agendado
-commit de fila/<slug>.json + push            para as 18h e move a fila para fila/publicados/
+ganchos dos Shorts, cenas, prévias,          renderiza o MP4, envia ao YouTube agendado
+thumbnail, textos, cortes.json,              para as 18h, renderiza 3 cortes verticais e
+commit de fila/<slug>.json + push            agenda cada um como Short (1 por dia, 12h)
 ```
 
 O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, e não peça ao Matheus: quem baixa é o GitHub Actions.
@@ -21,7 +22,8 @@ O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, 
 - **Nunca pare para perguntar.** Tome a decisão mais razoável e anote no resumo final.
 - **Erro do HeyGen** (créditos, timeout, recusa): não tente de novo nem gere a narração por outro caminho. Não coloque nada na fila. Mande o resumo com o erro e pare.
 - Se faltar algo para o vídeo ficar bom, prefira **não publicar** (não criar `fila/<slug>.json`) a publicar algo quebrado. Nesse caso, faça commit do que existe em `videos/<slug>/` e explique no resumo.
-- Pule os **cortes verticais** e o **bloco de ganchos** (o Matheus decidiu não automatizar o TikTok). Isso economiza créditos do HeyGen.
+- **Shorts do YouTube: sim.** Planeje **3 cortes** e gere o **bloco de ganchos** (passo 3b). O publicador renderiza os cortes e agenda um Short por dia às 12h (cortes do vídeo de terça em qua/qui/sex, do de quinta em sáb/dom/seg).
+- **TikTok: não.** Não é preciso gerar capas (`capas.py`) nem mandar arquivos ao Matheus.
 
 ## Passo a passo
 
@@ -43,6 +45,13 @@ O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, 
 - `create_speech` com a voz oficial (VOZ.md), um bloco por chamada, até ~4.500 caracteres, em paralelo.
 - De cada resposta guarde: o **link do áudio**, a **duração** (`duration`) e os `word_timestamps`.
 - `narracao_blocos.txt` e `transcricao.txt` como na skill. Offset de cada bloco = soma das durações anteriores + 1,0 s por bloco (é exatamente o que o `juntar_blocos.py` faz no Actions).
+
+### 3b. Cortes (Shorts) e bloco de ganchos
+- Ao escrever o roteiro, escolha **3 trechos** que viram Shorts, com os três testes da skill (entende-se sozinho nos primeiros 5 s, fecha com uma revelação ou pergunta, dura **de 65 s a 2:40** contando o gancho; acima de 3 min o YouTube não trata como Short e o corte fica de fora). Os melhores costumam ser a abertura, a virada e as teorias. Coloque o mais forte primeiro: ele sai no dia seguinte ao vídeo longo.
+- Para cada um, escreva o gancho (4 a 7 s, números por extenso), o `gancho_tela` e as linhas da `capa`, como na skill.
+- Gere **um** bloco extra no HeyGen com os 3 ganchos separados por `[long pause]` (mesma voz e configuração). Guarde o link, a duração e os `word_timestamps`; anote início e fim de cada gancho (folga de 0,1 s) em `videos/<slug>/ganchos.txt`.
+- Depois das cenas prontas (passo 4), confira os tempos com `python cortes.py videos/<slug> --frases` e escreva `videos/<slug>/cortes.json` no formato da skill, com `serie` e, por corte: `id`, `inicio`, `fim`, `titulo`, `gancho`, `gancho_audio`, `gancho_tela`, `gancho_t` (uma cena forte do trecho), `capa`, `titulo_post` (título do Short, até ~60 caracteres, com a curiosidade) e `post` (1 ou 2 frases + 3 a 5 hashtags como #misterio #historia #pontocego).
+- Garanta que a cena de `gancho_t` tenha o Historiador e o objeto ou cenário marcante, sem informação colada nas bordas (x < 140 ou x > 1780).
 
 ### 4. Cenas e revisão
 - `videos/<slug>/scenes.py` com `THEME = "<tema>"`, `SFX_OFF = True` e 10 a 15 toques em `SFX`.
@@ -67,20 +76,23 @@ Escreva `fila/<slug>.json`:
   "descricao": "<descrição completa com capítulos e hashtags>",
   "tags": ["tag 1", "tag 2"],
   "thumbnail": "videos/<slug>/thumb/<arquivo escolhido>.png",
-  "categoria": "27"
+  "categoria": "27",
+  "ganchos_audio": "<link do bloco de ganchos>",
+  "ganchos_duracao": 27.8
 }
 ```
 
 - `audio_blocos` e `duracoes` na **mesma ordem** dos blocos. O publicador confere cada duração e recusa se não bater (o vídeo sairia fora de sincronia).
-- Valide o JSON (`python -m json.tool fila/<slug>.json`).
+- `ganchos_audio` e `ganchos_duracao` vêm do bloco de ganchos (passo 3b). Sem `cortes.json` o vídeo longo sai normal, só sem Shorts.
+- Valide os JSONs (`python -m json.tool fila/<slug>.json` e `videos/<slug>/cortes.json`).
 
 ### 7. Commit e push
-- Commit de `videos/<slug>/` (sem áudio), `automacao/temas.md` e `fila/<slug>.json` na `main`, e push. Se recusar por mudança de outra sessão: `git pull --rebase` e push de novo.
-- O push dispara o workflow "Publicar no YouTube". Daqui em diante é com ele (leva ~30 a 60 min).
+- Commit de `videos/<slug>/` (sem áudio, com `ganchos.txt` e `cortes.json`), `automacao/temas.md` e `fila/<slug>.json` na `main`, e push. Se recusar por mudança de outra sessão: `git pull --rebase` e push de novo.
+- O push dispara o workflow "Publicar no YouTube". Daqui em diante é com ele (leva ~40 a 70 min com os Shorts).
 
 ### 8. Resumo final (SendUserMessage)
 Curto, em português:
 - título, história e tema visual escolhidos, e duração;
-- quando vai ao ar (dia e 18h);
+- quando vai ao ar (dia e 18h) e os 3 Shorts (título de cada um; saem às 12h nos dias seguintes);
 - como vetar: até o horário, no YouTube Studio > Conteúdo, o vídeo aparece como "Programado"; dá para editar, deixar privado ou excluir;
 - qualquer decisão tomada sozinho ou problema encontrado.

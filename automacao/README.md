@@ -1,7 +1,8 @@
 # Publicação automática do Ponto Cego
 
 Toda **segunda e quarta à noite** uma tarefa agendada do Claude faz o vídeo de terça e de quinta (passo a passo em `AUTOMATICO.md`)
-e coloca na fila (`fila/<slug>.json`). O GitHub Actions renderiza e envia ao YouTube **agendado para as 18h** do dia seguinte.
+e coloca na fila (`fila/<slug>.json`). O GitHub Actions renderiza e envia ao YouTube **agendado para as 18h** do dia seguinte,
+e depois agenda **3 Shorts** feitos de trechos do vídeo: um por dia às 12h (cortes de terça em qua/qui/sex, de quinta em sáb/dom/seg).
 
 Janela de veto: o vídeo aparece no YouTube Studio como **Programado** desde a noite anterior. Para barrar, edite, deixe privado ou exclua por lá.
 
@@ -35,7 +36,8 @@ Em https://github.com/matheuspdias/pontocego-videos/settings/secrets/actions, cr
 O YouTube só aceita thumbnail enviada por API se o canal estiver verificado por telefone: https://www.youtube.com/verify
 
 ## No dia a dia
-- **Ver o que vai sair:** YouTube Studio > Conteúdo (status Programado), ou a pasta `fila/publicados/` neste repo.
+- **Ver o que vai sair:** YouTube Studio > Conteúdo (status Programado; os Shorts ficam na aba Shorts), ou a pasta `fila/publicados/` neste repo.
+- **Desligar os Shorts de um vídeo:** `"shorts": false` no `fila/<slug>.json`. Horário e quantidade: `SHORT_HORA` e `SHORT_MAX` no `publicar.py`.
 - **Acompanhar o render:** aba **Actions** do repositório. Se falhar, o GitHub manda e-mail. O MP4 fica 7 dias como artefato da execução.
 - **Sugerir temas:** escreva na seção "Ideias" de `temas.md`.
 - **Pausar a automação:** pause as tarefas agendadas no Claude. Para só barrar um vídeo que já está na fila e ainda não rodou, apague o `fila/<slug>.json`.
