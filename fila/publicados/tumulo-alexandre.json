@@ -1,12 +1,6 @@
 {
   "slug": "tumulo-alexandre",
   "publicar_em": "2026-10-20T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=962a09b4-1dac-4cab-8eba-0a00aff502cc.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=95bf49ea-cf77-470a-8763-7f1a7b02f9e5.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=30ff578c-91ee-44c9-b8ff-ad27ddc9569a.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=429d8c9b-f812-4453-9fe4-3ea4b8b34a83.wav"
-  ],
   "duracoes": [
     169.509,
     192.653,
@@ -36,5 +30,10 @@
     "historiador"
   ],
   "thumbnail": "videos/tumulo-alexandre/thumb/alexandre_thumb_A.png",
-  "categoria": "27"
+  "categoria": "27",
+  "video_id": "rVhGC5fV12U",
+  "url": "https://youtu.be/rVhGC5fV12U",
+  "agendado_para": "2026-10-20T18:00:00-03:00",
+  "enviado_em": "2026-10-19T14:39:38-03:00",
+  "avisos": []
 }
