@@ -54,7 +54,8 @@ jobs:
           if [ "${{ inputs.sem_upload }}" = "true" ]; then extra="--sem-upload"; fi
           for f in "${itens[@]}"; do
             echo "::group::$f"
-            python automacao/publicar.py "$f" $extra
+            set -o pipefail
+            python automacao/publicar.py "$f" $extra 2>&1 | tee -a out_log.txt
             echo "::endgroup::"
           done
 
@@ -70,6 +71,7 @@ jobs:
       - name: Registrar na fila
         if: always()
         run: |
+          if [ -f out_log.txt ]; then tail -n 60 out_log.txt > fila/ultimo_log.txt; fi
           git config user.name "pontocego-bot"
           git config user.email "pontocego-bot@users.noreply.github.com"
           git add -A fila
