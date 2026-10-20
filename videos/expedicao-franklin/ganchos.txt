@@ -1,0 +1,7 @@
+# Ganchos dos cortes — bloco extra HeyGen (Pedro Lima - Serious, eleven_v4), 40.359 s
+# https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1458eacd-94e8-4d97-b7ec-33b94f21a03e.wav
+caixao   0.00-6.30   Esse rapaz ficou cento e trinta e oito anos congelado no Ártico. E ele foi o que teve sorte.
+bilhete  7.40-15.35  Num monte de pedras no Ártico, acharam um bilhete. A primeira mensagem dizia: tudo bem. A segunda mudou tudo.
+inuites  16.45-24.10 Os inuítes contaram o que aconteceu com esses homens. A Inglaterra chamou de mentira. Os ossos provaram que era verdade.
+teorias  24.85-30.95 Cento e vinte e nove homens, com comida para anos, morreram no gelo. Existem três explicações.
+terror   31.55-40.30 Um navio perdido havia mais de cento e cinquenta anos estava quase intacto no fundo do mar. E uma única porta continuava fechada.
