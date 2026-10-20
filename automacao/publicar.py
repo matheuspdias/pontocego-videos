@@ -353,6 +353,27 @@ def enviar_shorts(m, video, yt, vid_longo, quando_longo):
     return shorts, avisos
 
 
+def registrar(caminho, m, vid, quando, avisos, shorts=()):
+    """tira o vídeo da fila e guarda em fila/publicados/ (o workflow faz o commit)"""
+    destino_dir = os.path.join(RAIZ, "fila", "publicados")
+    os.makedirs(destino_dir, exist_ok=True)
+    m = dict(m)
+    m.pop("audio_blocos", None)  # links temporários, não precisam ficar no histórico
+    m.pop("ganchos_audio", None)
+    m.update({
+        "video_id": vid,
+        "url": f"https://youtu.be/{vid}",
+        "agendado_para": quando.astimezone(FUSO).isoformat(),
+        "enviado_em": dt.datetime.now(FUSO).replace(microsecond=0).isoformat(),
+        "avisos": avisos,
+        "shorts": list(shorts),
+    })
+    with open(os.path.join(destino_dir, os.path.basename(caminho)), "w", encoding="utf-8") as f:
+        json.dump(m, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    os.remove(caminho)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("fila", nargs="?")
@@ -380,7 +401,12 @@ def main():
         log("modo teste: sem upload", video)
         return
     yt = youtube()
-    vid, quando, avisos = enviar(m, video, yt)
+    if m.get("video_id"):
+        # o vídeo longo já foi enviado numa execução anterior: só registra e faz os Shorts
+        vid, quando, avisos = m["video_id"], horario(m), ["vídeo longo já tinha sido enviado; esta execução só fez os Shorts"]
+        log(f"vídeo longo já enviado: https://youtu.be/{vid}")
+    else:
+        vid, quando, avisos = enviar(m, video, yt)
     # o vídeo longo já subiu: registra antes dos Shorts, para nunca reenviar o longo se algo falhar depois
     registrar(a.fila, m, vid, quando, avisos)
     caminho_pub = os.path.join(RAIZ, "fila", "publicados", os.path.basename(a.fila))
