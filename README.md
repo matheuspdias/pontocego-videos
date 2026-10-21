@@ -147,5 +147,13 @@ e rode `python capas.py videos/<slug> out/<slug>.mp4 --grade`.
 - Chapéus novos dos bonecos: `hat="helmet"` (elmo grego/romano com crista), `hat="laurel"` (coroa de louros) e `hat="mitre"` (mitra de bispo).
 - `videos/tumulo-alexandre/scenes.py` tem `tw("palavra", depois_de)`: busca o tempo da palavra no `palavras.json` (evita errar a conversão m:ss).
 
+## Manuscritos e códigos (O Manuscrito Voynich)
+- Escrita inventada: `vword(c, "qokedy", h)` desenha uma palavra em "voynichês" (glifos à mão, sem fonte), `vword_w`, `vline(c, x, y, w, h, seed)` e `vpara(..., star=True)` (parágrafo com estrela na margem).
+- Páginas: `manuscript_page(c, kind, w, h, seed, t)` com `kind` = `text herbal zodiac bath rosette pharma first`; `manuscript_spread(c, esquerda, direita, t, p, s)` (livro aberto) e `closed_codex(c, s, glow_on, t)`.
+- Ilustrações: `vplant(seed)` (planta inventada), `zodiac_wheel(t, r, spin, months)`, `bath_pool(t, w, n)`, `rosette`, `rosette_foldout(t, p)` (folha que se desdobra), `swallow_castle` (ameias em rabo de andorinha), `pharma_jar(kind)`, `star_mark`.
+- Investigação: `uv_lamp(t, on, beam, ang)` (luz ultravioleta, cor `UVC`), `quill`, `punch_card`, `tabulator(t)` (máquina de cartões dos anos 1940), `cipher_machine(t, label)`, `cardan_grille(t, p)` (tabela + grade furada), `flask`, `handbag`, `ruler_cm`.
+- Cenários: `villa` (casarão italiano), `prague_castle`, `beinecke` (biblioteca de mármore). Cores `VINK VGREEN VBLUE VRED VBROWN VSKIN VELLUM`.
+- Chapéus novos: `hat="crown"` (coroa imperial) e `hat="skullcap"` (solidéu/barrete escuro de sábios e padres).
+
 ## Publicação automática
 Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz o vídeo e coloca em `fila/`, e o GitHub Actions renderiza e envia ao YouTube agendado para as 18h. Configuração e uso em `automacao/README.md`; instruções da tarefa em `automacao/AUTOMATICO.md`.

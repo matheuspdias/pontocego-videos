@@ -1,0 +1,5 @@
+# Ganchos dos cortes — bloco extra HeyGen (Pedro Lima - Serious, eleven_v4), 24.189 s
+# https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=09edc8cf-d70d-4cb5-a70c-f95b0e99b4e9.wav
+abertura  0.00-7.14   Este livro tem quase seiscentos anos. E até hoje, ninguém no mundo conseguiu ler uma única frase.
+friedman  8.85-15.30  O maior decifrador de códigos dos Estados Unidos passou décadas tentando ler este livro. E não conseguiu.
+imperador 16.14-24.10 Um imperador teria pago uma fortuna por um livro que ninguém conseguia ler. E um nome apagado na primeira página pode provar isso.

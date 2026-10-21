@@ -1077,6 +1077,17 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
         hc = hat_col or (0.86, 0.84, 0.78)
         poly(c, [(-hr * 0.8, -hr + 8), (-hr * 0.7, -hr - 52), (0, -hr - 86), (hr * 0.7, -hr - 52), (hr * 0.8, -hr + 8)]); fs(c, hc, 5)
         line(c, 0, -hr - 70, 0, -hr + 4, 5, (0.80, 0.62, 0.24)); line(c, -22, -hr - 40, 22, -hr - 40, 5, (0.80, 0.62, 0.24))
+    elif hat == "crown":
+        # coroa imperial dourada (Rodolfo II)
+        hc = hat_col or (0.86, 0.68, 0.26)
+        poly(c, [(-hr * 0.85, -hr + 6), (-hr * 0.95, -hr - 40), (-hr * 0.45, -hr - 14), (0, -hr - 52), (hr * 0.45, -hr - 14),
+                 (hr * 0.95, -hr - 40), (hr * 0.85, -hr + 6)]); fs(c, hc, 5)
+        for jx in (-0.5, 0, 0.5):
+            circle(c, hr * jx, -hr - 6, 6, RED if jx == 0 else (0.30, 0.46, 0.66), 2)
+    elif hat == "skullcap":
+        # solidéu / barrete escuro (sábios, padres, Dee)
+        hc = hat_col or (0.12, 0.12, 0.14)
+        c.new_sub_path(); c.arc(0, -hr * 0.55, hr * 0.78, math.pi, 2 * math.pi); c.close_path(); fs(c, hc, 5)
     elif hat == "hood":
         hc = hat_col or COAT
         c.new_sub_path(); c.arc(0, 0, hr + 14, math.pi * 0.85, math.pi * 2.15)
@@ -3916,3 +3927,515 @@ def alexandria_skyline(c, t=0, w=1600):
         for j in range(4):
             line(c, x - 36 + j * 24, -60 - hh + 14, x - 36 + j * 24, -66, 2, (0.40, 0.35, 0.28))
     c.save(); c.translate(w / 2 - 80, -50); c.scale(0.8, 0.8); lighthouse(c, t); c.restore()
+
+
+# ================================================================ O Manuscrito Voynich (pergaminho, escrita, ilustrações)
+VINK = (0.30, 0.20, 0.12)        # tinta ferrogálica marrom
+VGREEN = (0.44, 0.56, 0.32)      # verde das plantas e piscinas
+VBLUE = (0.36, 0.46, 0.64)
+VRED = (0.66, 0.32, 0.26)
+VBROWN = (0.52, 0.37, 0.22)
+VSKIN = (0.86, 0.72, 0.60)
+VELLUM = (0.84, 0.76, 0.58)
+UVC = (0.62, 0.40, 0.98)         # luz ultravioleta
+VWORDS = ["qokedy", "daiin", "chedy", "shedy", "qokaiin", "okal", "chol", "otedy", "ar", "dar", "okeey", "cheol", "sho",
+          "qotedy", "chor", "okain", "dal", "shol", "ykeedy", "otaiin", "chdy", "kchy", "pchedar", "ofaiin", "qokal", "sain"]
+
+
+def _vg(c, ch, h, lw):
+    """desenha um glifo do 'voynichês' com a base em y=0; devolve a largura"""
+    r = h * 0.22
+    yc = -r
+    if ch == "o":
+        c.new_sub_path(); c.arc(r, yc, r, 0, 2 * math.pi); c.stroke(); return 2.3 * r
+    if ch == "a":
+        c.new_sub_path(); c.arc(r, yc, r, 0, 2 * math.pi); c.stroke()
+        c.move_to(2 * r, yc - r * 0.6); c.line_to(2 * r + r * 0.4, 0); c.stroke(); return 2.8 * r
+    if ch == "e" or ch == "c":
+        c.new_sub_path(); c.arc(r, yc, r, math.pi * 0.25, math.pi * 1.75); c.stroke()
+        if ch == "c":
+            c.move_to(r * 0.3, -2.1 * r); c.line_to(r * 0.9, -2.6 * r); c.stroke()
+        return 2.1 * r
+    if ch == "h":
+        c.move_to(0, -2 * r); c.line_to(2.4 * r, -2 * r); c.stroke()
+        c.new_sub_path(); c.arc(1.4 * r, yc, r, math.pi * 0.3, math.pi * 1.7); c.stroke(); return 2.6 * r
+    if ch == "s":
+        c.move_to(0, -2.2 * r); c.curve_to(r * 1.8, -2.6 * r, r * 1.8, -1.2 * r, r * 0.4, -0.9 * r)
+        c.curve_to(r * 1.8, -0.6 * r, r * 1.6, 0.2 * r, 0, 0); c.stroke(); return 2.2 * r
+    if ch == "i":
+        c.move_to(r * 0.4, -1.9 * r); c.line_to(r * 0.4, 0); c.stroke(); return 1.1 * r
+    if ch == "n":
+        c.move_to(0, -1.9 * r); c.line_to(0, 0); c.curve_to(r * 0.4, -0.2 * r, r * 1.4, -0.4 * r, r * 1.6, -2.4 * r); c.stroke()
+        return 2.0 * r
+    if ch == "r":
+        c.move_to(0, -1.8 * r); c.line_to(0, 0); c.move_to(0, -1.6 * r); c.curve_to(r, -2.4 * r, r * 1.6, -2.0 * r, r * 1.6, -1.6 * r)
+        c.stroke(); return 2.0 * r
+    if ch == "l":
+        c.move_to(r * 0.4, 0); c.curve_to(r * 0.2, -1.5 * r, r * 1.8, -2.6 * r, r * 1.2, -1.0 * r)
+        c.curve_to(r * 0.9, -0.2 * r, r * 1.8, 0.1 * r, r * 2.2, -0.6 * r); c.stroke(); return 2.4 * r
+    if ch == "y":
+        c.new_sub_path(); c.arc(r, yc, r, 0, 2 * math.pi); c.stroke()
+        c.move_to(2 * r, yc); c.curve_to(2 * r, r * 1.4, r * 0.2, r * 1.6, -r * 0.4, r * 0.8); c.stroke(); return 2.4 * r
+    if ch == "d":
+        c.new_sub_path(); c.arc(r, yc, r, 0, 2 * math.pi); c.stroke()
+        c.move_to(2 * r, yc); c.curve_to(2.4 * r, -3.2 * r, 0.2 * r, -3.6 * r, r * 0.6, -2.4 * r); c.stroke(); return 2.4 * r
+    if ch == "q":
+        c.move_to(r * 1.4, 0); c.line_to(r * 1.4, -2.6 * r); c.line_to(0, -1.0 * r); c.line_to(r * 2.0, -1.0 * r); c.stroke()
+        return 2.3 * r
+    if ch in "ktpf":
+        # gallows: hastes altas com laço
+        c.move_to(r * 0.4, 0); c.line_to(r * 0.4, -4.2 * r); c.stroke()
+        c.move_to(r * 1.8, 0); c.line_to(r * 1.8, -3.0 * r); c.stroke()
+        c.move_to(-r * 0.4, -1.2 * r); c.curve_to(r * 0.6, -0.6 * r, r * 1.6, -1.8 * r, r * 2.8, -1.4 * r); c.stroke()
+        if ch in "tf":
+            c.new_sub_path(); c.arc(r * 2.4, -3.0 * r, r * 0.7, math.pi, 2.4 * math.pi); c.stroke()
+        if ch in "pf":
+            c.move_to(r * 0.4, -4.2 * r); c.curve_to(r * 1.4, -4.8 * r, r * 2.2, -4.0 * r, r * 1.8, -3.0 * r); c.stroke()
+        return 3.0 * r
+    return 1.6 * r
+
+
+def vword(c, word, h=24, col=VINK, lw=None):
+    """uma palavra em 'voynichês' desenhada à mão a partir da origem (base); devolve a largura"""
+    lw = lw or max(1.4, h * 0.085)
+    rgb(c, col); c.set_line_width(lw); c.set_line_cap(cairo.LINE_CAP_ROUND); c.set_line_join(cairo.LINE_JOIN_ROUND)
+    x = 0
+    for ch in word:
+        c.save(); c.translate(x, 0)
+        x += _vg(c, ch, h, lw) + h * 0.06
+        c.restore()
+    c.set_line_cap(cairo.LINE_CAP_BUTT)
+    return x
+
+
+def vword_w(word, h=24):
+    surf = cairo.ImageSurface(cairo.FORMAT_A8, 4, 4)
+    return vword(cairo.Context(surf), word, h)
+
+
+def vline(c, x, y, w, h=24, seed=1, col=VINK, p=1.0):
+    """linha de texto do manuscrito, de x até x+w (p<1 mostra só o começo)"""
+    rnd = random.Random(seed)
+    xx = x
+    lim = x + w * p
+    while True:
+        wd = rnd.choice(VWORDS)
+        ww = vword_w(wd, h)
+        if xx + ww > x + w or xx > lim:
+            break
+        c.save(); c.translate(xx, y); vword(c, wd, h, col); c.restore()
+        xx += ww + h * 0.55
+
+
+def vpara(c, x, y, w, n=5, h=24, gap=None, seed=1, col=VINK, star=False, p=1.0):
+    gap = gap or h * 1.55
+    for i in range(n):
+        q = clamp01(p * n - i)
+        if q <= 0:
+            break
+        ww = w if i < n - 1 else w * 0.6
+        vline(c, x, y + i * gap, ww, h, seed * 31 + i, col, q)
+    if star:
+        c.save(); c.translate(x - h * 1.1, y - h * 0.4); star_mark(c, h * 0.55); c.restore()
+
+
+def star_mark(c, r=14, col=VRED):
+    pts = []
+    for k in range(10):
+        a = -math.pi / 2 + k * math.pi / 5
+        rr = r if k % 2 == 0 else r * 0.45
+        pts.append((math.cos(a) * rr, math.sin(a) * rr))
+    poly(c, pts); fs(c, col, 2, VINK)
+    c.move_to(r * 0.3, r * 0.4); c.curve_to(r * 1.2, r * 1.3, r * 0.4, r * 1.8, r * 1.4, r * 2.2)
+    rgb(c, VINK); c.set_line_width(2); c.stroke()
+
+
+def vplant(c, seed=1, s=1.0, mixed=False, t=0):
+    """planta inventada do herbário (base da raiz em 0,0, cresce para cima)"""
+    rnd = random.Random(seed)
+    c.save(); c.scale(s, s)
+    # raiz
+    rc = VBROWN if not mixed else (0.60, 0.42, 0.26)
+    c.move_to(-60, 0); c.curve_to(-70, 60, -20, 90, 0, 60); c.curve_to(20, 90, 70, 60, 60, 0); c.close_path(); fs(c, rc, 4, VINK)
+    for k in range(4):
+        x0 = -40 + k * 27
+        c.move_to(x0, 50); c.curve_to(x0 - 10, 90, x0 + 20, 110, x0 + rnd.uniform(-30, 30), 140)
+        rgb(c, VINK); c.set_line_width(3); c.stroke()
+    # caule
+    c.move_to(0, 0); c.curve_to(-14, -120, 14, -200, 0, -300); rgb(c, VGREEN); c.set_line_width(12); c.stroke()
+    c.move_to(0, 0); c.curve_to(-14, -120, 14, -200, 0, -300); rgb(c, VINK); c.set_line_width(2); c.stroke()
+    # folhas
+    for k in range(rnd.randint(3, 5)):
+        y = -50 - k * 55
+        sx = 1 if k % 2 == 0 else -1
+        L = rnd.uniform(80, 130)
+        c.save(); c.translate(0, y); c.scale(sx, 1); c.rotate(-0.4 - rnd.uniform(0, 0.3))
+        c.move_to(0, 0); c.curve_to(L * 0.3, -L * 0.35, L * 0.8, -L * 0.3, L, 0); c.curve_to(L * 0.8, L * 0.3, L * 0.3, L * 0.35, 0, 0)
+        fs(c, VGREEN if rnd.random() > 0.3 else (0.36, 0.52, 0.48), 3, VINK)
+        line(c, 0, 0, L * 0.9, 0, 1.6, VINK)
+        c.restore()
+    # flor
+    fc = rnd.choice([VBLUE, VRED, (0.72, 0.56, 0.30)]) if not mixed else VRED
+    c.save(); c.translate(0, -300)
+    n = rnd.randint(5, 8)
+    for k in range(n):
+        a = -math.pi / 2 + (k - (n - 1) / 2) * 0.38
+        c.save(); c.rotate(a + math.pi / 2)
+        c.move_to(0, 0); c.curve_to(-26, -30, -16, -80, 0, -88); c.curve_to(16, -80, 26, -30, 0, 0); fs(c, fc, 3, VINK)
+        c.restore()
+    circle(c, 0, 0, 20, (0.74, 0.60, 0.30), 3, VINK)
+    c.restore()
+    c.restore()
+
+
+def zodiac_wheel(c, t=0, r=230, spin=0.03, months=None):
+    """página astronômica: anéis, sol no centro, figurinhas segurando estrelas"""
+    circle(c, 0, 0, r, VELLUM, 4, VINK)
+    for rr in (r * 0.86, r * 0.58, r * 0.32):
+        circle(c, 0, 0, rr, None, 3, VINK)
+    c.save(); c.rotate(t * spin)
+    for k in range(12):
+        a = k * math.pi / 6
+        c.save(); c.rotate(a); c.translate(0, -r * 0.72)
+        circle(c, 0, -8, 9, VSKIN, 2, VINK)
+        ellipse(c, 0, 12, 9, 14); fs(c, VBLUE if k % 2 else VRED, 2, VINK)
+        c.save(); c.translate(14, -16); star_mark(c, 7, (0.86, 0.70, 0.32)); c.restore()
+        c.restore()
+        c.save(); c.rotate(a + math.pi / 12); c.translate(0, -r * 0.93)
+        vword(c, VWORDS[k % len(VWORDS)][:4], 14)
+        c.restore()
+    c.restore()
+    # sol com rosto
+    for k in range(16):
+        a = k * math.pi / 8 + t * 0.1
+        line(c, math.cos(a) * r * 0.2, math.sin(a) * r * 0.2, math.cos(a) * r * 0.3, math.sin(a) * r * 0.3, 3, (0.80, 0.58, 0.20))
+    circle(c, 0, 0, r * 0.19, (0.90, 0.72, 0.34), 3, VINK)
+    circle(c, -r * 0.06, -r * 0.03, 3, VINK, 0); circle(c, r * 0.06, -r * 0.03, 3, VINK, 0)
+    c.new_sub_path(); c.arc(0, r * 0.02, r * 0.07, 0.2, math.pi - 0.2); rgb(c, VINK); c.set_line_width(2.5); c.stroke()
+    if months:
+        for k, m in enumerate(months):
+            a = -math.pi * 0.75 + k * 0.42
+            text(c, m, math.cos(a) * (r + 60), math.sin(a) * (r + 60), 40, HAND, LYELLOW)
+
+
+def bath_pool(c, t=0, w=520, n=5, seed=3):
+    """página 'balneológica': piscina verde, canos e figurinhas dentro d'água (base em 0,0)"""
+    rnd = random.Random(seed)
+    # canos
+    for k in range(3):
+        x0 = -w / 2 + 60 + k * (w - 120) / 2
+        c.move_to(x0, -40); c.curve_to(x0 - 40, -180, x0 + 120, -220, x0 + 60, -320)
+        rgb(c, VINK); c.set_line_width(26); c.stroke()
+        c.move_to(x0, -40); c.curve_to(x0 - 40, -180, x0 + 120, -220, x0 + 60, -320)
+        rgb(c, (0.50, 0.64, 0.48)); c.set_line_width(20); c.stroke()
+        for j in range(5):
+            yy = -80 - j * 50
+            ellipse(c, x0 + 10 + j * 8, yy, 13, 4); rgb(c, VINK); c.set_line_width(1.5); c.stroke()
+    # piscina
+    c.move_to(-w / 2, -40)
+    for k in range(9):
+        x = -w / 2 + (k + 1) * w / 9
+        c.curve_to(x - w / 18, -60, x - w / 36, -20, x, -40)
+    c.line_to(w / 2 - 20, 40); c.line_to(-w / 2 + 20, 40); c.close_path()
+    fs(c, VGREEN, 4, VINK)
+    for i in range(n):
+        x = -w / 2 + 70 + i * (w - 140) / max(1, n - 1)
+        bob = math.sin(t * 1.3 + i) * 3
+        ellipse(c, x, -44 + bob, 22, 16); fs(c, VSKIN, 2.5, VINK)            # ombros
+        circle(c, x, -74 + bob, 14, VSKIN, 2.5, VINK)                       # cabeça
+        c.new_sub_path(); c.arc(x, -78 + bob, 15, math.pi * 1.05, math.pi * 1.95)
+        rgb(c, VBROWN); c.set_line_width(5); c.stroke()                      # cabelo
+    for k in range(6):
+        x = -w / 2 + 40 + k * (w - 80) / 5
+        line(c, x - 18, 10 + (k % 2) * 10, x + 18, 10 + (k % 2) * 10, 2, (0.26, 0.38, 0.22))
+
+
+def swallow_castle(c, s=1.0, col=(0.66, 0.58, 0.42)):
+    """castelo com ameias em rabo de andorinha (gibelinas) — base em 0,0"""
+    c.save(); c.scale(s, s)
+    c.rectangle(-160, -140, 320, 140); fs(c, col, 4, VINK)
+    for tx in (-200, 200):
+        c.rectangle(tx - 40, -230, 80, 230); fs(c, col, 4, VINK)
+    def merlons(x0, x1, y):
+        k = x0
+        while k + 30 <= x1 + 1:
+            poly(c, [(k, y), (k, y - 34), (k + 8, y - 34), (k + 15, y - 20), (k + 22, y - 34), (k + 30, y - 34), (k + 30, y)])
+            fs(c, col, 3, VINK)
+            k += 42
+    merlons(-156, 156, -140)
+    for tx in (-200, 200):
+        merlons(tx - 38, tx + 38, -230)
+    rrect(c, -34, -90, 68, 90, 30); fs(c, (0.20, 0.16, 0.12), 3, VINK)
+    for tx in (-200, 200):
+        rrect(c, tx - 10, -180, 20, 40, 8); fs(c, (0.20, 0.16, 0.12), 2, VINK)
+    c.restore()
+
+
+def rosette(c, r=70, seed=1, col=VBLUE):
+    rnd = random.Random(seed)
+    circle(c, 0, 0, r, VELLUM, 3, VINK)
+    n = rnd.choice([8, 10, 12])
+    for k in range(n):
+        a = k * 2 * math.pi / n
+        c.save(); c.rotate(a)
+        c.move_to(0, -r * 0.25); c.curve_to(-r * 0.2, -r * 0.55, -r * 0.1, -r * 0.9, 0, -r * 0.92)
+        c.curve_to(r * 0.1, -r * 0.9, r * 0.2, -r * 0.55, 0, -r * 0.25); fs(c, col if k % 2 else VGREEN, 2, VINK)
+        c.restore()
+    circle(c, 0, 0, r * 0.25, (0.86, 0.70, 0.34), 2, VINK)
+
+
+def rosette_foldout(c, t=0, p=1.0, w=900, h=600, castle=True):
+    """folha dobrável com nove círculos ligados por caminhos; p abre as dobras (0..1)"""
+    cols = 3
+    vis = max(0.0001, p)
+    c.save(); c.scale(vis, 1)
+    rrect(c, -w / 2, -h / 2, w, h, 6); fs(c, VELLUM, 5, VINK)
+    for k in range(1, 3):
+        line(c, -w / 2 + k * w / 3, -h / 2, -w / 2 + k * w / 3, h / 2, 2, (0.62, 0.52, 0.36))
+    line(c, -w / 2, 0, w / 2, 0, 2, (0.62, 0.52, 0.36))
+    pts = [(-w / 2 + (i + 0.5) * w / cols, -h / 2 + (j + 0.5) * h / 3) for j in range(3) for i in range(cols)]
+    for i in range(len(pts)):
+        for j in (i + 1, i + cols):
+            if j < len(pts) and (j != i + 1 or (i + 1) % cols):
+                x0, y0 = pts[i]; x1, y1 = pts[j]
+                line(c, x0, y0, x1, y1, 14, VINK); line(c, x0, y0, x1, y1, 9, (0.72, 0.62, 0.42))
+    for k, (x, y) in enumerate(pts):
+        c.save(); c.translate(x, y); rosette(c, 62 if k != 4 else 74, k + 2, VBLUE if k % 2 else VRED); c.restore()
+    if castle:
+        c.save(); c.translate(w / 2 - 110, -h / 2 + 120); swallow_castle(c, 0.28); c.restore()
+    c.restore()
+
+
+def pharma_jar(c, kind=0, col=(0.72, 0.56, 0.30), h=200):
+    """frasco/pote de farmácia ornamentado (base em 0,0)"""
+    w = h * 0.36
+    if kind == 0:
+        c.move_to(-w, 0); c.curve_to(-w * 1.3, -h * 0.4, -w * 0.6, -h * 0.7, -w * 0.5, -h * 0.85); c.line_to(w * 0.5, -h * 0.85)
+        c.curve_to(w * 0.6, -h * 0.7, w * 1.3, -h * 0.4, w, 0); c.close_path()
+    elif kind == 1:
+        c.rectangle(-w * 0.8, -h * 0.85, w * 1.6, h * 0.85)
+    else:
+        c.move_to(-w * 0.5, 0); c.line_to(-w * 0.9, -h * 0.5); c.line_to(-w * 0.4, -h * 0.85); c.line_to(w * 0.4, -h * 0.85)
+        c.line_to(w * 0.9, -h * 0.5); c.line_to(w * 0.5, 0); c.close_path()
+    fs(c, col, 4, VINK)
+    rrect(c, -w * 0.6, -h, w * 1.2, h * 0.16, 6); fs(c, VRED, 3, VINK)
+    for k in range(3):
+        y = -h * (0.2 + k * 0.2)
+        line(c, -w * 0.6, y, w * 0.6, y, 2, VINK)
+    circle(c, 0, -h * 1.06, h * 0.05, VBLUE, 2, VINK)
+
+
+def manuscript_page(c, kind="text", w=520, h=700, seed=1, t=0, p=1.0, erased=0.0):
+    """uma página do manuscrito (centro em 0,0). kind: text herbal zodiac bath rosette pharma first blank"""
+    rnd = random.Random(seed)
+    rrect(c, -w / 2, -h / 2, w, h, 8); fs(c, VELLUM, 4, (0.50, 0.40, 0.26))
+    for k in range(4):   # manchas do tempo
+        x, y = rnd.uniform(-w / 2 + 60, w / 2 - 60), rnd.uniform(-h / 2 + 60, h / 2 - 60)
+        glow(c, x, y, rnd.uniform(60, 140), (0.60, 0.48, 0.28), 0.18)
+    m = 46
+    if kind == "text":
+        y = -h / 2 + 70
+        for k in range(4):
+            vpara(c, -w / 2 + m + 24, y, w - 2 * m - 24, 3, 20, seed=seed * 7 + k, star=True, p=clamp01(p * 4 - k))
+            y += 150
+    elif kind == "first":
+        vpara(c, -w / 2 + m, -h / 2 + 80, w - 2 * m, 8, 20, seed=seed, p=p)
+        vpara(c, -w / 2 + m, -h / 2 + 410, w - 2 * m, 5, 20, seed=seed + 5, p=p)
+        if erased < 1:
+            # o nome apagado no pé da página
+            for k in range(3):
+                line(c, -w / 2 + m + 10 + k * 12, h / 2 - 70 + k * 3, w / 2 - m - 120 + k * 9, h / 2 - 70 + k * 3, 2,
+                     (0.64, 0.56, 0.42))
+    elif kind == "herbal":
+        c.save(); c.translate(0, -h / 2 + 380); vplant(c, seed, 0.85, t=t); c.restore()
+        vpara(c, -w / 2 + m, h / 2 - 150, w - 2 * m, 4, 18, seed=seed, p=p)
+        vpara(c, -w / 2 + m, -h / 2 + 50, w * 0.36, 3, 18, seed=seed + 3, p=p)
+    elif kind == "zodiac":
+        c.save(); c.translate(0, -40); zodiac_wheel(c, t, min(w, h) * 0.40); c.restore()
+        vpara(c, -w / 2 + m, h / 2 - 120, w - 2 * m, 2, 18, seed=seed, p=p)
+    elif kind == "bath":
+        c.save(); c.translate(0, -h / 2 + 330); c.scale(0.82, 0.82); bath_pool(c, t, w * 1.05, 4, seed); c.restore()
+        vpara(c, -w / 2 + m, h / 2 - 280, w - 2 * m, 6, 18, seed=seed, p=p)
+    elif kind == "rosette":
+        c.save(); c.scale(w / 1000, w / 1000); rosette_foldout(c, t, 1.0, 900, 1200 * h / w * 0.7); c.restore()
+    elif kind == "pharma":
+        for k in range(3):
+            c.save(); c.translate(-w / 2 + 100 + k * (w - 200) / 2, -h / 2 + 260); pharma_jar(c, k, h=170); c.restore()
+            c.save(); c.translate(-w / 2 + 100 + k * (w - 200) / 2, -h / 2 + 330); c.scale(0.22, 0.22); vplant(c, seed + k); c.restore()
+        vpara(c, -w / 2 + m, h / 2 - 260, w - 2 * m, 6, 18, seed=seed, p=p)
+    text(c, str(seed), w / 2 - 34, -h / 2 + 28, 18, HAND, (0.45, 0.36, 0.24))
+
+
+def manuscript_spread(c, left="text", right="herbal", t=0, p=1.0, s=1.0, seed=1, pw=520, ph=700):
+    """livro aberto: capa de couro e duas páginas (centro em 0,0)"""
+    c.save(); c.scale(s, s)
+    rrect(c, -pw - 26, -ph / 2 - 22, 2 * pw + 52, ph + 44, 16); fs(c, (0.40, 0.28, 0.17), 5)
+    c.save(); c.translate(-pw / 2 - 2, 0); manuscript_page(c, left, pw, ph, seed, t, p); c.restore()
+    c.save(); c.translate(pw / 2 + 2, 0); manuscript_page(c, right, pw, ph, seed + 1, t, p); c.restore()
+    g = cairo.LinearGradient(-40, 0, 40, 0)
+    g.add_color_stop_rgba(0, 0, 0, 0, 0); g.add_color_stop_rgba(0.5, 0, 0, 0, 0.35); g.add_color_stop_rgba(1, 0, 0, 0, 0)
+    c.rectangle(-40, -ph / 2, 80, ph); c.set_source(g); c.fill()
+    c.restore()
+
+
+def closed_codex(c, s=1.0, glow_on=False, t=0):
+    """o manuscrito fechado: capa de pergaminho mole, gasta"""
+    c.save(); c.scale(s, s)
+    if glow_on:
+        glow(c, 0, 0, 380, AMBER, 0.20 + 0.05 * math.sin(t * 2))
+    poly(c, [(-150, -205), (150, -210), (158, 200), (-146, 205)]); fs(c, (0.78, 0.70, 0.52), 6, (0.48, 0.38, 0.24))
+    rrect(c, -150, -205, 30, 410, 6); fs(c, (0.66, 0.58, 0.42), 4, (0.48, 0.38, 0.24))
+    for k in range(6):
+        line(c, 160, -190 + k * 75, 166, -170 + k * 75, 3, (0.60, 0.52, 0.36))
+    c.restore()
+
+
+def uv_lamp(c, t=0, on=True, beam=True, ang=0.0):
+    """lanterna de luz ultravioleta; origem = cabo; o feixe sai para baixo (rotacione o contexto)"""
+    c.save(); c.rotate(ang)
+    if on and beam:
+        poly(c, [(-30, 50), (30, 50), (230, 520), (-230, 520)])
+        g = cairo.LinearGradient(0, 50, 0, 520)
+        g.add_color_stop_rgba(0, UVC[0], UVC[1], UVC[2], 0.45); g.add_color_stop_rgba(1, UVC[0], UVC[1], UVC[2], 0.05)
+        c.set_source(g); c.fill()
+    rrect(c, -20, -110, 40, 110, 10); fs(c, DGRAY, 5)
+    rrect(c, -40, 0, 80, 54, 10); fs(c, (0.30, 0.30, 0.36), 5)
+    ellipse(c, 0, 54, 34, 9); fs(c, UVC if on else DGRAY, 3)
+    c.restore()
+
+
+def quill(c, col=(0.86, 0.84, 0.78)):
+    """pena de escrever (ponta em 0,0, inclinada para cima à direita)"""
+    c.save(); c.rotate(-0.8)
+    c.move_to(0, 0); c.curve_to(10, -60, 40, -180, 10, -260); c.curve_to(-30, -180, -20, -60, 0, 0); fs(c, col, 4)
+    line(c, 0, 0, 8, -240, 2, (0.55, 0.50, 0.44))
+    c.restore()
+    line(c, -2, 0, 4, 10, 4, VINK)
+
+
+def punch_card(c, seed=1, w=340, h=150):
+    rnd = random.Random(seed)
+    poly(c, [(-w / 2 + 20, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2 + 20)])
+    fs(c, (0.86, 0.80, 0.62), 4)
+    for col in range(18):
+        for row in range(6):
+            if rnd.random() < 0.22:
+                c.rectangle(-w / 2 + 18 + col * 17.5, -h / 2 + 18 + row * 20, 8, 12); rgb(c, (0.12, 0.10, 0.08)); c.fill()
+
+
+def tabulator(c, t=0, w=420, h=300):
+    """máquina de cartões perfurados dos anos 1940 (base em 0,0)"""
+    rrect(c, -w / 2, -h, w, h, 14); fs(c, (0.32, 0.34, 0.38), 6)
+    rrect(c, -w / 2 + 30, -h + 30, w - 60, 80, 8); fs(c, (0.12, 0.13, 0.15), 4)
+    for k in range(8):
+        on = int(t * 4 + k * 1.7) % 3 == 0
+        circle(c, -w / 2 + 60 + k * 44, -h + 70, 9, AMBER if on else DGRAY, 3)
+    for k in range(4):
+        rrect(c, -w / 2 + 40 + k * 90, -h + 140, 70, 110, 6); fs(c, (0.24, 0.25, 0.28), 4)
+    # bandeja com cartões
+    for k in range(4):
+        c.save(); c.translate(w / 2 - 60, -h - 10 - k * 10); c.scale(0.3, 0.3); punch_card(c, k); c.restore()
+
+
+def cipher_machine(c, t=0, label="CIFRA"):
+    """máquina de cifra com teclado e rotores (centro em 0,0)"""
+    rrect(c, -260, -150, 520, 300, 16); fs(c, (0.26, 0.24, 0.22), 6)
+    for k in range(4):
+        x = -150 + k * 100
+        circle(c, x, -70, 36, (0.50, 0.46, 0.40), 5)
+        c.save(); c.translate(x, -70); c.rotate(t * (0.8 + k * 0.3))
+        line(c, 0, 0, 0, -30, 4, INK); c.restore()
+    for r in range(3):
+        for k in range(9 - r):
+            circle(c, -190 + k * 47 + r * 22, 20 + r * 42, 15, (0.14, 0.13, 0.12), 3)
+    text(c, label, 0, 128, 26, TYPE, AMBER)
+
+
+def cardan_grille(c, t=0, p=0.0, w=560, h=380):
+    """tabela de sílabas com uma grade de papel furada que desliza (p = posição 0..1)"""
+    syl = ["qo", "ke", "dy", "ch", "ol", "ai", "in", "sh", "ed", "ok", "da", "ar", "ot", "ey", "or", "al"]
+    rnd = random.Random(5)
+    rrect(c, -w / 2, -h / 2, w, h, 8); fs(c, (0.82, 0.74, 0.56), 5)
+    for r in range(6):
+        for k in range(8):
+            text(c, rnd.choice(syl), -w / 2 + 45 + k * 67, -h / 2 + 40 + r * 60, 30, TYPE, DARKTXT)
+    gx = -w / 2 + 100 + p * (w - 200)
+    c.save(); c.translate(gx, 0)
+    c.set_fill_rule(cairo.FILL_RULE_EVEN_ODD)
+    c.rectangle(-110, -h / 2 - 20, 220, h + 40)
+    for (hx, hy) in ((-55, -h / 2 + 40), (10, -h / 2 + 160), (-45, -h / 2 + 280)):
+        c.rectangle(hx - 28, hy - 22, 66, 44)
+    rgb(c, (0.20, 0.24, 0.32), 0.92); c.fill()
+    c.set_fill_rule(cairo.FILL_RULE_WINDING)
+    rrect(c, -110, -h / 2 - 20, 220, h + 40, 6); rgb(c, INK); c.set_line_width(4); c.stroke()
+    c.restore()
+
+
+def villa(c, s=1.0, lit=True):
+    """casarão de campo italiano (Villa Mondragone) — base em 0,0"""
+    c.save(); c.scale(s, s)
+    wall = (0.62, 0.56, 0.46)
+    c.rectangle(-460, -260, 920, 260); fs(c, wall, 5)
+    poly(c, [(-490, -260), (490, -260), (440, -310), (-440, -310)]); fs(c, (0.46, 0.30, 0.22), 5)
+    c.rectangle(-90, -400, 180, 140); fs(c, wall, 5)
+    poly(c, [(-110, -400), (110, -400), (0, -460)]); fs(c, (0.46, 0.30, 0.22), 5)
+    for row in range(2):
+        for k in range(9):
+            x = -400 + k * 100
+            y = -200 + row * 110
+            c.move_to(x - 26, y + 60); c.line_to(x - 26, y); c.curve_to(x - 26, y - 34, x + 26, y - 34, x + 26, y); c.line_to(x + 26, y + 60)
+            c.close_path(); fs(c, (0.95, 0.78, 0.42) if (lit and (k * 3 + row) % 4 == 0) else (0.14, 0.13, 0.12), 3)
+    circle(c, 0, -330, 26, (0.86, 0.84, 0.78), 4)
+    c.restore()
+
+
+def prague_castle(c, s=1.0):
+    """colina com catedral gótica de torres pontudas (Praga) — base em 0,0"""
+    c.save(); c.scale(s, s)
+    c.move_to(-520, 0); c.curve_to(-300, -120, 300, -130, 520, 0); c.close_path(); fs(c, (0.18, 0.19, 0.22), 4)
+    c.rectangle(-380, -190, 520, 90); fs(c, (0.36, 0.34, 0.36), 4)
+    for k in range(10):
+        rrect(c, -360 + k * 50, -170, 20, 34, 6); fs(c, (0.95, 0.78, 0.42) if k % 3 == 0 else (0.12, 0.12, 0.14), 2)
+    for x, hh in ((150, 300), (230, 360), (300, 300)):
+        c.rectangle(x - 26, -100 - hh, 52, hh); fs(c, (0.32, 0.31, 0.34), 4)
+        poly(c, [(x - 32, -100 - hh), (x + 32, -100 - hh), (x, -100 - hh - 120)]); fs(c, (0.30, 0.38, 0.36), 4)
+    c.restore()
+
+
+def beinecke(c, s=1.0, t=0):
+    """biblioteca moderna de painéis de mármore translúcido (base em 0,0)"""
+    c.save(); c.scale(s, s)
+    c.rectangle(-360, -420, 720, 340); fs(c, (0.56, 0.56, 0.54), 5)
+    for r in range(5):
+        for k in range(10):
+            x, y = -340 + k * 70, -400 + r * 66
+            c.rectangle(x + 6, y + 6, 58, 54)
+            a = 0.55 + 0.15 * math.sin(t * 0.7 + k + r)
+            rgb(c, (0.90 * a + 0.1, 0.70 * a + 0.1, 0.40 * a)); c.fill()
+    for x in (-330, 330):
+        poly(c, [(x - 20, -80), (x + 20, -80), (x, 0)]); fs(c, (0.40, 0.40, 0.40), 4)
+    c.restore()
+
+
+def flask(c, col=(0.40, 0.70, 0.50), h=160):
+    """frasco de alquimista (base em 0,0)"""
+    c.move_to(-14, -h); c.line_to(-14, -h * 0.55); c.curve_to(-80, -h * 0.4, -80, 0, 0, 0); c.curve_to(80, 0, 80, -h * 0.4, 14, -h * 0.55)
+    c.line_to(14, -h); c.close_path(); fs(c, (0.30, 0.40, 0.44), 5)
+    c.move_to(-60, -h * 0.25); c.curve_to(-60, 0, 60, 0, 60, -h * 0.25); c.close_path(); rgb(c, col, 0.85); c.fill()
+    glow(c, 0, -h * 0.2, 90, col, 0.25)
+
+
+def handbag(c):
+    """bolsa de couro (base em 0,0)"""
+    c.new_sub_path(); c.arc(0, -150, 70, math.pi, 2 * math.pi); rgb(c, INK); c.set_line_width(8); c.stroke()
+    rrect(c, -130, -150, 260, 150, 20); fs(c, (0.46, 0.30, 0.18), 6)
+    rrect(c, -20, -130, 40, 26, 6); fs(c, (0.80, 0.66, 0.32), 3)
+
+
+def ruler_cm(c, length=470, cm=23, label="23 cm"):
+    """régua vertical (topo em 0,0)"""
+    rrect(c, -26, 0, 52, length, 6); fs(c, (0.78, 0.66, 0.40), 4)
+    for k in range(cm + 1):
+        y = k * length / cm
+        line(c, -26, y, -26 + (22 if k % 5 == 0 else 12), y, 2, DARKTXT)
+    text(c, label, 70, length / 2, 30, TYPE, INK, align="l")

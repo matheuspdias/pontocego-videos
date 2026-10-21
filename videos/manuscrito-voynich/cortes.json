@@ -1,0 +1,20 @@
+{"serie": "MANUSCRITO VOYNICH", "cortes": [
+ {"id": "abertura", "inicio": 0.0, "fim": 98.6, "titulo": "O LIVRO QUE\\NNINGUÉM LÊ",
+  "gancho": "Este livro tem quase seiscentos anos. E até hoje, ninguém no mundo conseguiu ler uma única frase.",
+  "gancho_audio": [0.0, 7.14], "gancho_tela": "600 ANOS\\NNINGUÉM LEU", "gancho_t": 14.5,
+  "capa": ["600 ANOS", "E NINGUÉM", "CONSEGUE LER"],
+  "titulo_post": "O livro de 600 anos que ninguém consegue ler",
+  "post": "Plantas que não existem, mapas de estrelas e uma escrita que não se parece com nenhuma outra. Ninguém leu uma frase. #misterio #historia #manuscritovoynich #pontocego"},
+ {"id": "friedman", "inicio": 443.6, "fim": 537.4, "titulo": "O DECIFRADOR\\NQUE PERDEU",
+  "gancho": "O maior decifrador de códigos dos Estados Unidos passou décadas tentando ler este livro. E não conseguiu.",
+  "gancho_audio": [8.85, 15.3], "gancho_tela": "O MAIOR DECIFRADOR\\NNÃO CONSEGUIU", "gancho_t": 452.0,
+  "capa": ["O MAIOR", "DECIFRADOR", "PERDEU"],
+  "titulo_post": "Ele quebrou a cifra do Japão, mas não leu este livro",
+  "post": "William Friedman quebrou segredos de um império. O Manuscrito Voynich ele não conseguiu ler, e escondeu a conclusão num anagrama. #misterio #historia #criptografia #pontocego"},
+ {"id": "imperador", "inicio": 238.2, "fim": 314.0, "titulo": "O LIVRO\\NDO IMPERADOR",
+  "gancho": "Um imperador teria pago uma fortuna por um livro que ninguém conseguia ler. E um nome apagado na primeira página pode provar isso.",
+  "gancho_audio": [16.14, 24.1], "gancho_tela": "UM NOME APAGADO\\NNA PRIMEIRA PÁGINA", "gancho_t": 308.5,
+  "capa": ["600 DUCADOS", "E UM NOME", "APAGADO"],
+  "titulo_post": "O imperador pagou uma fortuna por um livro ilegível",
+  "post": "Rodolfo II teria pago 600 ducados pelo Manuscrito Voynich. Com luz ultravioleta, a primeira página revelou um nome. #misterio #historia #manuscritovoynich #pontocego"}
+]}

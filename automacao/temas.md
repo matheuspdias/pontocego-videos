@@ -10,6 +10,7 @@ O Matheus pode mexer à vontade: mover ideias, apagar, marcar como proibido.
 - 5 mistérios sem solução: Homem do Machado de Nova Orleans, Sinal Wow!, D. B. Cooper, Hinterkaifeck e um caso brasileiro (`5-misterios`)
 - Expedição Franklin (`expedicao-franklin`), tema `neve`
 - O túmulo perdido de Alexandre, o Grande (`tumulo-alexandre`), tema `deserto`
+- O Manuscrito Voynich (`manuscrito-voynich`), tema `classico` (documento/objeto misterioso)
 - Passo Dyatlov: só existe uma prévia curta (`examples/dyatlov-demo`), ainda pode virar vídeo completo
 
 ## Ideias (opcional, o Matheus pode preencher)

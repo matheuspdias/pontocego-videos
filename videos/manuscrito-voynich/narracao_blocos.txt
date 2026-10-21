@@ -1,0 +1,174 @@
+# O Manuscrito Voynich — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  171.755s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=0cd1f5d4-0baa-4516-8908-ba0783486c5c.wav
+# bloco2  177.685s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b9ba067c-1595-481d-bc41-3bb8ba3593d6.wav
+# bloco3  185.130s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=dc59e679-ae89-4db0-81be-4828e676c4b1.wav
+# bloco4  213.682s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=6cf1369d-105a-4538-9596-61276d0d8baf.wav
+# Offsets absolutos: B1=0.000  B2=172.755  B3=351.440  B4=537.570  (fim ~751.25)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.20|Existe um livro, guardado numa biblioteca dos Estados Unidos, que ninguém no mundo consegue ler. [dos@2.56] [mundo@4.80]
+1|6.80|Não é uma língua esquecida.
+1|8.48|Não é um alfabeto antigo que os especialistas ainda estão estudando. [os@9.84]
+1|12.48|É uma escrita que não se parece com nenhuma outra. [parece@13.84]
+1|16.62|São cerca de duzentas e quarenta páginas de pergaminho, cobertas por uma letra elegante, escrita com calma, quase sem rasuras. [páginas@18.32] [letra@20.56] [sem@23.52]
+1|24.88|E, ao lado do texto, desenhos.
+1|27.68|Plantas que nenhum botânico reconhece.
+1|30.24|Mapas de estrelas.
+1|31.68|E pequenas figuras de mulheres dentro de piscinas verdes, ligadas por tubos que parecem veias. [de@33.56] [que@35.92]
+1|38.07|O pergaminho tem quase seiscentos anos.
+1|41.04|Nesse tempo, o livro passou pelas mãos de alquimistas, de jesuítas, talvez de um imperador, e de alguns dos maiores decifradores de códigos do século vinte. [mãos@42.80] [de@45.60] [dos@47.20] [século@49.39]
+1|50.79|Ninguém conseguiu ler uma única frase.
+1|54.24|Esta é a história do Manuscrito Voynich, o livro mais misterioso do mundo. [Voynich@56.16] [mundo@58.84]
+1|60.16|Hoje, ele fica na Biblioteca Beinecke, da Universidade Yale, guardado com o número quatrocentos e oito. [da@62.44] [número@64.48]
+1|66.63|É pequeno.
+1|67.52|Tem vinte e três centímetros de altura e dezesseis de largura. [altura@69.04]
+1|70.92|Cabe numa bolsa.
+1|72.56|Quem abre o livro encontra seis partes diferentes. [partes@74.56]
+1|76.15|A primeira, e a maior, parece um herbário, um daqueles manuais medievais de plantas medicinais. [um@78.00] [de@80.36]
+1|81.92|Cada página tem uma planta, com raiz, folhas e flor, e um texto em volta. [raiz@83.88] [texto@86.08]
+1|87.43|O problema é que quase nenhuma dessas plantas foi identificada. [dessas@89.20]
+1|91.12|Algumas parecem montadas com pedaços de espécies diferentes, como se alguém tivesse colado a raiz de uma na flor de outra. [espécies@93.28] [colado@95.52] [flor@97.04]
+1|98.83|Depois vêm páginas de astronomia:
+1|101.20|círculos com sóis, luas, estrelas e os signos do zodíaco. [os@104.28]
+1|106.16|Ao lado dos signos, alguém escreveu, com letras comuns, os nomes de alguns meses, numa língua parecida com o francês ou o catalão. [com@108.32] [alguns@110.08] [o@112.19]
+1|114.16|Provavelmente foi outra mão, mais tarde.
+1|116.76|É uma das poucas coisas legíveis no livro inteiro. [no@118.64]
+1|120.32|Em seguida, a parte mais estranha de todas. [de@122.52]
+1|123.52|Dezenas de pequenas mulheres, banhando-se em piscinas e banheiras, ligadas por canos que entram e saem da página. [piscinas@126.28] [que@128.80]
+1|130.96|Ninguém sabe se aquilo é medicina, religião, alquimia, ou outra coisa. [religião@133.04]
+1|136.30|Há também uma folha enorme, que se desdobra em seis partes, com nove círculos ligados por caminhos, como o mapa de um lugar que não existe. [se@138.24] [nove@140.24] [o@142.68] [não@143.76]
+1|144.75|Num dos cantos, aparece um castelo com muralhas em forma de rabo de andorinha, um estilo comum no norte da Itália daquela época. [com@147.07] [de@148.79] [norte@150.71]
+1|152.75|Depois, desenhos de potes e frascos de farmácia, com pedaços de plantas ao lado. [de@155.27] [ao@157.31]
+1|158.19|E, no fim, páginas e mais páginas só de texto, cada parágrafo marcado por uma pequena estrela. [páginas@160.43] [marcado@163.07]
+1|165.93|Ao todo, são cerca de trinta e oito mil palavras. [e@167.91]
+1|169.94|E nenhuma delas foi lida.
+2|0.14|Para entender de onde esse livro veio, a gente precisa voltar a mil novecentos e doze. [veio@1.64] [mil@3.52]
+2|5.65|Itália, perto de Roma.
+2|8.70|Um livreiro chamado Wilfrid Voynich visita uma antiga casa de jesuítas, a Villa Mondragone, em Frascati. [uma@11.24] [Villa@13.36]
+2|15.52|Os padres precisavam de dinheiro e estavam vendendo, discretamente, parte da sua biblioteca. [estavam@17.52] [biblioteca@20.32]
+2|21.76|Voynich compra cerca de trinta manuscritos.
+2|24.72|Um deles é este.
+2|26.96|E Voynich não era um livreiro qualquer. [qualquer@28.76]
+2|29.76|Ele tinha nascido no território da atual Lituânia. [atual@31.44]
+2|32.76|Foi preso por atividade revolucionária contra o czar e mandado para a Sibéria. [o@35.16] [Sibéria@36.56]
+2|37.40|Fugiu, chegou a Londres sem nada, e virou um dos maiores negociantes de livros raros do mundo. [e@39.80] [de@41.76]
+2|44.24|Junto com o manuscrito, havia uma carta. [carta@46.00]
+2|47.08|Escrita em latim, em mil seiscentos e sessenta e cinco, por um médico de Praga chamado Johannes Marcus Marci. [e@49.24] [médico@50.56] [Marci@53.04]
+2|53.84|Ele estava mandando o livro para um sábio jesuíta em Roma, Athanasius Kircher, famoso por dizer que tinha decifrado os hieróglifos egípcios. [um@55.20] [Kircher@57.68] [decifrado@59.92]
+2|62.79|E a carta contava uma história.
+2|65.68|Segundo Marci, o livro tinha pertencido a Rodolfo Segundo, imperador do Sacro Império, que vivia em Praga. [a@67.88] [Império@70.40]
+2|72.20|Um homem obcecado por alquimia, astrologia e objetos raros. [e@75.36]
+2|77.12|Rodolfo teria pago por ele seiscentos ducados, uma fortuna. [ducados@79.36]
+2|81.23|E acreditava que o autor era Roger Bacon, um frade inglês do século treze. [Roger@82.80] [século@84.99]
+2|86.56|Na corte de Rodolfo também circulavam figuras como o inglês John Dee, matemático e astrólogo, e o seu parceiro Edward Kelley, que dizia conversar com anjos. [figuras@88.72] [matemático@90.80] [parceiro@92.72] [com@95.28]
+2|96.54|Por muito tempo, muita gente suspeitou que Kelley tivesse fabricado o livro para vender ao imperador. [que@98.80] [para@100.96]
+2|102.93|Durante muito tempo, isso pareceu só uma lenda. [uma@105.24]
+2|106.64|Mas, há poucos anos, o pesquisador alemão Stefan Guzy encontrou nos registros da corte uma compra de mil quinhentos e noventa e nove. [alemão@108.64] [da@111.32] [quinhentos@113.12]
+2|114.75|O imperador pagou seiscentos florins por um lote de livros de um médico chamado Carl Widemann. [um@117.00] [médico@118.24]
+2|120.64|Os papéis não dizem o nome do livro. [do@122.16]
+2|122.96|Mas o valor bate.
+2|124.87|E existe outra pista.
+2|126.64|Na primeira página do manuscrito, alguém apagou um nome. [apagou@129.04]
+2|130.62|Com luz ultravioleta, dá para ler:
+2|132.88|Jacobus de Tepenec.
+2|134.88|Ele era o químico e boticário do imperador Rodolfo, e recebeu um título de nobreza no começo do século dezessete. [do@136.40] [título@138.35] [século@140.08]
+2|141.40|Depois da corte de Rodolfo, o livro aparece nas mãos de um alquimista de Praga, Georg Baresch. [livro@143.32] [alquimista@144.76]
+2|147.87|Em mil seiscentos e trinta e nove, ele escreve para Kircher, em Roma, pedindo ajuda. [nove@149.16] [Roma@151.32]
+2|152.96|Diz que, pelas plantas e pelas estrelas, o livro inteiro deve ser sobre medicina. [estrelas@154.76] [sobre@156.92]
+2|158.08|E manda cópias de algumas páginas.
+2|160.49|Kircher nunca respondeu com uma solução.
+2|163.55|Quando Baresch morre, o livro passa para Marci. [para@165.64]
+2|166.64|E Marci, já velho e quase cego, manda o livro para Roma. [cego@168.68]
+2|171.36|Ali ele desaparece por mais de duzentos anos, numa biblioteca jesuíta, até ser vendido a Voynich. [duzentos@172.96] [ser@176.20]
+3|0.16|Voynich passou o resto da vida tentando descobrir o que o livro dizia. [tentando@1.92] [dizia@3.52]
+3|4.29|Mandou cópias para professores, cientistas e especialistas em códigos. [especialistas@7.04]
+3|10.13|Em mil novecentos e vinte e um, um professor da Universidade da Pensilvânia, William Newbold, anunciou que tinha resolvido o enigma. [um@11.36] [Pensilvânia@13.20] [resolvido@16.20]
+3|18.16|Segundo ele, cada letra do manuscrito era formada por traços minúsculos, quase invisíveis, que escondiam uma escrita grega abreviada. [era@20.40] [invisíveis@22.96] [abreviada@25.44]
+3|26.44|E o texto provava que Roger Bacon tinha inventado o microscópio, séculos antes de todo mundo. [Bacon@28.16] [antes@30.96]
+3|32.96|A notícia correu o mundo.
+3|35.36|Mas, em mil novecentos e trinta e um, outro estudioso, John Manly, mostrou que aqueles traços minúsculos eram só rachaduras da tinta, que secou e se partiu com o tempo. [e@37.24] [mostrou@39.96] [só@42.20] [e@44.48]
+3|46.16|Newbold tinha lido o que queria ler. [ler@48.00]
+3|48.94|Ele já tinha morrido, em mil novecentos e vinte e seis, ainda convencido de que estava certo. [novecentos@50.28] [convencido@52.36]
+3|54.87|Voynich morreu em mil novecentos e trinta, sem a resposta. [trinta@56.68]
+3|58.48|O livro ficou com a viúva, Ethel, autora de um romance que vendeu milhões de exemplares na União Soviética. [Ethel@60.08] [vendeu@61.84] [Soviética@63.76]
+3|64.76|Depois dela, com uma amiga, que o vendeu a um comerciante de livros raros de Nova York, Hans Kraus. [o@66.44] [livros@67.84] [Kraus@69.84]
+3|70.92|Kraus pagou vinte e quatro mil e quinhentos dólares. [e@72.56]
+3|73.97|Tentou vender por cento e sessenta mil. [mil@75.76]
+3|76.40|Ninguém quis.
+3|77.68|Em mil novecentos e sessenta e nove, ele desistiu e doou o manuscrito para Yale. [nove@79.12] [manuscrito@81.12]
+3|82.96|Mas, antes disso, o livro já tinha chamado a atenção de um homem muito mais perigoso para qualquer segredo. [tinha@85.36] [homem@86.80] [segredo@89.36]
+3|90.48|William Friedman.
+3|92.36|Friedman foi talvez o maior decifrador de códigos da história dos Estados Unidos. [de@94.48] [Unidos@96.32]
+3|97.12|Ele chefiava o serviço do Exército americano que quebrou a principal cifra diplomática do Japão, pouco antes da Segunda Guerra Mundial. [americano@98.88] [diplomática@101.04] [Segunda@103.20]
+3|104.71|No fim da guerra, montou grupos de especialistas só para estudar o Manuscrito Voynich. [de@106.35] [Manuscrito@108.32]
+3|109.92|Eles copiaram o texto inteiro em cartões e contaram cada letra, cada palavra, cada repetição. [cartões@111.68] [palavra@114.32]
+3|116.40|Usaram algumas das primeiras máquinas de calcular. [calcular@118.32]
+3|119.35|E o resultado foi estranho.
+3|121.84|O texto não se comporta como uma cifra comum. [uma@123.52]
+3|124.79|Uma cifra embaralha as letras, e o resultado parece aleatório. [o@126.76]
+3|128.64|Mas o Voynich tem padrões.
+3|130.64|Algumas letras só aparecem no começo das palavras. [das@132.88]
+3|133.96|Outras, só no fim.
+3|135.36|As palavras mais comuns se repetem na mesma proporção que nas línguas humanas. [na@137.48] [humanas@139.28]
+3|139.89|Ao mesmo tempo, tem coisas que nenhuma língua faz. [nenhuma@141.73]
+3|143.37|A mesma palavra aparece duas, três vezes seguidas. [vezes@145.85]
+3|147.01|E quase não existem palavras curtas, de uma ou duas letras. [de@149.05]
+3|151.45|Friedman estudou o livro por décadas.
+3|154.10|E guardou a sua conclusão de um jeito que só um decifrador de códigos faria. [um@155.53] [de@157.25]
+3|159.09|Escondeu a frase num anagrama, as letras embaralhadas, publicado num artigo. [letras@161.17]
+3|164.41|Quando a frase foi revelada, ela dizia que o manuscrito era uma tentativa antiga de criar uma língua artificial, inventada do zero. [dizia@166.13] [tentativa@167.57] [artificial@169.57]
+3|172.53|Friedman morreu em mil novecentos e sessenta e nove. [sessenta@174.61]
+3|175.77|O mesmo ano em que o livro chegou a Yale. [livro@177.01]
+3|178.84|O homem que ajudou a ler os segredos de um império não conseguiu ler um livro de duzentas e quarenta páginas. [os@180.01] [conseguiu@181.81] [e@183.73]
+4|0.08|Então, o que é o Manuscrito Voynich? [Voynich@2.16]
+4|3.68|Hoje existem quatro grandes caminhos.
+4|7.27|O primeiro:
+4|8.28|é um código.
+4|9.76|Alguém pegou uma língua conhecida, como o latim ou o italiano, e escondeu o texto num sistema próprio. [o@11.71] [escondeu@13.52]
+4|15.88|Talvez um médico guardando receitas.
+4|18.29|Talvez um alquimista protegendo uma fórmula.
+4|21.52|O problema é que nenhuma técnica conhecida da época produz um texto com esses padrões. [conhecida@23.44] [com@25.52]
+4|27.49|O segundo:
+4|28.36|é uma língua de verdade, escrita num alfabeto inventado. [num@30.40]
+4|32.40|Já disseram que era hebraico, latim abreviado, turco antigo, uma língua românica perdida, até a língua dos astecas. [abreviado@34.44] [perdida@37.44]
+4|40.44|Em dois mil e catorze, o linguista Stephen Bax propôs ter identificado cerca de dez palavras, como nomes de plantas e de uma constelação. [linguista@41.76] [cerca@44.40] [de@46.48]
+4|48.92|Nenhuma dessas propostas convenceu os especialistas.
+4|52.72|O terceiro é o de Friedman:
+4|54.64|uma língua artificial, inventada por alguém séculos antes do esperanto. [séculos@57.44]
+4|59.89|E o quarto:
+4|60.92|é uma farsa.
+4|62.24|Um livro feito para parecer misterioso, talvez para ser vendido caro a um imperador que pagava qualquer preço por segredos. [talvez@64.96] [um@66.52] [por@68.72]
+4|70.20|Em dois mil e quatro, o pesquisador britânico Gordon Rugg mostrou que, com uma tabela de sílabas e uma grade de papel com furos, dá para produzir um texto muito parecido com o do Voynich. [pesquisador@71.36] [com@74.32] [uma@75.84] [dá@77.60] [parecido@79.36]
+4|81.04|Sem nenhum significado.
+4|83.65|Mas a ciência também trouxe respostas.
+4|86.84|Em dois mil e nove, a Universidade do Arizona fez a datação por carbono catorze do pergaminho. [Universidade@88.08] [por@90.08]
+4|92.44|Resultado:
+4|93.08|entre mil quatrocentos e quatro e mil quatrocentos e trinta e oito. [mil@95.12]
+4|97.28|Isso descarta Roger Bacon, que viveu dois séculos antes. [dois@99.48]
+4|100.83|E descarta Voynich como falsificador.
+4|103.56|Até a ideia de Kelley fica difícil: [difícil@104.96]
+4|105.76|ele precisaria ter guardado, por mais de cem anos, o couro de pelo menos catorze bezerros, sem uso. [de@107.68] [pelo@109.28]
+4|112.80|Em dois mil e vinte, a paleógrafa Lisa Fagin Davis estudou a letra com cuidado e encontrou pelo menos cinco mãos diferentes. [paleógrafa@114.00] [letra@116.48] [menos@118.56]
+4|120.60|Cinco escribas.
+4|122.20|Se for uma farsa, foi um trabalho de equipe. [trabalho@123.60]
+4|124.80|E, se for um texto de verdade, um grupo inteiro sabia ler essa escrita. [verdade@126.00] [essa@128.40]
+4|129.92|Em dois mil e vinte e quatro, imagens feitas com luzes de várias cores revelaram, na primeira página, três colunas apagadas: [quatro@130.72] [várias@132.84] [três@135.68]
+4|137.31|o alfabeto latino, ao lado de letras do Voynich. [letras@139.20]
+4|140.59|Davis acredita que foi uma tentativa de decifrar o livro, talvez feita pelo próprio Marci, no século dezessete. [de@142.75] [pelo@144.91]
+4|147.77|Alguém tentou ler este livro há mais de trezentos anos. [mais@149.35]
+4|151.11|E também não conseguiu.
+4|153.23|Hoje, o manuscrito inteiro está digitalizado e pode ser visto de graça na internet. [e@156.03] [na@157.43]
+4|158.78|Programas de computador e inteligências artificiais já foram apontados para ele. [já@161.15]
+4|162.99|Em dois mil e dezessete, uma equipe canadense usou inteligência artificial e anunciou que a língua era hebraico. [equipe@164.51] [anunciou@167.15]
+4|169.21|Quem fala hebraico não reconheceu as frases. [frases@171.15]
+4|171.91|Milhares de pessoas no mundo inteiro tentam, todos os dias. [tentam@174.07]
+4|175.86|Ninguém conseguiu ler uma única frase com certeza. [com@178.19]
+4|179.79|Em algum lugar do norte da Itália, ou da Europa Central, há seiscentos anos, cinco pessoas se sentaram diante dessas páginas e escreveram com calma, linha por linha, quase sem errar. [Itália@181.31] [seiscentos@183.59] [diante@186.51] [calma@188.75] [errar@191.51]
+4|192.25|Elas sabiam exatamente o que estavam dizendo. [dizendo@194.19]
+4|195.06|E levaram isso com elas.
+4|197.45|E você?
+4|198.11|O Manuscrito Voynich é um código, uma língua perdida, ou a farsa mais bem feita da história? [uma@200.19] [mais@202.11]
+4|203.75|Deixa a sua teoria aqui nos comentários. [comentários@205.27]
+4|206.18|Eu leio todas.
+4|207.71|Eu sou o Historiador.
+4|209.27|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@210.67] [conseguiu@212.51]
