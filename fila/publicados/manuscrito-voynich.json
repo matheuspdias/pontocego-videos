@@ -1,12 +1,6 @@
 {
   "slug": "manuscrito-voynich",
   "publicar_em": "2026-10-22T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=0cd1f5d4-0baa-4516-8908-ba0783486c5c.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b9ba067c-1595-481d-bc41-3bb8ba3593d6.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=dc59e679-ae89-4db0-81be-4828e676c4b1.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=6cf1369d-105a-4538-9596-61276d0d8baf.wav"
-  ],
   "duracoes": [
     171.755,
     177.685,
@@ -36,6 +30,36 @@
   ],
   "thumbnail": "videos/manuscrito-voynich/thumb/voynich_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=09edc8cf-d70d-4cb5-a70c-f95b0e99b4e9.wav",
-  "ganchos_duracao": 24.189
+  "ganchos_duracao": 24.189,
+  "video_id": "zlJfwXR7GF0",
+  "url": "https://youtu.be/zlJfwXR7GF0",
+  "agendado_para": "2026-10-22T18:00:00-03:00",
+  "enviado_em": "2026-10-21T14:47:58-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "abertura",
+      "video_id": "crdCr9yYMYc",
+      "url": "https://youtu.be/crdCr9yYMYc",
+      "titulo": "O livro de 600 anos que ninguém consegue ler #Shorts",
+      "duracao": 106.1,
+      "agendado_para": "2026-10-23T12:00:00-03:00"
+    },
+    {
+      "id": "friedman",
+      "video_id": "1NbjvVwlOek",
+      "url": "https://youtu.be/1NbjvVwlOek",
+      "titulo": "Ele quebrou a cifra do Japão, mas não leu este livro #Shorts",
+      "duracao": 100.7,
+      "agendado_para": "2026-10-24T12:00:00-03:00"
+    },
+    {
+      "id": "imperador",
+      "video_id": "VmxQx8Mg4qM",
+      "url": "https://youtu.be/VmxQx8Mg4qM",
+      "titulo": "O imperador pagou uma fortuna por um livro ilegível #Shorts",
+      "duracao": 84.0,
+      "agendado_para": "2026-10-25T12:00:00-03:00"
+    }
+  ]
 }
