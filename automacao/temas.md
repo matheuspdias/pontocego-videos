@@ -11,7 +11,7 @@ O Matheus pode mexer à vontade: mover ideias, apagar, marcar como proibido.
 - Expedição Franklin (`expedicao-franklin`), tema `neve`
 - O túmulo perdido de Alexandre, o Grande (`tumulo-alexandre`), tema `deserto`
 - O Manuscrito Voynich (`manuscrito-voynich`), tema `classico` (documento/objeto misterioso)
-- Passo Dyatlov: só existe uma prévia curta (`examples/dyatlov-demo`), ainda pode virar vídeo completo
+- O Passo Dyatlov (`passo-dyatlov`), tema `neve` (caso histórico / fenômeno sem explicação)
 
 ## Ideias (opcional, o Matheus pode preencher)
 - 

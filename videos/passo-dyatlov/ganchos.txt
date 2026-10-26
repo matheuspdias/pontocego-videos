@@ -1,0 +1,5 @@
+# Ganchos dos cortes — bloco extra HeyGen (Pedro Lima - Serious, eleven_v4), 24.686 s
+# https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=c1b7fe67-0a09-4a68-a1be-3193367a1cee.wav
+abertura  0.00-7.70   Nove jovens fugiram da própria barraca no meio da noite, a trinta graus negativos. E rasgaram a lona por dentro para sair.
+ravina    8.86-16.90  Três meses depois, acharam os últimos quatro, com ossos quebrados como num acidente de carro. E quase nenhum ferimento por fora.
+frozen    18.14-24.50 Dois cientistas usaram a neve do filme Frozen para tentar resolver um mistério de mais de sessenta anos.

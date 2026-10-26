@@ -155,5 +155,10 @@ e rode `python capas.py videos/<slug> out/<slug>.mp4 --grade`.
 - Cenários: `villa` (casarão italiano), `prague_castle`, `beinecke` (biblioteca de mármore). Cores `VINK VGREEN VBLUE VRED VBROWN VSKIN VELLUM`.
 - Chapéus novos: `hat="crown"` (coroa imperial) e `hat="skullcap"` (solidéu/barrete escuro de sábios e padres).
 
+## Montes Urais (O Passo Dyatlov)
+- Objetos (seção PASSO DYATLOV do engine): `dyatlov_tent(t, cut, sag, snow_on, glow_on)` (barraca comprida de lona; `cut` abre os rasgos), `cedar(h, broken)` (pinheiro siberiano com galhos quebrados), `campfire_out(t)`, `steam_train(t, cars)`, `old_truck(t)`, `skis`, `backpack`, `felt_boot`, `winter_coat(col)`, `knife`, `geiger(t, level)`, `radiation_sign(r)`, `orange_orb(t, r)`, `rocket(t)`, `probe_pole(h)`, `memorial_plaque(names)`, `ufo_disc(t)`, `factory(t, w, h)`, `snow_slab(w, h, crack)`, `big_footprint`, `telegram_form(lines)`, `soviet_doc(title, lines, stamp=)`, `hut`, `cache_platform`.
+- `videos/passo-dyatlov/scenes.py` tem `slope()`/`slope_y()` (encosta com a barraca no alto e a floresta embaixo), `ural_map()` (mapa estilizado Sverdlovsk → Otorten), `flag()` (bandeirinha que marca onde alguém foi encontrado, sem mostrar corpos) e `slope_section()` (corte da encosta para explicar a placa de neve).
+- `tempos.py` desse vídeo lê `ts/sN.txt` (só os tempos de início de cada palavra, na ordem do roteiro).
+
 ## Publicação automática
 Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz o vídeo e coloca em `fila/`, e o GitHub Actions renderiza e envia ao YouTube agendado para as 18h. Configuração e uso em `automacao/README.md`; instruções da tarefa em `automacao/AUTOMATICO.md`.

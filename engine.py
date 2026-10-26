@@ -4439,3 +4439,301 @@ def ruler_cm(c, length=470, cm=23, label="23 cm"):
         y = k * length / cm
         line(c, -26, y, -26 + (22 if k % 5 == 0 else 12), y, 2, DARKTXT)
     text(c, label, 70, length / 2, 30, TYPE, INK, align="l")
+
+
+# ================================================================ PASSO DYATLOV (Montes Urais, 1959)
+def _dot(c, x, y, r):
+    """só o caminho de um círculo (para preencher depois com transparência)"""
+    c.new_sub_path(); c.arc(x, y, r, 0, 2 * math.pi)
+
+
+def dyatlov_tent(c, t=0, cut=0.0, sag=0.0, snow_on=0.0, glow_on=False, col=(0.52, 0.46, 0.30)):
+    """barraca comprida de lona (vista de lado, base em 0,0, ~620 px). cut: 0..1 rasgos aparecendo;
+    sag: 0..1 meio caída; snow_on: neve por cima; glow_on: luz de lanterna dentro"""
+    w, h = 300, 150 - 70 * sag
+    pts = [(-w, 0), (-w + 40, -h * 0.9), (-w * 0.2, -h - 6 * math.sin(t * 2)), (w * 0.35, -h * (1 - 0.35 * sag)), (w - 30, -h * 0.8), (w, 0)]
+    poly(c, pts); fs(c, col, 6)
+    if glow_on:
+        poly(c, pts); rgb(c, AMBER, 0.28 + 0.05 * math.sin(t * 7)); c.fill()
+        glow(c, 0, -h * 0.5, 320, AMBER, 0.22)
+    line(c, -w + 40, -h * 0.9, -w + 40, -h - 30, 6, BROWN)
+    line(c, w - 30, -h * 0.8, w - 30, -h - 20, 6, BROWN)
+    for k in range(5):
+        x = -w + 90 + k * 110
+        line(c, x, -h * 0.85, x + 10, -6, 2, tuple(v * 0.75 for v in col))
+    if cut > 0:
+        for k, (x0, y0, x1, y1) in enumerate(((-120, -0.82, -100, -0.15), (20, -0.86, 40, -0.12), (150, -0.70, 165, -0.20))):
+            p = clamp01(cut * 3 - k)
+            if p <= 0:
+                continue
+            ya, yb = y0 * h, y0 * h + (y1 - y0) * h * p
+            c.move_to(x0, ya); c.line_to(x0 + 14, (ya + yb) / 2); c.line_to(x0 + (x1 - x0) * p, yb)
+            rgb(c, (0.02, 0.02, 0.03)); c.set_line_width(18); c.stroke_preserve()
+            rgb(c, INK); c.set_line_width(3); c.stroke()
+    if snow_on > 0:
+        c.move_to(-w + 30, -h * 0.85)
+        for k in range(9):
+            x = -w + 30 + k * (2 * w - 60) / 8
+            c.line_to(x, -h * 0.9 - 10 * snow_on - 6 * math.sin(k * 1.7))
+        c.line_to(w - 40, -h * 0.75); c.close_path(); rgb(c, (0.90, 0.93, 0.98), 0.9 * snow_on); c.fill()
+    ellipse(c, 0, 6, w + 50, 16); rgb(c, (0.85, 0.88, 0.94), 0.8); c.fill()
+
+
+def cedar(c, h=560, broken=0.0, col=(0.14, 0.24, 0.20), seed=5):
+    """pinheiro siberiano ("cedro") grande, base em 0,0; broken marca galhos quebrados na parte de baixo"""
+    rnd = random.Random(seed)
+    poly(c, [(-26, 0), (26, 0), (12, -h), (-12, -h)]); fs(c, (0.32, 0.22, 0.14), 5)
+    for i in range(7):
+        y = -h * (0.30 + i * 0.1)
+        wd = h * (0.40 - i * 0.045)
+        for sd in (-1, 1):
+            c.move_to(0, y + 30)
+            c.curve_to(sd * wd * 0.4, y - 10, sd * wd * 0.8, y + 10 + rnd.uniform(-10, 10), sd * wd, y + 40)
+            c.curve_to(sd * wd * 0.6, y + 60, sd * wd * 0.3, y + 50, 0, y + 70)
+            c.close_path(); fs(c, col, 4)
+    poly(c, [(0, -h - 60), (40, -h + 20), (-40, -h + 20)]); fs(c, col, 4)
+    if broken > 0:
+        for i in range(4):
+            if broken * 4 < i + 0.5:
+                break
+            y = -h * (0.08 + i * 0.07)
+            sd = -1 if i % 2 else 1
+            line(c, sd * 22, y, sd * 80, y - 20, 9, (0.40, 0.28, 0.18))
+            line(c, sd * 80, y - 20, sd * 96, y - 4, 5, (0.62, 0.46, 0.30))
+            circle(c, sd * 22, y, 7, (0.80, 0.66, 0.44), 2)
+
+
+def campfire_out(c, t=0, smoke_on=True):
+    """restos de fogueira apagada na neve (base em 0,0)"""
+    ellipse(c, 0, 0, 110, 22); rgb(c, (0.18, 0.17, 0.17)); c.fill()
+    for a, l in ((-0.3, 120), (0.25, 110), (0.0, 90)):
+        c.save(); c.rotate(a); rrect(c, -l / 2, -14, l, 18, 8); fs(c, (0.20, 0.14, 0.10), 4); c.restore()
+    for k in range(6):
+        circle(c, -50 + k * 20, -2 + (k % 2) * 4, 5, (0.55, 0.20, 0.10) if k % 3 == 0 else (0.30, 0.28, 0.28), 0)
+    if smoke_on:
+        for k in range(3):
+            p = ((t * 0.25 + k / 3) % 1)
+            _dot(c, math.sin(p * 6 + k) * 20, -30 - p * 180, 14 + p * 30)
+            rgb(c, (0.70, 0.72, 0.76), 0.18 * (1 - p)); c.fill()
+
+
+def steam_train(c, t=0, cars=2):
+    """trem a vapor (base em 0,0, frente para a direita)"""
+    for k in range(cars):
+        x = -520 - k * 260 + 260
+        rrect(c, x - 110, -150, 230, 120, 8); fs(c, (0.26, 0.20, 0.18), 5)
+        for j in range(3):
+            c.rectangle(x - 90 + j * 70, -130, 46, 40); rgb(c, (0.85, 0.66, 0.30), 0.85); c.fill()
+        for wx in (x - 70, x + 70):
+            circle(c, wx, -20, 22, DGRAY, 5)
+    rrect(c, -40, -190, 120, 160, 8); fs(c, (0.18, 0.18, 0.20), 5)
+    rrect(c, 70, -140, 230, 110, 40); fs(c, (0.20, 0.21, 0.24), 5)
+    rrect(c, 230, -200, 34, 70, 4); fs(c, (0.16, 0.16, 0.18), 4)
+    circle(c, 300, -90, 16, LYELLOW, 3); glow(c, 330, -90, 120, LYELLOW, 0.25)
+    for wx in (0, 120, 220):
+        circle(c, wx, -26, 30, DGRAY, 5)
+    for k in range(4):
+        p = ((t * 0.6 + k / 4) % 1)
+        _dot(c, 247 - p * 260, -220 - p * 120, 18 + p * 50)
+        rgb(c, (0.75, 0.75, 0.78), 0.30 * (1 - p)); c.fill()
+
+
+def old_truck(c, t=0):
+    """caminhão soviético dos anos 50 (base em 0,0, frente para a direita)"""
+    rrect(c, -260, -170, 300, 130, 6); fs(c, (0.30, 0.34, 0.26), 5)
+    for k in range(4):
+        line(c, -250 + k * 80, -170, -250 + k * 80, -40, 2, (0.20, 0.24, 0.18))
+    rrect(c, 50, -200, 140, 160, 14); fs(c, (0.32, 0.38, 0.28), 5)
+    rrect(c, 80, -185, 80, 60, 6); fs(c, (0.62, 0.74, 0.82), 3)
+    rrect(c, 180, -110, 90, 70, 18); fs(c, (0.30, 0.36, 0.26), 5)
+    circle(c, 262, -80, 12, LYELLOW, 3)
+    for wx in (-180, -40, 200):
+        circle(c, wx, -30, 34, DGRAY, 6); circle(c, wx, -30, 12, GRAY, 3)
+
+
+def skis(c, col=(0.62, 0.36, 0.20)):
+    """par de esquis cruzados com bastões (centrado)"""
+    for a in (-0.35, 0.35):
+        c.save(); c.rotate(a)
+        rrect(c, -14, -170, 28, 340, 12); fs(c, col, 5)
+        c.restore()
+    for a in (-0.15, 0.15):
+        c.save(); c.rotate(a); line(c, 0, -180, 0, 180, 5, GRAY); circle(c, 0, 160, 16, None, 3); c.restore()
+
+
+def backpack(c, col=(0.36, 0.40, 0.30)):
+    """mochila de lona (centrada)"""
+    rrect(c, -80, -100, 160, 200, 30); fs(c, col, 6)
+    rrect(c, -60, -110, 120, 60, 20); fs(c, tuple(v * 0.8 for v in col), 5)
+    rrect(c, -50, 20, 100, 60, 10); fs(c, tuple(v * 0.85 for v in col), 4)
+    line(c, -40, -60, -40, 90, 3, (0.20, 0.18, 0.14)); line(c, 40, -60, 40, 90, 3, (0.20, 0.18, 0.14))
+
+
+def felt_boot(c, col=(0.42, 0.36, 0.30)):
+    """bota de feltro (valenki), centrada"""
+    c.move_to(-40, -110); c.line_to(30, -110); c.line_to(30, 40); c.curve_to(90, 40, 110, 70, 100, 100)
+    c.line_to(-40, 100); c.close_path(); fs(c, col, 6)
+    line(c, -40, -90, 30, -90, 3, tuple(v * 0.7 for v in col))
+
+
+def winter_coat(c, col=(0.30, 0.32, 0.40)):
+    """casaco de inverno (centrado)"""
+    poly(c, [(-60, -110), (60, -110), (120, -60), (100, 110), (-100, 110), (-120, -60)]); fs(c, col, 6)
+    poly(c, [(-60, -110), (0, -60), (60, -110)]); fs(c, (0.80, 0.78, 0.72), 4)
+    line(c, 0, -60, 0, 110, 4, (0.12, 0.12, 0.14))
+    for k in range(3):
+        circle(c, 14, -30 + k * 45, 6, INK, 0)
+
+
+def knife(c):
+    """faca (centrada, lâmina para a direita)"""
+    rrect(c, -130, -16, 90, 32, 10); fs(c, (0.40, 0.26, 0.16), 5)
+    c.move_to(-40, -18); c.line_to(120, -10); c.line_to(140, 4); c.line_to(-40, 18); c.close_path(); fs(c, (0.78, 0.80, 0.84), 5)
+
+
+def geiger(c, t=0, level=0.6):
+    """contador Geiger (centrado): caixa com ponteiro e sonda"""
+    rrect(c, -150, -100, 300, 200, 16); fs(c, (0.62, 0.56, 0.30), 6)
+    rrect(c, -110, -70, 220, 110, 10); fs(c, (0.88, 0.86, 0.76), 4)
+    c.new_sub_path(); c.arc(0, 30, 80, math.pi * 1.15, math.pi * 1.85); rgb(c, DARKTXT); c.set_line_width(3); c.stroke()
+    a = math.pi * (1.15 + 0.7 * clamp01(level + 0.06 * math.sin(t * 23)))
+    line(c, 0, 30, 80 * math.cos(a), 30 + 80 * math.sin(a), 5, RED)
+    circle(c, 0, 30, 8, DARKTXT, 0)
+    line(c, 150, 0, 230, 60, 8, DGRAY); rrect(c, 210, 50, 120, 36, 14); fs(c, GRAY, 4)
+
+
+def radiation_sign(c, r=90, col=AMBER):
+    """símbolo de radiação desenhado (centrado)"""
+    circle(c, 0, 0, r, col, 6)
+    for k in range(3):
+        a0 = -math.pi / 2 + k * 2 * math.pi / 3 - 0.5
+        c.move_to(0, 0); c.arc(0, 0, r * 0.82, a0, a0 + 1.0); c.close_path(); rgb(c, (0.08, 0.07, 0.06)); c.fill()
+    circle(c, 0, 0, r * 0.18, col, 0)
+    circle(c, 0, 0, r * 0.12, (0.08, 0.07, 0.06), 0)
+
+
+def orange_orb(c, t=0, r=40):
+    """esfera de luz alaranjada no céu (centrada)"""
+    glow(c, 0, 0, r * 5, ORANGE, 0.35 + 0.05 * math.sin(t * 3))
+    circle(c, 0, 0, r, (0.98, 0.62, 0.26), 0)
+    circle(c, -r * 0.25, -r * 0.25, r * 0.4, (1.0, 0.86, 0.60), 0)
+
+
+def rocket(c, t=0, flame=True):
+    """míssil/foguete subindo (centrado, ponta para cima)"""
+    if flame:
+        f = 1 + 0.2 * math.sin(t * 30)
+        poly(c, [(-24, 120), (0, 120 + 130 * f), (24, 120)]); rgb(c, ORANGE, 0.9); c.fill()
+        glow(c, 0, 170, 160, ORANGE, 0.3)
+    c.move_to(0, -150); c.curve_to(40, -100, 40, -40, 34, 120); c.line_to(-34, 120); c.curve_to(-40, -40, -40, -100, 0, -150)
+    c.close_path(); fs(c, (0.82, 0.82, 0.84), 6)
+    for sd in (-1, 1):
+        poly(c, [(sd * 34, 60), (sd * 80, 130), (sd * 34, 120)]); fs(c, RED, 4)
+    line(c, -36, -40, 36, -40, 4, RED)
+
+
+def probe_pole(c, h=420):
+    """vara comprida de sondagem na neve (topo em 0,-h, ponta em 0,0)"""
+    line(c, 0, 0, 0, -h, 7, (0.62, 0.48, 0.30))
+    line(c, -16, -h + 8, 16, -h + 8, 6, (0.62, 0.48, 0.30))
+
+
+def memorial_plaque(c, names=(), w=520, h=440):
+    """rocha com placa de metal e nomes (base em 0,0)"""
+    poly(c, [(-w / 2 - 60, 0), (-w / 2 - 20, -h * 0.8), (-w / 4, -h - 30), (w / 4, -h - 10), (w / 2 + 30, -h * 0.7), (w / 2 + 70, 0)])
+    fs(c, (0.30, 0.31, 0.34), 6)
+    rrect(c, -w / 2 + 30, -h + 40, w - 60, h - 110, 8); fs(c, (0.40, 0.33, 0.20), 5)
+    rrect(c, -w / 2 + 42, -h + 52, w - 84, h - 134, 6); rgb(c, (0.62, 0.50, 0.30)); c.set_line_width(2); c.stroke()
+    for i, n in enumerate(names):
+        text(c, n, 0, -h + 92 + i * 30, 24, TYPE, (0.92, 0.84, 0.62))
+
+
+def ufo_disc(c, t=0):
+    """disco voador estilizado (centrado)"""
+    glow(c, 0, 0, 260, (0.60, 0.90, 0.80), 0.18)
+    ellipse(c, 0, 0, 170, 40); fs(c, (0.62, 0.66, 0.70), 6)
+    c.new_sub_path(); c.arc(0, -10, 70, math.pi, 2 * math.pi); c.close_path(); fs(c, (0.50, 0.70, 0.74), 5)
+    for k in range(5):
+        on = (int(t * 4) + k) % 2
+        circle(c, -120 + k * 60, 8, 9, LYELLOW if on else GRAY, 2)
+
+
+def factory(c, t=0, w=520, h=220, smoke_on=True):
+    """fábrica com chaminés (base em 0,0)"""
+    rrect(c, -w / 2, -h, w, h, 4); fs(c, (0.20, 0.20, 0.22), 5)
+    for k in range(5):
+        c.rectangle(-w / 2 + 30 + k * (w - 60) / 5, -h + 50, 46, 50); rgb(c, (0.85, 0.66, 0.30), 0.55 + 0.2 * ((k * 7) % 3) / 2); c.fill()
+    poly(c, [(-w / 2, -h), (-w / 4, -h - 60), (-w / 4, -h), (0, -h - 60), (0, -h), (w / 4, -h - 60), (w / 4, -h)]); fs(c, (0.24, 0.24, 0.26), 5)
+    for k, x in enumerate((w / 2 - 120, w / 2 - 40)):
+        rrect(c, x - 16, -h - 170, 32, 170, 3); fs(c, (0.30, 0.24, 0.20), 4)
+        if smoke_on:
+            for j in range(3):
+                p = ((t * 0.18 + j / 3 + k * 0.5) % 1)
+                _dot(c, x - p * 120, -h - 190 - p * 160, 16 + p * 40)
+                rgb(c, (0.62, 0.62, 0.64), 0.25 * (1 - p)); c.fill()
+
+
+def snow_slab(c, w=420, h=90, crack=0.0):
+    """bloco de neve compactada (placa), centrado; crack desenha a fissura"""
+    poly(c, [(-w / 2, -h / 2), (w / 2, -h / 2 - 20), (w / 2 + 20, h / 2), (-w / 2 + 10, h / 2 + 10)]); fs(c, (0.86, 0.90, 0.96), 6)
+    for k in range(3):
+        line(c, -w / 2 + 20, -h / 2 + 20 + k * 22, w / 2, -h / 2 + 6 + k * 22, 2, (0.66, 0.72, 0.82))
+    if crack > 0:
+        c.move_to(-w / 2, -h / 2)
+        for k in range(1, 7):
+            if k / 6 > crack:
+                break
+            c.line_to(-w / 2 + k * w / 6, -h / 2 - (k % 2) * 14 - k * 3)
+        rgb(c, (0.20, 0.24, 0.34)); c.set_line_width(5); c.stroke()
+
+
+def big_footprint(c, col=(0.55, 0.60, 0.70)):
+    """pegada gigante na neve (homem das neves), centrada"""
+    ellipse(c, 0, 30, 70, 120); rgb(c, col, 0.85); c.fill()
+    for k, (x, y, r) in enumerate(((-52, -110, 20), (-20, -130, 22), (14, -128, 20), (44, -112, 17), (64, -86, 14))):
+        _dot(c, x, y, r); rgb(c, col, 0.85); c.fill()
+
+
+def telegram_form(c, lines=("", ""), w=420, h=280):
+    """formulário de telegrama (centrado)"""
+    rrect(c, -w / 2, -h / 2, w, h, 6); fs(c, (0.86, 0.82, 0.68), 5)
+    text(c, "TELEGRAMA", 0, -h / 2 + 40, 34, TYPE, BLOOD)
+    line(c, -w / 2 + 20, -h / 2 + 66, w / 2 - 20, -h / 2 + 66, 3, BLOOD)
+    for i in range(4):
+        line(c, -w / 2 + 30, -h / 2 + 120 + i * 40, w / 2 - 30, -h / 2 + 120 + i * 40, 2, (0.6, 0.54, 0.42))
+    for i, s in enumerate(lines):
+        text(c, s, 0, -h / 2 + 108 + i * 40, 26, TYPE, DARKTXT)
+
+
+def soviet_doc(c, title="", lines=4, w=460, h=600, stamp=None, t=0):
+    """documento datilografado com título e carimbo (centrado)"""
+    rrect(c, -w / 2, -h / 2, w, h, 4); fs(c, (0.86, 0.83, 0.72), 5)
+    if title:
+        text(c, title, 0, -h / 2 + 60, 30, TYPE, DARKTXT)
+        line(c, -w / 2 + 40, -h / 2 + 90, w / 2 - 40, -h / 2 + 90, 2, DARKTXT)
+    rnd = random.Random(len(title) + lines)
+    for i in range(lines):
+        lw_ = rnd.uniform(0.6, 0.95) * (w - 80)
+        line(c, -w / 2 + 40, -h / 2 + 140 + i * 40, -w / 2 + 40 + lw_, -h / 2 + 140 + i * 40, 4, (0.45, 0.42, 0.36))
+    if stamp:
+        c.save(); c.translate(60, h / 2 - 110); c.rotate(-0.2); date_stamp(c, stamp, 34, BLOOD); c.restore()
+
+
+def hut(c, w=300, h=170, lit=False, t=0):
+    """cabana de madeira abandonada (base em 0,0)"""
+    c.rectangle(-w / 2, -h, w, h); fs(c, (0.30, 0.22, 0.15), 5)
+    for k in range(5):
+        line(c, -w / 2, -h + k * h / 5, w / 2, -h + k * h / 5, 2, (0.20, 0.14, 0.10))
+    poly(c, [(-w / 2 - 30, -h), (0, -h - 110), (w / 2 + 30, -h)]); fs(c, (0.86, 0.90, 0.96), 5)
+    c.rectangle(-30, -h + 40, 60, 50); rgb(c, (0.85, 0.66, 0.30) if lit else (0.06, 0.06, 0.08)); c.fill()
+    rrect(c, w / 4 - 30, -110, 60, 110, 3); fs(c, (0.18, 0.12, 0.08), 4)
+
+
+def cache_platform(c):
+    """depósito de mantimentos numa plataforma de madeira (base em 0,0)"""
+    for x in (-110, 110):
+        line(c, x, 0, x, -120, 10, (0.36, 0.26, 0.16))
+    c.rectangle(-150, -140, 300, 24); fs(c, (0.40, 0.30, 0.18), 5)
+    for k in range(3):
+        rrect(c, -130 + k * 90, -230, 80, 90, 6); fs(c, (0.52, 0.42, 0.26), 4)
+    poly(c, [(-150, -232), (0, -270), (150, -232)]); fs(c, (0.86, 0.90, 0.96), 4)

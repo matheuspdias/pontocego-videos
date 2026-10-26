@@ -1,0 +1,208 @@
+# O Passo Dyatlov — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  200.542s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=2893a597-9cd1-4e36-bdc1-c298da5559be.wav
+# bloco2  220.238s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1beadbcf-ac69-4670-be09-8c5a96875730.wav
+# bloco3  225.280s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=778407bb-972a-44e6-b192-313770357bad.wav
+# bloco4  232.255s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=fe3504a4-9ecd-48d9-be0c-54c5eb19aab6.wav
+# Offsets absolutos: B1=0.000  B2=201.542  B3=422.780  B4=649.060  (fim ~881.31)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Numa noite de fevereiro, numa montanha gelada da União Soviética, nove jovens saíram correndo da própria barraca. [gelada@2.48] [saíram@5.52]
+1|8.23|Fazia perto de trinta graus negativos.
+1|10.88|Eles não pararam para calçar as botas. [botas@12.60]
+1|13.28|Não pegaram os casacos.
+1|15.10|E não saíram pela porta.
+1|16.85|Rasgaram a lona da barraca por dentro, e fugiram pela abertura, montanha abaixo, no escuro. [dentro@18.56] [abaixo@21.12]
+1|23.67|Semanas depois, as equipes de busca encontraram os nove. [encontraram@25.76]
+1|27.32|Alguns perto de uma fogueira apagada.
+1|29.72|Outros no meio da encosta, como se estivessem tentando voltar. [se@31.68]
+1|33.82|E os últimos quatro só apareceram três meses depois, no fundo de uma ravina, com ossos quebrados como se tivessem sofrido um acidente de carro. [três@35.84] [uma@37.79] [se@39.88] [carro@41.64]
+1|42.55|A investigação oficial terminou com uma frase estranha: [frase@44.72]
+1|45.88|eles morreram por causa de uma força natural irresistível. [força@47.52]
+1|50.00|Os papéis foram guardados num arquivo secreto. [secreto@51.84]
+1|52.88|E, por mais de sessenta anos, ninguém conseguiu explicar o que aconteceu naquela noite. [ninguém@55.08] [naquela@57.28]
+1|58.64|Esta é a história do Passo Dyatlov. [Dyatlov@60.48]
+1|62.08|Em janeiro de mil novecentos e cinquenta e nove, a cidade de Sverdlovsk, que hoje se chama Ecaterimburgo, era um dos grandes centros industriais da União Soviética, aos pés dos Montes Urais. [cinquenta@63.68] [Sverdlovsk@65.28] [era@68.08] [da@70.08] [Montes@72.08]
+1|73.64|Ali ficava o Instituto Politécnico dos Urais, uma das melhores escolas de engenharia do país. [Urais@75.72] [engenharia@77.84]
+1|79.36|E, naquele inverno, um grupo de estudantes e ex-alunos do instituto planejava uma das travessias mais difíceis que se podia fazer na época. [estudantes@81.20] [uma@83.92] [se@86.00]
+1|87.99|O líder era Igor Dyatlov, de vinte e três anos, estudante de engenharia de rádio. [vinte@90.12] [engenharia@91.76]
+1|93.09|Era metódico, experiente, conhecido por não arriscar à toa. [arriscar@96.08]
+1|97.42|O plano era percorrer cerca de trezentos quilômetros de esqui pelo norte dos Urais, até uma montanha chamada Otorten, e voltar. [trezentos@99.16] [dos@101.36] [Otorten@103.56]
+1|105.19|A travessia tinha a classificação de terceiro grau, a mais alta da época. [terceiro@107.04] [época@108.96]
+1|109.57|Quem completasse ganharia o título de mestre em esporte. [mestre@111.68]
+1|113.28|Com ele iam mais nove pessoas.
+1|116.08|Zinaida Kolmogorova, de vinte e dois anos, e Lyudmila Dubinina, de vinte, as duas mulheres do grupo. [anos@118.24] [as@120.88]
+1|122.56|Yuri Doroshenko, Yuri Krivonischenko, Rustem Slobodin, Nikolai Thibeaux-Brignolle e Alexander Kolevatov, todos estudantes ou engenheiros recém-formados, com experiência em montanha. [Nikolai@126.56] [estudantes@130.16] [em@133.16]
+1|134.32|Yuri Yudin, de vinte e um anos. [anos@136.00]
+1|136.59|E um homem mais velho, que quase ninguém do grupo conhecia: [quase@138.04]
+1|140.24|Semyon Zolotaryov, de trinta e oito anos, veterano da Segunda Guerra Mundial e instrutor de turismo. [anos@142.60] [e@145.08]
+1|147.71|Eles deixaram Sverdlovsk no dia vinte e três de janeiro, de trem. [e@149.96]
+1|151.88|Seguiram até a cidade de Ivdel, depois de caminhão até Vizhai, o último povoado antes da floresta. [depois@153.80] [último@155.84]
+1|158.28|Dali em diante, só esqui, mochilas pesadas e um trenó. [pesadas@160.92]
+1|162.81|Os diários e as fotos que eles deixaram mostram um grupo animado. [eles@164.09]
+1|166.44|Gente rindo, cantando, brincando com a neve. [neve@169.00]
+1|170.72|No dia vinte e oito de janeiro, porém, aconteceu a primeira baixa. [janeiro@171.80]
+1|175.44|Yuri Yudin sentia dores fortes nas articulações e na perna. [articulações@177.76]
+1|179.40|Não conseguiria acompanhar o ritmo.
+1|181.77|Ele se despediu dos amigos num acampamento abandonado de geólogos e voltou para casa. [acampamento@183.32] [para@186.04]
+1|187.07|Foi a última pessoa a vê-los com vida. [com@188.76]
+1|190.36|Agora eram nove.
+1|192.56|E eles seguiram para o norte, na direção de uma montanha que, na língua do povo mansi, costuma ser traduzida como Montanha Morta. [na@194.16] [na@196.08] [ser@197.96]
+2|0.07|O nome mansi é Kholat Syakhl.
+2|2.64|Provavelmente fala de um lugar pobre, sem caça, onde nada cresce. [sem@4.76]
+2|7.46|Mas depois de mil novecentos e cinquenta e nove, ficou difícil ouvir esse nome sem pensar em outra coisa. [cinquenta@9.28] [esse@11.40] [coisa@12.96]
+2|14.61|No dia trinta e um de janeiro, o grupo chegou à borda da floresta, perto da montanha. [janeiro@15.56] [da@17.40]
+2|19.60|Ali, eles montaram um depósito com comida e equipamento extra, para buscar na volta. [comida@21.44] [na@23.76]
+2|24.92|No dia seguinte, primeiro de fevereiro, subiram pela encosta. [subiram@27.40]
+2|29.16|O tempo piorou.
+2|30.52|O vento ficou forte, e a visibilidade caiu. [visibilidade@32.16]
+2|34.14|No fim da tarde, Dyatlov tomou uma decisão que até hoje é discutida. [uma@36.00] [discutida@37.56]
+2|38.76|Em vez de descer de volta para a floresta, onde havia abrigo e lenha, ele mandou montar a barraca ali mesmo, na encosta aberta. [para@40.16] [e@41.96] [barraca@43.52]
+2|46.47|Eles cavaram um degrau na neve, armaram a lona e se prepararam para a noite. [armaram@48.40] [para@50.24]
+2|51.27|Talvez quisessem não perder a altura conquistada. [conquistada@53.20]
+2|54.08|Talvez quisessem treinar um acampamento no frio. [frio@56.24]
+2|56.92|Ninguém sabe.
+2|58.38|As últimas fotos mostram o grupo cavando a neve, com o sol baixo. [cavando@60.24] [baixo@61.84]
+2|62.80|E, naquela noite, eles ainda tiveram humor para escrever um jornalzinho de brincadeira, chamado O Vespertino Otorten. [humor@65.16] [brincadeira@66.92]
+2|70.61|Numa das notas, escreveram que os cientistas tinham provado que o homem das neves existia, e que vivia nos Urais. [cientistas@72.24] [das@74.24] [nos@76.40]
+2|77.68|Foi o último registro que eles deixaram. [deixaram@79.28]
+2|80.55|O combinado era que Dyatlov mandaria um telegrama de Vizhai por volta do dia doze de fevereiro, na volta. [um@82.60] [do@84.40] [volta@86.08]
+2|86.96|O telegrama não chegou.
+2|88.95|No começo, ninguém se preocupou muito.
+2|91.28|Atrasos eram comuns em travessias longas.
+2|94.00|Mas os dias passaram, e as famílias começaram a pressionar o instituto. [famílias@95.64]
+2|98.55|No dia vinte de fevereiro, as buscas começaram: [buscas@100.24]
+2|101.52|estudantes voluntários, militares, aviões e caçadores mansi, que conheciam a região. [mansi@105.20]
+2|107.67|No dia vinte e seis de fevereiro, um estudante chamado Mikhail Sharavin avistou alguma coisa na encosta de Kholat Syakhl. [fevereiro@108.80] [avistou@111.92] [Kholat@114.16]
+2|115.51|Era a barraca.
+2|116.78|Estava meio caída e coberta de neve. [neve@118.64]
+2|119.31|E tinha cortes enormes num dos lados. [lados@121.12]
+2|122.15|Os investigadores concluíram depois que a lona tinha sido cortada por dentro. [lona@124.32]
+2|126.88|Lá dentro, estava quase tudo.
+2|129.28|As botas.
+2|130.20|Os casacos.
+2|131.23|A comida.
+2|132.04|As mochilas.
+2|133.24|Até as lanternas.
+2|134.84|Do lado de fora, na neve, havia pegadas. [havia@136.75]
+2|137.80|Oito ou nove pessoas, descendo a encosta lado a lado, em fila. [encosta@140.30]
+2|143.16|Algumas pegadas eram de pés só de meia. [de@145.16]
+2|146.08|Outras, de pés descalços.
+2|148.08|Uma de alguém com uma bota só. [só@149.80]
+2|151.14|E elas não pareciam pegadas de gente em pânico. [gente@153.08]
+2|154.48|Pareciam passos normais, de quem caminha.
+2|157.56|As pegadas seguiam por uns quinhentos metros e depois sumiam, apagadas pelo vento. [metros@159.48] [vento@162.12]
+2|163.69|No dia seguinte, a cerca de um quilômetro e meio da barraca, já na beira da floresta, os buscadores chegaram a um grande pinheiro siberiano, que os russos chamam de cedro. [um@165.40] [já@167.24] [buscadores@168.92] [siberiano@171.00] [cedro@172.92]
+2|174.20|Embaixo dele, havia os restos de uma pequena fogueira. [uma@176.12]
+2|177.87|E ali estavam Yuri Doroshenko e Yuri Krivonischenko, só com roupas de baixo. [Yuri@180.12] [baixo@182.36]
+2|183.48|Os galhos da árvore estavam quebrados até uns cinco metros de altura, como se alguém tivesse subido para olhar alguma coisa. [até@185.32] [como@187.16] [olhar@188.72]
+2|190.04|Ou para olhar a barraca.
+2|192.47|Entre o cedro e a barraca, foram encontrados mais três. [foram@193.96]
+2|196.04|Igor Dyatlov, Zinaida Kolmogorova e, dias depois, Rustem Slobodin. [depois@199.56]
+2|202.09|Estavam espalhados pela encosta, virados para cima, na direção da barraca. [cima@204.60]
+2|206.65|Como se tivessem tentado voltar.
+2|209.40|Os médicos disseram que os cinco morreram de hipotermia. [morreram@211.24]
+2|212.84|O frio.
+2|214.09|Mas faltavam quatro pessoas.
+2|216.08|E, para elas, a neve guardaria a resposta por mais dois meses. [a@218.00]
+3|0.08|As buscas continuaram durante março e abril. [abril@2.35]
+3|3.12|Os voluntários enfiavam varas compridas na neve, metro por metro, tentando sentir alguma coisa lá embaixo. [neve@5.44] [alguma@8.20]
+3|11.42|No dia quatro de maio, quando a neve começou a derreter, eles encontraram os últimos quatro. [a@13.12] [encontraram@15.04]
+3|17.76|Estavam no fundo de uma ravina, a uns setenta e cinco metros do cedro, debaixo de quase quatro metros de neve. [a@19.52] [do@20.96] [metros@23.12]
+3|24.76|Lyudmila Dubinina, Semyon Zolotaryov, Alexander Kolevatov e Nikolai Thibeaux-Brignolle. [e@29.52]
+3|32.29|Esses quatro estavam mais vestidos que os outros. [os@34.16]
+3|35.16|Alguns usavam peças de roupa que pertenciam aos dois rapazes do cedro, cortadas com faca. [pertenciam@36.88] [cortadas@39.28]
+3|41.03|Parecia que eles tinham voltado à árvore, encontrado os amigos já mortos, e pegado as roupas para tentar sobreviver. [árvore@42.64] [e@45.24] [sobreviver@46.88]
+3|48.45|Mas foi a autópsia que mudou tudo. [tudo@50.08]
+3|51.19|Thibeaux-Brignolle tinha uma fratura grave no crânio. [crânio@53.48]
+3|54.53|Dubinina e Zolotaryov estavam com várias costelas quebradas. [costelas@56.96]
+3|58.47|O médico legista comparou a força dos impactos à de um acidente de carro. [dos@60.32] [de@62.00]
+3|63.03|E havia um detalhe que ninguém conseguia explicar: [conseguia@64.64]
+3|66.00|quase não havia ferimentos por fora.
+3|68.24|Nem cortes, nem grandes hematomas na pele. [pele@70.48]
+3|71.26|Como se uma pressão enorme tivesse esmagado os corpos sem deixar marca. [esmagado@73.04]
+3|76.37|Os corpos também tinham danos que os peritos atribuíram ao tempo, à água do riacho que corria sob a neve e aos animais. [os@77.96] [água@80.08] [a@81.64]
+3|83.52|Mas, com o tempo, esses detalhes ganharam versões cada vez mais assustadoras, contadas e recontadas. [ganharam@85.60] [contadas@88.60]
+3|91.17|E havia mais.
+3|92.78|Algumas peças de roupa encontradas na ravina foram analisadas, e mostraram traços de radioatividade. [ravina@94.60] [de@97.44]
+3|99.04|Não era uma dose mortal, mas estava acima do normal. [estava@100.76]
+3|102.69|Segundo vários relatos, Krivonischenko tinha trabalhado num complexo nuclear secreto, onde um acidente grave tinha acontecido dois anos antes. [num@105.68] [acidente@108.00] [antes@110.48]
+3|111.36|Ninguém conseguiu provar como aquela radiação foi parar ali. [foi@113.92]
+3|115.27|Houve também relatos de luzes no céu. [céu@117.12]
+3|118.05|Outro grupo de excursionistas, a uns cinquenta quilômetros ao sul, contou ter visto esferas de luz alaranjada no céu do norte. [cinquenta@119.88] [visto@122.08] [céu@124.08]
+3|125.19|Nas semanas seguintes, moradores da região e até militares relataram coisa parecida. [e@127.60]
+3|130.54|Esses relatos não entraram na conclusão oficial. [oficial@132.64]
+3|133.92|O investigador responsável era Lev Ivanov.
+3|137.25|Em maio de mil novecentos e cinquenta e nove, o caso foi encerrado. [cinquenta@138.85] [encerrado@140.56]
+3|141.77|A conclusão dizia que não havia culpados, e que a causa das mortes tinha sido uma força natural irresistível, que o grupo não conseguiu vencer. [culpados@143.61] [mortes@145.25] [irresistível@147.25] [vencer@149.57]
+3|150.45|Os arquivos foram lacrados.
+3|152.60|A região ficou fechada para excursionistas por alguns anos. [por@154.85]
+3|157.07|Só no fim dos anos oitenta, com a abertura da União Soviética, partes dos documentos começaram a aparecer. [com@158.77] [partes@160.81]
+3|163.68|Em mil novecentos e noventa, Ivanov publicou um artigo num jornal da região, dizendo que, na época, recebeu ordens para não investigar as luzes no céu. [publicou@165.97] [região@167.49] [ordens@170.17] [no@172.17]
+3|173.15|Essa declaração só aumentou o mistério.
+3|176.37|Hoje, a passagem entre as montanhas onde a barraca foi montada tem um nome. [onde@178.45] [um@180.05]
+3|180.93|Chama-se Passo Dyatlov, em homenagem ao líder do grupo. [líder@183.57]
+3|184.82|E, sobre o que aconteceu ali, existem muitas teorias. [existem@186.77]
+3|188.90|A primeira, logo em mil novecentos e cinquenta e nove, apontou para o povo mansi, que vivia e caçava na região. [e@190.85] [o@192.53] [caçava@194.37]
+3|195.79|Mas a própria investigação descartou essa ideia. [ideia@197.81]
+3|198.59|Não havia outras pegadas na neve além das do grupo. [além@200.29]
+3|201.57|Não havia sinal de luta.
+3|203.31|E os mansi tinham ajudado nas buscas. [buscas@205.09]
+3|206.48|Depois, veio a teoria militar.
+3|208.83|Os Urais ficavam numa região de testes, e há quem acredite que o grupo foi surpreendido por um míssil, uma explosão ou uma arma secreta. [testes@210.45] [o@212.32] [míssil@213.81] [secreta@215.97]
+3|216.91|Isso explicaria as luzes, a radiação e o segredo em volta do caso. [e@219.17] [caso@220.37]
+3|221.22|Mas nunca apareceu prova de um teste naquela noite, naquele lugar. [teste@222.85]
+4|0.08|Outra teoria fala de infrassom:
+4|2.72|um som tão grave que ninguém escuta, produzido pelo vento passando pela montanha, e que poderia causar medo e pânico sem motivo. [escuta@4.60] [montanha@7.04] [e@9.20]
+4|11.27|É uma ideia interessante.
+4|12.80|Mas é muito difícil de provar.
+4|15.73|E, claro, existem as teorias mais estranhas. [estranhas@18.16]
+4|19.28|Um ataque do homem das neves, lembrando a piada que eles mesmos escreveram naquela noite. [lembrando@21.20] [escreveram@22.96]
+4|24.56|Ou as esferas de luz no céu, que muita gente associa a discos voadores. [céu@26.00] [discos@27.92]
+4|29.90|A explicação mais simples sempre foi uma avalanche. [uma@32.24]
+4|33.25|Uma massa de neve que desceu sobre a barraca e fez o grupo fugir. [sobre@34.84] [grupo@36.08]
+4|37.42|Mas ela tinha problemas sérios.
+4|39.35|A encosta não era tão inclinada.
+4|41.48|Os buscadores não viram sinais claros de avalanche. [de@43.48]
+4|44.36|A barraca ainda estava em pé, em parte. [em@46.16]
+4|46.92|E as pegadas continuavam lá, na neve, semanas depois. [neve@48.96]
+4|51.52|Em dois mil e dezenove, sessenta anos depois, a promotoria da região reabriu o caso. [anos@53.68] [reabriu@56.00]
+4|57.36|Em julho de dois mil e vinte, o promotor Andrei Kuryakov anunciou a conclusão. [vinte@58.48] [a@61.44]
+4|62.48|Segundo ele, uma pequena avalanche atingiu a barraca. [a@64.92]
+4|65.71|O grupo fugiu para a floresta, sem conseguir enxergar quase nada, e morreu de frio tentando sobreviver. [sem@67.52] [morreu@69.76]
+4|72.29|Parte das famílias não aceitou essa resposta. [resposta@74.20]
+4|75.82|Mas, alguns meses depois, a resposta ganhou um reforço inesperado. [ganhou@78.40]
+4|80.64|Dois cientistas, Johan Gaume, da Escola Politécnica Federal de Lausanne, na Suíça, e Alexander Puzrin, do Instituto Federal de Tecnologia de Zurique, publicaram um estudo sobre o caso. [Politécnica@83.20] [e@85.72] [de@88.16] [estudo@90.32]
+4|91.75|E um dos instrumentos que eles usaram veio de um lugar improvável: [usaram@93.12]
+4|95.56|o filme Frozen, da Disney.
+4|98.24|Gaume tinha assistido ao filme e ficou impressionado com a neve da animação. [ficou@100.00] [animação@101.84]
+4|102.72|Ele procurou os criadores do programa que simulava aquela neve, e usou a mesma ideia para calcular o que um bloco de neve faria com o corpo de uma pessoa. [que@104.56] [a@106.44] [que@108.32] [com@109.76]
+4|111.60|A conclusão deles foi esta.
+4|113.74|Para montar a barraca, o grupo cavou um degrau na encosta. [cavou@115.32]
+4|117.12|Isso enfraqueceu a neve logo acima.
+4|119.66|Durante a noite, o vento forte que desce das montanhas foi empilhando mais neve ali em cima, aos poucos. [que@121.44] [mais@123.48] [poucos@125.24]
+4|126.22|Horas depois, uma placa de neve se soltou. [se@128.08]
+4|128.96|Não uma avalanche gigante.
+4|130.44|Um bloco pequeno, de poucos metros, mas pesado o bastante para cair sobre a barraca. [mas@132.92] [sobre@134.88]
+4|135.89|E, segundo o modelo, um bloco assim poderia causar fraturas como as de Dubinina, de Zolotaryov e de Thibeaux-Brignolle, sem grandes ferimentos por fora. [assim@138.17] [de@140.25] [Thibeaux-Brignolle@142.29]
+4|146.35|Isso explicaria por que eles cortaram a lona e saíram correndo, sem botas: [a@148.09] [botas@150.17]
+4|150.85|tinham medo de que viesse mais neve. [neve@152.45]
+4|153.41|E explicaria por que as pegadas sobreviveram: [sobreviveram@155.05]
+4|156.01|um bloco pequeno não apaga tudo.
+4|158.85|Mas o estudo não fecha todas as portas. [as@160.77]
+4|161.87|Os próprios autores disseram que ninguém sabe de verdade o que aconteceu naquela noite. [sabe@163.97] [naquela@165.85]
+4|167.12|Se três deles já estavam tão feridos na barraca, como conseguiram descer um quilômetro e meio no escuro, no frio, pela neve? [feridos@168.85] [um@171.37] [no@173.29]
+4|175.31|Por que a radiação nas roupas?
+4|177.09|E por que as luzes no céu? [céu@178.45]
+4|179.81|Yuri Yudin, o rapaz que voltou para casa por causa da dor na perna, viveu até dois mil e treze. [para@181.81] [na@183.09] [e@185.09]
+4|186.11|Ele passou a vida inteira tentando entender o que aconteceu com os amigos. [entender@187.89] [amigos@189.49]
+4|190.36|E costumava dizer que, se pudesse fazer uma única pergunta a Deus, perguntaria o que aconteceu com eles naquela noite. [fazer@192.37] [perguntaria@194.45] [naquela@196.53]
+4|198.18|Hoje, perto do Passo Dyatlov, há uma placa de pedra com os nomes dos nove. [uma@200.37] [nomes@201.81]
+4|203.00|Eles eram jovens, experientes e cuidadosos.
+4|206.44|E alguma coisa, numa noite de fevereiro, foi forte o bastante para fazê-los rasgar a própria barraca e correr para o escuro. [fevereiro@208.21] [fazê-los@210.37] [correr@212.73]
+4|214.68|E você?
+4|215.37|O que aconteceu no Passo Dyatlov?
+4|217.45|Uma avalanche, um teste militar, ou alguma coisa que a gente ainda não entende? [alguma@219.73] [não@221.22]
+4|222.21|Deixa a sua teoria aqui nos comentários. [comentários@223.73]
+4|224.67|Eu leio todas.
+4|226.21|Eu sou o Historiador.
+4|227.77|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@229.17] [conseguiu@231.01]
