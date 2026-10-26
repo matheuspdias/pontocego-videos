@@ -1,12 +1,6 @@
 {
   "slug": "passo-dyatlov",
   "publicar_em": "2026-10-27T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=2893a597-9cd1-4e36-bdc1-c298da5559be.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1beadbcf-ac69-4670-be09-8c5a96875730.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=778407bb-972a-44e6-b192-313770357bad.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=fe3504a4-9ecd-48d9-be0c-54c5eb19aab6.wav"
-  ],
   "duracoes": [
     200.542,
     220.238,
@@ -36,6 +30,36 @@
   ],
   "thumbnail": "videos/passo-dyatlov/thumb/dyatlov_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=c1b7fe67-0a09-4a68-a1be-3193367a1cee.wav",
-  "ganchos_duracao": 24.686
+  "ganchos_duracao": 24.686,
+  "video_id": "jlzyOI6JnFI",
+  "url": "https://youtu.be/jlzyOI6JnFI",
+  "agendado_para": "2026-10-27T18:00:00-03:00",
+  "enviado_em": "2026-10-26T15:02:18-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "abertura",
+      "video_id": "NnvuJVbFRRE",
+      "url": "https://youtu.be/NnvuJVbFRRE",
+      "titulo": "9 jovens fugiram da barraca a -30 °C. Por quê? #Shorts",
+      "duracao": 69.9,
+      "agendado_para": "2026-10-28T12:00:00-03:00"
+    },
+    {
+      "id": "ravina",
+      "video_id": "hUXy8VRq0LU",
+      "url": "https://youtu.be/hUXy8VRq0LU",
+      "titulo": "Ossos quebrados e quase nenhuma marca por fora #Shorts",
+      "duracao": 73.3,
+      "agendado_para": "2026-10-29T12:00:00-03:00"
+    },
+    {
+      "id": "frozen",
+      "video_id": "gs1aJM6zW_8",
+      "url": "https://youtu.be/gs1aJM6zW_8",
+      "titulo": "Cientistas usaram Frozen para explicar o Passo Dyatlov #Shorts",
+      "duracao": 84.9,
+      "agendado_para": "2026-10-30T12:00:00-03:00"
+    }
+  ]
 }
