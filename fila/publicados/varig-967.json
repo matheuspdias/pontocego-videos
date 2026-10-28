@@ -1,12 +1,6 @@
 {
   "slug": "varig-967",
   "publicar_em": "2026-10-29T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=608d66e5-eee3-42f4-a1a8-802b1f5b9dce.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=469feb5e-9609-4d09-abe9-391b6b474155.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=d1e7de77-11d9-4325-a5ea-138b66e658ab.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=3ca4f9cf-1f83-449e-b44b-ae4ea566bf59.wav"
-  ],
   "duracoes": [
     149.682,
     167.837,
@@ -36,6 +30,36 @@
   ],
   "thumbnail": "videos/varig-967/thumb/varig967_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=506e87d4-a43c-4f93-86ce-9df77d5026a0.wav",
-  "ganchos_duracao": 24.921
+  "ganchos_duracao": 24.921,
+  "video_id": "dCvsgnngeGU",
+  "url": "https://youtu.be/dCvsgnngeGU",
+  "agendado_para": "2026-10-29T18:00:00-03:00",
+  "enviado_em": "2026-10-28T14:35:34-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "abertura",
+      "video_id": "pVuV-V99-aQ",
+      "url": "https://youtu.be/pVuV-V99-aQ",
+      "titulo": "Um avião brasileiro sumiu no Pacífico. Até hoje. #Shorts",
+      "duracao": 86.8,
+      "agendado_para": "2026-10-31T12:00:00-03:00"
+    },
+    {
+      "id": "comandante",
+      "video_id": "8fY5vXCVC4w",
+      "url": "https://youtu.be/8fY5vXCVC4w",
+      "titulo": "O piloto que sobreviveu a Orly e sumiu no Pacífico #Shorts",
+      "duracao": 116.8,
+      "agendado_para": "2026-11-01T12:00:00-03:00"
+    },
+    {
+      "id": "silencio",
+      "video_id": "yWO_m-3yZe0",
+      "url": "https://youtu.be/yWO_m-3yZe0",
+      "titulo": "8 dias de busca e nem uma mancha de óleo #Shorts",
+      "duracao": 114.0,
+      "agendado_para": "2026-11-02T12:00:00-03:00"
+    }
+  ]
 }
