@@ -162,3 +162,7 @@ e rode `python capas.py videos/<slug> out/<slug>.mp4 --grade`.
 
 ## Publicação automática
 Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz o vídeo e coloca em `fila/`, e o GitHub Actions renderiza e envia ao YouTube agendado para as 18h. Configuração e uso em `automacao/README.md`; instruções da tarefa em `automacao/AUTOMATICO.md`.
+
+## Pacífico Norte e aviação de carga (O voo Varig 967)
+- Mapa (seção VARIG 967 do engine): `draw_pacific(c, proj)` desenha Japão, Sakhalin, Ásia/Kamchatka e Alasca/costa oeste dos EUA, com as Curilas e as Aleutas em pontinhos. Use longitudes de 0 a 360 (Los Angeles = 241.6), por exemplo `make_proj(125, 250, 14, 66)` (Pacífico inteiro) ou `make_proj(128, 168, 28, 56)` (Japão e Kamchatka).
+- Objetos: `b707(t, door, gear, rose, stripe, lights)` (Boeing 707 cargueiro de perfil, 4 motores, porta de carga que abre, rosa dos ventos genérica na deriva), `fighter_jet(col, star)`, `cargo_crate(w, h, label)`, `abstract_painting(seed, w, h)` (tela abstrata genérica, não reproduz obra real), `necktie(col)`, `onion_field(y)`, `eiffel(h)`, `coffee_bush(seed)`, `headset_mic`, `life_vest`, `frozen_lake(w, h)`.

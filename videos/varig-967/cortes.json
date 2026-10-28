@@ -1,0 +1,20 @@
+{"serie": "VOO VARIG 967", "cortes": [
+ {"id": "abertura", "inicio": 0.0, "fim": 79.9, "titulo": "O MISTÉRIO DO\\NVOO VARIG 967",
+  "gancho": "Um avião brasileiro decolou de Tóquio, falou pelo rádio vinte e dois minutos depois, e nunca mais foi visto.",
+  "gancho_audio": [0.0, 6.5], "gancho_tela": "SUMIU EM\\N22 MINUTOS", "gancho_t": 36.5,
+  "capa": ["DECOLOU", "DE TÓQUIO", "E SUMIU"],
+  "titulo_post": "Um avião brasileiro sumiu no Pacífico. Até hoje.",
+  "post": "1979: um cargueiro da Varig decolou de Tóquio com quadros de Manabu Mabe a bordo. Nunca acharam nada. #misterio #historia #varig #aviacao #pontocego"},
+ {"id": "comandante", "inicio": 150.6, "fim": 258.4, "titulo": "O COMANDANTE\\NDOS DOIS DESASTRES",
+  "gancho": "Ele sobreviveu a um dos piores desastres da aviação brasileira. Seis anos depois, sumiu no comando de outro avião, sem deixar rastro.",
+  "gancho_audio": [8.19, 16.74], "gancho_tela": "SOBREVIVEU...\\NE DEPOIS SUMIU", "gancho_t": 205.0,
+  "capa": ["SOBREVIVEU", "EM 1973.", "SUMIU EM 1979"],
+  "titulo_post": "O piloto que sobreviveu a Orly e sumiu no Pacífico",
+  "post": "Gilberto Araújo da Silva comandava o voo Varig 820 em 1973. Em 1979, desapareceu com o voo 967. #misterio #historia #aviacao #varig #pontocego"},
+ {"id": "silencio", "inicio": 331.7, "fim": 438.6, "titulo": "21H23:\\NO SILÊNCIO",
+  "gancho": "Um cargueiro brasileiro desapareceu sobre o Pacífico. Oito dias de busca, e nem uma mancha de óleo.",
+  "gancho_audio": [18.2, 24.74], "gancho_tela": "8 DIAS DE BUSCA\\NE NADA", "gancho_t": 419.5,
+  "capa": ["8 DIAS", "DE BUSCA", "E NADA"],
+  "titulo_post": "8 dias de busca e nem uma mancha de óleo",
+  "post": "Voo Varig 967, 1979: o último contato foi 'tudo normal'. Depois, silêncio. Nada nunca foi encontrado. #misterio #historia #aviacao #varig #pontocego"}
+]}

@@ -4737,3 +4737,215 @@ def cache_platform(c):
     for k in range(3):
         rrect(c, -130 + k * 90, -230, 80, 90, 6); fs(c, (0.52, 0.42, 0.26), 4)
     poly(c, [(-150, -232), (0, -270), (150, -232)]); fs(c, (0.86, 0.90, 0.96), 4)
+
+
+# ================================================================ VARIG 967 (Pacífico Norte, 1979)
+# Mapa do Pacífico Norte em longitudes 0..360 (leste positivo; 241.6 = 118.4 W, Los Angeles)
+PACIFIC_LAND = {
+    "honshu": [(130.0, 31.0), (131.0, 31.3), (131.8, 33.0), (132.5, 34.2), (135.0, 33.5), (136.8, 34.3), (138.8, 34.6),
+               (139.8, 35.0), (140.9, 35.7), (140.6, 36.9), (141.0, 38.3), (141.9, 39.6), (141.5, 41.4), (140.0, 41.2),
+               (139.9, 40.0), (139.5, 38.5), (138.5, 37.3), (136.8, 37.2), (136.0, 35.7), (133.0, 35.5), (131.0, 34.4),
+               (129.7, 33.3), (130.0, 31.0)],
+    "hokkaido": [(140.0, 41.5), (141.2, 41.8), (143.3, 42.0), (145.6, 43.3), (145.0, 44.2), (142.0, 45.5), (141.6, 45.2),
+                 (141.5, 43.3), (140.0, 42.6), (140.0, 41.5)],
+    "sakhalin": [(142.0, 46.0), (143.5, 46.5), (143.0, 49.0), (144.5, 49.0), (143.0, 53.5), (142.5, 54.3), (142.2, 51.0),
+                 (142.0, 48.0), (142.0, 46.0)],
+    "asia": [(100, 75), (100, 20), (110, 20), (118, 24), (121, 28), (122, 31), (120.8, 34.5), (119, 37), (121.5, 39),
+             (125, 39.8), (126.5, 37.5), (126.3, 34.6), (127.5, 34.6), (129.4, 35.4), (129.5, 37), (128, 38.8),
+             (129.7, 41), (131, 42.6), (133, 42.8), (135.5, 43.8), (138, 46.5), (140.4, 48.5), (140.8, 51.5),
+             (141.4, 53.3), (139, 54.2), (137, 54), (135.2, 54.8), (137.5, 56.5), (140.5, 58.2), (143, 59.3),
+             (148, 59.3), (152, 59), (155, 59.6), (156.0, 57.8), (155.6, 55.5), (156.0, 52.5), (156.7, 51.0),
+             (158.6, 52.9), (160.0, 54.5), (162.0, 56.2), (163.3, 57.8), (162.5, 59.5), (166, 60.3), (170, 60),
+             (173, 61.5), (178, 62.5), (180, 65), (185, 65.5), (190, 66.5), (190, 75)],
+    "america": [(260, 75), (200, 75), (194, 66), (197, 64.5), (195.5, 61), (198, 59), (202, 57), (206, 57.5),
+                (208.5, 60), (212, 59.8), (216, 60), (221, 59), (224, 57.5), (226, 55), (228, 53), (232, 51),
+                (235.5, 48.4), (236, 46), (235.7, 43), (235.7, 40.5), (237.5, 38), (239, 36), (241.5, 34),
+                (242.8, 32.5), (245.8, 31), (247, 27), (250, 23), (255, 18), (260, 15)],
+}
+KURILS = [(145.8, 43.6), (146.8, 44.0), (147.9, 44.6), (149.2, 45.4), (150.4, 46.1), (151.6, 46.9), (152.6, 47.6),
+          (153.6, 48.3), (154.5, 49.0), (155.3, 49.8), (156.2, 50.6)]
+ALEUTIANS = [(172.5, 52.9), (174.5, 52.3), (177.5, 51.8), (180.5, 51.6), (183.5, 51.8), (186.5, 52.0), (189.0, 52.4),
+             (191.5, 52.9), (193.5, 53.6), (195.5, 54.2), (197.5, 54.8)]
+PAC_LAND_COL = (0.17, 0.20, 0.25)
+PAC_SEA_COL = (0.04, 0.07, 0.12)
+
+
+def draw_pacific(c, proj, grid=10, land_col=PAC_LAND_COL, sea_col=PAC_SEA_COL, lw=3, islands=True):
+    """Pacífico Norte (Japão, Kamchatka, Alasca, costa oeste dos EUA)"""
+    c.rectangle(0, 0, W, H); rgb(c, sea_col); c.fill()
+    for lon in range(100, 270, grid):
+        x0, y0 = proj(lon, 5); x1, y1 = proj(lon, 80)
+        line(c, x0, y0, x1, y1, 1, (0.11, 0.15, 0.22))
+    for lat in range(0, 81, grid):
+        x0, y0 = proj(90, lat); x1, y1 = proj(270, lat)
+        line(c, x0, y0, x1, y1, 1, (0.11, 0.15, 0.22))
+    for name, pts in PACIFIC_LAND.items():
+        xy = [proj(*p) for p in pts]
+        c.move_to(*xy[0])
+        for p in xy[1:]:
+            c.line_to(*p)
+        c.close_path(); fs(c, land_col, lw, (0.55, 0.62, 0.72))
+    if islands:
+        for lon, lat in KURILS + ALEUTIANS:
+            x, y = proj(lon, lat)
+            circle(c, x, y, 5, land_col, 2, (0.55, 0.62, 0.72))
+
+
+def b707(c, t=0, col=(0.86, 0.86, 0.84), stripe=(0.16, 0.30, 0.58), door=0.0, windows=True, rose=True, gear=False, lights=True):
+    """Boeing 707 cargueiro (vista lateral, nariz à direita): 4 motores sob a asa, cauda convencional.
+    door 0..1 abre a porta de carga dianteira; rose desenha uma rosa dos ventos genérica na deriva."""
+    if gear:
+        for gx in (-40, 250):
+            line(c, gx, 40, gx, 78, 6); circle(c, gx, 84, 13, (0.16, 0.16, 0.18), 4)
+    poly(c, [(-250, -36), (-330, -190), (-282, -190), (-170, -36)]); fs(c, col, 6)          # deriva
+    c.move_to(340, 4); c.curve_to(340, -26, 312, -40, 268, -40)                              # fuselagem
+    c.line_to(-250, -40); c.line_to(-345, -22); c.line_to(-350, -6); c.line_to(-260, 40)
+    c.line_to(268, 40); c.curve_to(312, 40, 340, 32, 340, 4); c.close_path(); fs(c, col, 6)
+    poly(c, [(-260, -6), (-350, -14), (-358, 2), (-270, 10)]); fs(c, col, 4)                 # estabilizador
+    line(c, -330, 6, 300, 6, 9, stripe)
+    if windows:
+        for x in range(-210, 250, 30):
+            circle(c, x, -15, 4.5, (0.25, 0.32, 0.42), 0)
+    poly(c, [(282, -30), (318, -24), (326, -8), (288, -8)]); fs(c, (0.25, 0.32, 0.42), 3)   # para-brisa
+    # porta de carga (à frente da asa)
+    if door > 0:
+        c.save(); c.translate(150, -38); c.rotate(-1.9 * door)
+        c.rectangle(-60, 0, 120, 6); fs(c, col, 4); c.restore()
+        c.rectangle(90, -34, 120, 64); rgb(c, (0.10, 0.10, 0.12)); c.fill()
+        glow(c, 150, 0, 80, AMBER, 0.35 * door)
+    else:
+        rrect(c, 90, -34, 120, 64, 4); rgb(c, INK, 0.7); c.set_line_width(3); c.stroke()
+    poly(c, [(40, 22), (150, 22), (10, 100), (-40, 100)]); fs(c, (0.72, 0.73, 0.75), 5)    # asa
+    for ex, ey in ((60, 70), (-10, 96)):                                                    # motores
+        rrect(c, ex - 62, ey - 14, 108, 30, 14); fs(c, (0.62, 0.63, 0.66), 5)
+        line(c, ex - 30, ey - 14, ex - 10, ey - 30, 4)
+    if rose:
+        c.save(); c.translate(-270, -110); c.scale(0.38, 0.38)
+        circle(c, 0, 0, 70, stripe, 5)
+        for k in range(8):
+            a = k * math.pi / 4
+            L = 64 if k % 2 == 0 else 38
+            poly(c, [(L * math.cos(a), L * math.sin(a)), (12 * math.cos(a + 0.5), 12 * math.sin(a + 0.5)),
+                     (12 * math.cos(a - 0.5), 12 * math.sin(a - 0.5))]); fs(c, INK, 2)
+        c.restore()
+    if lights:
+        blink = int(t * 1.6) % 2 == 0
+        circle(c, -335, -186, 7, RED if blink else BLOOD, 0)
+        if blink:
+            glow(c, -335, -186, 40, RED, 0.5)
+
+
+def fighter_jet(c, col=(0.48, 0.52, 0.50), star=True):
+    """caça a jato genérico (vista lateral, nariz à direita), duas derivas"""
+    c.move_to(260, 0); c.line_to(120, -26); c.line_to(-200, -26); c.line_to(-240, -10); c.line_to(-240, 16)
+    c.line_to(-200, 22); c.line_to(150, 18); c.close_path(); fs(c, col, 5)
+    poly(c, [(150, -24), (95, -48), (40, -46), (60, -24)]); fs(c, (0.25, 0.32, 0.42), 4)    # cabine
+    for dx in (0, 26):
+        poly(c, [(-150 + dx, -24), (-215 + dx, -110), (-185 + dx, -110), (-100 + dx, -24)]); fs(c, col, 5)
+    poly(c, [(40, 8), (-90, 8), (-150, 60), (-120, 60)]); fs(c, col, 5)                     # asa
+    rrect(c, -258, -12, 26, 26, 6); fs(c, (0.25, 0.25, 0.27), 4)
+    if star:
+        c.save(); c.translate(-165, -75)
+        pts = []
+        for k in range(10):
+            r = 16 if k % 2 == 0 else 7
+            a = -math.pi / 2 + k * math.pi / 5
+            pts.append((r * math.cos(a), r * math.sin(a)))
+        poly(c, pts); fs(c, RED, 2)
+        c.restore()
+
+
+def cargo_crate(c, w=150, h=110, label=None, col=(0.50, 0.38, 0.24)):
+    """caixote de carga de madeira"""
+    c.rectangle(-w / 2, -h / 2, w, h); fs(c, col, 5)
+    for k in (-1, 1):
+        line(c, -w / 2, k * h / 4, w / 2, k * h / 4, 3, (0.34, 0.25, 0.15))
+    line(c, -w / 2, -h / 2, w / 2, h / 2, 4, (0.36, 0.26, 0.16))
+    c.rectangle(-w / 2, -h / 2, w, h); rgb(c, INK); c.set_line_width(5); c.stroke()
+    if label:
+        rrect(c, -w * 0.36, -16, w * 0.72, 32, 4); fs(c, PARCH, 3)
+        text(c, label, 0, 0, 20, TYPE, DARKTXT)
+
+
+def abstract_painting(c, seed=1, w=240, h=300, frame=True, alpha=1.0):
+    """tela abstrata genérica (pinceladas largas em vermelho, ocre, preto e branco) num chassi"""
+    rnd = random.Random(seed)
+    if frame:
+        c.rectangle(-w / 2 - 12, -h / 2 - 12, w + 24, h + 24); fs(c, (0.36, 0.26, 0.16), 5)
+    c.save(); c.rectangle(-w / 2, -h / 2, w, h); c.clip()
+    bgc = rnd.choice([(0.14, 0.12, 0.12), (0.78, 0.72, 0.60), (0.22, 0.20, 0.26)])
+    rgb(c, bgc, alpha); c.paint()
+    pal = [(0.74, 0.20, 0.16), (0.86, 0.62, 0.22), (0.08, 0.08, 0.09), (0.90, 0.88, 0.82), (0.36, 0.30, 0.52), (0.62, 0.32, 0.18)]
+    for k in range(7):
+        col = rnd.choice(pal)
+        x0, y0 = rnd.uniform(-w / 2, w / 2), rnd.uniform(-h / 2, h / 2)
+        x1, y1 = x0 + rnd.uniform(-w, w) * 0.6, y0 + rnd.uniform(-h, h) * 0.5
+        c.move_to(x0, y0)
+        c.curve_to(x0 + rnd.uniform(-80, 80), y0 + rnd.uniform(-80, 80), x1 + rnd.uniform(-80, 80), y1 + rnd.uniform(-80, 80), x1, y1)
+        rgb(c, col, 0.9 * alpha); c.set_line_width(rnd.uniform(10, 34)); c.set_line_cap(cairo.LINE_CAP_ROUND); c.stroke()
+    for k in range(3):
+        col = rnd.choice(pal)
+        c.new_path(); c.arc(rnd.uniform(-w / 3, w / 3), rnd.uniform(-h / 3, h / 3), rnd.uniform(14, 42), 0, 6.283)
+        rgb(c, col, 0.85 * alpha); c.fill()
+    c.restore()
+    c.set_line_cap(cairo.LINE_CAP_BUTT)
+    c.rectangle(-w / 2, -h / 2, w, h); rgb(c, INK); c.set_line_width(4); c.stroke()
+
+
+def necktie(c, col=(0.70, 0.24, 0.20), seed=2):
+    """gravata pintada à mão"""
+    poly(c, [(-18, -120), (18, -120), (12, -96), (-12, -96)]); fs(c, col, 4)
+    poly(c, [(-12, -96), (12, -96), (40, 90), (0, 130), (-40, 90)]); fs(c, col, 4)
+    rnd = random.Random(seed)
+    for k in range(4):
+        y = rnd.uniform(-60, 80)
+        line(c, -20, y, 22, y + rnd.uniform(-20, 20), 6, rnd.choice([AMBER, INK, (0.1, 0.1, 0.1)]))
+
+
+def onion_field(c, y=860, w=W, rows=6):
+    """campo arado em perspectiva (fileiras de cebola)"""
+    c.rectangle(0, y, w, H - y); rgb(c, (0.16, 0.14, 0.10)); c.fill()
+    for k in range(rows):
+        yy = y + 18 + k * (H - y) / rows
+        line(c, 0, yy, w, yy, 3, (0.26, 0.30, 0.18))
+        for x in range(20 + (k % 2) * 30, w, 60):
+            line(c, x, yy, x - 6, yy - 18, 3, (0.36, 0.46, 0.26))
+            line(c, x, yy, x + 6, yy - 16, 3, (0.36, 0.46, 0.26))
+
+
+def eiffel(c, h=420, col=(0.30, 0.30, 0.34)):
+    """torre metálica estilizada (base em 0,0)"""
+    poly(c, [(-h * 0.26, 0), (-h * 0.05, -h * 0.72), (0, -h), (h * 0.05, -h * 0.72), (h * 0.26, 0), (h * 0.15, 0),
+             (0, -h * 0.30), (-h * 0.15, 0)]); fs(c, col, 4)
+    line(c, -h * 0.14, -h * 0.30, h * 0.14, -h * 0.30, 5)
+    line(c, -h * 0.07, -h * 0.58, h * 0.07, -h * 0.58, 4)
+
+
+def coffee_bush(c, seed=1):
+    rnd = random.Random(seed)
+    c.save(); c.translate(0, -60)
+    cloud_shape(c, 120, 120, (0.14, 0.26, 0.18), 4, seed)
+    for k in range(9):
+        circle(c, rnd.uniform(-40, 40), rnd.uniform(-40, 40), 6, (0.70, 0.16, 0.14), 0)
+    c.restore()
+    line(c, 0, 0, 0, -10, 6, BROWN)
+
+
+def headset_mic(c):
+    """fone de ouvido com microfone (para controladores)"""
+    c.new_sub_path(); c.arc(0, 0, 60, math.pi, 2 * math.pi); rgb(c, INK); c.set_line_width(7); c.stroke()
+    for sx in (-1, 1):
+        rrect(c, sx * 60 - 14, -10, 28, 40, 8); fs(c, DGRAY, 4)
+    line(c, 60, 20, 30, 60, 4); circle(c, 26, 62, 8, DGRAY, 3)
+
+
+def life_vest(c, col=(0.95, 0.62, 0.12)):
+    poly(c, [(-60, -80), (-20, -80), (-10, -40), (10, -40), (20, -80), (60, -80), (70, 80), (10, 90), (0, 40), (-10, 90), (-70, 80)])
+    fs(c, col, 5)
+    line(c, -60, 20, 60, 20, 4, DARKTXT)
+
+
+def frozen_lake(c, w=1400, h=180, col=(0.74, 0.82, 0.90)):
+    ellipse(c, 0, 0, w / 2, h / 2); fs(c, col, 5)
+    for k in range(5):
+        line(c, -w * 0.35 + k * w * 0.16, -h * 0.2, -w * 0.30 + k * w * 0.16, h * 0.18, 2, (0.52, 0.62, 0.74))

@@ -1,0 +1,5 @@
+# Ganchos dos cortes — bloco extra HeyGen (Pedro Lima - Serious, eleven_v4), 24.921 s
+# https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=506e87d4-a43c-4f93-86ce-9df77d5026a0.wav
+abertura    0.00-6.50   Um avião brasileiro decolou de Tóquio, falou pelo rádio vinte e dois minutos depois, e nunca mais foi visto.
+comandante  8.19-16.74  Ele sobreviveu a um dos piores desastres da aviação brasileira. Seis anos depois, sumiu no comando de outro avião, sem deixar rastro.
+silencio    18.20-24.74 Um cargueiro brasileiro desapareceu sobre o Pacífico. Oito dias de busca, e nem uma mancha de óleo.

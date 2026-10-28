@@ -1,0 +1,164 @@
+# O voo Varig 967 — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  149.682s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=608d66e5-eee3-42f4-a1a8-802b1f5b9dce.wav
+# bloco2  167.837s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=469feb5e-9609-4d09-abe9-391b6b474155.wav
+# bloco3  194.482s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=d1e7de77-11d9-4325-a5ea-138b66e658ab.wav
+# bloco4  236.539s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=3ca4f9cf-1f83-449e-b44b-ae4ea566bf59.wav
+# Offsets absolutos: B1=0.000  B2=150.682  B3=319.519  B4=515.001  (fim ~751.54)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Numa noite de janeiro, um avião de carga brasileiro decolou de Tóquio rumo a Los Angeles. [de@2.08] [rumo@4.16]
+1|6.12|Vinte e dois minutos depois, o comandante falou com o controle pelo rádio. [comandante@7.76] [rádio@9.44]
+1|10.16|Estava tudo normal.
+1|11.88|E essa foi a última vez que alguém ouviu a voz de qualquer um dos seis homens a bordo. [que@13.68] [qualquer@14.88] [bordo@16.56]
+1|18.07|O avião nunca chegou.
+1|19.84|Não houve pedido de socorro.
+1|21.64|Não apareceu nenhum destroço, nenhuma mancha de óleo, nenhum corpo. [de@24.16]
+1|26.64|Um Boeing de mais de quarenta metros simplesmente sumiu sobre o Oceano Pacífico. [metros@28.24] [Pacífico@30.88]
+1|32.47|No porão, além de toneladas de carga, viajavam dezenas de quadros de um dos pintores mais famosos do Brasil. [carga@34.48] [um@37.04] [Brasil@38.88]
+1|40.13|Nenhum deles foi visto de novo.
+1|42.56|E o homem no comando era um piloto que, seis anos antes, já tinha sobrevivido a um dos piores desastres da aviação brasileira. [um@43.72] [já@45.88] [piores@47.44]
+1|50.64|Esta é a história do voo Varig novecentos e sessenta e sete. [Varig@52.32]
+1|55.44|No fim dos anos setenta, a Varig era a maior companhia aérea do Brasil, e uma das mais conhecidas do mundo. [Varig@57.04] [do@59.04] [conhecidas@60.64]
+1|62.38|Os aviões com a rosa dos ventos na cauda pousavam na Europa, nos Estados Unidos, na África e no Japão. [ventos@63.80] [nos@65.92] [no@67.92]
+1|69.04|E, além dos voos de passageiros, a empresa tinha uma frota de cargueiros, que cruzavam os oceanos levando de tudo: [a@71.15] [cargueiros@72.52] [de@75.04]
+1|75.92|peças, máquinas, eletrônicos, obras de arte.
+1|80.08|Um desses cargueiros era um Boeing setecentos e sete, de prefixo pê-pê-vê-éle-u. [setecentos@81.92]
+1|85.90|Ele tinha sido fabricado em mil novecentos e sessenta e seis para a American Airlines, e foi comprado pela Varig em mil novecentos e setenta e quatro. [novecentos@87.36] [a@89.07] [pela@91.04] [setenta@92.88]
+1|94.24|Tinha uns doze anos de uso, quatro motores, e uma porta enorme na lateral, por onde entravam os paletes de carga. [quatro@95.96] [na@98.12] [paletes@99.68]
+1|101.51|Na noite de trinta de janeiro de mil novecentos e setenta e nove, uma terça-feira, esse avião estava no Aeroporto de Narita, perto de Tóquio. [de@102.96] [nove@104.52] [no@107.08] [Tóquio@108.88]
+1|109.83|O aeroporto era novo, inaugurado poucos meses antes. [meses@112.16]
+1|113.55|O plano era longo:
+1|114.88|atravessar o Pacífico até Los Angeles, seguir para Lima, no Peru, e terminar no Rio de Janeiro. [seguir@117.28] [terminar@119.04]
+1|121.28|Não havia passageiros.
+1|122.92|Só seis tripulantes.
+1|124.88|O comandante Gilberto Araújo da Silva.
+1|127.63|O primeiro oficial Erni Peixoto Mylius.
+1|130.52|Os segundos oficiais Antonio Brasileiro da Silva Neto e Evan Braga Saunders. [Silva@133.04]
+1|135.82|E os mecânicos de voo José Severino Gusmão de Araújo e Nicola Exposito. [Severino@137.44] [Exposito@139.76]
+1|140.59|Era uma tripulação experiente, de uma das empresas mais respeitadas do mundo. [das@142.91]
+1|146.09|E o nome mais conhecido daquela cabine era o do comandante. [cabine@147.75]
+2|0.08|Gilberto Araújo da Silva tinha cinquenta e cinco anos e mais de vinte e três mil horas de voo. [e@2.48] [vinte@3.88] [voo@5.48]
+2|6.46|Mas não era só a experiência que fazia dele um nome conhecido. [que@7.84]
+2|9.99|Era o que tinha acontecido com ele seis anos antes, perto de Paris. [ele@11.20] [Paris@13.20]
+2|14.72|Em onze de julho de mil novecentos e setenta e três, o voo Varig oitocentos e vinte saiu do Rio de Janeiro rumo ao aeroporto de Orly. [novecentos@16.00] [voo@18.00] [do@20.36] [aeroporto@21.76]
+2|23.27|Era um Boeing setecentos e sete com cento e trinta e quatro pessoas a bordo. [com@25.12] [pessoas@26.48]
+2|27.72|E o comandante era Gilberto.
+2|30.64|Já na descida para Paris, começou um incêndio num dos banheiros do fundo do avião. [um@32.56] [fundo@34.40]
+2|35.58|A investigação apontou como causa provável um cigarro jogado no lixo. [um@38.00]
+2|40.07|A fumaça tomou o avião em poucos minutos, e chegou até a cabine de comando. [poucos@41.64] [cabine@43.52]
+2|45.47|Sem tempo de chegar à pista, a tripulação pousou o avião num campo de cebolas, a uns cinco quilômetros de Orly. [a@46.92] [campo@48.76] [quilômetros@50.40]
+2|51.76|O pouso foi bem-sucedido.
+2|53.60|Mas a fumaça já tinha feito o pior. [o@55.24]
+2|56.12|Das cento e trinta e quatro pessoas, só onze sobreviveram. [pessoas@57.36]
+2|60.54|Entre os mortos estavam o senador Filinto Müller e o cantor Agostinho dos Santos. [Filinto@62.16] [dos@64.32]
+2|65.57|Entre os sobreviventes, quase todos eram tripulantes. [tripulantes@67.76]
+2|68.76|E um deles era o comandante Gilberto. [Gilberto@70.24]
+2|71.75|Ele foi tratado como herói.
+2|73.36|Recebeu homenagens na França, por ter evitado que o avião caísse sobre os subúrbios de Paris, e no Brasil. [evitado@75.40] [os@77.00] [Brasil@78.56]
+2|79.36|E, alguns meses depois, voltou a voar. [voar@81.76]
+2|82.48|Depois desse acidente, as autoridades passaram a proibir o cigarro nos banheiros dos aviões. [a@84.85] [dos@86.64]
+2|88.29|Seis anos depois, era ele quem estava no comando do voo novecentos e sessenta e sete. [estava@90.40] [e@92.48]
+2|93.84|E, por uma coincidência que até hoje impressiona, Gilberto se tornou um dos raríssimos pilotos da aviação comercial envolvidos em dois desastres com mortes. [hoje@95.60] [dos@97.92] [envolvidos@100.48]
+2|103.28|Um que ele sobreviveu.
+2|104.76|E outro do qual ninguém nunca voltou. [voltou@106.72]
+2|108.00|Mas, naquela noite em Tóquio, o que mais chamava atenção não era o comandante. [que@110.00] [o@111.88]
+2|112.92|Era a carga.
+2|114.47|O avião levava cerca de vinte toneladas de mercadorias. [toneladas@116.24]
+2|118.00|E, entre elas, caixas com quadros de Manabu Mabe, que voltavam de uma exposição no Japão. [de@120.36] [uma@122.24]
+2|123.75|Os registros mais citados falam em cento e cinquenta e três quadros. [cento@125.88]
+2|127.76|Outras fontes falam em cinquenta e três. [três@129.40]
+2|130.16|Juntos, eles valiam mais de um milhão de dólares da época. [milhão@132.16]
+2|134.20|Manabu Mabe nasceu no Japão em mil novecentos e vinte e quatro, e chegou ao Brasil ainda menino, com a família, para trabalhar numa fazenda de café no interior de São Paulo. [mil@136.68] [e@138.48] [com@140.40] [fazenda@142.00] [São@143.61]
+2|144.75|Pintou gravatas para sobreviver.
+2|147.08|E, em mil novecentos e cinquenta e nove, foi premiado como o melhor pintor nacional da Bienal de São Paulo. [e@148.97] [melhor@150.64] [São@152.72]
+2|153.60|A revista americana Time chegou a chamar aquele ano de o ano de Manabu Mabe. [chamar@155.44] [de@157.32]
+2|159.52|As obras que ele tinha mostrado no país onde nasceu estavam voltando para casa, no porão de um avião brasileiro. [no@161.00] [para@163.20] [avião@164.76]
+2|166.36|Elas nunca chegaram.
+3|0.07|O voo novecentos e sessenta e sete decolou de Narita às oito e vinte e três da noite. [sete@1.72] [e@3.72]
+3|5.52|O avião subiu, virou para leste e seguiu para o mar escuro, em direção à América. [e@7.68] [em@9.32]
+3|12.37|Às oito e quarenta e cinco, vinte e dois minutos depois da decolagem, o comandante Gilberto fez um contato de rotina com o controle de tráfego aéreo. [vinte@13.88] [decolagem@15.40] [contato@17.72] [de@19.52]
+3|20.96|Informou a posição.
+3|22.24|Estava tudo normal.
+3|23.76|Nenhum problema a bordo.
+3|26.24|Sobre o oceano, longe dos radares de terra, os aviões daquela época se comunicavam assim: [de@28.28] [se@30.32]
+3|31.80|passavam por pontos fixos no mapa, pontos imaginários sobre o mar, e avisavam o controle em horários combinados. [pontos@34.04] [avisavam@36.00]
+3|39.08|O próximo contato do voo novecentos e sessenta e sete estava marcado para as nove e vinte e três. [e@41.04] [para@42.88] [três@44.12]
+3|45.68|Às nove e vinte e três, o rádio ficou em silêncio. [o@47.32]
+3|49.89|Os controladores chamaram o avião.
+3|52.08|Chamaram de novo.
+3|53.52|E de novo.
+3|55.16|Nada.
+3|56.00|Depois de cerca de uma hora de tentativas, o alarme foi dado. [de@57.44]
+3|60.77|As buscas começaram ainda naquela noite, com aviões e navios do Japão. [com@63.28]
+3|65.82|Mas era noite, no meio do inverno, sobre o oceano aberto. [inverno@67.28]
+3|69.56|A busca foi suspensa no escuro e só recomeçou na manhã seguinte, mais de doze horas depois da decolagem. [e@71.44] [mais@73.64] [decolagem@75.28]
+3|77.07|Então, o Japão e os Estados Unidos colocaram aviões e navios para varrer o Pacífico a leste de Tóquio. [Unidos@78.64] [varrer@80.88] [Tóquio@82.72]
+3|83.66|Foram mais de oito dias de busca intensa. [busca@85.36]
+3|87.26|E não encontraram nada.
+3|89.40|Nenhum pedaço de fuselagem.
+3|91.36|Nenhuma caixa de carga boiando.
+3|93.60|Nenhuma mancha de combustível.
+3|95.56|Nenhum colete salva-vidas.
+3|97.68|Nenhum corpo.
+3|99.20|Nem um único quadro.
+3|101.67|Quando um avião cai no mar, quase sempre alguma coisa sobe à superfície. [quase@103.16] [superfície@105.20]
+3|106.08|Pedaços de espuma, de plástico, de madeira. [madeira@108.40]
+3|109.48|Um cargueiro com vinte toneladas de carga deveria ter deixado um rastro enorme. [carga@111.28] [enorme@113.24]
+3|114.40|Mas o voo novecentos e sessenta e sete não deixou rastro nenhum. [e@115.92]
+3|119.41|As caixas-pretas, que gravam as vozes da cabine e os dados do voo, foram feitas para resistir ao impacto. [da@121.44] [voo@122.80] [impacto@125.12]
+3|126.19|Mas, para serem lidas, elas precisam ser encontradas. [ser@128.24]
+3|129.48|E ninguém sabia onde procurar.
+3|132.24|A investigação da Varig e das autoridades não chegou a lugar nenhum. [autoridades@133.96]
+3|136.83|O relatório concluiu que não foi possível encontrar nenhum indício que lançasse qualquer luz sobre as causas do desaparecimento. [possível@138.56] [qualquer@141.20] [desaparecimento@143.04]
+3|144.44|No Brasil, seis famílias esperaram notícias que nunca vieram. [que@147.64]
+3|149.40|Sem destroços, sem corpos, sem uma explicação. [explicação@152.20]
+3|153.48|E, no vazio deixado pelo avião, começaram a nascer as teorias. [começaram@155.84]
+3|158.10|A primeira, e a que mais circulou na época, era a do roubo. [circulou@159.48] [roubo@161.08]
+3|161.95|Um avião carregado de obras de arte desaparece sem deixar nada para trás. [arte@163.64] [trás@166.04]
+3|166.76|Para muita gente, parecia o plano perfeito. [perfeito@168.84]
+3|169.88|Jornais brasileiros chegaram a noticiar que a decolagem teria atrasado por causa de manutenção, o que daria tempo para alguém se esconder a bordo. [a@171.92] [de@173.96] [para@175.80]
+3|177.87|O problema é que, em mais de quarenta anos, nenhum dos quadros de Manabu Mabe apareceu. [de@179.72] [de@182.16]
+3|183.87|Nenhum leilão, nenhuma coleção particular, nenhuma pista. [pista@187.24]
+3|188.11|Quem rouba uma obra de arte, cedo ou tarde, tenta vender. [cedo@189.80]
+3|191.80|E essas obras simplesmente sumiram.
+4|0.07|A segunda teoria olha para o mapa. [mapa@2.00]
+4|3.28|A rota de Tóquio para Los Angeles passava pelo norte do Pacífico, não muito longe da União Soviética, das Ilhas Curilas e da península de Kamchatka. [Angeles@4.64] [não@7.20] [das@9.28] [de@11.04]
+4|12.32|E, em plena Guerra Fria, os soviéticos não perdoavam quem entrasse no espaço aéreo deles. [soviéticos@14.48] [espaço@16.88]
+4|19.20|Menos de um ano antes, em abril de mil novecentos e setenta e oito, um Boeing setecentos e sete da Korean Air Lines se perdeu sobre o norte da Rússia. [abril@20.88] [e@22.64] [sete@24.76] [perdeu@26.52]
+4|28.47|Foi atingido por um caça soviético e fez um pouso forçado num lago congelado. [e@30.40] [lago@31.96]
+4|33.44|Dois passageiros morreram.
+4|35.34|Será que o voo novecentos e sessenta e sete errou o caminho, entrou no lugar errado, e foi derrubado em segredo? [sessenta@36.72] [entrou@38.76] [derrubado@40.37]
+4|42.68|Há quem defenda essa ideia.
+4|44.44|Um ex-operador de rádio e ex-copiloto da Força Aérea Brasileira, Oswaldo Profeta, escreveu um livro sobre o caso, O Mistério do Setecentos e Sete, sugerindo um erro de navegação que levaria o avião para o espaço aéreo soviético. [da@46.72] [escreveu@49.44] [O@51.16] [sugerindo@53.48] [levaria@55.36] [aéreo@57.04]
+4|58.61|Mas nunca apareceu nenhum documento, nenhum radar, nenhuma prova de que isso aconteceu. [radar@61.04] [aconteceu@63.28]
+4|64.91|Daí veio a versão mais rocambolesca.
+4|67.88|Em setembro de mil novecentos e setenta e seis, um piloto soviético, Viktor Belenko, fugiu para o Japão pilotando o caça mais secreto da época, o MiG vinte e cinco. [setenta@69.60] [Viktor@72.00] [pilotando@74.24] [época@76.32]
+4|78.71|Os japoneses e os americanos desmontaram o avião peça por peça, e só depois o devolveram, em caixotes. [o@80.96] [só@83.04]
+4|85.68|Segundo a teoria, algumas peças teriam ficado para trás, escondidas na carga do voo da Varig, e os soviéticos teriam derrubado o avião para recuperá-las. [ficado@88.00] [do@90.36] [soviéticos@91.68] [recuperá-las@94.08]
+4|95.60|É uma boa história de espionagem.
+4|97.76|Mas não explica por que essas peças esperariam mais de dois anos para sair do Japão, logo num cargueiro comercial. [peças@99.44] [para@101.68] [cargueiro@103.36]
+4|104.64|E também não tem nenhuma prova.
+4|107.49|E há a explicação que muitos especialistas consideram a mais provável. [especialistas@109.20]
+4|111.96|A mais silenciosa de todas.
+4|114.52|Uma despressurização lenta.
+4|117.28|Se o ar da cabine escapar aos poucos, sem explosão e sem barulho, a falta de oxigênio vai deixando a tripulação confusa, sonolenta, até perder a consciência. [aos@118.56] [barulho@120.72] [deixando@122.76] [perder@126.00]
+4|127.51|Ninguém pede socorro, porque ninguém percebe o que está acontecendo. [o@129.92]
+4|131.27|E o piloto automático continua voando, reto, até o combustível acabar. [reto@133.60]
+4|137.00|Isso já aconteceu.
+4|138.27|Em dois mil e cinco, na Grécia, um Boeing da Helios Airways voou por quase três horas com a tripulação desacordada, até cair sem combustível. [Grécia@139.63] [voou@142.19] [a@144.05] [combustível@146.99]
+4|148.80|Se algo assim aconteceu com o voo novecentos e sessenta e sete, logo depois do último contato, o avião pode ter seguido por horas sobre o oceano, para muito longe da área das buscas. [voo@150.27] [logo@152.27] [avião@154.39] [sobre@156.11] [da@158.27]
+4|160.03|E pode estar hoje no fundo do Pacífico, a milhares de metros de profundidade. [do@161.55] [de@163.83]
+4|165.92|Ainda assim, nem essa teoria explica tudo. [tudo@168.43]
+4|169.51|Ela não explica por que nada, nem uma única caixa, nunca apareceu em nenhuma praia. [nem@171.27] [em@173.87]
+4|175.53|E também não há como provar, porque a única testemunha seria o próprio avião. [porque@177.31] [próprio@179.27]
+4|181.07|Hoje, mais de quarenta e sete anos depois, o voo Varig novecentos e sessenta e sete continua sendo um dos raros aviões comerciais que desapareceram sem deixar nenhum vestígio. [anos@183.07] [e@185.59] [um@187.55] [desapareceram@189.71]
+4|193.31|Seis homens, um Boeing de quatro motores e as obras de um grande pintor brasileiro sumiram na primeira hora de voo. [motores@195.39] [grande@197.15] [hora@200.03]
+4|201.71|Manabu Mabe continuou pintando até morrer, em mil novecentos e noventa e sete. [em@204.75] [sete@206.39]
+4|207.43|E, em algum lugar no fundo do maior oceano do mundo, ou talvez em algum lugar que ninguém imagina, estão as telas que ele nunca mais viu. [do@209.23] [talvez@211.15] [imagina@212.83] [nunca@215.07]
+4|217.06|E você?
+4|217.71|O que aconteceu com o voo Varig novecentos e sessenta e sete? [Varig@219.07]
+4|221.20|Uma falha silenciosa, um roubo perfeito, ou um segredo da Guerra Fria? [ou@224.03]
+4|225.87|Deixa a sua teoria aqui nos comentários. [comentários@227.47]
+4|228.48|Eu leio todas.
+4|230.48|Eu sou o Historiador.
+4|232.13|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@233.55] [conseguiu@235.39]
