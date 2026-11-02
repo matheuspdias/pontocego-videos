@@ -1,0 +1,20 @@
+{"serie": "A PRAGA DA DANÇA", "cortes": [
+ {"id": "troffea", "inicio": 166.0, "fim": 247.0, "titulo": "A MULHER QUE\\NNÃO PAROU DE DANÇAR",
+  "gancho": "Em mil quinhentos e dezoito, uma mulher começou a dançar numa rua de Estrasburgo. Um mês depois, centenas dançavam com ela.",
+  "gancho_audio": [0.0, 8.02], "gancho_tela": "ELA COMEÇOU...\\NE CENTENAS FORAM ATRÁS", "gancho_t": 172.0,
+  "capa": ["1518:", "ELA COMEÇOU", "A DANÇAR"],
+  "titulo_post": "Ela começou a dançar e uma cidade inteira foi atrás",
+  "post": "Estrasburgo, 14 de julho de 1518: Frau Troffea começou a dançar na rua e não parou. Em dias, dezenas se juntaram a ela. #misterio #historia #pragadadanca #pontocego"},
+ {"id": "musicos", "inicio": 247.0, "fim": 324.9, "titulo": "A CURA QUE\\NPIOROU TUDO",
+  "gancho": "Uma cidade inteira começou a dançar sem parar. E a solução das autoridades foi contratar músicos.",
+  "gancho_audio": [9.4, 15.78], "gancho_tela": "A SOLUÇÃO:\\NCONTRATAR MÚSICOS", "gancho_t": 296.0,
+  "capa": ["A CURA:", "MAIS", "MÚSICA"],
+  "titulo_post": "A cidade tentou curar a dança contratando músicos",
+  "post": "1518: os médicos de Estrasburgo mandaram os dançarinos dançarem ainda mais. Montaram palcos e pagaram músicos. Foi um desastre. #misterio #historia #pragadadanca #pontocego"},
+ {"id": "teorias", "inicio": 562.0, "fim": 681.2, "titulo": "POR QUE ELES\\NDANÇAVAM?",
+  "gancho": "Centenas de pessoas dançaram por semanas, até cair de exaustão. Até hoje, ninguém sabe explicar por quê.",
+  "gancho_audio": [17.14, 24.1], "gancho_tela": "DANÇARAM ATÉ CAIR.\\NPOR QUÊ?", "gancho_t": 586.6,
+  "capa": ["VENENO,", "MEDO OU", "MALDIÇÃO?"],
+  "titulo_post": "Por que centenas dançaram até cair em 1518?",
+  "post": "Fungo no pão, ritual secreto ou medo de uma maldição? As teorias para a Praga da Dança de Estrasburgo. #misterio #historia #pragadadanca #pontocego"}
+]}

@@ -753,6 +753,12 @@ POSES = {
     "wave": dict(rh=(88, -120), rb=1, lh=(-34, 138), wave=True),
     "hold": dict(rh=(48, 50), lh=(-48, 50)),
     "run": dict(rh=(34, 138), lh=(-34, 138), run=True),
+    # dança descontrolada (Praga da Dança): braços e uma perna levantados, alternando
+    "dance_a": dict(rh=(96, -130), rb=1, lh=(-110, -20), lb=-1, rf=(70, 140), lf=(-26, 186)),
+    "dance_b": dict(lh=(-96, -130), lb=-1, rh=(110, -20), rb=1, lf=(-70, 140), rf=(26, 186)),
+    "dance_c": dict(rh=(60, -150), rb=1, lh=(-60, -150), lb=-1, rf=(46, 176), lf=(-46, 176)),
+    "dance_d": dict(rh=(120, 40), rb=1, lh=(-40, -140), lb=-1, rf=(20, 186), lf=(-80, 150)),
+    "slump": dict(rh=(60, 150), lh=(-60, 150), rf=(50, 186), lf=(-50, 186)),
 }
 LEGS = dict(rf=(30, 186), lf=(-30, 186))
 
@@ -1094,6 +1100,18 @@ def figure(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "happy"),), look
         rgb(c, hc); c.set_line_width(22); c.stroke()
         c.new_sub_path(); c.arc(0, 0, hr + 25, math.pi * 0.85, math.pi * 2.15)
         rgb(c, INK); c.set_line_width(5); c.stroke()
+    elif hat == "coif":
+        # touca de linho (mulheres do séc. XVI): pano que cobre o alto da cabeça e cai atrás
+        hc = hat_col or (0.86, 0.83, 0.74)
+        c.new_sub_path(); c.arc(0, 0, hr + 8, math.pi * 0.92, math.pi * 2.08)
+        c.line_to(hr + 16, 30); c.line_to(hr - 2, 34); c.arc_negative(0, 0, hr - 4, math.pi * 0.15, math.pi * 0.85)
+        c.line_to(-hr - 16, 30); c.close_path()
+        fs(c, hc, 5)
+    elif hat == "beret":
+        # gorro chato de pano (barrete de mercador/médico, séc. XVI)
+        hc = hat_col or (0.20, 0.16, 0.14)
+        ellipse(c, 6, -hr + 4, hr + 22, 20); fs(c, hc, 5)
+        c.rectangle(-hr + 6, -hr + 6, 2 * hr - 12, 14); fs(c, hc, 4)
     c.restore()
     # arms
     perp = (math.cos(lean), math.sin(lean))
@@ -4949,3 +4967,287 @@ def frozen_lake(c, w=1400, h=180, col=(0.74, 0.82, 0.90)):
     ellipse(c, 0, 0, w / 2, h / 2); fs(c, col, 5)
     for k in range(5):
         line(c, -w * 0.35 + k * w * 0.16, -h * 0.2, -w * 0.30 + k * w * 0.16, h * 0.18, 2, (0.52, 0.62, 0.74))
+
+
+# ================================================================ PRAGA DA DANÇA (Estrasburgo, 1518)
+WOOD = (0.42, 0.30, 0.20)
+WOOD_D = (0.28, 0.20, 0.14)
+RSAND = (0.56, 0.30, 0.26)      # arenito vermelho da catedral
+PLASTER = (0.66, 0.62, 0.54)    # reboco das casas de enxaimel
+SHOE_RED = (0.78, 0.14, 0.12)
+
+
+def dance_keys(t0, t1, period=0.55, seed=0, start="stand", end=None):
+    """keyframes de pose para um dançarino entre t0 e t1 (alterna dance_a/b/c/d com ritmo irregular)"""
+    rnd = random.Random(seed)
+    names = ["dance_a", "dance_b", "dance_c", "dance_d"]
+    keys = [(-999, start)]
+    t = t0
+    i = rnd.randrange(4)
+    while t < t1:
+        keys.append((t, names[i % 4]))
+        i += rnd.choice((1, 1, 2, 3))
+        t += period * rnd.uniform(0.75, 1.3)
+    if end:
+        keys.append((t1, end))
+    return keys
+
+
+def dance_bob(t, fid=0, amp=26):
+    """deslocamento (dx, dy) do corpo de quem dança: pulos e balanço"""
+    return math.sin(t * 3.1 + fid) * 14, -abs(math.sin(t * 5.6 + fid * 1.7)) * amp
+
+
+def dancer(c, t, x, y, s, t0=0.0, t1=9999.0, fid=11, col=(0.45, 0.30, 0.26), woman=True, start="stand", end=None,
+           exprs=((0, "desperate"),), period=0.55, appear=None, red_shoes=False, **kw):
+    """pessoa de 1518 dançando sem conseguir parar (mulher de touca ou homem de barrete)"""
+    on = t0 <= t < t1
+    dx, dy = dance_bob(t, fid) if on else (0, 0)
+    poses = dance_keys(t0, t1, period, fid, start, end)
+    o = dict(hat="coif", hair="long") if woman else dict(hat="beret", hair=None, hat_col=(0.24, 0.20, 0.16))
+    o.update(kw)
+    figure(c, t, x + dx * s, y + dy * s, s, poses=poses, exprs=exprs, coat=col, fid=fid, appear=appear, **o)
+    if red_shoes:
+        P = pose_at(t, poses)
+        for (fx, fy) in (P["rf"], P["lf"]):
+            pass  # os sapatos vermelhos são desenhados no objeto red_shoes (cena do ritual)
+
+
+def half_timber(c, w=230, h=320, col=PLASTER, seed=1, lit=0.0, beams=WOOD_D):
+    """casa de enxaimel (madeira aparente) de Estrasburgo, base em y=0, telhado pontudo"""
+    rnd = random.Random(seed)
+    c.rectangle(-w / 2, -h, w, h); fs(c, col, 5)
+    # vigas
+    for k in range(1, 3):
+        y = -h * k / 3
+        line(c, -w / 2, y, w / 2, y, 7, beams)
+    for k in range(4):
+        x = -w / 2 + w * k / 3
+        line(c, x, 0, x, -h, 6, beams)
+    for k in range(3):
+        x0 = -w / 2 + w * k / 3
+        if rnd.random() < 0.6:
+            line(c, x0, -h / 3, x0 + w / 3, -2 * h / 3, 5, beams)
+        else:
+            line(c, x0 + w / 3, -h / 3, x0, -2 * h / 3, 5, beams)
+    # janelas
+    for k in range(3):
+        x = -w / 2 + w * (k + 0.5) / 3
+        wl = lit if rnd.random() < 0.6 else 0
+        c.rectangle(x - 18, -h + 28, 36, 44)
+        fs(c, (0.95, 0.75, 0.35) if wl > 0 else (0.10, 0.10, 0.12), 4, beams)
+        if wl > 0:
+            glow(c, x, -h + 50, 60, AMBER, 0.15 * wl)
+    # porta
+    c.move_to(-26, 0); c.line_to(-26, -70); c.curve_to(-26, -96, 26, -96, 26, -70); c.line_to(26, 0); c.close_path()
+    fs(c, WOOD, 4, beams)
+    # telhado
+    rh = h * 0.75 + rnd.uniform(-20, 40)
+    poly(c, [(-w / 2 - 16, -h), (0, -h - rh), (w / 2 + 16, -h)]); fs(c, (0.30, 0.16, 0.14), 5)
+    c.rectangle(-14, -h - rh * 0.45, 28, 30); fs(c, (0.10, 0.10, 0.12), 3)
+
+
+def cathedral(c, h=760, col=RSAND, lit=0.0):
+    """catedral gótica de Estrasburgo: fachada com rosácea e UMA torre com flecha (à esquerda), base em y=0"""
+    w = 420
+    # corpo da fachada
+    c.rectangle(-w / 2, -h * 0.55, w, h * 0.55); fs(c, col, 6)
+    # torre única com flecha
+    c.rectangle(-w / 2, -h * 0.80, 150, h * 0.25); fs(c, col, 5)
+    poly(c, [(-w / 2 - 6, -h * 0.80), (-w / 2 + 75, -h), (-w / 2 + 156, -h * 0.80)]); fs(c, col, 5)
+    for k in range(5):
+        y = -h * 0.80 - k * h * 0.04
+        line(c, -w / 2 + 75 - (5 - k) * 12, y, -w / 2 + 75 + (5 - k) * 12, y, 3, (0.30, 0.14, 0.12))
+    line(c, -w / 2 + 75, -h, -w / 2 + 75, -h - 40, 4)
+    line(c, -w / 2 + 62, -h - 26, -w / 2 + 88, -h - 26, 4)
+    # torre direita incompleta (plataforma)
+    c.rectangle(w / 2 - 150, -h * 0.66, 150, h * 0.11); fs(c, col, 5)
+    # rosácea
+    circle(c, 0, -h * 0.40, 70, (0.20, 0.10, 0.10), 5)
+    for k in range(12):
+        a = k * math.pi / 6
+        line(c, 0, -h * 0.40, math.cos(a) * 66, -h * 0.40 + math.sin(a) * 66, 3, (0.70, 0.40, 0.32))
+    if lit:
+        glow(c, 0, -h * 0.40, 120, AMBER, 0.25 * lit)
+    # portais góticos
+    for x in (-130, 0, 130):
+        ww = 70 if x else 96
+        c.move_to(x - ww / 2, 0); c.line_to(x - ww / 2, -110); c.line_to(x, -190 if x == 0 else -160)
+        c.line_to(x + ww / 2, -110); c.line_to(x + ww / 2, 0); c.close_path(); fs(c, (0.16, 0.08, 0.08), 4)
+    # arcos/janelas altas
+    for x in (-150, 150):
+        c.move_to(x - 22, -h * 0.30); c.line_to(x - 22, -h * 0.44); c.line_to(x, -h * 0.50); c.line_to(x + 22, -h * 0.44)
+        c.line_to(x + 22, -h * 0.30); c.close_path(); fs(c, (0.16, 0.08, 0.08), 3)
+
+
+def strasbourg(c, t, y=900, n=7, seed=3, lit=0.6, cat_x=None, cat_h=700):
+    """faixa de casas de enxaimel; catedral opcional atrás (cat_x)"""
+    if cat_x is not None:
+        c.save(); c.translate(cat_x, y); cathedral(c, cat_h, lit=lit); c.restore()
+    rnd = random.Random(seed)
+    xs = [i * (W / (n - 1)) + rnd.uniform(-30, 30) for i in range(n)]
+    for i, x in enumerate(xs):
+        hh = rnd.uniform(240, 330)
+        if cat_x is not None and abs(x - cat_x) < 200:
+            continue
+        c.save(); c.translate(x, y); half_timber(c, rnd.uniform(200, 260), hh, seed=seed * 10 + i, lit=lit); c.restore()
+    c.rectangle(0, y, W, H - y); rgb(c, (0.11, 0.10, 0.11)); c.fill()
+    # pedras da rua
+    for k in range(40):
+        xx = (k * 97 + seed * 31) % W
+        yy = y + 20 + (k * 53 % max(1, (H - y - 30)))
+        ellipse(c, xx, yy, 26, 9); rgb(c, (0.20, 0.19, 0.20)); c.fill()
+
+
+def cobbles(c, y=880, col=(0.16, 0.15, 0.16)):
+    c.rectangle(0, y, W, H - y); rgb(c, (0.10, 0.09, 0.10)); c.fill()
+    for row in range(5):
+        yy = y + 18 + row * 42
+        for k in range(26):
+            xx = k * 80 + (row % 2) * 40
+            ellipse(c, xx, yy, 34, 13); rgb(c, col); c.fill()
+
+
+def red_shoes(c, crosses=True, s=1.0, glow_on=False):
+    """par de sapatos vermelhos com cruzes de óleo (ritual de São Vito em Saverne)"""
+    if glow_on:
+        glow(c, 0, -20, 180, SHOE_RED, 0.18)
+    for sx in (-1, 1):
+        c.save(); c.translate(sx * 70, 0)
+        c.move_to(-60, 0); c.curve_to(-64, -40, -40, -50, -10, -48); c.curve_to(10, -46, 30, -30, 50, -22)
+        c.curve_to(76, -14, 78, 0, 70, 6); c.close_path(); fs(c, SHOE_RED, 5)
+        line(c, -62, 6, 72, 6, 6, (0.30, 0.10, 0.08))
+        if crosses:
+            line(c, 18, -40, 18, -14, 4, GOLD); line(c, 8, -30, 28, -30, 4, GOLD)
+        c.restore()
+
+
+def drum(c, t=0, beat=True):
+    """tambor medieval com baquetas"""
+    c.rectangle(-60, -50, 120, 100); fs(c, (0.62, 0.20, 0.16), 5)
+    for k in range(5):
+        x = -60 + k * 30
+        line(c, x, -50, x + 30, 50, 3, GOLD_D)
+    ellipse(c, 0, -50, 60, 16); fs(c, (0.86, 0.80, 0.66), 5)
+    ellipse(c, 0, 50, 60, 16); fs(c, (0.62, 0.20, 0.16), 5)
+    a = math.sin(t * 14) * 0.4 if beat else 0
+    for sx in (-1, 1):
+        c.save(); c.translate(sx * 30, -60); c.rotate(sx * (0.6 + a)); line(c, 0, 0, 0, -80, 6, WOOD); c.restore()
+
+
+def flute(c):
+    """flauta/charamela de madeira"""
+    c.save(); c.rotate(-0.5)
+    rrect(c, -100, -10, 200, 20, 8); fs(c, WOOD, 4)
+    for k in range(5):
+        circle(c, -40 + k * 24, 0, 4, (0.10, 0.08, 0.06), 0)
+    poly(c, [(100, -10), (130, -22), (130, 22), (100, 10)]); fs(c, WOOD, 4)
+    c.restore()
+
+
+def fiddle(c):
+    """instrumento de corda (rabeca/viela)"""
+    c.move_to(0, -110); c.curve_to(50, -110, 60, -60, 36, -30); c.curve_to(64, 0, 60, 70, 0, 70)
+    c.curve_to(-60, 70, -64, 0, -36, -30); c.curve_to(-60, -60, -50, -110, 0, -110); c.close_path(); fs(c, WOOD, 5)
+    rrect(c, -10, -210, 20, 110, 4); fs(c, WOOD_D, 4)
+    for k in (-6, -2, 2, 6):
+        line(c, k, -200, k, 50, 1.5, INK)
+    line(c, -70, 30, 90, -110, 3, INK)
+
+
+def stage(c, w=560, h=90, col=WOOD):
+    """palco de madeira montado na praça (base em y=0)"""
+    c.rectangle(-w / 2, -h, w, 24); fs(c, col, 5)
+    for k in range(9):
+        x = -w / 2 + 20 + k * (w - 40) / 8
+        line(c, x, -h + 24, x, 0, 8, WOOD_D)
+    line(c, -w / 2 + 10, -h + 30, w / 2 - 10, -10, 4, WOOD_D)
+    line(c, w / 2 - 10, -h + 30, -w / 2 + 10, -10, 4, WOOD_D)
+    for k in range(7):
+        x = -w / 2 + k * w / 6
+        line(c, x, -h, x, -h + 24, 2, WOOD_D)
+
+
+def cart(c, t=0, w=320, moving=True, cover=False):
+    """carroça de madeira de duas rodas (base das rodas em y=0)"""
+    for x in (-w / 2 + 70, w / 2 - 70):
+        circle(c, x, -50, 50, WOOD_D, 6)
+        for k in range(8):
+            a = k * math.pi / 4 + (t * 2.5 if moving else 0)
+            line(c, x, -50, x + math.cos(a) * 44, -50 + math.sin(a) * 44, 4)
+        circle(c, x, -50, 9, INK, 0)
+    c.rectangle(-w / 2, -130, w, 50); fs(c, WOOD, 5)
+    for k in range(4):
+        x = -w / 2 + k * w / 3
+        line(c, x, -130, x, -80, 3, WOOD_D)
+    line(c, w / 2, -100, w / 2 + 120, -90, 6, WOOD_D)
+    if cover:
+        c.move_to(-w / 2, -130); c.curve_to(-w / 2, -250, w / 2, -250, w / 2, -130); c.close_path(); fs(c, (0.62, 0.58, 0.48), 5)
+
+
+def saint_statue(c, t=0, glow_on=False):
+    """imagem de madeira de São Vito (jovem com auréola e palma do martírio), sobre pedestal, base em y=0"""
+    if glow_on:
+        glow(c, 0, -300, 260, AMBER, 0.22)
+    c.rectangle(-70, -60, 140, 60); fs(c, WOOD_D, 5)
+    c.rectangle(-84, -76, 168, 18); fs(c, WOOD, 4)
+    # túnica
+    poly(c, [(-40, -76), (40, -76), (30, -260), (-30, -260)]); fs(c, (0.52, 0.36, 0.24), 5)
+    line(c, 0, -90, 0, -250, 3, WOOD_D)
+    # manto
+    poly(c, [(-34, -250), (-56, -110), (-20, -200)]); fs(c, (0.40, 0.18, 0.16), 4)
+    # cabeça e auréola
+    circle(c, 0, -300, 38, (0.62, 0.46, 0.32), 5)
+    c.new_sub_path(); c.arc(0, -306, 60, 0, 2 * math.pi); rgb(c, GOLD); c.set_line_width(6); c.stroke()
+    line(c, -12, -300, -12, -294, 4); line(c, 12, -300, 12, -294, 4)
+    # palma
+    line(c, 40, -150, 70, -330, 5, (0.30, 0.50, 0.30))
+    for k in range(6):
+        y = -200 - k * 22
+        xx = 40 + (y + 150) / -180 * 30
+        line(c, xx, y, xx - 24, y - 14, 3, (0.30, 0.50, 0.30)); line(c, xx, y, xx + 22, y - 18, 3, (0.30, 0.50, 0.30))
+
+
+def rye(c, ergot=False, h=300, seed=1):
+    """espiga de centeio; com ergot = esporões escuros saindo dos grãos"""
+    rnd = random.Random(seed)
+    c.move_to(0, 0); c.curve_to(6, -h * 0.4, -4, -h * 0.7, 4, -h); rgb(c, (0.70, 0.62, 0.38)); c.set_line_width(5); c.stroke()
+    for k in range(10):
+        y = -h + 10 + k * 16
+        for sx in (-1, 1):
+            c.save(); c.translate(4 + sx * 8, y); c.rotate(sx * 0.5)
+            ellipse(c, 0, 0, 7, 13); fs(c, (0.80, 0.70, 0.42), 3)
+            line(c, 0, -12, sx * 10, -50, 1.5, (0.80, 0.70, 0.42))
+            if ergot and rnd.random() < 0.35:
+                c.move_to(-5, 0); c.curve_to(-6, -30, 6, -30, 5, 0); c.close_path(); fs(c, (0.16, 0.10, 0.14), 3)
+            c.restore()
+
+
+def chronicle(c, w=340, h=440, title="", seed=2, col=PARCH):
+    """página de crônica manuscrita (linhas em escrita gótica estilizada)"""
+    rnd = random.Random(seed)
+    rrect(c, -w / 2, -h / 2, w, h, 8); fs(c, col, 5)
+    if title:
+        text(c, title, 0, -h / 2 + 44, 30, SERIF, DARKTXT)
+    for k in range(11):
+        y = -h / 2 + 90 + k * 30
+        x = -w / 2 + 30
+        while x < w / 2 - 40:
+            ww = rnd.uniform(20, 60)
+            line(c, x, y, x + ww, y + rnd.uniform(-1, 1), 3, (0.30, 0.22, 0.16))
+            x += ww + 12
+    circle(c, -w / 2 + 44, -h / 2 + 110, 18, (0.62, 0.14, 0.12), 3)
+
+
+def council_seal(c, r=80):
+    """selo de cera vermelha do conselho (cidade livre)"""
+    circle(c, 0, 0, r, (0.62, 0.12, 0.10), 6)
+    circle(c, 0, 0, r * 0.72, None, 3, (0.85, 0.50, 0.40))
+    line(c, -r * 0.4, r * 0.4, r * 0.4, -r * 0.4, 8, (0.85, 0.50, 0.40))
+
+
+def laugh_marks(c, t, n=3):
+    """“ha ha” flutuando (crise de riso de Tanganica)"""
+    for k in range(n):
+        y = -((t * 40 + k * 50) % 150)
+        text(c, "ha", k * 40 - 40, y, 34, HAND, AMBER, alpha=max(0, 1 - abs(y) / 150))

@@ -166,3 +166,10 @@ Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz 
 ## Pacífico Norte e aviação de carga (O voo Varig 967)
 - Mapa (seção VARIG 967 do engine): `draw_pacific(c, proj)` desenha Japão, Sakhalin, Ásia/Kamchatka e Alasca/costa oeste dos EUA, com as Curilas e as Aleutas em pontinhos. Use longitudes de 0 a 360 (Los Angeles = 241.6), por exemplo `make_proj(125, 250, 14, 66)` (Pacífico inteiro) ou `make_proj(128, 168, 28, 56)` (Japão e Kamchatka).
 - Objetos: `b707(t, door, gear, rose, stripe, lights)` (Boeing 707 cargueiro de perfil, 4 motores, porta de carga que abre, rosa dos ventos genérica na deriva), `fighter_jet(col, star)`, `cargo_crate(w, h, label)`, `abstract_painting(seed, w, h)` (tela abstrata genérica, não reproduz obra real), `necktie(col)`, `onion_field(y)`, `eiffel(h)`, `coffee_bush(seed)`, `headset_mic`, `life_vest`, `frozen_lake(w, h)`.
+
+## Estrasburgo, 1518 (A Praga da Dança)
+- Cenário urbano medieval (seção PRAGA DA DANÇA do engine): `half_timber(w, h, seed, lit)` (casa de enxaimel), `cathedral(h, lit)` (catedral gótica de arenito vermelho com uma torre só), `strasbourg(c, t, y, n, seed, lit, cat_x)` (fileira de casas + rua de pedra, catedral opcional), `cobbles(c, y)`.
+- Dança: poses novas `dance_a dance_b dance_c dance_d` (braços e uma perna levantados) e `slump` (exausto); `dancer(c, t, x, y, s, t0, t1, fid, col, woman)` alterna as poses com pulos (`dance_keys`, `dance_bob`). No `scenes.py` do vídeo há `mini_dancer`/`dance_crowd` para multidões pequenas.
+- Objetos: `red_shoes(crosses)` (ritual de São Vito), `saint_statue(t, glow_on)` (imagem de madeira com auréola e palma), `drum(t, beat)`, `flute`, `fiddle`, `stage(w, h)` (palco de madeira), `cart(t, w, moving, cover)` (carroça de duas rodas), `rye(ergot, h)` (centeio com esporão), `chronicle(w, h, title)` (página de crônica), `council_seal`, `laugh_marks(t)`.
+- Chapéus novos: `hat="coif"` (touca de linho das mulheres) e `hat="beret"` (barrete de mercador/médico/conselheiro).
+- Cores `WOOD WOOD_D RSAND PLASTER SHOE_RED`.

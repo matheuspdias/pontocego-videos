@@ -1,0 +1,177 @@
+# A Praga da Dança de 1518 — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  164.963s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b98d6830-d43b-4091-91be-8cc0b526fc20.wav
+# bloco2  158.093s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=ac0ccfb6-7db6-44ae-a71e-c105be08c170.wav
+# bloco3  177.032s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e23b0bd7-f682-4dc5-aa04-b52b850cb3e1.wav
+# bloco4  177.110s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=ad85a63f-56ee-48af-a616-1663ad33f6ce.wav
+# bloco5   67.082s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1c1997fb-3842-436a-a0a8-85c936457edf.wav
+# Offsets absolutos: B1=0.000  B2=165.963  B3=325.056  B4=503.088  B5=681.198  (fim ~748.28)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Num dia quente de julho, uma mulher saiu de casa, parou no meio de uma rua de pedra, e começou a dançar. [mulher@1.84] [meio@3.76] [e@5.52]
+1|7.20|Não havia música.
+1|8.44|Não havia festa.
+1|9.87|Ninguém sabia por quê.
+1|12.23|Ela dançou a tarde inteira.
+1|14.36|Dançou até a noite cair.
+1|16.40|No dia seguinte, voltou para a rua e continuou dançando. [rua@18.00]
+1|20.16|E no outro dia também.
+1|22.40|Em uma semana, mais de trinta pessoas estavam dançando com ela. [pessoas@24.40]
+1|26.72|Em um mês, segundo uma crônica da época, eram centenas. [da@28.52]
+1|30.88|Homens, mulheres, mendigos, peregrinos, até padres e freiras. [e@35.12]
+1|36.16|Com os pés sangrando, sem conseguir parar. [parar@38.40]
+1|39.76|E as autoridades da cidade tomaram uma decisão que, até hoje, parece difícil de acreditar: [uma@41.52] [difícil@43.92]
+1|45.81|contrataram músicos, montaram palcos, e mandaram aquelas pessoas dançarem ainda mais. [aquelas@48.88]
+1|52.33|Esta é a história da Praga da Dança de mil quinhentos e dezoito. [da@53.76] [dezoito@55.60]
+1|57.20|Para entender o que aconteceu, a gente precisa voltar mais de quinhentos anos, até Estrasburgo. [gente@58.80] [anos@60.80]
+1|63.26|Hoje, a cidade fica na França, na região da Alsácia, bem na fronteira com a Alemanha. [na@65.08] [fronteira@66.72]
+1|68.65|Mas, em mil quinhentos e dezoito, Estrasburgo era uma cidade livre do Sacro Império Romano-Germânico. [Estrasburgo@70.52] [Sacro@72.52]
+1|74.71|Tinha uns vinte mil habitantes, ruas estreitas, casas de madeira, e uma catedral de arenito vermelho, com uma torre que estava entre as construções mais altas da Europa. [estreitas@76.84] [catedral@78.99] [torre@81.04] [mais@82.84]
+1|84.79|Era uma cidade rica, cheia de mercadores, artesãos e corporações de ofício. [mercadores@86.48]
+1|90.00|Mas essa riqueza não chegava a todo mundo. [todo@91.92]
+1|92.87|E aqueles anos estavam sendo terríveis para os mais pobres. [para@95.08]
+1|96.79|Uma sequência de invernos rigorosos e colheitas ruins tinha deixado o pão caro demais. [colheitas@98.88] [caro@101.24]
+1|102.63|Havia fome nas ruas e nos campos em volta. [campos@104.40]
+1|105.82|Doenças assustavam a população:
+1|108.00|a varíola, a lepra, e uma doença nova, que tinha chegado à Europa poucas décadas antes e ainda não tinha cura: [doença@109.92] [Europa@111.60] [não@113.84]
+1|115.12|a sífilis.
+1|117.00|E havia o medo.
+1|118.64|Os moradores de Estrasburgo eram profundamente religiosos, e acreditavam que os santos podiam proteger, mas também castigar. [religiosos@121.12] [podiam@123.60]
+1|126.48|Um deles era especialmente temido naquela região do rio Reno: [região@129.16]
+1|130.72|São Vito.
+1|132.40|Vito foi um jovem cristão da Sicília, morto como mártir no começo do século quarto, segundo a tradição. [Sicília@133.92] [do@136.32]
+1|138.61|Com o tempo, ele virou protetor dos dançarinos, dos atores, e das pessoas com epilepsia. [dos@140.61] [pessoas@142.93]
+1|144.73|A festa dele era em junho, e em algumas cidades do Reno, as pessoas dançavam diante da imagem do santo, pedindo saúde para o ano seguinte. [e@146.49] [as@148.21] [do@150.29] [ano@152.13]
+1|153.93|Segundo uma crença popular, São Vito tinha o poder de lançar uma maldição sobre os pecadores. [tinha@156.37] [maldição@157.77]
+1|160.12|E a maldição era essa:
+1|162.13|fazer a pessoa dançar sem parar.
+2|0.08|No dia catorze de julho de mil quinhentos e dezoito, uma mulher chamada Frau Troffea começou a dançar numa rua de Estrasburgo. [mil@1.60] [chamada@3.68] [numa@6.08]
+2|8.13|Das seis crônicas que falam do episódio, quatro dão o nome dela como a primeira. [episódio@9.48] [como@11.60]
+2|12.95|Não se sabe quase nada sobre ela. [ela@14.56]
+2|15.17|Nem a idade, nem o rosto.
+2|17.15|Só o nome, e o que ela fez. [ela@18.36]
+2|19.68|Os relatos dizem que ela dançou por quatro a seis dias. [por@21.56]
+2|23.66|Parava só para dormir, quando o corpo desabava de cansaço. [corpo@25.28]
+2|27.42|Acordava, e voltava a dançar.
+2|29.83|O marido, envergonhado, não conseguia fazer nada. [nada@32.64]
+2|33.43|Uma multidão se juntava para olhar.
+2|36.21|Depois de alguns dias, as autoridades colocaram Frau Troffea numa carroça e a mandaram para fora da cidade, para um santuário de São Vito, nas colinas perto de Saverne, a uns cinquenta quilômetros dali. [colocaram@38.16] [a@40.48] [para@42.28] [nas@44.00] [uns@45.92]
+2|47.84|Mas era tarde demais.
+2|49.97|Na rua onde ela tinha dançado, outras pessoas começaram a dançar. [outras@51.96]
+2|54.45|Primeiro uma, depois outra.
+2|56.56|Em poucos dias, eram mais de trinta. [trinta@58.44]
+2|59.35|E a dança se espalhou pela cidade. [cidade@60.96]
+2|62.00|Não era uma dança alegre.
+2|63.76|Os relatos falam de pessoas pulando, girando, se debatendo, com os braços para cima, gritando por socorro, os olhos perdidos. [girando@66.04] [para@68.48] [olhos@71.04]
+2|72.47|Elas pareciam não estar ali.
+2|74.54|Os pés ficavam em carne viva, os sapatos se encharcavam de sangue, e mesmo assim elas não paravam. [os@76.56] [e@78.80]
+2|81.28|Diante de dezenas de pessoas dançando sem parar pelas ruas, o conselho de Estrasburgo precisava fazer alguma coisa. [sem@83.64] [de@85.64]
+2|88.40|E primeiro, ouviu os religiosos.
+2|90.77|Para eles, a explicação era clara:
+2|92.88|aquilo era a vingança de São Vito. [Vito@94.64]
+2|95.59|Mas os médicos da cidade discordaram.
+2|97.91|Eles disseram que não era maldição nenhuma. [nenhuma@99.44]
+2|100.20|Era uma doença natural, causada pelo sangue quente demais. [sangue@102.32]
+2|104.00|E propuseram um tratamento que, na lógica da medicina da época, fazia sentido: [lógica@106.00] [sentido@108.08]
+2|108.87|se o sangue estava quente, o jeito era deixar a pessoa dançar até o mal sair do corpo. [jeito@110.48] [até@112.32]
+2|114.39|E o conselho concordou.
+2|115.99|As corporações dos carpinteiros e dos curtidores de couro transformaram os seus salões em pistas de dança. [curtidores@117.92] [salões@120.12]
+2|122.29|Montaram um palco de madeira no mercado de cavalos, e outro no mercado de grãos. [mercado@123.72] [mercado@125.48]
+2|126.63|A cidade pagou músicos, com tambores, flautas e cornetas, para tocar dia e noite. [flautas@129.12] [e@131.40]
+2|132.20|E contratou homens fortes, para segurar os dançarinos de pé quando eles começassem a cair. [os@134.53] [começassem@136.05]
+2|138.13|Foi um desastre.
+2|139.78|A música e o espetáculo atraíram ainda mais gente. [ainda@141.89]
+2|143.24|E quanto mais pessoas viam aquilo, mais pessoas começavam a dançar. [mais@145.41]
+2|147.81|Em agosto, segundo a crônica de uma família da cidade, cerca de quatrocentas pessoas tinham sido tomadas pela dança. [uma@149.57] [quatrocentas@151.41] [dança@154.21]
+2|155.29|A cura tinha virado combustível.
+3|0.08|No meio de agosto, o conselho mudou de ideia. [mudou@2.00]
+3|3.35|Mandou desmontar os palcos.
+3|5.42|Proibiu as danças em público e quase toda música na cidade, até o fim de setembro. [quase@7.16] [o@9.52]
+3|11.51|Quem escreveu essa ordem foi um dos homens mais famosos de Estrasburgo: [dos@13.12]
+3|15.80|Sebastian Brant, o autor de A Nau dos Insensatos, um dos livros mais lidos da Europa naquela época. [Nau@18.00] [mais@20.24]
+3|22.78|Brant trabalhava para o conselho, e a ordem tinha uma exceção curiosa: [a@24.72]
+3|27.18|em casamentos e missas novas, ainda dava para tocar instrumentos de corda. [dava@29.44]
+3|31.68|Mas nada de tambores, nem pandeiros.
+3|34.86|E as autoridades passaram a acreditar que, afinal, os religiosos tinham razão. [que@36.88]
+3|40.23|Se aquilo era castigo de São Vito, então só São Vito podia acabar com aquilo. [Vito@41.60] [acabar@43.76]
+3|44.95|A cidade proibiu o jogo, a prostituição e outros pecados, e mandou rezar missas pelos dançarinos. [prostituição@46.72] [rezar@49.28]
+3|51.52|Os casos mais graves foram colocados em carroças e levados até o santuário de São Vito, perto de Saverne, numa viagem que, segundo os relatos, levava até três dias. [em@53.64] [santuário@55.48] [Saverne@57.28] [relatos@59.68]
+3|62.64|Lá, os dançarinos passavam por um ritual. [ritual@64.68]
+3|65.58|Os padres os colocavam diante de uma imagem de madeira de São Vito. [uma@67.32] [Vito@68.80]
+3|69.51|Punham pequenas cruzes nas mãos deles.
+3|72.07|E calçavam neles sapatos vermelhos.
+3|74.88|Os sapatos eram aspergidos com água benta, e marcados com cruzes de óleo consagrado, em cima e embaixo. [benta@76.96] [óleo@79.04]
+3|82.15|Tudo no meio da fumaça do incenso, e de orações em latim. [incenso@83.60]
+3|86.15|E aí aconteceu a coisa mais estranha da história. [estranha@88.16]
+3|89.92|Funcionou.
+3|91.04|Ou pelo menos parecia ter funcionado.
+3|93.92|Nas semanas seguintes, o número de dançarinos caiu. [dançarinos@95.76]
+3|97.19|No começo de setembro, a dança praticamente tinha acabado. [praticamente@99.04]
+3|100.87|Tão de repente quanto tinha começado.
+3|103.52|E como a gente sabe de tudo isso? [tudo@104.64]
+3|105.59|Pelas anotações do conselho da cidade, por sermões da catedral, por crônicas de famílias de Estrasburgo, e pelo arquiteto Daniel Specklin, que décadas depois copiou os registros do conselho na sua própria crônica. [por@107.84] [de@110.08] [arquiteto@111.88] [copiou@114.80] [sua@116.80]
+3|118.48|Agora, a pergunta que todo mundo faz: [faz@120.68]
+3|121.52|quantas pessoas morreram?
+3|123.27|E aqui é preciso separar o fato da lenda. [fato@125.20]
+3|126.39|Na internet, é comum ler que até quinze pessoas morriam por dia, e que o total passou de cem. [até@128.08] [e@130.51] [cem@131.96]
+3|132.44|Mas esse número vem de relatos escritos bem depois. [escritos@134.24]
+3|136.12|Os registros da própria cidade, as ordens do conselho e as anotações dos médicos, confirmam a dança, a música, os palcos e as viagens a Saverne. [ordens@138.28] [dos@140.20] [música@142.52] [a@144.80]
+3|145.88|Mas não falam de mortes.
+3|148.32|É possível que algumas pessoas tenham morrido de exaustão, de infarto ou de derrame, depois de dias dançando no calor do verão. [morrido@150.12] [de@152.32] [no@154.72]
+3|156.17|Mas quantas, ninguém sabe.
+3|158.32|E alguns historiadores acham que podem ter sido poucas, ou nenhuma. [ter@160.20]
+3|162.74|O que é certo é isso:
+3|164.28|durante quase dois meses, uma das cidades mais ricas do império viu centenas de moradores dançarem contra a própria vontade. [cidades@166.50] [centenas@168.80] [própria@171.00]
+3|172.27|E nem os médicos, nem os padres, nem o conselho souberam dizer por quê. [padres@173.80] [por@176.28]
+4|0.06|E o mais estranho é que Estrasburgo não foi a primeira. [Estrasburgo@1.40]
+4|4.64|Em mil trezentos e setenta e quatro, mais de cem anos antes, uma onda de dança começou em Aachen, na Alemanha, e desceu pelo vale do Reno. [quatro@6.12] [uma@8.60] [Aachen@10.20] [vale@12.32]
+4|13.52|Chegou a Colônia, a Metz, a Utrecht, e à própria Estrasburgo. [Utrecht@15.52]
+4|18.06|Os relatos falam de grupos dançando de cidade em cidade, alguns gritando que viam visões, alguns caindo de exaustão. [de@19.88] [que@22.40] [exaustão@24.64]
+4|26.36|Antes disso, em mil duzentos e trinta e sete, segundo uma crônica, um grupo de crianças saiu dançando de Erfurt, na Alemanha, até a cidade de Arnstadt, a uns vinte quilômetros. [trinta@28.32] [um@30.48] [de@32.40] [cidade@34.48] [quilômetros@36.40]
+4|37.67|Uma história que lembra muito a lenda do flautista de Hamelin. [lenda@39.20]
+4|41.97|Entre mil trezentos e setenta e quatro e mil quinhentos e dezoito, houve mais de dez surtos de dança registrados. [quatro@43.40] [houve@45.52] [dança@47.20]
+4|48.79|E quase todos aconteceram na mesma região: [região@50.96]
+4|51.84|ao longo dos rios Reno e Mosela. [Mosela@53.48]
+4|54.67|Justamente onde as pessoas acreditavam na maldição de São Vito. [maldição@56.72]
+4|59.02|Então, o que fez centenas de pessoas dançarem até cair? [pessoas@60.80]
+4|63.52|A primeira teoria é um veneno.
+4|65.83|O esporão do centeio é um fungo que cresce no centeio úmido, a base do pão dos mais pobres. [fungo@67.40] [a@69.32] [pobres@70.52]
+4|71.42|Ele produz substâncias parecidas com o éle-ésse-dê, e pode causar convulsões, alucinações e espasmos. [éle-ésse-dê@73.32] [e@76.96]
+4|78.23|Na Idade Média, surtos de envenenamento por esse fungo eram chamados de Fogo de Santo Antônio. [por@80.48] [Fogo@82.32]
+4|84.32|Mas o historiador John Waller, que escreveu o livro mais completo sobre o caso, descarta essa ideia. [escreveu@86.12] [o@87.92]
+4|90.22|O fungo também aperta os vasos sanguíneos e corta a circulação dos braços e das pernas. [sanguíneos@91.95] [braços@93.92]
+4|95.51|Uma pessoa envenenada teria convulsões, mas não conseguiria dançar por dias. [não@98.13]
+4|100.39|E um veneno não explicaria por que tantas pessoas, de lugares e casas diferentes, fizeram exatamente a mesma coisa. [que@102.04] [casas@104.16] [coisa@107.20]
+4|108.71|A segunda teoria diz que tudo foi encenado. [foi@110.52]
+4|111.75|Que seriam grupos religiosos, fazendo rituais proibidos e usando a dança como disfarce. [proibidos@114.24] [disfarce@116.24]
+4|117.34|Mas os relatos descrevem gente apavorada, pedindo ajuda, e não fiéis num culto. [pedindo@119.76] [culto@121.68]
+4|123.04|Uma explicação bem mais antiga veio de um médico famoso, o suíço Paracelso, que passou por Estrasburgo alguns anos depois. [de@125.12] [Paracelso@127.04] [anos@129.68]
+4|130.86|Para ele, Frau Troffea começou a dançar só para irritar o marido. [dançar@132.72]
+4|134.99|E as outras mulheres teriam imitado, pelo mesmo motivo. [pelo@137.64]
+4|139.16|Uma explicação que hoje soa mais preconceituosa do que científica. [preconceituosa@141.16]
+4|143.54|Mas Paracelso acertou em um ponto:
+4|145.86|ele achava que a causa estava na mente, e não no corpo. [na@147.32]
+4|150.20|Essa é a teoria mais aceita hoje: [hoje@152.20]
+4|152.98|uma doença psicogênica em massa.
+4|155.80|Para John Waller, a fome, as doenças e o medo deixaram os mais pobres de Estrasburgo num estado de desespero extremo. [doenças@157.72] [mais@159.56] [de@161.64]
+4|163.39|E numa cidade onde todos acreditavam que São Vito podia castigar com a dança, bastou uma pessoa começar. [que@165.48] [a@167.28]
+4|170.27|O medo da maldição fez as pessoas entrarem num estado parecido com um transe. [pessoas@171.80] [um@173.80]
+4|174.84|E a crença virou realidade.
+5|0.08|Pode parecer coisa do passado.
+5|2.88|Mas, em mil novecentos e sessenta e dois, em Tanganica, onde hoje fica a Tanzânia, uma crise de riso começou num internato de meninas e se espalhou para aldeias vizinhas. [e@4.68] [fica@6.92] [riso@8.84] [e@10.96]
+5|13.20|Escolas tiveram que fechar.
+5|15.12|Não havia vírus, nem veneno.
+5|17.16|Só o riso, passando de pessoa para pessoa. [para@19.12]
+5|21.01|Mesmo assim, a Praga da Dança guarda perguntas sem resposta. [guarda@23.04]
+5|25.50|Por que em Estrasburgo, e por que naquele verão? [que@27.20]
+5|28.48|Por que a dança, e não outro sintoma? [outro@29.88]
+5|31.03|E como um ritual com sapatos vermelhos conseguiu acabar com aquilo que os médicos não conseguiram? [vermelhos@32.64] [os@34.84]
+5|37.40|Mais de quinhentos anos depois, o nome de Frau Troffea ainda aparece nas crônicas. [nome@39.28] [nas@41.44]
+5|42.63|Ninguém sabe o que ela sentiu, naquele dia de julho, parada numa rua de pedra. [naquele@44.40] [rua@46.16]
+5|47.28|Só sabemos que ela começou a dançar. [dançar@48.76]
+5|49.52|E que uma cidade inteira foi atrás. [atrás@51.04]
+5|52.28|E você?
+5|53.11|O que acha que aconteceu em Estrasburgo? [Estrasburgo@54.24]
+5|55.25|Foi veneno, medo, ou alguma coisa que a gente ainda não entende? [que@57.52]
+5|59.20|Deixa sua teoria nos comentários.
+5|61.56|Eu sou o Historiador.
+5|62.87|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@64.24] [conseguiu@66.00]
