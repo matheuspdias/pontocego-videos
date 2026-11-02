@@ -1,13 +1,6 @@
 {
   "slug": "praga-da-danca",
   "publicar_em": "2026-11-03T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b98d6830-d43b-4091-91be-8cc0b526fc20.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=ac0ccfb6-7db6-44ae-a71e-c105be08c170.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e23b0bd7-f682-4dc5-aa04-b52b850cb3e1.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=ad85a63f-56ee-48af-a616-1663ad33f6ce.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1c1997fb-3842-436a-a0a8-85c936457edf.wav"
-  ],
   "duracoes": [
     164.963,
     158.093,
@@ -39,6 +32,36 @@
   ],
   "thumbnail": "videos/praga-da-danca/thumb/praga_danca_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=22da116c-bb7a-4ce4-9094-9b46aacd1566.wav",
-  "ganchos_duracao": 24.189
+  "ganchos_duracao": 24.189,
+  "video_id": "U0yaQBdUFTU",
+  "url": "https://youtu.be/U0yaQBdUFTU",
+  "agendado_para": "2026-11-03T18:00:00-03:00",
+  "enviado_em": "2026-11-02T14:42:26-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "troffea",
+      "video_id": "FhCbTc9VuX8",
+      "url": "https://youtu.be/FhCbTc9VuX8",
+      "titulo": "Ela começou a dançar e uma cidade inteira foi atrás #Shorts",
+      "duracao": 89.6,
+      "agendado_para": "2026-11-04T12:00:00-03:00"
+    },
+    {
+      "id": "musicos",
+      "video_id": "T6esIx0-IAo",
+      "url": "https://youtu.be/T6esIx0-IAo",
+      "titulo": "A cidade tentou curar a dança contratando músicos #Shorts",
+      "duracao": 84.7,
+      "agendado_para": "2026-11-05T12:00:00-03:00"
+    },
+    {
+      "id": "teorias",
+      "video_id": "aaiW3HbTeQ8",
+      "url": "https://youtu.be/aaiW3HbTeQ8",
+      "titulo": "Por que centenas dançaram até cair em 1518? #Shorts",
+      "duracao": 126.5,
+      "agendado_para": "2026-11-06T12:00:00-03:00"
+    }
+  ]
 }
