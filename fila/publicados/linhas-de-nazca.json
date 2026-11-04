@@ -1,13 +1,6 @@
 {
   "slug": "linhas-de-nazca",
   "publicar_em": "2026-11-05T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=554a72dc-7694-4780-ad3e-eb128e5601fa.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=2d0f2f32-ffe9-428b-a164-3c9e5c462e71.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b0a1276a-af8d-4171-a8d3-954cc7c9d979.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=72962839-d33c-4db8-b330-57791f11dd73.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=34e45b7f-3fd8-4cd9-a2c9-78e18e2cacf9.wav"
-  ],
   "duracoes": [
     155.115,
     167.523,
@@ -42,6 +35,36 @@
   ],
   "thumbnail": "videos/linhas-de-nazca/thumb/nazca_thumb_B.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=27d97b0c-f2c6-4c96-bbfc-5df2e822cd47.wav",
-  "ganchos_duracao": 27.167
+  "ganchos_duracao": 27.167,
+  "video_id": "FVD0hSapCxo",
+  "url": "https://youtu.be/FVD0hSapCxo",
+  "agendado_para": "2026-11-05T18:00:00-03:00",
+  "enviado_em": "2026-11-04T14:37:56-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "astronautas",
+      "video_id": "eFMK7_G3cB8",
+      "url": "https://youtu.be/eFMK7_G3cB8",
+      "titulo": "Pistas de pouso para ETs? Alguém resolveu testar #Shorts",
+      "duracao": 145.2,
+      "agendado_para": "2026-11-07T12:00:00-03:00"
+    },
+    {
+      "id": "abertura",
+      "video_id": "o4Jop-jrn0M",
+      "url": "https://youtu.be/o4Jop-jrn0M",
+      "titulo": "Um beija-flor gigante que ninguém vê do chão #Shorts",
+      "duracao": 106.9,
+      "agendado_para": "2026-11-08T12:00:00-03:00"
+    },
+    {
+      "id": "ia",
+      "video_id": "W6e1TjyNt_o",
+      "url": "https://youtu.be/W6e1TjyNt_o",
+      "titulo": "Uma IA achou 303 desenhos escondidos em Nazca #Shorts",
+      "duracao": 92.8,
+      "agendado_para": "2026-11-09T12:00:00-03:00"
+    }
+  ]
 }
