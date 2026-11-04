@@ -14,6 +14,7 @@ O Matheus pode mexer à vontade: mover ideias, apagar, marcar como proibido.
 - O Passo Dyatlov (`passo-dyatlov`), tema `neve` (caso histórico / fenômeno sem explicação)
 - O voo Varig 967 (`varig-967`), tema `mar` (desaparecimento, caso brasileiro)
 - A Praga da Dança de 1518, Estrasburgo (`praga-da-danca`), tema `cidade` (fenômeno sem explicação)
+- As Linhas de Nazca, Peru (`linhas-de-nazca`), tema `deserto` (enigma arqueológico)
 
 ## Ideias (opcional, o Matheus pode preencher)
 - 

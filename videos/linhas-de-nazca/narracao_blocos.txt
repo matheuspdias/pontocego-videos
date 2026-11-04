@@ -1,0 +1,190 @@
+# As Linhas de Nazca — voz "Pedro Lima - Serious" (HeyGen, ElevenLabs v4), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  155.115s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=554a72dc-7694-4780-ad3e-eb128e5601fa.wav
+# bloco2  167.523s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=2d0f2f32-ffe9-428b-a164-3c9e5c462e71.wav
+# bloco3  140.382s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b0a1276a-af8d-4171-a8d3-954cc7c9d979.wav
+# bloco4  171.442s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=72962839-d33c-4db8-b330-57791f11dd73.wav
+# bloco5  150.152s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=34e45b7f-3fd8-4cd9-a2c9-78e18e2cacf9.wav
+# Offsets absolutos: B1=0.000  B2=156.115  B3=324.638  B4=466.020  B5=638.462  (fim ~788.61)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.08|Num deserto do sul do Peru, existe um beija-flor do tamanho de um campo de futebol. [existe@2.08] [um@4.04]
+1|5.92|Ao lado dele, um macaco com a cauda enrolada em espiral. [a@7.76]
+1|9.84|Uma aranha.
+1|10.92|Um condor de asas abertas.
+1|13.39|E milhares de linhas, que atravessam o deserto, sobem morros, e não desviam de nada. [o@15.52] [desviam@17.92]
+1|20.29|Algumas linhas seguem retas por quilômetros, como se tivessem sido traçadas com régua. [como@23.04] [régua@24.80]
+1|25.76|Outras formam triângulos e trapézios enormes, maiores que quarteirões inteiros. [maiores@28.88]
+1|31.57|Quem caminha por ali não vê desenho nenhum. [desenho@33.24]
+1|34.69|Do chão, são só trilhas rasas no meio das pedras. [no@36.80]
+1|38.54|Para enxergar o beija-flor, é preciso estar lá no alto. [estar@40.72]
+1|42.39|E essas figuras foram feitas há mais de mil e quinhentos anos. [mais@44.12]
+1|46.52|Por um povo que não tinha escrita, não tinha avião, e não tinha como subir ao céu para ver o que estava desenhando. [escrita@47.76] [tinha@50.00] [ver@51.60]
+1|53.62|Então, como eles fizeram?
+1|55.81|E, mais estranho ainda:
+1|57.89|para quem eles fizeram?
+1|59.68|Esta é a história das Linhas de Nazca. [de@61.60]
+1|63.10|As linhas ficam num planalto seco, entre as cidades de Nazca e Palpa, a uns quatrocentos quilômetros ao sul de Lima. [entre@65.36] [Palpa@66.96] [sul@69.36]
+1|70.47|É um dos lugares mais secos do planeta. [do@72.24]
+1|73.28|Quase não chove, e o vento é fraco junto ao chão. [é@74.96]
+1|76.64|É por isso que os desenhos sobreviveram. [sobreviveram@77.92]
+1|79.35|O chão desse deserto é coberto por pedrinhas avermelhadas, escurecidas pelo óxido de ferro e pelo sol. [por@81.12] [de@84.36]
+1|86.16|Logo embaixo delas, a terra é bem mais clara. [bem@88.13]
+1|89.42|Os antigos moradores da região descobriram isso. [isso@91.76]
+1|92.47|Bastava tirar as pedras escuras e empilhar nas bordas, para que surgisse uma faixa clara no chão. [empilhar@94.60] [uma@96.76]
+1|98.87|Os sulcos têm só dez a quinze centímetros de profundidade. [quinze@100.48]
+1|102.72|Mas, somadas, as linhas passam de mil e trezentos quilômetros. [mil@105.28]
+1|107.44|São centenas de trapézios, triângulos, espirais, e mais de setenta figuras de animais e plantas. [e@111.04] [animais@112.84]
+1|114.52|Os números impressionam.
+1|116.38|O beija-flor tem cerca de noventa e três metros. [e@118.29]
+1|119.66|O macaco, noventa e três por cinquenta e oito. [cinquenta@121.68]
+1|122.88|O condor passa de cento e trinta metros de uma ponta a outra. [trinta@124.48] [outra@126.00]
+1|126.72|E algumas figuras chegam a quase quatrocentos metros. [quatrocentos@128.64]
+1|130.79|Os arqueólogos atribuem a maior parte do trabalho a duas culturas. [do@132.96]
+1|135.08|Primeiro, o povo Paracas.
+1|137.84|Depois, os Nazca, que viveram naquela região mais ou menos entre quinhentos antes de Cristo e quinhentos depois de Cristo. [região@140.24] [antes@142.36] [de@144.60]
+1|145.68|Eram agricultores e ceramistas habilidosos, que faziam vasos coloridos e tecidos finíssimos. [faziam@148.60]
+1|152.12|E que conseguiam cultivar no meio do deserto. [do@154.08]
+2|0.08|Durante séculos, quase ninguém prestou atenção nas linhas. [nas@2.96]
+2|4.35|Em mil quinhentos e cinquenta e três, um cronista espanhol, Pedro Cieza de León, passou pela região e anotou que havia sinais no chão. [três@5.68] [de@8.20] [anotou@10.16]
+2|12.38|Ele achou que fossem marcas de caminho. [caminho@13.92]
+2|15.67|Foi só no século vinte que as linhas começaram a chamar atenção. [as@17.28]
+2|19.82|Em mil novecentos e vinte e sete, o arqueólogo peruano Toribio Mejía Xesspe notou as linhas enquanto percorria a região a pé. [sete@21.04] [Xesspe@23.68] [a@26.27]
+2|27.44|E, nos anos seguintes, pilotos que cruzavam aquele deserto começaram a relatar algo estranho: [cruzavam@29.52] [algo@32.08]
+2|33.34|lá de cima, as trilhas formavam desenhos. [desenhos@35.44]
+2|37.28|Em mil novecentos e quarenta e um, chegou a Nazca um historiador americano chamado Paul Kosok. [um@38.76] [americano@40.56]
+2|43.02|Ele estudava os antigos sistemas de irrigação do Peru, e achou que as linhas fossem canais de água. [irrigação@44.88] [as@46.56]
+2|48.80|Mas aí aconteceu uma coisa.
+2|51.76|Era junho, perto do solstício de inverno do hemisfério sul. [inverno@53.92]
+2|55.76|Kosok estava no deserto no fim da tarde, quando percebeu que o sol se punha bem na direção de uma das linhas. [da@57.52] [sol@59.20] [de@60.96]
+2|62.30|Como se a linha tivesse sido traçada para apontar aquele momento do ano. [traçada@63.60] [ano@65.92]
+2|66.96|Kosok ficou fascinado.
+2|69.26|Segundo se conta, ele chamou aquele deserto de o maior livro de astronomia do mundo. [deserto@71.08] [astronomia@73.08]
+2|75.27|Quem trabalhava com ele era uma matemática alemã chamada Maria Reiche. [matemática@76.72]
+2|79.43|Ela tinha nascido em Dresden, em mil novecentos e três, e chegado ao Peru nos anos trinta. [mil@81.08] [ao@82.92]
+2|84.69|Depois que Kosok foi embora, ela ficou. [ficou@86.52]
+2|87.19|E dedicou o resto da vida às linhas. [às@88.80]
+2|90.53|Maria Reiche passou décadas medindo e mapeando as figuras, com fita métrica, bússola e paciência. [mapeando@92.80] [bússola@95.20]
+2|97.10|Morava perto do deserto, com muito pouco. [pouco@99.28]
+2|100.05|Usou o dinheiro dos próprios livros para pagar vigias. [para@101.76]
+2|103.11|E brigou com o governo para proteger aquele chão. [proteger@104.64]
+2|106.55|Porque o deserto já tinha sido ferido. [ferido@108.24]
+2|109.04|A rodovia Pan-Americana, aberta antes que alguém entendesse o que havia ali, passou por cima de uma das figuras, um lagarto, e cortou o desenho ao meio. [alguém@111.56] [passou@113.32] [figuras@114.64] [desenho@116.92]
+2|118.86|Maria Reiche conseguiu que o acesso fosse restringido, e ajudou a construir uma torre de observação à beira da estrada, para que os visitantes vissem as figuras sem pisar nelas. [fosse@120.48] [uma@122.72] [da@124.44] [vissem@126.16]
+2|128.60|Em mil novecentos e noventa e quatro, as linhas viraram Patrimônio Mundial da Unesco. [quatro@130.08] [da@132.92]
+2|134.32|Ela morreu quatro anos depois, aos noventa e cinco anos. [noventa@136.52]
+2|138.12|E foi enterrada perto de Nazca.
+2|141.57|Mas a grande ideia dela, a de um calendário gigante desenhado no chão, não resistiu ao tempo. [de@143.52] [chão@145.56]
+2|148.28|Nos anos seguintes, astrônomos como Gerald Hawkins e Anthony Aveni testaram as direções das linhas. [Hawkins@150.76] [direções@153.32]
+2|154.84|Algumas apontam para o nascer ou o pôr do sol em datas importantes. [o@156.90] [importantes@158.40]
+2|159.40|Mas a maioria não aponta para nada no céu. [nada@161.48]
+2|162.80|Com tantas linhas, em tantas direções, algumas iam acertar por acaso. [algumas@165.52]
+3|0.20|Então, se não era um calendário, o que era? [o@2.48]
+3|4.77|Em mil novecentos e sessenta e oito, um escritor suíço chamado Erich von Däniken publicou um livro que, no Brasil, ficou conhecido como Eram os Deuses Astronautas? [oito@6.24] [von@8.72] [no@10.84] [os@13.36]
+3|15.32|O livro vendeu milhões de exemplares.
+3|18.04|E uma das ideias mais famosas dele era sobre Nazca. [dele@19.76]
+3|22.53|Para von Däniken, as linhas retas pareciam pistas de pouso. [pareciam@24.56]
+3|26.68|E os desenhos só faziam sentido para quem estivesse voando. [para@28.88]
+3|30.80|Ou seja:
+3|31.72|alguém, lá de cima, teria orientado aquele povo. [aquele@34.24]
+3|35.69|Visitantes vindos de outro lugar.
+3|38.72|A ideia pegou.
+3|40.24|Uma figura numa encosta, com olhos grandes e redondos e uma mão levantada, ganhou o apelido de O Astronauta. [grandes@42.24] [levantada@43.92] [Astronauta@46.24]
+3|47.51|Ela tem cerca de trinta metros, e para alguns parece um homem de capacete. [e@49.40] [de@50.88]
+3|52.14|Para outros, uma coruja com corpo de gente. [de@54.32]
+3|56.06|Só que a teoria tem problemas sérios. [sérios@57.64]
+3|58.64|O chão de Nazca é macio, feito de areia e cascalho. [feito@60.56]
+3|62.40|Qualquer veículo pesado que pousasse ali afundaria, e deixaria marcas por séculos. [afundaria@64.72]
+3|68.12|Conta-se que a própria Maria Reiche brincava: [brincava@69.72]
+3|70.52|se os astronautas tivessem pousado ali, teriam ficado atolados. [teriam@72.80]
+3|75.12|E havia uma pergunta mais simples.
+3|77.57|Seria mesmo impossível fazer aqueles desenhos sem ver de cima? [sem@80.08]
+3|82.07|No começo dos anos oitenta, o pesquisador americano Joe Nickell decidiu testar. [pesquisador@83.72]
+3|86.94|Com algumas pessoas, estacas de madeira e cordas, sem nenhum equipamento moderno, ele reproduziu o condor de Nazca, em tamanho real, num campo nos Estados Unidos. [e@89.16] [ele@91.84] [em@93.84] [Estados@95.52]
+3|96.78|Levou poucos dias.
+3|98.38|E, quando fotografaram do alto, a figura estava quase perfeita. [figura@100.32]
+3|103.20|O método é antigo e simples.
+3|105.73|Desenha-se a figura pequena, divide-se em partes, e cada parte é ampliada no chão com estacas e cordas. [partes@108.08] [no@110.16]
+3|112.31|E isso não é só um palpite. [palpite@113.32]
+3|114.15|Nas pontas de algumas linhas, os arqueólogos encontraram restos de estacas de madeira. [arqueólogos@115.84] [madeira@118.24]
+3|119.03|Foi assim, aliás, que conseguiram datar o trabalho. [o@121.00]
+3|122.48|Então o como, talvez, já tenha resposta. [resposta@125.12]
+3|126.07|Um povo organizado, com cordas, estacas e muito tempo, conseguiria desenhar um beija-flor gigante sem nunca sair do chão. [e@129.04] [beija-flor@131.36] [chão@133.76]
+3|134.38|O mistério de verdade é outro.
+3|136.75|Por que alguém faria um desenho que nunca ia conseguir ver? [que@138.35]
+4|0.07|Uma das respostas mais fortes tem a ver com água. [a@2.16]
+4|4.30|Para os Nazca, a água era tudo. [tudo@6.28]
+4|7.39|Os rios da região passam boa parte do ano secos. [parte@9.12]
+4|10.94|Para sobreviver, eles construíram os puquios, galerias subterrâneas, com aberturas em espiral, que buscavam água debaixo do deserto. [galerias@13.76] [que@16.64]
+4|19.33|Algumas funcionam até hoje.
+4|21.84|Nos anos oitenta, o antropólogo Johan Reinhard propôs que as linhas faziam parte de um culto às montanhas e à água. [Reinhard@24.24] [parte@26.40] [e@28.24]
+4|29.28|Muitas linhas apontam para as montanhas de onde vinha a chuva, ou seguem o curso de rios e fontes. [de@31.32] [seguem@33.04] [fontes@34.40]
+4|35.44|Outro pesquisador, David Johnson, defendeu que algumas linhas marcariam até onde corria a água por baixo da terra. [algumas@38.20] [a@40.75]
+4|43.03|E há um detalhe que muda tudo. [tudo@44.64]
+4|45.60|Várias figuras foram desenhadas com uma única linha contínua. [única@47.84]
+4|49.52|Ela entra, percorre o corpo inteiro do animal, e sai, sem nunca se cruzar. [do@51.84] [se@54.00]
+4|54.96|Como um caminho.
+4|56.72|Muitos arqueólogos acreditam que as linhas eram feitas para serem percorridas a pé. [eram@58.88] [pé@60.80]
+4|61.36|Em procissão, talvez com música e oferendas, num ritual para pedir água e fertilidade. [oferendas@63.52] [e@65.96]
+4|67.28|Ao longo de várias linhas, foram encontrados pedaços de cerâmica quebrada de propósito. [encontrados@69.08] [propósito@71.48]
+4|72.54|E, ali perto, ficava Cahuachi, um grande centro cerimonial dos Nazca, com pirâmides de adobe. [grande@75.04] [pirâmides@77.36]
+4|79.11|Nessa visão, ninguém precisava ver o beija-flor de cima. [beija-flor@81.32]
+4|82.71|Bastava caminhar por ele.
+4|84.40|Ou, talvez, quem tinha que ver eram os deuses. [eram@86.80]
+4|88.47|E então, quase um século depois de Mejía Xesspe, veio uma surpresa. [de@90.64]
+4|93.75|Pesquisadores da Universidade de Yamagata, no Japão, estudam Nazca há anos. [Japão@96.08]
+4|98.70|Em parceria com a IBM, eles treinaram uma inteligência artificial para procurar figuras em imagens de altíssima resolução do deserto. [treinaram@100.56] [figuras@103.28] [do@105.72]
+4|106.72|A máquina apontou mais de mil e trezentos lugares suspeitos. [e@108.56]
+4|110.71|E a equipe foi a campo conferir. [conferir@112.08]
+4|113.42|Em seis meses, entre dois mil e vinte e dois e dois mil e vinte e três, eles confirmaram trezentas e três figuras novas. [e@115.09] [mil@116.24] [confirmaram@117.64]
+4|120.56|Até ali, se conheciam cerca de quatrocentas e trinta. [quatrocentas@122.44]
+4|124.22|Num estudo publicado em dois mil e vinte e quatro, o número de desenhos conhecidos deu um salto enorme. [e@125.56] [de@126.92] [enorme@128.92]
+4|130.08|E essas figuras novas são diferentes.
+4|132.75|Muitas são pequenas, com poucos metros, e quase invisíveis até para quem passa do lado. [e@135.48] [passa@137.56]
+4|138.84|Mostram pessoas, cabeças, lhamas e outros animais criados pelo homem, aves, e até orcas. [animais@142.16] [até@144.56]
+4|145.71|E estão espalhadas ao longo de antigas trilhas. [antigas@147.32]
+4|149.44|Para os pesquisadores, essas figuras pequenas funcionavam quase como murais, feitos para serem vistos por quem caminhava pelas trilhas. [funcionavam@152.08] [serem@154.76] [trilhas@156.68]
+4|157.80|Já as grandes figuras de linha, ao longo de caminhos sinuosos, seriam para rituais da comunidade. [ao@159.72] [para@161.88]
+4|163.87|Ou seja:
+4|164.80|talvez as Linhas de Nazca nunca tenham sido feitas para o céu. [tenham@166.68]
+4|168.66|Talvez tenham sido feitas para os pés. [pés@170.68]
+5|0.08|Mas o deserto que guardou esses desenhos por dois mil anos é frágil. [desenhos@1.76] [frágil@3.92]
+5|5.11|Uma pegada, ali, pode durar séculos.
+5|9.09|Em dezembro de dois mil e catorze, ativistas do Greenpeace entraram na área proibida, ao lado do beija-flor, para montar uma mensagem sobre energia renovável. [catorze@10.20] [área@13.08] [para@15.52] [renovável@17.44]
+5|18.62|As pegadas deles ficaram marcadas no chão. [chão@20.72]
+5|21.44|O governo do Peru reagiu com indignação. [indignação@23.12]
+5|25.25|Em dois mil e dezoito, um caminhoneiro saiu da estrada e passou por cima de três geoglifos. [caminhoneiro@26.72] [por@28.96]
+5|31.20|E, em dois mil e vinte e cinco, o próprio governo chegou a reduzir em quarenta e dois por cento a área da reserva, numa região com garimpo ilegal. [e@32.40] [a@34.44] [por@35.84] [numa@37.60]
+5|39.76|Depois das críticas, voltou atrás.
+5|43.04|Ao mesmo tempo, o deserto continua revelando segredos. [revelando@45.52]
+5|47.17|Em dois mil e vinte, durante uma obra num mirante, apareceu numa encosta a figura de um gato de perfil, com uns trinta e sete metros. [uma@48.64] [encosta@50.72] [de@52.24] [sete@53.84]
+5|54.96|Ele tinha sido feito ainda antes dos Nazca, provavelmente pelo povo Paracas. [dos@56.72]
+5|59.83|E estava ali, escondido, o tempo todo. [todo@62.72]
+5|63.91|E não foi o único.
+5|65.60|Em dois mil e dezoito, drones encontraram dezenas de figuras novas perto de Palpa. [encontraram@67.36] [de@69.92]
+5|70.80|Muitas delas também eram dos Paracas, séculos mais antigas que as dos Nazca. [séculos@73.28] [Nazca@74.92]
+5|75.59|E um detalhe chamou atenção:
+5|77.68|várias estavam desenhadas em encostas, viradas para o vale. [para@80.64]
+5|81.59|Quem vivia lá embaixo conseguia ver.
+5|84.64|Então, o que a gente sabe?
+5|86.88|Sabe quem fez:
+5|88.12|os Paracas e os Nazca.
+5|89.92|Sabe como:
+5|90.92|com estacas, cordas, e muito trabalho.
+5|94.16|E não há nenhuma evidência de extraterrestres. [extraterrestres@95.76]
+5|97.35|Mas o porquê continua aberto.
+5|99.68|Eram caminhos de procissão?
+5|101.44|Pedidos de chuva?
+5|102.80|Mapas da água escondida?
+5|104.40|Murais para quem passava?
+5|105.95|Ou mensagens para deuses que olhavam lá de cima? [lá@108.08]
+5|109.20|Talvez tudo isso, em épocas diferentes.
+5|112.08|Os Nazca não deixaram nada escrito.
+5|114.54|Deixaram só o desenho.
+5|116.96|E ainda hoje, quando um avião pequeno sobrevoa aquele planalto e o beija-flor aparece lá embaixo, a sensação é a mesma dos primeiros pilotos. [pequeno@118.56] [beija-flor@120.84] [é@123.68]
+5|125.98|De que alguém, há dois mil anos, desenhou aquilo para ser visto de um lugar onde nenhum deles jamais esteve. [anos@127.52] [de@129.64] [jamais@131.44]
+5|133.28|E você?
+5|134.22|Para quem você acha que os Nazca desenharam? [Nazca@135.32]
+5|136.36|Para os deuses, para a água, ou para quem caminhava por ali? [ou@138.76]
+5|141.07|Deixa sua teoria nos comentários.
+5|143.76|Eu sou o Historiador.
+5|145.77|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@147.24] [conseguiu@149.12]

@@ -173,3 +173,9 @@ Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz 
 - Objetos: `red_shoes(crosses)` (ritual de São Vito), `saint_statue(t, glow_on)` (imagem de madeira com auréola e palma), `drum(t, beat)`, `flute`, `fiddle`, `stage(w, h)` (palco de madeira), `cart(t, w, moving, cover)` (carroça de duas rodas), `rye(ergot, h)` (centeio com esporão), `chronicle(w, h, title)` (página de crônica), `council_seal`, `laugh_marks(t)`.
 - Chapéus novos: `hat="coif"` (touca de linho das mulheres) e `hat="beret"` (barrete de mercador/médico/conselheiro).
 - Cores `WOOD WOOD_D RSAND PLASTER SHOE_RED`.
+
+## Deserto do Peru (As Linhas de Nazca)
+- Geoglifos (seção LINHAS DE NAZCA do engine): `geoglyph(c, kind, p, col, lw, glow_a)` desenha a figura como trilha clara contínua, com `p` (0..1) para o efeito de traçar; `kind` = `hummingbird monkey spider condor astronaut cat lizard orca llama trapezoid spiral head`. `glyph_head_pos(kind, p)` dá a ponta do traço (para um caminhante seguir a linha).
+- Chão: `pampa_top(c, t, seed, lines, dark)` (deserto de pedrinhas visto de cima, em cache), `nazca_lines_set(seed, n)` (linhas retas aleatórias), `trapezoid_top`, `pampa_side(c, t, y, hills, track)` (deserto visto do chão), `stone_piles`, `highway_top`.
+- Objetos: `cessna(t)` (avião pequeno de perfil), `cessna_top(t)` + `plane_shadow` (visto de cima), `stake(h)` + `cord(...)`, `mirador(h)` (torre de observação), `puquio(t, r)` (aqueduto em espiral visto de cima), `drone(t)`, `setting_sun(r)`, `shards(seed)` (cacos de cerâmica), `nazca_vase(s)`, `scan_box(w, h, t, col, label)` (caixa de detecção da IA). Cores `GLYPH PAMPA PAMPA_D PAMPA_L NAZCA_RED NAZCA_CREAM`.
+- `videos/linhas-de-nazca/scenes.py` tem `glyph_at` (geoglifo sendo traçado a partir de um tempo), `native` (antigo morador), `hillside` (encosta para geoglifos) e `ai_screen` (tela com detecções). O `tw()` desse vídeo procura a ocorrência mais próxima do tempo dado.

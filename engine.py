@@ -5251,3 +5251,383 @@ def laugh_marks(c, t, n=3):
     for k in range(n):
         y = -((t * 40 + k * 50) % 150)
         text(c, "ha", k * 40 - 40, y, 34, HAND, AMBER, alpha=max(0, 1 - abs(y) / 150))
+
+
+# ================================================================ LINHAS DE NAZCA (deserto do Peru, geoglifos)
+GLYPH = (0.88, 0.82, 0.66)        # traço claro do geoglifo (terra sem as pedras)
+PAMPA = (0.33, 0.20, 0.14)        # chão de pedrinhas avermelhadas
+PAMPA_D = (0.22, 0.13, 0.09)
+PAMPA_L = (0.46, 0.30, 0.20)
+NAZCA_RED = (0.62, 0.24, 0.16)    # cerâmica nazca
+NAZCA_CREAM = (0.86, 0.76, 0.58)
+
+
+def _spiral(cx, cy, r0, r1, turns, n=60, ph=0.0, sx=1):
+    pts = []
+    for i in range(n + 1):
+        k = i / n
+        a = ph + sx * k * turns * 2 * math.pi
+        r = r0 + (r1 - r0) * k
+        pts.append((cx + math.cos(a) * r, cy + math.sin(a) * r))
+    return pts
+
+
+def _mirror(pts):
+    return [(-x, y) for x, y in pts]
+
+
+def _glyph_strokes(kind):
+    """traços (listas de pontos, unidades ~ -100..100) de cada geoglifo estilizado"""
+    if kind == "hummingbird":
+        wing = [(-8, -22), (-60, -34), (-96, -46), (-92, -34), (-78, -36), (-90, -22), (-74, -24), (-84, -10), (-66, -12),
+                (-74, 2), (-8, 0)]
+        body = [(-8, -46), (-11, 0), (-9, 34), (0, 44), (9, 34), (11, 0), (8, -46)]
+        head = _spiral(0, -54, 11, 11, 1.0, 24, math.pi / 2)
+        beak = [(0, -65), (0, -118)]
+        tail = [(-7, 42), (-22, 92), (-10, 84), (0, 100), (10, 84), (22, 92), (7, 42)]
+        return [beak, head, body, wing, _mirror(wing), tail]
+    if kind == "monkey":
+        body = [(-40, -10), (-52, -48), (-30, -76), (2, -78), (22, -56), (18, -20), (4, 6), (-24, 8), (-40, -10)]
+        head = _spiral(-48, -86, 16, 16, 1.0, 24)
+        arm_l = [(-44, -30), (-82, -40), (-96, -64), (-104, -58), (-98, -82), (-90, -74), (-88, -96), (-80, -82), (-72, -98), (-70, -72), (-60, -50)]
+        arm_r = [(12, -60), (46, -78), (62, -100), (70, -92), (74, -110), (80, -96), (90, -104), (86, -84), (96, -80), (80, -66), (20, -40)]
+        legs = [(-24, 8), (-34, 40), (-44, 44), (-40, 54), (-26, 50), (-12, 14)]
+        legs2 = [(0, 6), (10, 40), (0, 46), (6, 54), (20, 48), (12, 4)]
+        tail = [(4, 4), (40, 20)] + _spiral(68, 40, 46, 4, 2.6, 80, math.pi, -1)
+        return [head, body, arm_l, arm_r, legs, legs2, tail]
+    if kind == "spider":
+        abdo = _spiral(0, 30, 34, 34, 1.0, 30, 0)
+        head = _spiral(0, -26, 20, 20, 1.0, 24, 0)
+        legs = []
+        for k, (a, b) in enumerate(((-60, -70), (-74, -30), (-76, 10), (-62, 52))):
+            sy = -30 + k * 14
+            legs.append([(-14, sy), (a, sy - 40 + k * 20), (a - 26, sy - 4 + k * 26)])
+            legs.append([(14, sy), (-a, sy - 40 + k * 20), (-a + 26, sy - 4 + k * 26)])
+        legs[1] = [(14, -30), (60, -76), (84, -110)]
+        return [abdo, head] + legs + [[(0, 64), (0, 84)]]
+    if kind == "condor":
+        wing = [(-12, -30), (-50, -44), (-100, -30), (-96, -20), (-108, -14), (-96, -8), (-104, 0), (-90, 2), (-94, 12),
+                (-72, 8), (-14, 20)]
+        body = [(-12, -30), (-16, 30), (0, 46), (16, 30), (12, -30)]
+        neck = [(-8, -30), (-6, -54), (6, -54), (8, -30)]
+        head = [(-6, -54), (-10, -70), (0, -84), (10, -70), (6, -54)]
+        tail = [(-12, 40), (-34, 90), (-14, 80), (0, 96), (14, 80), (34, 90), (12, 40)]
+        return [head, neck, body, wing, _mirror(wing), tail]
+    if kind == "astronaut":
+        head = _spiral(0, -46, 34, 34, 1.0, 36, 0)
+        eye_l = _spiral(-13, -50, 9, 9, 1.0, 16)
+        eye_r = _spiral(13, -50, 9, 9, 1.0, 16)
+        body = [(-22, -12), (-26, 60), (-10, 64), (-6, 30), (6, 30), (10, 64), (26, 60), (22, -12), (-22, -12)]
+        arm_r = [(22, -6), (54, -10), (60, -46), (66, -50), (68, -38), (72, -50), (74, -34), (64, 2), (24, 10)]
+        arm_l = [(-22, -6), (-46, 18), (-54, 42), (-40, 44), (-34, 22), (-22, 12)]
+        return [head, eye_l, eye_r, body, arm_r, arm_l]
+    if kind == "cat":
+        body = [(-60, 0), (-56, -26), (-20, -30), (30, -30), (54, -26), (58, -6), (56, 20), (44, 22), (40, 4), (-36, 6),
+                (-40, 24), (-52, 24), (-60, 0)]
+        head = [(54, -26), (60, -50), (66, -40), (78, -42), (84, -54), (88, -34), (82, -16), (58, -6)]
+        eye = _spiral(74, -32, 3, 3, 1.0, 10)
+        tail = [(-60, -10), (-84, -34), (-98, -64)]
+        stripes = [[(-80, -26), (-88, -32)], [(-88, -40), (-96, -44)], [(-94, -54), (-102, -56)]]
+        legs = [[(-30, 6), (-32, 24)], [(26, 6), (24, 24)]]
+        return [body, head, eye, tail] + stripes + legs
+    if kind == "lizard":
+        body = [(-14, -60), (-10, -84), (0, -96), (10, -84), (14, -60), (12, 30), (4, 100), (0, 130), (-4, 100), (-12, 30), (-14, -60)]
+        legs = [[(-12, -40), (-44, -54), (-50, -70)], [(12, -40), (44, -54), (50, -70)],
+                [(-12, 14), (-44, 30), (-50, 48)], [(12, 14), (44, 30), (50, 48)]]
+        return [body] + legs
+    if kind == "orca":
+        body = [(-90, 0), (-60, -22), (0, -30), (50, -20), (86, -6), (92, 4), (70, 12), (20, 22), (-40, 18), (-90, 0)]
+        fin = [(0, -30), (8, -66), (24, -26)]
+        tail = [(-88, 0), (-106, -22), (-100, 0), (-108, 20), (-88, 4)]
+        eye = _spiral(62, -4, 4, 4, 1.0, 10)
+        return [body, fin, tail, eye]
+    if kind == "llama":
+        body = [(-50, -10), (30, -10), (40, -30), (46, -70), (60, -76), (66, -66), (54, -60), (52, -6), (40, 10), (-44, 12), (-50, -10)]
+        ears = [(52, -72), (50, -90), (58, -78)]
+        legs = [[(-40, 12), (-42, 52)], [(-26, 12), (-24, 52)], [(22, 10), (20, 52)], [(36, 8), (38, 52)]]
+        return [body, ears] + legs
+    if kind == "trapezoid":
+        return [[(-30, -100), (30, -100), (90, 100), (-90, 100), (-30, -100)]]
+    if kind == "spiral":
+        return [_spiral(0, 0, 4, 90, 3.0, 120) + [(90, 0), (140, 0)]]
+    if kind == "head":
+        face = _spiral(0, 0, 40, 40, 1.0, 36)
+        eyes = [_spiral(-14, -8, 6, 6, 1.0, 12), _spiral(14, -8, 6, 6, 1.0, 12)]
+        mouth = [(-14, 16), (0, 20), (14, 16)]
+        return [face] + eyes + [mouth]
+    raise ValueError(kind)
+
+
+def _strokes_len(strokes):
+    return sum(math.hypot(b[0] - a[0], b[1] - a[1]) for st in strokes for a, b in zip(st, st[1:]))
+
+
+def geoglyph(c, kind, p=1.0, col=GLYPH, lw=5, glow_a=0.0):
+    """geoglifo de Nazca desenhado como trilha clara contínua; p (0..1) desenha só parte (efeito de traçar)"""
+    strokes = _glyph_strokes(kind)
+    tot = _strokes_len(strokes) * clamp01(p)
+    if glow_a > 0:
+        glow(c, 0, 0, 160, GLYPH, glow_a)
+    c.set_line_cap(cairo.LINE_CAP_ROUND); c.set_line_join(cairo.LINE_JOIN_ROUND)
+    for st in strokes:
+        if tot <= 0:
+            break
+        c.move_to(*st[0])
+        for a, b in zip(st, st[1:]):
+            L = math.hypot(b[0] - a[0], b[1] - a[1])
+            if tot >= L:
+                c.line_to(*b); tot -= L
+            else:
+                k = tot / max(L, 1e-6)
+                c.line_to(a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k); tot = 0
+                break
+        rgb(c, col); c.set_line_width(lw); c.stroke()
+
+
+def glyph_head_pos(kind, p):
+    """ponto (x,y) onde está a 'ponta' do traço na fração p (para um caminhante seguir a linha)"""
+    strokes = _glyph_strokes(kind)
+    tot = _strokes_len(strokes) * clamp01(p)
+    last = strokes[0][0]
+    for st in strokes:
+        for a, b in zip(st, st[1:]):
+            L = math.hypot(b[0] - a[0], b[1] - a[1])
+            if tot <= L:
+                k = tot / max(L, 1e-6)
+                return a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k
+            tot -= L
+            last = b
+    return last
+
+
+_PAMPA_CACHE = {}
+
+
+def _pampa_surface(seed, w, h):
+    key = (seed, w, h)
+    if key not in _PAMPA_CACHE:
+        surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, w, h)
+        cc = cairo.Context(surf)
+        g = cairo.LinearGradient(0, 0, 0, h)
+        g.add_color_stop_rgb(0, *PAMPA_D); g.add_color_stop_rgb(1, *PAMPA)
+        cc.set_source(g); cc.paint()
+        rnd = random.Random(seed)
+        for _ in range(int(w * h / 900)):
+            x, y = rnd.uniform(0, w), rnd.uniform(0, h)
+            r = rnd.uniform(1.2, 3.4)
+            k = rnd.uniform(0.7, 1.35)
+            rgb(cc, (min(1, PAMPA_L[0] * k), PAMPA_L[1] * k, PAMPA_L[2] * k), rnd.uniform(0.25, 0.7))
+            cc.new_sub_path(); cc.arc(x, y, r, 0, 6.283); cc.fill()
+        _PAMPA_CACHE[key] = surf
+    return _PAMPA_CACHE[key]
+
+
+def pampa_top(c, t=0, seed=1, lines=None, dark=0.0, x0=0, y0=0, w=W, h=H):
+    """chão do deserto visto de cima (pedrinhas avermelhadas); lines = [((x1,y1),(x2,y2),largura), ...] trilhas claras"""
+    c.save(); c.rectangle(x0, y0, w, h); c.clip()
+    c.set_source_surface(_pampa_surface(seed, W, H), 0, 0); c.paint()
+    for (a, b, lw) in (lines or []):
+        line(c, a[0], a[1], b[0], b[1], lw, (0.70, 0.60, 0.46))
+    if dark > 0:
+        c.rectangle(x0, y0, w, h); rgb(c, (0.02, 0.01, 0.01), dark); c.fill()
+    c.restore()
+
+
+def nazca_lines_set(seed=3, n=9):
+    """linhas retas e trapézios aleatórios (vista de cima) para pampa_top / trapezoids"""
+    rnd = random.Random(seed)
+    out = []
+    for _ in range(n):
+        x, y = rnd.uniform(-200, W + 200), rnd.uniform(-200, H + 200)
+        a = rnd.uniform(0, math.pi)
+        L = rnd.uniform(900, 2600)
+        out.append(((x - math.cos(a) * L / 2, y - math.sin(a) * L / 2), (x + math.cos(a) * L / 2, y + math.sin(a) * L / 2),
+                    rnd.uniform(5, 12)))
+    return out
+
+
+def trapezoid_top(c, x, y, w0, w1, h, ang=0.0, col=(0.66, 0.56, 0.42), a=0.85):
+    """trapézio raspado no chão (vista de cima)"""
+    c.save(); c.translate(x, y); c.rotate(ang)
+    poly(c, [(-w0 / 2, -h / 2), (w0 / 2, -h / 2), (w1 / 2, h / 2), (-w1 / 2, h / 2)])
+    rgb(c, col, a); c.fill()
+    c.restore()
+
+
+def pampa_side(c, t=0, y=760, hills=True, track=False, seed=5):
+    """deserto visto do chão: morros secos ao fundo, planície de pedrinhas até a frente"""
+    if hills:
+        for k, (yy, col, amp, per) in enumerate(((y - 10, (0.20, 0.13, 0.09), 120, 330), (y, (0.26, 0.17, 0.11), 70, 210))):
+            c.move_to(0, yy)
+            for x in range(0, W + 60, 40):
+                c.line_to(x, yy - amp * (0.5 + 0.5 * math.sin(x / per + k * 1.7)) * (0.6 + 0.4 * math.sin(x / 97 + k)))
+            c.line_to(W, yy + 40); c.line_to(0, yy + 40); c.close_path(); rgb(c, col); c.fill()
+    g = cairo.LinearGradient(0, y, 0, H)
+    g.add_color_stop_rgb(0, 0.27, 0.17, 0.11); g.add_color_stop_rgb(1, *PAMPA)
+    c.rectangle(0, y, W, H - y); c.set_source(g); c.fill()
+    rnd = random.Random(seed)
+    for _ in range(420):
+        k = rnd.random() ** 1.6
+        yy = y + 4 + k * (H - y)
+        x = rnd.uniform(0, W)
+        r = 1.0 + k * 6
+        rgb(c, PAMPA_L, 0.25 + 0.4 * k); c.new_sub_path(); c.save(); c.translate(x, yy); c.scale(1, 0.55)
+        c.arc(0, 0, r, 0, 6.283); c.restore(); c.fill()
+    line(c, 0, y, W, y, 3, (0.48, 0.34, 0.24))
+    if track:
+        # trilha rasa que some no horizonte (perspectiva)
+        cx = W * 0.62
+        poly(c, [(cx - 6, y + 2), (cx + 6, y + 2), (cx + 170, H), (cx - 170, H)]); rgb(c, (0.62, 0.50, 0.36), 0.55); c.fill()
+
+
+def stone_piles(c, x0, x1, y, seed=2):
+    """pedrinhas empilhadas nas bordas da trilha (vista lateral)"""
+    rnd = random.Random(seed)
+    x = x0
+    while x < x1:
+        r = rnd.uniform(6, 13)
+        circle(c, x, y - r * 0.6, r, (0.36, 0.20, 0.14), 2, (0.20, 0.12, 0.08))
+        x += r * 1.4
+
+
+def cessna(c, t=0, col=(0.82, 0.80, 0.74)):
+    """avião pequeno de asa alta (sobrevoo turístico), de perfil, voltado para a direita"""
+    poly(c, [(-170, -6), (-120, -24), (60, -30), (110, -18), (128, 0), (110, 16), (-120, 10)]); fs(c, col, 5)
+    poly(c, [(-170, -6), (-196, -66), (-170, -66), (-136, -18)]); fs(c, col, 5)
+    rrect(c, -60, -44, 170, 14, 6); fs(c, col, 5)
+    poly(c, [(30, -24), (84, -22), (100, -6), (30, -6)]); fs(c, LBLUE, 3)
+    line(c, 0, -30, 20, 10, 4)
+    circle(c, 10, 30, 10, DGRAY, 3); circle(c, 84, 28, 10, DGRAY, 3)
+    line(c, 10, 14, 10, 22, 4); line(c, 84, 14, 84, 20, 4)
+    k = abs(math.sin(t * 40))
+    ellipse(c, 134, 0, 6, 40 * (0.3 + 0.7 * k)); rgb(c, INK, 0.6); c.fill()
+    circle(c, 130, 0, 6, DGRAY, 3)
+
+
+def cessna_top(c, t=0, col=(0.82, 0.80, 0.74)):
+    """avião pequeno visto de cima (para sobrevoar o chão), nariz para a direita"""
+    rrect(c, -110, -14, 230, 28, 14); fs(c, col, 5)
+    rrect(c, -10, -150, 60, 300, 14); fs(c, col, 5)
+    poly(c, [(-110, -10), (-140, -60), (-120, -60), (-90, -10)]); fs(c, col, 4)
+    poly(c, [(-110, 10), (-140, 60), (-120, 60), (-90, 10)]); fs(c, col, 4)
+    k = abs(math.sin(t * 40))
+    ellipse(c, 126, 0, 5, 36 * (0.3 + 0.7 * k)); rgb(c, INK, 0.6); c.fill()
+
+
+def plane_shadow(c, r=1.0):
+    c.save(); c.scale(r, r)
+    rgb(c, (0, 0, 0), 0.35)
+    rrect(c, -110, -14, 230, 28, 14); c.fill()
+    rrect(c, -10, -150, 60, 300, 14); c.fill()
+    c.restore()
+
+
+def stake(c, h=90, col=WOOD if "WOOD" in globals() else (0.42, 0.30, 0.20)):
+    """estaca de madeira cravada no chão (base em 0,0)"""
+    poly(c, [(-7, 0), (-6, -h), (0, -h - 10), (6, -h), (7, 0)]); fs(c, col, 4)
+    line(c, -12, 0, 12, 0, 4, (0.30, 0.20, 0.14))
+
+
+def cord(c, x1, y1, x2, y2, sag=14, col=(0.86, 0.80, 0.62), lw=3):
+    """corda esticada entre duas estacas"""
+    c.move_to(x1, y1); c.curve_to(x1 + (x2 - x1) / 3, y1 + sag, x1 + 2 * (x2 - x1) / 3, y2 + sag, x2, y2)
+    rgb(c, col); c.set_line_width(lw); c.stroke()
+
+
+def mirador(c, h=420, col=(0.46, 0.44, 0.42)):
+    """torre de observação metálica à beira da estrada (base em 0,0)"""
+    w0, w1 = 150, 90
+    line(c, -w0 / 2, 0, -w1 / 2, -h, 7, col); line(c, w0 / 2, 0, w1 / 2, -h, 7, col)
+    n = 6
+    for k in range(n):
+        y_a = -h * k / n; y_b = -h * (k + 1) / n
+        xa = w0 / 2 - (w0 - w1) / 2 * k / n; xb = w0 / 2 - (w0 - w1) / 2 * (k + 1) / n
+        line(c, -xa, y_a, xb, y_b, 4, col); line(c, xa, y_a, -xb, y_b, 4, col)
+        line(c, -xb, y_b, xb, y_b, 4, col)
+    rrect(c, -w1 / 2 - 30, -h - 16, w1 + 60, 16, 4); fs(c, col, 4)
+    for k in range(5):
+        x = -w1 / 2 - 30 + k * (w1 + 60) / 4
+        line(c, x, -h - 16, x, -h - 60, 4, col)
+    line(c, -w1 / 2 - 30, -h - 60, w1 / 2 + 30, -h - 60, 5, col)
+
+
+def puquio(c, t=0, r=150, water=True):
+    """abertura em espiral de um puquio (vista de cima): paredes de pedra descendo até a água"""
+    circle(c, 0, 0, r + 30, PAMPA, 4, (0.30, 0.18, 0.12))
+    for k in range(7):
+        rr = r * (1 - k / 7)
+        circle(c, k * 6, k * 4, rr, (0.30 - k * 0.025, 0.20 - k * 0.018, 0.14 - k * 0.012), 3, (0.52, 0.40, 0.30))
+    pts = _spiral(0, 0, r, r * 0.25, 1.6, 60, -0.6)
+    c.move_to(*pts[0])
+    for p_ in pts[1:]:
+        c.line_to(*p_)
+    rgb(c, (0.70, 0.60, 0.46)); c.set_line_width(14); c.stroke()
+    if water:
+        ellipse(c, 36, 24, r * 0.2, r * 0.13); rgb(c, (0.30, 0.48, 0.62)); c.fill()
+        glow(c, 36, 24, r * 0.3, (0.55, 0.75, 0.90), 0.25 + 0.1 * math.sin(t * 2))
+
+
+def drone(c, t=0, col=(0.70, 0.72, 0.76)):
+    """drone quadricóptero visto de frente/levemente de cima"""
+    rrect(c, -40, -18, 80, 36, 12); fs(c, col, 5)
+    for sx in (-1, 1):
+        line(c, sx * 36, -6, sx * 110, -26, 6, col)
+        k = abs(math.sin(t * 50 + sx))
+        ellipse(c, sx * 110, -34, 54 * (0.4 + 0.6 * k), 7); rgb(c, INK, 0.55); c.fill()
+        line(c, sx * 110, -30, sx * 110, -26, 5)
+    circle(c, 0, 26, 12, DGRAY, 4)
+    circle(c, 0, 26, 5, (0.20, 0.50, 0.80), 0)
+    line(c, -30, 18, -40, 40, 4, col); line(c, 30, 18, 40, 40, 4, col)
+
+
+def setting_sun(c, r=120, col=(0.92, 0.56, 0.24)):
+    """sol se pondo (metade acima do horizonte em y=0)"""
+    glow(c, 0, 0, r * 4, col, 0.25)
+    c.save(); c.rectangle(-r * 2, -r * 2, r * 4, r * 2); c.clip()
+    circle(c, 0, 0, r, col, 0)
+    c.restore()
+
+
+def shards(c, seed=1, n=6, spread=90):
+    """cacos de cerâmica nazca quebrada de propósito (oferenda)"""
+    rnd = random.Random(seed)
+    for k in range(n):
+        x, y = rnd.uniform(-spread, spread), rnd.uniform(-spread * 0.4, spread * 0.4)
+        a = rnd.uniform(0, 6.28); s = rnd.uniform(16, 30)
+        c.save(); c.translate(x, y); c.rotate(a)
+        poly(c, [(-s, -s * 0.5), (s * 0.7, -s * 0.7), (s, s * 0.3), (-s * 0.3, s * 0.6)])
+        fs(c, NAZCA_RED if k % 2 == 0 else NAZCA_CREAM, 3)
+        line(c, -s * 0.6, 0, s * 0.6, -s * 0.1, 3, (0.15, 0.10, 0.08))
+        c.restore()
+
+
+def nazca_vase(c, s=1.0):
+    """vaso nazca de duas bicas (policromado, padrões geométricos genéricos)"""
+    c.save(); c.scale(s, s)
+    ellipse(c, 0, 10, 80, 70); fs(c, NAZCA_RED, 5)
+    c.save(); ellipse(c, 0, 10, 80, 70); c.clip()
+    c.rectangle(-90, -10, 180, 24); rgb(c, NAZCA_CREAM); c.fill()
+    for k in range(6):
+        circle(c, -62 + k * 25, 2, 7, (0.18, 0.12, 0.10), 0)
+    c.restore()
+    ellipse(c, 0, 10, 80, 70); rgb(c, INK); c.set_line_width(5); c.stroke()
+    for sx in (-1, 1):
+        poly(c, [(sx * 30, -50), (sx * 24, -96), (sx * 40, -96), (sx * 44, -52)]); fs(c, NAZCA_RED, 4)
+    c.move_to(-26, -90); c.curve_to(-20, -124, 20, -124, 30, -90); rgb(c, INK); c.set_line_width(8); c.stroke()
+    c.restore()
+
+
+def highway_top(c, x0, y0, x1, y1, w=60):
+    """rodovia asfaltada vista de cima, com faixa tracejada"""
+    line(c, x0, y0, x1, y1, w, (0.16, 0.16, 0.17))
+    c.set_dash([30, 26]); line(c, x0, y0, x1, y1, 4, (0.85, 0.78, 0.40)); c.set_dash([])
+
+
+def scan_box(c, w, h, t=0, col=(0.30, 0.90, 0.70), label=None):
+    """quadrado de detecção da IA (canto marcado)"""
+    k = 18
+    for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        x, y = sx * w / 2, sy * h / 2
+        line(c, x, y, x - sx * k, y, 4, col); line(c, x, y, x, y - sy * k, 4, col)
+    if label:
+        text(c, label, 0, -h / 2 - 22, 22, TYPE, col)
