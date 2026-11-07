@@ -43,6 +43,22 @@ Entrada: **transcrição com tempos** + **áudio da narração**. Saída: **MP4 
 `fog(c, t, ...)` já usa a cor da névoa do tema (passe `col=` só para exceções). Sem chuva, ondas ou ruídos novos: o Matheus não gosta de sons de ruído/chiado. Vídeos antigos sem `THEME` continuam iguais (`classico`).
 Thumbnails: chame `set_theme("selva")` no `thumb.py` antes de `background(c, t)`.
 
+## Estilo ILUSTRADO (`ilustrado.py`)
+Alternativa ao giz: ilustração vetorial chapada, com luz por hora do dia, profundidade (névoa de distância), personagens com rosto, roupa e cabelo. Modelo: `examples/ilustrado-demo/scenes.py`.
+```python
+from engine import *
+from ilustrado import *
+STYLE = "ilustrado"   # vinheta suave, sem poeira de giz
+THEME = "mar"         # o tema continua mandando no som ambiente
+```
+- **Luz** (comece toda cena com um cenário pronto ou com `luz("...")`): `dia tarde crepusculo noite nublado sepia vela interior`. Tudo (cenário e personagens) é pintado pela luz da cena; à noite as janelas acendem sozinhas.
+- **Cenários prontos**: `cena_vila(c, t, hora, estilo="medieval"|"colonial"|"pedra", igreja_x=)`, `cena_porto`, `cena_floresta`, `cena_deserto`, `cena_neve`, `cena_mar(navio="nau"|"vapor")`, `cena_campo`, `cena_interior(c, t, hora, tipo="biblioteca"|"cela"|"salao"|"escritorio")`. Varie a hora e a `seed` para não repetir o mesmo lugar.
+- **Peças para montar cenários**: `ceu(nuvens, astro, passaros)`, `montanhas(y, h, depth, neve)`, `colinas`, `chao(tipo="grama"|"terra"|"pedra"|"areia"|"neve"|"madeira")`, `predio`, `casario`, `igreja`, `torre_castelo`, `piramide`, `dunas`, `arvore(tipo="redonda"|"pinheiro"|"palmeira"|"cipreste", seca)`, `floresta`, `mar_i`, `nau`, `vapor`, `cais`, `interior(parede, piso, janela)`, `estante`, `mesa_i`, `vela_i`, `livro_aberto`, `cruz_parede`, `janela_i`, `particulas(tipo="poeira"|"brasas"|"cinzas"|"vagalumes")`. `depth` de 0 (perto) a 1 (horizonte) clareia na névoa e dá profundidade.
+- **O Historiador**: `historiador_i(c, t, x, y_pes, s, poses, exprs, look=)` (fedora, sobretudo, óculos redondos, barba curta, lanterna que brilha mais à noite). Mesmas poses e expressões dos bonecos de giz.
+- **Personagens**: `boneco(c, t, x, y, s, poses, exprs, look, andar=True, **FIGURINO["monge"])`. Figurinos: `campones camponesa monge padre papa nobre marinheiro capitao cavalheiro dama explorador medico soldado escriba`. Ou monte: `roupa` (camisa casaco tunica batina vestido jaqueta armadura), `cabelo` (curto longo calvo careca tonsura coque cacheado), `barba` (cheia curta cavanhaque longa), `bigode`, `chapeu` (fedora cartola quepe gorro capuz tiara palha turbante solideu touca explorador boina coroa elmo), `pele` (clara media morena escura), `idade` (grisalho), `capa`, `oculos`, `mulher`.
+- **Gente ao fundo**: `figurantes(c, t, y, n, s, figurinos=[...])` (andam sozinhos).
+- **Textos**: `rotulo(c, t, t0, "1903 · OSWALDO CRUZ", "Rio de Janeiro")` (legenda de canto; com o Historiador à esquerda, use `x≈760` para não cobrir as pernas dele), `placa(c, "TÍTULO", "SOBRETÍTULO")` (cartão de pergaminho), `titulo_i(c, "TÍTULO", x, y, size)` (título com sombra, legível sobre céu claro). `typewrite`, `date_stamp`, mapas e o resto do motor continuam valendo.
+
 ## Atmosfera (chame dentro da cena)
 `stars(c, t)`, `moon(c, r)`, `fog(c, t, y, alpha)`, `snow(c, t, n, vento, alpha)`, `glow(c, x, y, r, cor, a)`, `flames(c, t)`.
 O `overlay` (poeira, vinheta e flicker) e o fundo são aplicados automaticamente pelo renderizador.

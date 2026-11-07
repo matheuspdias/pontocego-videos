@@ -1227,8 +1227,15 @@ def vignette_surface():
     return _VIG
 
 
+STYLE = "giz"   # "ilustrado" = estilo vetorial chapado (ilustrado.py): vinheta suave, sem poeira de giz
+
+
 def overlay(c, t):
     """aplicado por cima de tudo em todo quadro: poeira + vinheta + leve flicker"""
+    if STYLE == "ilustrado":
+        c.set_source_surface(vignette_surface(), 0, 0)
+        c.paint_with_alpha(0.42)
+        return
     dust(c, t)
     c.set_source_surface(vignette_surface(), 0, 0)
     flick = 0.92 + 0.08 * math.sin(t * 7.3) * math.sin(t * 3.1)
