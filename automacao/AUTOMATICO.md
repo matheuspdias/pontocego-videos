@@ -32,7 +32,8 @@ O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, 
 2. Leia `automacao/temas.md`, liste `videos/` e os títulos em `fila/publicados/`. **Não repita** história já feita.
 3. Escolha uma história forte, com fatos verificáveis e um mistério real. Use a seção "Ideias" se houver algo lá. Varie em relação aos dois últimos vídeos:
    - o **tipo** (desaparecimento, expedição perdida, enigma arqueológico, fenômeno sem explicação, caso histórico, documento ou objeto misterioso, formato lista "5 mistérios");
-   - o **tema visual** (`THEME`): não use o mesmo dos dois últimos se der.
+   - o **tema visual** (`THEME`): não use o mesmo dos dois últimos se der;
+   - o **tom** (`TOM`): `normal`, `misterioso` ou `sombrio`, escolhido pelo assunto (veja o passo 4).
    - De vez em quando (1 a cada 4 ou 5), um caso brasileiro.
 4. Acrescente o tema em "Já feitos" no `temas.md`.
 
@@ -54,13 +55,16 @@ O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, 
 - Garanta que a cena de `gancho_t` tenha o Historiador e o objeto ou cenário marcante, sem informação colada nas bordas (x < 140 ou x > 1780).
 
 ### 4. Cenas e revisão
-- `videos/<slug>/scenes.py` com `THEME = "<tema>"`, `SFX_OFF = True` e 10 a 15 toques em `SFX`.
+- `videos/<slug>/scenes.py` no **estilo ilustrado** (obrigatório; o giz antigo não é mais usado): `from engine import *`, `from ilustrado import *`, `STYLE = "ilustrado"`, `TOM = "<tom>"`, `THEME = "<tema>"`, `SFX_OFF = True` e 10 a 15 toques em `SFX`. O Historiador é `historiador_i`, os personagens são `boneco(..., **FIGURINO[...])`.
+- **Tom pelo assunto:** `normal` (história, descobertas), `misterioso` (desaparecimentos, enigmas, casos sem solução), `sombrio` (terror, maldições, casas assombradas, mortes estranhas: use o kit de terror). Detalhes na skill e no README ("Tom do vídeo").
+- **Cenários variados:** cada cena escolhe uma luz (`dia tarde crepusculo noite nublado sepia vela interior sombrio tempestade lua_sangue`) e um cenário (`cena_vila`, `cena_porto`, `cena_floresta`, `cena_deserto`, `cena_neve`, `cena_mar`, `cena_campo`, `cena_interior`, `cena_cemiterio`, `cena_casa_abandonada`, `cena_floresta_sombria` ou montado com as peças). Nunca mais de 3 cenas seguidas com a mesma luz e o mesmo cenário. Modelos: `examples/ilustrado-demo/` e `examples/terror-demo/`.
+- Se a história pedir algo que o motor não tem (cenário, objeto, figurino), crie no `ilustrado.py`, confira na prévia, documente no README e inclua no commit.
 - A revisão das prévias é **obrigatória e é só sua**: `python render.py sheet ...` com tempos no fim e no meio de todas as cenas. Olhe cada grade, corrija sobreposições, textos cortados, telas vazias e elementos escuros demais, e gere de novo até ficar limpo. Pelo menos duas rodadas.
 - Confira que o `scenes.py` carrega sem erro e que a última cena termina em `999.0`.
 - Um teste mudo curto pega erro de código: `python render.py build videos/<slug>/scenes.py silent:20 out/teste.mp4`.
 
 ### 5. Thumbnail e textos
-- Duas thumbnails (`videos/<slug>/thumb/thumb.py`), escolha a melhor.
+- Duas thumbnails (`videos/<slug>/thumb/thumb.py`) no mesmo estilo ilustrado e no mesmo tom do vídeo (cenário pronto + `historiador_i` + `titulo_i`), escolha a melhor.
 - `videos/<slug>/youtube.txt` no formato dos vídeos anteriores (título, alternativas, descrição com capítulos pelos tempos reais das cenas, tags). Mantenha a linha "Narração gerada com voz de IA."
 
 ### 6. Colocar na fila
@@ -92,7 +96,7 @@ Escreva `fila/<slug>.json`:
 
 ### 8. Resumo final (SendUserMessage)
 Curto, em português:
-- título, história e tema visual escolhidos, e duração;
+- título, história, tom e tema visual escolhidos, e duração;
 - quando vai ao ar (dia e 18h) e os 3 Shorts (título de cada um; saem às 12h nos dias seguintes);
 - como vetar: até o horário, no YouTube Studio > Conteúdo, o vídeo aparece como "Programado"; dá para editar, deixar privado ou excluir;
 - qualquer decisão tomada sozinho ou problema encontrado.
