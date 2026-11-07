@@ -32,6 +32,7 @@ def load_scenes(path):
     import engine
     engine.set_theme(theme_of(m))
     engine.STYLE = getattr(m, "STYLE", "giz")
+    engine.TOM = getattr(m, "TOM", "normal")
     return m.SCENES
 
 

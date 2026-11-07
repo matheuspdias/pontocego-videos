@@ -59,6 +59,16 @@ THEME = "mar"         # o tema continua mandando no som ambiente
 - **Gente ao fundo**: `figurantes(c, t, y, n, s, figurinos=[...])` (andam sozinhos).
 - **Textos**: `rotulo(c, t, t0, "1903 · OSWALDO CRUZ", "Rio de Janeiro")` (legenda de canto; com o Historiador à esquerda, use `x≈760` para não cobrir as pernas dele), `placa(c, "TÍTULO", "SOBRETÍTULO")` (cartão de pergaminho), `titulo_i(c, "TÍTULO", x, y, size)` (título com sombra, legível sobre céu claro). `typewrite`, `date_stamp`, mapas e o resto do motor continuam valendo.
 
+### Tom do vídeo (`TOM = "..."` no scenes.py)
+Escolha pelo assunto. O tom ajusta a cor de todos os quadros no fim (saturação, tinta fria, vinheta) e, no `sombrio`, troca sozinho `dia` por `nublado` e `tarde` por `crepusculo`.
+| Tom | Use em | Luzes preferidas | Extras |
+| --- | --- | --- | --- |
+| `normal` | história, descobertas, curiosidades | todas | `particulas("poeira")`, raios de sol |
+| `misterioso` | desaparecimentos, enigmas, casos sem solução | crepusculo, noite, nublado, vela | `nevoa_i` leve, `corvo`, lua |
+| `sombrio` | terror, maldições, casas assombradas, mortes misteriosas | sombrio, tempestade, lua_sangue, noite, vela | `nevoa_i` densa, `relampago`, `silhueta`, `piscar`, `escurecer` |
+
+Kit de terror (`examples/terror-demo/scenes.py`): luzes `sombrio`, `tempestade`, `lua_sangue`; cenários `cena_cemiterio`, `cena_casa_abandonada(raios=(t,))`, `cena_floresta_sombria`; peças `casa_abandonada`, `arvore_morta`, `lapide(tipo="arco"|"cruz"|"obelisco", texto=)`, `cerca_ferro`, `corvo(voando=)`, `corredor` (lâmpada que falha), `silhueta` (vulto de olhos acesos), `nevoa_i`, `relampago(c, t, vezes)` (chame por último; já toca `boom`), `piscar(t)` (intensidade de luz que falha) e `escurecer(c, a, borda)`. O medo vem da luz, da névoa e do que quase não se vê: nada de sangue, corpos ou violência gráfica.
+
 ## Atmosfera (chame dentro da cena)
 `stars(c, t)`, `moon(c, r)`, `fog(c, t, y, alpha)`, `snow(c, t, n, vento, alpha)`, `glow(c, x, y, r, cor, a)`, `flames(c, t)`.
 O `overlay` (poeira, vinheta e flicker) e o fundo são aplicados automaticamente pelo renderizador.

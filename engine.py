@@ -1227,14 +1227,33 @@ def vignette_surface():
     return _VIG
 
 
+# TOM do vídeo (declare TOM = "..." no scenes.py): ajusta a cor de tudo no fim de cada quadro.
+#   normal     = cores como desenhadas (história, curiosidade, descoberta)
+#   misterioso = um pouco dessaturado e frio, vinheta média (desaparecimentos, enigmas, casos sem solução)
+#   sombrio    = bem dessaturado, frio, escuro nas bordas; dia vira nublado e tarde vira crepúsculo (terror, mortes, maldições)
+TOM = "normal"
+TONS = {
+    "normal":     dict(sat=0.0, mul=None, vig=0.42),
+    "misterioso": dict(sat=0.20, mul=(0.90, 0.93, 1.0), vig=0.62),
+    "sombrio":    dict(sat=0.42, mul=(0.78, 0.85, 0.88), vig=0.90),
+}
 STYLE = "giz"   # "ilustrado" = estilo vetorial chapado (ilustrado.py): vinheta suave, sem poeira de giz
 
 
 def overlay(c, t):
     """aplicado por cima de tudo em todo quadro: poeira + vinheta + leve flicker"""
     if STYLE == "ilustrado":
+        tom = TONS.get(TOM, TONS["normal"])
+        if tom["sat"]:
+            c.set_operator(cairo.OPERATOR_HSL_SATURATION)
+            c.set_source_rgba(0.5, 0.5, 0.5, tom["sat"]); c.paint()
+            c.set_operator(cairo.OPERATOR_OVER)
+        if tom["mul"]:
+            c.set_operator(cairo.OPERATOR_MULTIPLY)
+            c.set_source_rgb(*tom["mul"]); c.paint()
+            c.set_operator(cairo.OPERATOR_OVER)
         c.set_source_surface(vignette_surface(), 0, 0)
-        c.paint_with_alpha(0.42)
+        c.paint_with_alpha(tom["vig"])
         return
     dust(c, t)
     c.set_source_surface(vignette_surface(), 0, 0)

@@ -62,6 +62,16 @@ LUZES = {
     "interior":   dict(ceu=((0.55, 0.60, 0.66), (0.70, 0.72, 0.74)), tinta=(0.86, 0.88, 0.94), tk=1.0,
                        neb=(0.70, 0.72, 0.76), nebk=0.6, astro=None,
                        nuvem=(0.9, 0.9, 0.9), dir=1, noite=False, estrelas=False, fora=(0.82, 0.88, 0.94)),
+    # terror / mistério pesado
+    "sombrio":    dict(ceu=((0.04, 0.06, 0.07), (0.15, 0.19, 0.19)), tinta=(0.38, 0.46, 0.48), tk=1.0,
+                       neb=(0.26, 0.32, 0.32), nebk=0.85, astro=("lua", 1480, 210, (0.80, 0.84, 0.78)),
+                       nuvem=(0.12, 0.15, 0.16), dir=1, noite=True, estrelas=False, fora=(0.08, 0.10, 0.11)),
+    "tempestade": dict(ceu=((0.08, 0.08, 0.12), (0.24, 0.23, 0.29)), tinta=(0.44, 0.45, 0.55), tk=1.0,
+                       neb=(0.28, 0.28, 0.34), nebk=0.8, astro=None,
+                       nuvem=(0.16, 0.16, 0.21), dir=1, noite=True, estrelas=False, fora=(0.10, 0.10, 0.14)),
+    "lua_sangue": dict(ceu=((0.07, 0.02, 0.03), (0.30, 0.09, 0.07)), tinta=(0.62, 0.34, 0.32), tk=1.0,
+                       neb=(0.32, 0.10, 0.08), nebk=0.8, astro=("lua", 1460, 230, (0.86, 0.32, 0.22)),
+                       nuvem=(0.18, 0.06, 0.06), dir=1, noite=True, estrelas=True, fora=(0.12, 0.04, 0.04)),
 }
 _L = LUZES["dia"]
 
@@ -69,6 +79,8 @@ _L = LUZES["dia"]
 def luz(nome="dia"):
     """define a luz da cena (chame no começo de cada cena; os cenários prontos já chamam)"""
     global _L
+    if engine.TOM == "sombrio":
+        nome = {"dia": "nublado", "tarde": "crepusculo", "sepia": "nublado"}.get(nome, nome)
     if nome not in LUZES:
         raise ValueError(f"luz desconhecida: {nome} (opções: {', '.join(LUZES)})")
     _L = LUZES[nome]
@@ -178,7 +190,7 @@ def ceu(c, t, nuvens=True, astro=True, passaros=False, seed=1, horizonte=760):
             rglow(c, ax, ay, 160, (1, 1, 0.95), 0.5)
             c.new_sub_path(); c.arc(ax, ay, 56, 0, 6.283); rgb(c, lt(col, 0.4)); c.fill()
         else:
-            rglow(c, ax, ay, 380, (0.75, 0.80, 0.95), 0.22)
+            rglow(c, ax, ay, 380, mix(col, (0.75, 0.80, 0.95), 0.5), 0.22)
             c.new_sub_path(); c.arc(ax, ay, 58, 0, 6.283); rgb(c, col); c.fill()
             for dx, dy, r in ((-18, -10, 11), (14, 16, 8), (20, -20, 6), (-6, 24, 5)):
                 c.new_sub_path(); c.arc(ax + dx, ay + dy, r, 0, 6.283); rgb(c, dk(col, 0.08)); c.fill()
@@ -1368,3 +1380,251 @@ def particulas(c, t, tipo="poeira", n=40, seed=1):
             x = (x0 + math.sin(t * 0.3 + ph) * 50) % W; y = (y0 - t * sp * 0.4) % H
             col, r, a = (1.0, 0.95, 0.80), rnd.uniform(1.2, 2.8), 0.35 + 0.3 * math.sin(t * 1.5 + ph)
         c.new_sub_path(); c.arc(x, y, r, 0, 6.283); rgb(c, col, max(0, a)); c.fill()
+
+
+# ================================================================ KIT DE TERROR / MISTÉRIO PESADO
+# Luzes: sombrio (verde-acinzentado, névoa densa), tempestade (com relampago), lua_sangue (vermelho).
+# O clima vem da luz, da névoa, das sombras e do que NÃO se vê. Nada de sangue ou corpos.
+def piscar(t, seed=0, base=1.0):
+    """intensidade de uma luz que falha (0..1): use em velas, lampiões e lâmpadas"""
+    k = math.sin(t * 13 + seed) * math.sin(t * 7.7 + seed * 2) * math.sin(t * 3.1 + seed)
+    falha = 0.15 if ((t * 1.7 + seed) % 5) < 0.18 else 1.0
+    return base * (0.82 + 0.18 * k) * falha
+
+
+def nevoa_i(c, t, y=820, a=0.55, n=7, col=None, seed=1):
+    """névoa densa em faixas que deslizam (primeiro plano ou chão)"""
+    col = col or _L["neb"]
+    rnd = random.Random(seed)
+    for i in range(n):
+        w = rnd.uniform(700, 1200)
+        x = (rnd.uniform(0, W) + t * rnd.uniform(12, 30) * (1 if i % 2 else -1)) % (W + w) - w / 2
+        yy = y + rnd.uniform(-60, 120) + math.sin(t * 0.4 + i) * 12
+        h = rnd.uniform(90, 180)
+        g = cairo.RadialGradient(x, yy, 0, x, yy, w / 2)
+        g.add_color_stop_rgba(0, col[0], col[1], col[2], a * rnd.uniform(0.5, 1.0))
+        g.add_color_stop_rgba(1, col[0], col[1], col[2], 0)
+        c.save(); c.translate(x, yy); c.scale(1, h / (w / 2)); c.translate(-x, -yy)
+        c.set_source(g); c.arc(x, yy, w / 2, 0, 6.283); c.fill(); c.restore()
+    lgrad(c, 0, y - 40, 0, H, [(0, col, 0), (1, col, a * 0.7)])
+    c.rectangle(0, y - 40, W, H - y + 40); c.fill()
+
+
+def relampago(c, t, vezes=(2.0,), raio_x=1300, chance=True):
+    """clarão + raio nos instantes dados (tempo absoluto). Chame por ÚLTIMO na cena."""
+    for t0 in vezes:
+        d = t - t0
+        if 0 <= d < 0.6:
+            a = (0.42 if d < 0.08 else 0.0) + (0.28 if 0.16 < d < 0.24 else 0.0) + max(0, 0.15 * (1 - d / 0.6))
+            if d < 0.3:
+                rnd = random.Random(int(t0 * 10))
+                x, y = raio_x, 0
+                c.move_to(x, y)
+                while y < 560:
+                    x += rnd.uniform(-60, 60); y += rnd.uniform(40, 90); c.line_to(x, y)
+                rgb(c, (0.95, 0.95, 1.0), 0.9); c.set_line_width(5); c.stroke()
+            c.rectangle(0, 0, W, H); rgb(c, (0.85, 0.88, 1.0), min(0.5, a)); c.fill()
+            cue(t0, "boom")
+
+
+def arvore_morta(c, t, x, y, h=520, depth=0.0, seed=1, col=(0.12, 0.10, 0.10)):
+    """árvore seca retorcida (silhueta)"""
+    rnd = random.Random(seed)
+    cc = P(col, depth)
+
+    def galho(x0, y0, a, L, w, n):
+        if n == 0 or L < 12:
+            return
+        a2 = a + math.sin(t * 0.7 + n + seed) * 0.01
+        x1, y1 = x0 + math.cos(a2) * L, y0 + math.sin(a2) * L
+        c.move_to(x0, y0); c.curve_to(x0 + math.cos(a2 + 0.3) * L * 0.4, y0 + math.sin(a2 + 0.3) * L * 0.4,
+                                      x1 - math.cos(a2 - 0.3) * L * 0.3, y1 - math.sin(a2 - 0.3) * L * 0.3, x1, y1)
+        rgb(c, cc); c.set_line_width(w); c.set_line_cap(cairo.LINE_CAP_ROUND); c.stroke()
+        for _ in range(2 if n > 1 else 3):
+            galho(x1, y1, a2 + rnd.uniform(-0.8, 0.8), L * rnd.uniform(0.55, 0.75), w * 0.62, n - 1)
+    pg(c, [(x - h * 0.06, y), (x - h * 0.02, y - h * 0.4), (x + h * 0.03, y - h * 0.4), (x + h * 0.07, y)])
+    rgb(c, cc); c.fill()
+    galho(x, y - h * 0.38, -math.pi / 2 - 0.25, h * 0.32, h * 0.045, 5)
+    galho(x, y - h * 0.38, -math.pi / 2 + 0.45, h * 0.28, h * 0.04, 5)
+
+
+def lapide(c, x, y, s=1.0, tipo="arco", inclina=0.0, depth=0.0, texto=None):
+    """lápide: arco, cruz ou obelisco; origem = base"""
+    c.save(); c.translate(x, y); c.rotate(inclina); c.scale(s, s)
+    col = P((0.56, 0.56, 0.56), depth)
+    if tipo == "cruz":
+        c.rectangle(-12, -170, 24, 170); c.rectangle(-50, -130, 100, 22); rgb(c, col); c.fill()
+    elif tipo == "obelisco":
+        pg(c, [(-26, 0), (-18, -230), (0, -260), (18, -230), (26, 0)]); rgb(c, col); c.fill()
+    else:
+        c.move_to(-50, 0); c.line_to(-50, -100); c.arc(0, -100, 50, math.pi, 2 * math.pi); c.line_to(50, 0); c.close_path()
+        rgb(c, col); c.fill()
+        c.move_to(20, 0); c.line_to(20, -110); c.arc(0, -100, 50, -0.4, 0); c.line_to(50, 0); c.close_path()
+        rgb(c, dk(col, 0.25)); c.fill()
+        c.move_to(-30, -120); c.line_to(-16, -90); c.line_to(-24, -70); rgb(c, dk(col, 0.4)); c.set_line_width(2); c.stroke()
+        if texto:
+            c.select_font_face(TYPE); c.set_font_size(18)
+            w_ = c.text_extents(texto).x_advance
+            c.move_to(-w_ / 2, -80); rgb(c, dk(col, 0.5)); c.show_text(texto)
+    ellipse(c, 0, 2, 64, 10); rgb(c, (0, 0, 0), 0.3); c.fill()
+    c.restore()
+
+
+def cerca_ferro(c, y=880, x0=-20, x1=None, h=180, depth=0.0):
+    x1 = x1 if x1 is not None else W + 20
+    col = P((0.08, 0.08, 0.09), depth)
+    c.rectangle(x0, y - h + 30, x1 - x0, 6); c.rectangle(x0, y - 40, x1 - x0, 6); rgb(c, col); c.fill()
+    x = x0
+    while x < x1:
+        c.rectangle(x, y - h, 5, h); c.fill()
+        pg(c, [(x - 6, y - h), (x + 2.5, y - h - 22), (x + 11, y - h)]); c.fill()
+        x += 34
+
+
+def corvo(c, t, x, y, s=1.0, voando=False, seed=0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    col = (0.05, 0.05, 0.06)
+    if voando:
+        f = math.sin(t * 8 + seed) * 18
+        c.move_to(-50, -f); c.curve_to(-25, -20 - f * 0.5, -8, -6, 0, 0); c.curve_to(8, -6, 25, -20 - f * 0.5, 50, -f)
+        c.curve_to(25, -6, 10, 6, 0, 8); c.curve_to(-10, 6, -25, -6, -50, -f); rgb(c, col); c.fill()
+    else:
+        ellipse(c, 0, 0, 26, 18); rgb(c, col); c.fill()
+        c.new_sub_path(); c.arc(20, -16, 11, 0, 6.283); c.fill()
+        pg(c, [(28, -18), (44, -13), (28, -11)]); c.fill()
+        pg(c, [(-20, -4), (-46, 8), (-20, 8)]); c.fill()
+        c.new_sub_path(); c.arc(23, -18, 2.2, 0, 6.283); rgb(c, (0.9, 0.7, 0.3)); c.fill()
+    c.restore()
+
+
+def casa_abandonada(c, t, x, y, s=1.0, depth=0.0, luz_janela=True):
+    """casarão vitoriano abandonado: telhado torto, tábuas, janela com luz que falha; origem = base no centro"""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    wall = P((0.36, 0.34, 0.36), depth)
+    roof = P((0.16, 0.15, 0.18), depth)
+    c.save(); c.rotate(-0.015)
+    c.rectangle(-300, -420, 600, 420); rgb(c, wall); c.fill()
+    for k in range(0, 600, 26):
+        c.rectangle(-300 + k, -420, 2, 420); rgb(c, dk(wall, 0.2)); c.fill()
+    pg(c, [(-330, -410), (-40, -640), (250, -410)]); rgb(c, roof); c.fill()
+    c.rectangle(130, -720, 120, 320); rgb(c, dk(wall, 0.1)); c.fill()   # torre
+    pg(c, [(115, -715), (190, -860), (265, -715)]); rgb(c, roof); c.fill()
+    pg(c, [(-60, -500), (-20, -470), (-70, -460)]); rgb(c, dk(roof, 0.5)); c.fill()  # buraco no telhado
+    acesa = piscar(t, 3) if luz_janela else 0
+    for i, (wx, wy) in enumerate(((-230, -330), (-90, -330), (50, -330), (165, -620), (-230, -170), (50, -170))):
+        c.rectangle(wx - 6, wy - 6, 72, 112); rgb(c, dk(wall, 0.35)); c.fill()
+        lit = (i == 3) and luz_janela
+        c.rectangle(wx, wy, 60, 100)
+        if lit:
+            rgb(c, mix((0.15, 0.12, 0.08), JANELA_ACESA, acesa)); c.fill()
+            rglow(c, wx + 30, wy + 50, 160, JANELA_ACESA, 0.25 * acesa)
+        else:
+            rgb(c, (0.04, 0.04, 0.05)); c.fill()
+            if i in (1, 4):  # vidro quebrado
+                pg(c, [(wx + 10, wy), (wx + 34, wy + 40), (wx + 22, wy + 60), (wx + 50, wy + 100), (wx + 60, wy + 100), (wx + 60, wy)])
+                rgb(c, P((0.30, 0.34, 0.38), depth)); c.fill()
+            if i == 2:  # tábuas
+                for k, a in ((20, 0.3), (60, -0.25)):
+                    c.save(); c.translate(wx + 30, wy + k); c.rotate(a); c.rectangle(-44, -8, 88, 16)
+                    rgb(c, P(MADEIRA, depth)); c.fill(); c.restore()
+    # porta entreaberta
+    c.rectangle(-110, -190, 100, 190); rgb(c, (0.02, 0.02, 0.03)); c.fill()
+    pg(c, [(-110, -190), (-60, -176), (-60, 0), (-110, 0)]); rgb(c, P(MADEIRA_ESC, depth)); c.fill()
+    c.rectangle(-330, -30, 660, 30); rgb(c, dk(wall, 0.3)); c.fill()  # varanda
+    c.restore()
+    c.restore()
+
+
+def silhueta(c, t, x, y, s=1.0, alpha=0.9, olhos=True, chapeu=None):
+    """figura escura sem rosto (vulto). Use com parcimônia: o medo vem de vê-la pouco."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    c.push_group()
+    col = (0.02, 0.02, 0.03)
+    sway = math.sin(t * 0.6) * 2
+    c.move_to(-60, 0); c.curve_to(-70, -150, -54, -280, -40, -320); c.curve_to(-30, -350, 30, -350, 40, -320)
+    c.curve_to(54, -280, 70, -150, 60, 0); c.close_path(); rgb(c, col); c.fill()
+    ellipse(c, sway, -390, 44, 54); rgb(c, col); c.fill()
+    if chapeu == "fedora":
+        ellipse(c, sway, -420, 80, 12); c.fill(); rr(c, sway - 42, -470, 84, 52, 14); c.fill()
+    if olhos:
+        on = ((t * 0.7) % 4) > 0.15
+        if on:
+            for sx in (-1, 1):
+                ellipse(c, sway + sx * 15, -392, 5, 3); rgb(c, (0.95, 0.90, 0.75), 0.85); c.fill()
+    c.pop_group_to_source(); c.paint_with_alpha(alpha)
+    c.restore()
+
+
+def corredor(c, t, cor=(0.42, 0.44, 0.40), luz_falha=True, portas=3):
+    """corredor em perspectiva (hospital, hotel, casarão) com lâmpada que falha no teto"""
+    base = P(cor)
+    vx, vy = W / 2, 480
+    c.rectangle(0, 0, W, H); rgb(c, dk(base, 0.4)); c.fill()
+    pg(c, [(0, 0), (vx - 170, vy - 170), (vx - 170, vy + 170), (0, H)]); rgb(c, dk(base, 0.15)); c.fill()
+    pg(c, [(W, 0), (vx + 170, vy - 170), (vx + 170, vy + 170), (W, H)]); rgb(c, dk(base, 0.25)); c.fill()
+    pg(c, [(0, H), (vx - 170, vy + 170), (vx + 170, vy + 170), (W, H)]); rgb(c, dk(base, 0.35)); c.fill()
+    pg(c, [(0, 0), (vx - 170, vy - 170), (vx + 170, vy - 170), (W, 0)]); rgb(c, dk(base, 0.5)); c.fill()
+    c.rectangle(vx - 170, vy - 170, 340, 340); rgb(c, (0.02, 0.02, 0.03)); c.fill()
+    for i in range(portas):
+        k = 0.10 + i * 0.26
+        for side in (-1, 1):
+            xo = vx + side * (170 + (W / 2 - 170) * (1 - k))
+            xi = vx + side * (170 + (W / 2 - 170) * (1 - k - 0.13))
+            yt = lambda xx: vy - 170 - (abs(xx - vx) - 170) / (W / 2 - 170) * (vy - 170) * 0.55
+            yb = lambda xx: vy + 170 + (abs(xx - vx) - 170) / (W / 2 - 170) * (H - vy - 170)
+            pg(c, [(xo, yt(xo) + (yb(xo) - yt(xo)) * 0.25), (xi, yt(xi) + (yb(xi) - yt(xi)) * 0.25), (xi, yb(xi)), (xo, yb(xo))])
+            rgb(c, P(MADEIRA_ESC)); c.fill()
+    a = piscar(t, 1) if luz_falha else 1
+    c.rectangle(vx - 60, 60, 120, 14); rgb(c, mix((0.2, 0.2, 0.2), (1, 0.95, 0.8), a)); c.fill()
+    c.move_to(vx - 60, 74); c.line_to(vx + 60, 74); c.line_to(vx + 420, H); c.line_to(vx - 420, H); c.close_path()
+    lgrad(c, vx, 74, vx, H, [(0, (1, 0.95, 0.8), 0.22 * a), (1, (1, 0.95, 0.8), 0.0)]); c.fill()
+
+
+def escurecer(c, a=0.35, borda=0.6):
+    """escurece a cena e fecha as bordas (use no fim de cenas de terror)"""
+    c.rectangle(0, 0, W, H); rgb(c, (0, 0, 0), a); c.fill()
+    g = cairo.RadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, W * 0.65)
+    g.add_color_stop_rgba(0, 0, 0, 0, 0); g.add_color_stop_rgba(1, 0, 0, 0, borda)
+    c.set_source(g); c.paint()
+
+
+# ---------------------------------------------------------------- cenários de terror prontos
+def cena_cemiterio(c, t, hora="sombrio", seed=11):
+    luz(hora)
+    ceu(c, t, nuvens=3, seed=seed)
+    colinas(c, 700, 50, seed=seed, col=(0.22, 0.28, 0.24), depth=0.5)
+    igreja(c, 1500, 720, 0.42, depth=0.55)
+    arvore_morta(c, t, 220, 900, 620, depth=0.1, seed=seed)
+    rnd = random.Random(seed)
+    for i in range(9):
+        lapide(c, 520 + i * 150 + rnd.uniform(-30, 30), 840 + (i % 3) * 30, rnd.uniform(0.6, 0.9),
+               rnd.choice(["arco", "arco", "cruz", "obelisco"]), rnd.uniform(-0.12, 0.12), depth=0.2)
+    chao(c, t, 900, "terra", seed=seed)
+    cerca_ferro(c, 1000, depth=0.0)
+    corvo(c, t, 300, 520, 1.0)
+    nevoa_i(c, t, 860, 0.5, seed=seed)
+
+
+def cena_casa_abandonada(c, t, hora="sombrio", seed=12, raios=()):
+    luz(hora)
+    ceu(c, t, nuvens=4, seed=seed)
+    floresta(c, t, 700, 16, (200, 300), ("pinheiro",), (0.14, 0.20, 0.18), seed=seed, depth=0.6)
+    casa_abandonada(c, t, 1180, 860, 0.95, depth=0.15)
+    arvore_morta(c, t, 1750, 900, 560, seed=seed + 1)
+    chao(c, t, 860, "terra", seed=seed)
+    corvo(c, t, (t * 70) % (W + 200) - 100, 260 + math.sin(t) * 20, 0.8, voando=True)
+    nevoa_i(c, t, 880, 0.45, seed=seed)
+    if raios:
+        relampago(c, t, raios, raio_x=700)
+
+
+def cena_floresta_sombria(c, t, hora="sombrio", seed=13):
+    luz(hora)
+    ceu(c, t, nuvens=2, seed=seed)
+    for d, n, yy in ((0.75, 18, 720), (0.5, 14, 780), (0.25, 10, 840)):
+        for i in range(n):
+            rnd = random.Random(seed * 7 + i + int(d * 100))
+            arvore_morta(c, t, -60 + (W + 120) * i / (n - 1) + rnd.uniform(-40, 40), yy, rnd.uniform(380, 620) * (1.2 - d),
+                         depth=d, seed=seed + i)
+    chao(c, t, 860, "terra", seed=seed)
+    nevoa_i(c, t, 820, 0.6, seed=seed)
