@@ -64,7 +64,7 @@ O ambiente da tarefa **não consegue baixar** os áudios do HeyGen. Não tente, 
 - Um teste mudo curto pega erro de código: `python render.py build videos/<slug>/scenes.py silent:20 out/teste.mp4`.
 
 ### 5. Thumbnail e textos
-- Duas thumbnails (`videos/<slug>/thumb/thumb.py`) no mesmo estilo ilustrado e no mesmo tom do vídeo (cenário pronto + `historiador_i` + `titulo_i`), escolha a melhor.
+- Duas thumbnails (`videos/<slug>/thumb/thumb.py`) no estilo ilustrado, a partir do modelo `examples/thumb-demo/thumb.py`: `thumb_close` (Historiador em close com emoção forte), `thumb_texto` (2 a 4 palavras enormes), `thumb_selo` opcional, cenário da história com o objeto visível e `salvar_thumb(..., tom="<tom do vídeo>")`. Abra as duas, confira que o texto lê bem em tamanho pequeno e não cobre o objeto principal, e escolha a melhor.
 - `videos/<slug>/youtube.txt` no formato dos vídeos anteriores (título, alternativas, descrição com capítulos pelos tempos reais das cenas, tags). Mantenha a linha "Narração gerada com voz de IA."
 
 ### 6. Colocar na fila

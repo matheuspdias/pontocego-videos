@@ -1628,3 +1628,73 @@ def cena_floresta_sombria(c, t, hora="sombrio", seed=13):
                          depth=d, seed=seed + i)
     chao(c, t, 860, "terra", seed=seed)
     nevoa_i(c, t, 820, 0.6, seed=seed)
+
+
+# ================================================================ THUMBNAILS (1280x720, desenhadas em 1920x1080)
+# Fórmula: 1 rosto grande com emoção forte (o Historiador em close) + 2 a 4 palavras enormes + 1 objeto/cenário
+# central + contraste alto. Nada de texto pequeno. O tom do vídeo vale aqui também.
+def thumb_texto(c, linhas, x=1300, y=430, size=170, cores=None, inclina=-0.03, alinhamento="c"):
+    """texto de thumbnail: Cinzel Bold enorme, contorno preto grosso e sombra. linhas = ["ONDE", "ESTÁ?"]"""
+    cores = cores or [(0.98, 0.96, 0.90), (1.0, 0.80, 0.30)]
+    c.save(); c.translate(x, y); c.rotate(inclina)
+    _bold(c, SERIF)
+    yy = 0
+    for i, s_ in enumerate(linhas):
+        sz = size * (1.0 if i == len(linhas) - 1 else 0.72) if len(linhas) > 1 else size
+        c.set_font_size(sz)
+        w_ = c.text_extents(s_).x_advance
+        tx = -w_ / 2 if alinhamento == "c" else 0
+        yy += sz * 0.95
+        c.move_to(tx + 8, yy + 10); c.text_path(s_); rgb(c, (0, 0, 0), 0.6); c.fill()
+        c.move_to(tx, yy); c.text_path(s_)
+        rgb(c, (0.05, 0.03, 0.03)); c.set_line_width(sz * 0.14); c.set_line_join(cairo.LINE_JOIN_ROUND); c.stroke_preserve()
+        rgb(c, cores[min(i, len(cores) - 1)] if i < len(linhas) - 1 or len(cores) == 1 else cores[-1]); c.fill()
+    c.restore()
+
+
+def thumb_selo(c, s, x, y, size=58, col=(0.80, 0.16, 0.12), inclina=-0.05):
+    """faixa/selo vermelho com texto curto (ex.: "NUNCA ENCONTRADO", "1959")"""
+    _bold(c, SERIF); c.set_font_size(size)
+    w_ = c.text_extents(s).x_advance
+    c.save(); c.translate(x, y); c.rotate(inclina)
+    rr(c, -w_ / 2 - 34 + 6, -size * 0.85 + 8, w_ + 68, size * 1.6, 8); rgb(c, (0, 0, 0), 0.45); c.fill()
+    rr(c, -w_ / 2 - 34, -size * 0.85, w_ + 68, size * 1.6, 8); rgb(c, col); c.fill()
+    c.move_to(-w_ / 2, size * 0.32); rgb(c, (1, 0.97, 0.92)); c.show_text(s)
+    c.restore()
+
+
+LUZES["chave"] = dict(LUZES["dia"], tinta=(1.0, 0.93, 0.84), tk=0.6, dir=1)  # luz de rosto para thumbnails
+
+
+def thumb_close(c, t, x=420, y=1500, s=2.3, expr="shocked", pose="point_r", look=0.7, lanterna=False, **kw):
+    """o Historiador em close (cintura para cima), iluminado de frente e com contorno claro para destacar do fundo"""
+    global _L
+    antes = _L
+    _L = LUZES["chave"]
+    c.push_group()
+    historiador_i(c, t, x, y, s, poses=((0, pose),), exprs=((0, expr),), look=look, lanterna=lanterna, **kw)
+    pat = c.pop_group()
+    _L = antes
+    # contorno (halo) deslocando a silhueta em volta
+    for dx, dy in ((-10, 0), (10, 0), (0, -10), (0, 10), (-7, -7), (7, 7), (-7, 7), (7, -7)):
+        c.save(); c.translate(dx, dy); c.set_source(pat); c.restore()
+        c.save(); c.translate(dx, dy); rgb(c, (0.98, 0.94, 0.82)); c.mask(pat); c.restore()
+    c.set_source(pat); c.paint()
+
+
+def salvar_thumb(fn, caminho, tom="normal", t=1.0):
+    """renderiza fn(c, t) em 1920x1080 com o acabamento do estilo/tom e salva PNG 1280x720"""
+    import os, subprocess
+    engine.STYLE, engine.TOM = "ilustrado", tom
+    surf = cairo.ImageSurface(cairo.FORMAT_RGB24, W, H); c = cairo.Context(surf)
+    c.set_line_cap(cairo.LINE_CAP_ROUND); c.set_line_join(cairo.LINE_JOIN_ROUND)
+    fn(c, t)
+    overlay(c, t)
+    # contraste extra para miniatura pequena
+    c.set_operator(cairo.OPERATOR_SOFT_LIGHT); c.set_source_rgba(0.5, 0.5, 0.5, 0.0); c.paint(); c.set_operator(cairo.OPERATOR_OVER)
+    big = caminho.replace(".png", "_1080.png")
+    surf.write_to_png(big)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", big, "-vf", "scale=1280:720:flags=lanczos,eq=contrast=1.08:saturation=1.12",
+                    caminho], check=True)
+    os.remove(big)
+    return caminho
