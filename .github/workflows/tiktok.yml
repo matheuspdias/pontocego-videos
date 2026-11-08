@@ -1,0 +1,63 @@
+name: TikTok automático
+
+# Dispara quando um TikTok novo entra na fila (fila_tiktok/<slug>.json) ou à mão pela aba Actions.
+# Renderiza o vertical com legendas e a capa e publica numa release "tiktok-<slug>".
+# Não posta no TikTok: o Matheus baixa e posta à mão (o agendamento do TikTok trava as views).
+on:
+  push:
+    branches: [main]
+    paths: ["fila_tiktok/*.json"]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "slug do vídeo na fila (vazio = todos)"
+        required: false
+
+concurrency:
+  group: tiktok
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  tiktok:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dependências
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q ffmpeg libcairo2-dev pkg-config fontconfig
+          pip install -q -r automacao/requirements.txt pillow
+          mkdir -p ~/.fonts && cp fonts/*.ttf ~/.fonts/ && fc-cache -f
+
+      - name: Renderizar e publicar na release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          shopt -s nullglob
+          if [ -n "${{ inputs.slug }}" ]; then itens=("fila_tiktok/${{ inputs.slug }}.json"); else itens=(fila_tiktok/*.json); fi
+          if [ ${#itens[@]} -eq 0 ]; then echo "fila vazia"; exit 0; fi
+          falhou=0
+          for f in "${itens[@]}"; do
+            echo "::group::$f"
+            set -o pipefail
+            python automacao/tiktok_render.py "$f" 2>&1 | tee -a out_log.txt || falhou=1
+            echo "::endgroup::"
+          done
+          exit $falhou
+
+      - name: Registrar na fila
+        if: always()
+        run: |
+          mkdir -p fila_tiktok
+          if [ -f out_log.txt ]; then tail -n 60 out_log.txt > fila_tiktok/ultimo_log.txt; fi
+          git config user.name "pontocego-bot"
+          git config user.email "pontocego-bot@users.noreply.github.com"
+          git add -A fila_tiktok
+          git diff --cached --quiet && exit 0
+          git commit -m "TikTok automático: vídeo pronto na release [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done

@@ -1,0 +1,23 @@
+OS FAROLEIROS DAS ILHAS FLANNAN (TikTok nativo, roteiro próprio, 70,2 s; estilo ilustrado, tom misterioso)
+Produzido em 07/11/2026 para domingo 08/11, 12h. Formato: "um caso em 60 segundos" com virada (o diário famoso é invenção).
+Narração: Pedro Lima - Serious (HeyGen, ElevenLabs v4), 1 bloco. "Hesperus" enviado como "Hésperus" para a pronúncia.
+
+Fontes (conferidas em 07/11/2026):
+- National Records of Scotland, "The Flannan Islands lighthouse: a disappearance": James Ducat, Thomas Marshall e Donald McArthur;
+  luz não vista desde 15/12/1900; Hesperus em 26/12 com Joseph Moore; lâmpadas preparadas, cozinha arrumada; duas peças de roupa
+  de sair faltando (Ducat e Marshall usavam oleados para ir ao desembarque); último registro no quadro às 9h do dia 15; no
+  desembarque oeste, grade de ferro torcida e pedra de mais de 20 cwt (~1 t) deslocada; Robert Muirhead: uma onda grande os levou.
+- As anotações dramáticas do diário (ventos nunca vistos, McArthur chorando, os três rezando) não constam dos registros oficiais
+  (o diário oficial vai até 13/12 e o quadro até 15/12); surgiram em versões posteriores da história.
+
+[mysterious] Dezembro de mil e novecentos. Um farol numa ilha da Escócia ficou apagado por dez noites. E ninguém sabia por quê.
+[serious] No dia vinte e seis, o navio Hesperus chegou com o faroleiro Joseph Moore. Ninguém veio receber o barco. Ele subiu sozinho.
+O portão estava fechado. As lâmpadas, limpas e prontas para acender. A cozinha, arrumada. Mas os três faroleiros tinham sumido.
+[short pause] Dois casacos impermeáveis não estavam no lugar. O terceiro ficou pendurado. Alguém saiu sem casaco, numa ilha no meio do Atlântico, em pleno dezembro.
+O último registro, num quadro de giz, era das nove da manhã do dia quinze.
+[thoughtful] No desembarque do lado oeste, a grade de ferro estava torcida. Uma pedra de mais de uma tonelada tinha saído do lugar.
+A investigação concluiu que uma onda gigante levou os três. Mas os corpos nunca foram encontrados.
+[curious] E tem um detalhe. As anotações assustadoras do diário, que você talvez já tenha ouvido, sobre homens chorando e rezando, não aparecem nos registros oficiais. Foram inventadas depois.
+[serious] Então sobra a pergunta: por que o terceiro saiu correndo, sem casaco? Qual é a sua teoria?
+
+Áudio HeyGen: https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=b23b36f1-0d08-41fe-b783-0a1b2f0bb6a9.mp3 (70,19 s)

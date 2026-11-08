@@ -208,3 +208,11 @@ Terças e quintas o canal pode rodar sozinho: uma tarefa agendada do Claude faz 
 - Chão: `pampa_top(c, t, seed, lines, dark)` (deserto de pedrinhas visto de cima, em cache), `nazca_lines_set(seed, n)` (linhas retas aleatórias), `trapezoid_top`, `pampa_side(c, t, y, hills, track)` (deserto visto do chão), `stone_piles`, `highway_top`.
 - Objetos: `cessna(t)` (avião pequeno de perfil), `cessna_top(t)` + `plane_shadow` (visto de cima), `stake(h)` + `cord(...)`, `mirador(h)` (torre de observação), `puquio(t, r)` (aqueduto em espiral visto de cima), `drone(t)`, `setting_sun(r)`, `shards(seed)` (cacos de cerâmica), `nazca_vase(s)`, `scan_box(w, h, t, col, label)` (caixa de detecção da IA). Cores `GLYPH PAMPA PAMPA_D PAMPA_L NAZCA_RED NAZCA_CREAM`.
 - `videos/linhas-de-nazca/scenes.py` tem `glyph_at` (geoglifo sendo traçado a partir de um tempo), `native` (antigo morador), `hillside` (encosta para geoglifos) e `ai_screen` (tela com detecções). O `tw()` desse vídeo procura a ocorrência mais próxima do tempo dado.
+
+## TikTok nativo (vídeos curtos próprios, desde 07/11/2026)
+No TikTok o canal usa vídeos curtos com roteiro próprio (60-80 s), não cortes do vídeo longo. A cena é desenhada em 16:9 e o
+`tiktok.py` monta o vertical no mesmo enquadramento dos cortes (título no topo, cena no meio, legendas palavra por palavra e capa):
+`python tiktok.py videos/<slug> out/<slug>_base.mp4 out/<slug>_tiktok.mp4 --capa out/<slug>_capa.png` (lê `tiktok.json` e `palavras.json`).
+Produção automática: `automacao/AUTOMATICO_TIKTOK.md`, temas em `automacao/temas_tiktok.md`, render e release no workflow `tiktok.yml`.
+Novos no `ilustrado.py`: `farol_i(c, t, x, y, s, aceso)`, `ilha_rochosa`, `cena_ilha_farol(c, t, hora, aceso)`, `cena_praia(c, t, hora)`,
+`papel_nota(c, linhas, w, h, size)` (papel rasgado com texto), `quadro_giz(c, linhas)`, `dna_i(c, t)` e `onda_gigante(c, t, t0, x, y, w, h)`.

@@ -1705,3 +1705,153 @@ def salvar_thumb(fn, caminho, tom="normal", t=1.0):
                     caminho], check=True)
     os.remove(big)
     return caminho
+
+
+# ================================================================ peças dos TikToks nativos (nov 2026)
+def ilha_rochosa(c, x, y, w=900, h=260, seed=1, depth=0.0, col=(0.42, 0.40, 0.38), grama=True):
+    """ilha de rocha com penhasco (origem = centro da linha d'água); o topo fica em y - h"""
+    rnd = random.Random(seed)
+    pts = [(x - w / 2, y)]
+    n = 9
+    for i in range(n + 1):
+        k = i / n
+        yy = y - h * (0.55 + 0.45 * math.sin(k * math.pi) ** 0.5) + rnd.uniform(-18, 18)
+        pts.append((x - w / 2 + w * (0.06 + 0.88 * k), yy))
+    pts.append((x + w / 2, y))
+    pg(c, pts); rgb(c, P(col, depth)); c.fill()
+    for i in range(7):  # fendas
+        xx = x - w / 2 + rnd.uniform(0.15, 0.85) * w
+        c.move_to(xx, y - h * rnd.uniform(0.3, 0.7)); c.line_to(xx + rnd.uniform(-30, 30), y)
+        rgb(c, P(dk(col, 0.3), depth), 0.6); c.set_line_width(5); c.stroke()
+    if grama:
+        pg(c, pts[1:-1] + [(x + w * 0.44, pts[-2][1] + 22), (x - w * 0.44, pts[1][1] + 22)])
+        rgb(c, P((0.36, 0.48, 0.30), depth)); c.fill()
+    ellipse(c, x, y, w * 0.55, 16); rgb(c, (1, 1, 1), 0.25); c.fill()
+
+
+def farol_i(c, t, x, y, s=1.0, aceso=True, depth=0.0):
+    """farol de pedra (origem = base no centro). aceso=False: lanterna escura, sem feixe"""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    if aceso:
+        a = t * 1.1
+        for sx in (-1, 1):
+            dx = math.cos(a if sx > 0 else a + math.pi)
+            if dx * sx > 0:
+                pg(c, [(0, -330), (sx * 900, -400), (sx * 900, -250)])
+                g = cairo.LinearGradient(0, 0, sx * 900, 0)
+                g.add_color_stop_rgba(0, 1, 0.92, 0.65, 0.45 * abs(dx)); g.add_color_stop_rgba(1, 1, 0.92, 0.65, 0)
+                c.set_source(g); c.fill()
+    corpo = P((0.92, 0.90, 0.86), depth)
+    pg(c, [(-62, 0), (-40, -290), (40, -290), (62, 0)]); rgb(c, corpo); c.fill()
+    pg(c, [(10, 0), (20, -290), (40, -290), (62, 0)]); rgb(c, dk(corpo, 0.18)); c.fill()
+    rr(c, -70, -18, 140, 18, 4); rgb(c, P((0.55, 0.52, 0.48), depth)); c.fill()
+    rr(c, -14, -70, 28, 70, 10); rgb(c, P(MADEIRA_ESC, depth)); c.fill()
+    rr(c, -58, -304, 116, 18, 4); rgb(c, P((0.20, 0.20, 0.22), depth)); c.fill()
+    vid = (1.0, 0.86, 0.50) if aceso else P((0.16, 0.18, 0.22), depth)
+    rr(c, -36, -362, 72, 58, 6); rgb(c, vid); c.fill()
+    for xx in (-12, 12):
+        c.rectangle(xx - 2, -362, 4, 58); rgb(c, P((0.15, 0.15, 0.17), depth)); c.fill()
+    pg(c, [(-46, -362), (0, -402), (46, -362)]); rgb(c, P((0.62, 0.16, 0.14), depth)); c.fill()
+    if aceso:
+        rglow(c, 0, -333, 180, (1.0, 0.85, 0.5), 0.45)
+    c.restore()
+
+
+def cena_ilha_farol(c, t, hora="noite", aceso=False, seed=21, x=1250, chuva=False):
+    """ilha isolada no mar aberto com o farol no topo (Flannan, Eilean Mòr); topo do farol em y ~260"""
+    luz(hora)
+    ceu(c, t, seed=seed)
+    mar_i(c, t, 700)
+    ilha_rochosa(c, 300, 720, 500, 90, seed=seed + 3, depth=0.6)
+    ilha_rochosa(c, x, 780, 900, 220, seed=seed)
+    farol_i(c, t, x + 40, 780 - 200, 0.8, aceso)
+    rr(c, x - 150, 780 - 250, 110, 60, 4); rgb(c, P((0.86, 0.84, 0.80))); c.fill()  # casa dos faroleiros
+    pg(c, [(x - 160, 780 - 250), (x - 95, 780 - 285), (x - 30, 780 - 250)]); rgb(c, P((0.40, 0.36, 0.34))); c.fill()
+    if chuva:
+        rnd = random.Random(3)
+        for i in range(120):
+            xx = (rnd.uniform(0, W) + t * 300) % W; yy = (rnd.uniform(0, H) + t * 900) % H
+            c.move_to(xx, yy); c.line_to(xx - 8, yy + 26); rgb(c, (0.8, 0.85, 0.95), 0.25); c.set_line_width(2); c.stroke()
+
+
+def cena_praia(c, t, hora="dia", seed=22, muro=True):
+    """praia com mureta (Somerton, 1948): céu, mar, areia e um paredão baixo à esquerda"""
+    luz(hora)
+    ceu(c, t, seed=seed)
+    mar_i(c, t, 600)
+    lgrad(c, 0, 640, 0, H, [(0, P(lt(AREIA, 0.05)), 1), (1, P(dk(AREIA, 0.2)), 1)])
+    pg(c, [(-20, 680), (W * 0.4, 650), (W + 20, 700), (W + 20, H), (-20, H)]); c.fill()
+    for i in range(5):  # espuma
+        yy = 655 + i * 9
+        c.move_to(-20, yy + 30); c.curve_to(W * 0.3, yy + math.sin(t + i) * 8, W * 0.6, yy + 20, W + 20, yy + 40)
+        rgb(c, (1, 1, 1), 0.35 - i * 0.06); c.set_line_width(5); c.stroke()
+    chao(c, t, 900, "areia", seed=seed)
+    if muro:
+        pg(c, [(-20, 610), (520, 640), (560, 760), (-20, 760)]); rgb(c, P((0.70, 0.66, 0.58))); c.fill()
+        for k in range(0, 540, 90):
+            c.rectangle(k, 620 + k * 0.05, 4, 140); rgb(c, P((0.55, 0.52, 0.46))); c.fill()
+
+
+def papel_nota(c, linhas, w=520, h=None, size=64, font=None, cor=(0.97, 0.94, 0.84), tinta=(0.15, 0.12, 0.10), rasgado=True, rot=-0.03):
+    """pedaço de papel (centrado na origem) com linhas de texto; rasgado = borda irregular embaixo"""
+    h = h or size * 1.5 * len(linhas) + 60
+    c.save(); c.rotate(rot)
+    rnd = random.Random(len(linhas) + w)
+    pts = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2)]
+    if rasgado:
+        for i in range(12, -1, -1):
+            pts.append((-w / 2 + w * i / 12, h / 2 + rnd.uniform(-12, 10)))
+    else:
+        pts.append((-w / 2, h / 2))
+    c.save(); c.translate(10, 14); pg(c, pts); rgb(c, (0, 0, 0), 0.30); c.fill(); c.restore()
+    pg(c, pts); rgb(c, cor); c.fill()
+    c.select_font_face(font or SERIF); c.set_font_size(size)
+    y0 = -h / 2 + 30 + size
+    for i, s in enumerate(linhas):
+        e = c.text_extents(s)
+        c.move_to(-e.x_advance / 2, y0 + i * size * 1.5); rgb(c, tinta); c.show_text(s)
+    c.restore()
+
+
+def quadro_giz(c, linhas, w=560, h=380, size=56):
+    """lousa de ardósia com moldura de madeira e texto a giz (centrada na origem)"""
+    rr(c, -w / 2 - 22, -h / 2 - 22, w + 44, h + 44, 10); rgb(c, P(MADEIRA)); c.fill()
+    rr(c, -w / 2, -h / 2, w, h, 4); rgb(c, (0.16, 0.19, 0.18)); c.fill()
+    c.select_font_face(TYPE); c.set_font_size(size)
+    for i, s in enumerate(linhas):
+        e = c.text_extents(s)
+        c.move_to(-e.x_advance / 2, -h / 2 + 40 + size + i * size * 1.45); rgb(c, (0.92, 0.92, 0.88), 0.92); c.show_text(s)
+
+
+def dna_i(c, t, h=420, w=120, col1=(0.30, 0.62, 0.86), col2=(0.86, 0.66, 0.30)):
+    """hélice de DNA girando (centrada na origem)"""
+    n = 22
+    for i in range(n):
+        k = i / (n - 1)
+        y = -h / 2 + h * k
+        a = k * 4 * math.pi + t * 2
+        x1, x2 = math.sin(a) * w / 2, -math.sin(a) * w / 2
+        line(c, x1, y, x2, y, 4, (0.85, 0.85, 0.85))
+        for xx, col in ((x1, col1), (x2, col2)):
+            c.new_sub_path(); c.arc(xx, y, 11, 0, 6.283); rgb(c, col); c.fill()
+
+
+def onda_gigante(c, t, t0, x=900, y=900, w=1400, h=520, d=1.6):
+    """vagalhão que cresce a partir de t0 e quebra (base em y)"""
+    if t < t0:
+        return
+    k = ease_out(prog(t, t0, d))
+    hh = h * k
+    col = P((0.22, 0.36, 0.44))
+    c.move_to(x - w / 2, y)
+    c.curve_to(x - w * 0.2, y - hh * 0.2, x, y - hh * 1.05, x + w * 0.22, y - hh)
+    c.curve_to(x + w * 0.36, y - hh * 0.98, x + w * 0.40, y - hh * 0.72, x + w * 0.30, y - hh * 0.62)
+    c.curve_to(x + w * 0.38, y - hh * 0.5, x + w * 0.46, y - hh * 0.2, x + w / 2, y)
+    c.close_path()
+    lgrad(c, x, y - hh, x, y, [(0, lt(col, 0.25), 1), (1, dk(col, 0.25), 1)]); c.fill()
+    rnd = random.Random(7)
+    for i in range(40):  # espuma na crista
+        a = rnd.uniform(0, 1)
+        px = x + w * (0.05 + 0.3 * a) + math.sin(t * 3 + i) * 6
+        py = y - hh * (1.0 - 0.15 * abs(a - 0.6)) + rnd.uniform(-10, 18)
+        c.new_sub_path(); c.arc(px, py, rnd.uniform(8, 20) * k, 0, 6.283); rgb(c, (0.95, 0.97, 0.98), 0.8); c.fill()
