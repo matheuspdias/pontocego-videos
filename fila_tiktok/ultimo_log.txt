@@ -1,0 +1,26 @@
+[publicar] baixando bloco 1/1
+[publicar] bloco 1: 70.19s (esperado 70.19s)
+/home/runner/work/pontocego-videos/pontocego-videos/out/flannan-isles/bloco1.mp3: 70.191s, início 0.000s, diferença -102 dB -> ok
+/home/runner/work/pontocego-videos/pontocego-videos/out/flannan-isles_narracao.wav 70.191s
+[publicar] renderizando o vertical
+efeitos sonoros: 0 eventos, volume 0.35
+/home/runner/work/pontocego-videos/pontocego-videos/out/flannan-isles_base.mp4 5 MB
+/home/runner/work/pontocego-videos/pontocego-videos/out/flannan-isles_capa.png
+/home/runner/work/pontocego-videos/pontocego-videos/out/flannan-isles_tiktok.mp4 4.8 MB 70.2 s
+[publicar] pronto: 70.2s, 4.8 MB
+release not found
+https://github.com/matheuspdias/pontocego-videos/releases/tag/tiktok-flannan-isles
+[publicar] release: https://github.com/matheuspdias/pontocego-videos/releases/tag/tiktok-flannan-isles
+[publicar] baixando bloco 1/1
+[publicar] bloco 1: 74.03s (esperado 74.03s)
+/home/runner/work/pontocego-videos/pontocego-videos/out/homem-de-somerton/bloco1.mp3: 74.031s, início 0.000s, diferença -102 dB -> ok
+/home/runner/work/pontocego-videos/pontocego-videos/out/homem-de-somerton_narracao.wav 74.031s
+[publicar] renderizando o vertical
+efeitos sonoros: 0 eventos, volume 0.34
+/home/runner/work/pontocego-videos/pontocego-videos/out/homem-de-somerton_base.mp4 6 MB
+/home/runner/work/pontocego-videos/pontocego-videos/out/homem-de-somerton_capa.png
+/home/runner/work/pontocego-videos/pontocego-videos/out/homem-de-somerton_tiktok.mp4 4.8 MB 74.0 s
+[publicar] pronto: 74.0s, 4.8 MB
+release not found
+https://github.com/matheuspdias/pontocego-videos/releases/tag/tiktok-homem-de-somerton
+[publicar] release: https://github.com/matheuspdias/pontocego-videos/releases/tag/tiktok-homem-de-somerton
