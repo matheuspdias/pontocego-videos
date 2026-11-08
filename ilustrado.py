@@ -934,6 +934,10 @@ def boneco(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "neutral"),), lo
     else:  # camisa
         pg(c, [(-18, shy - 10), (0, shy + 14), (18, shy - 10)]); rgb(c, shade(roupa_c, 0.2)); c.fill()
         c.rectangle(-2, shy + 10, 4, hem - shy - 14); rgb(c, shade(roupa_c, 0.18)); c.fill()
+        if gravata:
+            pg(c, [(-20, shy - 10), (-4, shy + 8), (-14, shy + 14)]); pg(c, [(20, shy - 10), (4, shy + 8), (14, shy + 14)])
+            rgb(c, lt(roupa_c, 0.15)); c.fill()
+            pg(c, [(-7, shy - 6), (7, shy - 6), (9, shy + 70), (0, shy + 84), (-9, shy + 70)]); rgb(c, P(gravata)); c.fill()
         c.rectangle(-60, hem - 10, 120, 10); rgb(c, P(cinto or (0.30, 0.20, 0.13))); c.fill()
     c.restore()
     # pescoço
@@ -1666,13 +1670,16 @@ def thumb_selo(c, s, x, y, size=58, col=(0.80, 0.16, 0.12), inclina=-0.05):
 LUZES["chave"] = dict(LUZES["dia"], tinta=(1.0, 0.93, 0.84), tk=0.6, dir=1)  # luz de rosto para thumbnails
 
 
-def thumb_close(c, t, x=420, y=1500, s=2.3, expr="shocked", pose="point_r", look=0.7, lanterna=False, **kw):
+def thumb_close(c, t, x=420, y=1500, s=2.3, expr="shocked", pose="point_r", look=0.7, lanterna=False, quem=None, **kw):
     """o Historiador em close (cintura para cima), iluminado de frente e com contorno claro para destacar do fundo"""
     global _L
     antes = _L
     _L = LUZES["chave"]
     c.push_group()
-    historiador_i(c, t, x, y, s, poses=((0, pose),), exprs=((0, expr),), look=look, lanterna=lanterna, **kw)
+    if quem is None:
+        historiador_i(c, t, x, y, s, poses=((0, pose),), exprs=((0, expr),), look=look, lanterna=lanterna, **kw)
+    else:  # outro personagem: quem = dict de figurino
+        boneco(c, t, x, y, s, poses=((0, pose),), exprs=((0, expr),), look=look, **dict(quem, **kw))
     pat = c.pop_group()
     _L = antes
     # contorno (halo) deslocando a silhueta em volta
