@@ -17,7 +17,7 @@ O Matheus pode mexer à vontade: mover ideias, apagar, marcar como proibido.
 - As Linhas de Nazca, Peru (`linhas-de-nazca`), tema `deserto` (enigma arqueológico)
 
 ## Ideias (opcional, o Matheus pode preencher)
-- 
+- A Colônia Perdida de Roanoke (`colonia-roanoke`): roteiro pronto e conferido em `videos/colonia-roanoke/roteiro.txt` (5 blocos + ganchos, ~15 min), tom `misterioso`, tema `selva`. Falta só a narração (o HeyGen recusou em 09/11 por login expirado). Próxima execução: reaproveitar este roteiro.
 
 ## Não fazer
 - Casos com vítimas ou famílias vivas expostas a acusações sem prova
