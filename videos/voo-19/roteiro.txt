@@ -1,0 +1,24 @@
+O VOO 19 (TikTok nativo, roteiro próprio, ~75 s estimados; estilo ilustrado, tom misterioso, tema mar)
+Escrito em 09/11/2026 para terça 10/11, 20h. Formato: "mito x fato" (a lenda do Triângulo das Bermudas x os registros da Marinha).
+Narração: Pedro Lima - Serious (HeyGen, ElevenLabs v4), 1 bloco. NÃO GERADA: o HeyGen recusou em 09/11 (401, token expirado/revogado).
+Grafia "como se pronuncia" no texto do HeyGen: "Tchárls Têilor" = Charles Taylor; "Quíz" = Keys; "Kúshi" = Kusche (corrigir nas legendas).
+
+Fontes (conferidas em 09/11/2026):
+- National Archives (Prologue, 16/10/2017), "Uncertain as to in what position lay the Peninsula of Florida": 05/12/1945, decolagem 14h10
+  de NAS Fort Lauderdale; 5 Avengers, 14 homens; instrutor Lt. Charles C. Taylor; "Both of my compasses are out"; "sure I am in the Keys";
+  estava a nordeste; por do sol ~17h30, tempo piorando; ~19h30: chuva, turbulência, vento de 25-30 nós, mar muito agitado; última
+  mensagem 19h04 ("when the first plane drops below ten gallons, we all go down together"); avião de busca explodiu, 13 mortos; 27 no total;
+  nenhum destroço do Voo 19 encontrado.
+- Wikipedia, "Flight 19": o avião de busca era um PBM Mariner (13 tripulantes); o petroleiro SS Gaines Mills viu chamas de uma explosão;
+  o USS Solomons perdeu o contato de radar no mesmo ponto e hora; a Marinha depois mudou a conclusão para "causa desconhecida" após
+  reclamação da mãe de Taylor; os 5 Avengers achados em 1991 não eram do Voo 19.
+- Skeptoid #4417: tempo ruim ("seas and wind running high, rain"); Larry Kusche (1975) mostrou que Charles Berlitz (1974) fabricou mensagens
+  de rádio para sugerir pane estranha e clima incomum.
+
+[mysterious] Cinco de dezembro de mil novecentos e quarenta e cinco. Cinco aviões da Marinha americana decolam da Flórida. Nenhum volta.
+[serious] É o Voo Dezenove, a história que ajudou a criar a lenda do Triângulo das Bermudas. A versão famosa: céu limpo, mar calmo, instrumentos enlouquecidos e mensagens estranhas no rádio antes do silêncio.
+[curious] Agora, o que dizem os registros. [short pause] Era um voo de treino, com catorze homens. O líder, o tenente Tchárls Têilor, achou que as bússolas tinham pifado e que estava sobre as ilhas Quíz, ao sul da Flórida. Na verdade, estava a nordeste, perto das Bahamas.
+[serious] Tentando voltar, o grupo foi cada vez mais para o mar aberto. O sol se pôs. O tempo piorou: chuva, vento forte e mar muito agitado. A última mensagem: quando o primeiro avião ficar sem combustível, todos descemos juntos.
+[thoughtful] E as mensagens sobrenaturais? Não estão nos registros. Anos depois, o pesquisador Larry Kúshi mostrou que muitas foram inventadas em livros dos anos setenta.
+[short pause] Mas tem uma parte real que é pior. Um hidroavião de resgate, com treze homens, saiu para procurá-los. Um navio viu chamas no mar, no ponto em que o radar perdeu o avião. Ninguém sobreviveu.
+[serious] Vinte e sete homens. E os cinco aviões nunca foram encontrados. [thoughtful] Erro de navegação... ou algo mais? Qual é a sua teoria?

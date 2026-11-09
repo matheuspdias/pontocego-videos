@@ -19,10 +19,10 @@ Os vídeos do YouTube (automacao/temas.md) também contam: pode fazer um curto s
 
 ## Ideias soltas (a automação pode usar)
 - Dyatlov: o detalhe das barracas cortadas por dentro (já tem vídeo longo: outro ângulo)
-- O Sinal Wow! de 1977: 72 segundos e nunca mais
+- O Sinal Wow! de 1977 (`sinal-wow`): roteiro pronto e conferido (o detalhe que ninguém percebeu), escrito para 10/11 12h; falta a narração (HeyGen recusou em 09/11: login expirado). Próxima execução: reaproveitar.
 - A Colônia perdida de Roanoke e a palavra "CROATOAN"
 - O navio fantasma Kaz II (2007)
-- O Mistério do Voo 19 (Triângulo das Bermudas: mito x fato)
+- O Voo 19 (`voo-19`): roteiro pronto e conferido (mito x fato), escrito para 10/11 20h; falta a narração (HeyGen recusou em 09/11: login expirado). Próxima execução: reaproveitar.
 - Os sapatos de Kenneth Arnold / pratos voadores de 1947 (como nasceu o termo "disco voador")
 - O Ourives de Mohenjo-daro / escrita do Indo que ninguém lê
 - O mapa de Piri Reis (mito x fato)

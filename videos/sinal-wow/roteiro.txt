@@ -1,0 +1,23 @@
+O SINAL WOW! (TikTok nativo, roteiro próprio, ~70 s estimados; estilo ilustrado, tom misterioso)
+Escrito em 09/11/2026 para terça 10/11, 12h. Formato: "o detalhe que ninguém percebeu" (6EQUJ5 não é mensagem; a 2ª antena não ouviu nada).
+Narração: Pedro Lima - Serious (HeyGen, ElevenLabs v4), 1 bloco. NÃO GERADA: o HeyGen recusou em 09/11 (401, token expirado/revogado).
+Grafia "como se pronuncia" no texto do HeyGen: "Big Ír" = Big Ear; "Djéri Êman" = Jerry Ehman; "Uau" = Wow! (corrigir nas legendas).
+O caso já apareceu no vídeo longo `5-misterios`; aqui o ângulo é outro (o que o código significa e o detalhe das duas antenas).
+
+Fontes (conferidas em 09/11/2026):
+- National Geographic, "This mysterious radio signal has puzzled astronomers for nearly 50 years": 15/08/1977, Big Ear (Ohio State),
+  Jerry Ehman circulou e escreveu "Wow!" em tinta vermelha; 72 s; ~1420 MHz (linha do hidrogênio); ~30x o ruído; região de Sagitário;
+  Arecibo Wow! Project (Abel Méndez): em 2024, hipótese de nuvem fria de hidrogênio que brilhou de repente (ex.: clarão de magnetar);
+  reanálise de 2025 (arXiv 2508.10657): sinal ~4x mais forte do que se pensava.
+- Resumo do verbete "Wow! signal": 6EQUJ5 é a intensidade ao longo do tempo (cada caractere, um ciclo de 12 s; U ~30 desvios-padrão);
+  Ehman achou dias depois revisando as folhas; duas cornetas (feed horns) apontando para pontos vizinhos, sinal esperado nas duas com ~3 min
+  de diferença e visto só numa; buscas de 1987, 1989, 1995-96 e Breakthrough Listen 2022 sem nada.
+- Universe Today / Phys.org (ago/2024): "The Wow! Signal deciphered — it was hydrogen all along" (preprint, hipótese, não confirmação).
+
+[mysterious] Agosto de mil novecentos e setenta e sete. Um radiotelescópio nos Estados Unidos captou um sinal vindo do espaço. Durou setenta e dois segundos. E nunca mais voltou.
+[serious] O telescópio se chamava Big Ír, a orelha grande. Dias depois, o astrônomo Djéri Êman revisava as folhas impressas à mão. Viu uma sequência: seis, E, Q, U, J, cinco. Circulou com caneta vermelha e escreveu do lado: Uau!
+[curious] Muita gente acha que isso é uma mensagem. Não é. Cada caractere mede a força do sinal. O U, o pico, era cerca de trinta vezes mais forte que o ruído de fundo.
+[thoughtful] E a frequência era quase exatamente a do hidrogênio, mil quatrocentos e vinte megahértz. Justamente a frequência que os cientistas achavam que uma civilização usaria para ser ouvida.
+[short pause] Agora, o detalhe que quase ninguém percebe. O telescópio tinha duas antenas, olhando para pontos vizinhos do céu. O sinal passou pela primeira. Três minutos depois, a segunda deveria ouvir a mesma coisa. Não ouviu nada. Ele se apagou nesse intervalo.
+[serious] Décadas de buscas na mesma região, na constelação de Sagitário. Nada. Em dois mil e vinte e quatro, pesquisadores sugeriram uma nuvem de hidrogênio que brilhou de repente.
+[mysterious] Um fenômeno raro da natureza... ou alguém que falou uma vez só? Qual é a sua teoria?
