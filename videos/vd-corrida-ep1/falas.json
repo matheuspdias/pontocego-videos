@@ -1,0 +1,111 @@
+{
+ "serie": "A última corrida",
+ "episodio": 1,
+ "vozes": {
+  "voce": {
+   "voice_id": "0d0e23e8170446e38b18a7380b2d30a8",
+   "nome": "Pedro Lima (você)"
+  },
+  "passageiro": {
+   "voice_id": "3b2a59d6edb54e79a40b29726a12d1c3",
+   "nome": "Calm Carlos (Seu Antônio)"
+  }
+ },
+ "cauda": 7.5,
+ "falas": [
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Duas e quarenta e sete da manhã. Doze horas rodando. Última corrida e eu vou pra casa."
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Cemitério da Consolação? A essa hora?",
+   "pausa": 0.6
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Quarenta reais. Fecha a meta do dia. Aceito."
+  },
+  {
+   "quem": "voce",
+   "texto": "Boa noite! Seu Antônio?",
+   "pausa": 0.9
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Boa noite, meu filho. Pode seguir pela Consolação."
+  },
+  {
+   "quem": "voce",
+   "texto": "Bonitas as flores. O senhor vai visitar alguém?",
+   "pausa": 0.8
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Não. Eu tô voltando pra casa."
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Voltando pra casa... no cemitério?",
+   "pausa": 0.7
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "O carro ficou gelado. E eu nem liguei o ar.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "passageiro",
+   "texto": "As flores são pra mim mesmo. Hoje é meu aniversário.",
+   "pausa": 0.6
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Pera. O aplicativo diz que o passageiro ainda não embarcou.",
+   "pausa": 0.9
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Mas eu ouvi a porta bater. Eu ouvi ele sentar."
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Não olha no retrovisor, meu filho.",
+   "pausa": 0.7
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "O banco de trás tá vazio. Só tem as flores.",
+   "pausa": 1.0
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Faz vinte anos que eu peço essa corrida. Ninguém nunca chegou no portão.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Faltam duzentos metros.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Mas se você parar o carro antes do portão... eu desço junto com você.",
+   "pausa": 0.7
+  },
+  {
+   "quem": "voce",
+   "texto": "E aí? O que você faria?",
+   "pausa": 1.0
+  }
+ ]
+}

@@ -1,6 +1,9 @@
-import cairo, math, random
+import cairo, math, random, os
 
-W, H, FPS = 1920, 1080, 30
+# formato: 16:9 (YouTube) por padrão; PC_VERTICAL=1 deixa o quadro 1080x1920 (TikTok nativo, formato "Você decide").
+# O render.py liga sozinho quando o scenes.py tem VERTICAL = True.
+VERTICAL = os.environ.get("PC_VERTICAL") == "1"
+W, H, FPS = (1080, 1920, 30) if VERTICAL else (1920, 1080, 30)
 
 BG = (0.075, 0.080, 0.098)          # fundo noturno
 INK = (0.91, 0.87, 0.77)            # traço de giz (creme)
@@ -1219,7 +1222,10 @@ def vignette_surface():
     if _VIG is None:
         surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
         c = cairo.Context(surf)
-        g = cairo.RadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, W * 0.72)
+        if VERTICAL:
+            g = cairo.RadialGradient(W / 2, H / 2, W * 0.45, W / 2, H / 2, H * 0.62)
+        else:
+            g = cairo.RadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, W * 0.72)
         g.add_color_stop_rgba(0, 0, 0, 0, 0)
         g.add_color_stop_rgba(1, 0, 0, 0, 0.85)
         c.set_source(g); c.paint()

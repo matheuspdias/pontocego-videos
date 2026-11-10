@@ -9,6 +9,10 @@ Uso:
 import sys, os, subprocess, importlib.util, tempfile, numpy as np
 from concurrent.futures import ProcessPoolExecutor
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# vídeo vertical nativo: o scenes.py declara VERTICAL = True (precisa valer antes de importar o engine)
+for _a in sys.argv[2:3]:
+    if _a.endswith(".py") and os.path.exists(_a) and "\nVERTICAL = True" in open(_a, encoding="utf-8").read():
+        os.environ["PC_VERTICAL"] = "1"
 from engine import *
 
 XF = 0.28  # duração do crossfade entre cenas (s)
@@ -148,7 +152,7 @@ def sheet(scenes_path, out_png, times):
     stills(scenes_path, tmp, times)
     rows = (len(times) + 1) // 2
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-pattern_type", "glob", "-i", f"{tmp}/f_*.png",
-                    "-vf", f"scale=960:-1,tile=2x{rows}", "-frames:v", "1", out_png], check=True)
+                    "-vf", (f"scale=540:-1,tile=4x{(len(times) + 3) // 4}" if VERTICAL else f"scale=960:-1,tile=2x{rows}"), "-frames:v", "1", out_png], check=True)
 
 
 def _segment(args):

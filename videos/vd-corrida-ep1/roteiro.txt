@@ -1,0 +1,9 @@
+VOCÊ DECIDE · A ÚLTIMA CORRIDA · EP. 1 (TikTok vertical, ~75 s)
+Inspirado na lenda urbana do passageiro que pede corrida para o cemitério.
+POV: você é motorista de aplicativo em São Paulo, 2h47 da manhã.
+
+Vozes: você = Pedro Lima (voz do canal); Seu Antônio = Calm Carlos.
+Falas em falas.json (ordem, quem, pensamento). Escolha final:
+  A) PARAR O CARRO AGORA
+  B) LEVAR ATÉ O PORTÃO
+O mais votado vira o Ep. 2.
