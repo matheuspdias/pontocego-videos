@@ -177,7 +177,8 @@ def build(scenes_path, audio, out_mp4, crf=None):
     O antigo CRF 26 vinha do limite de ~25 MB do chat, que não vale para a publicação automática."""
     crf = crf if crf is not None else int(os.environ.get("CRF", "17"))
     saida_h = int(os.environ.get("SAIDA_H", "1440"))
-    vf = [] if saida_h == H else ["-vf", f"scale={saida_h * 16 // 9}:{saida_h}:flags=lanczos"]
+    # o vertical (TikTok) fica em 1080x1920: o TikTok não usa mais que isso
+    vf = [] if (VERTICAL or saida_h == H) else ["-vf", f"scale={saida_h * 16 // 9}:{saida_h}:flags=lanczos"]
     silent = audio.startswith("silent:")
     if silent:
         dur = float(audio.split(":")[1])
