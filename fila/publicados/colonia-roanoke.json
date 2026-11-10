@@ -1,13 +1,6 @@
 {
   "slug": "colonia-roanoke",
   "publicar_em": "2026-11-10T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1191ca2f6d4f4650a7b5f4516b1e6544.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e54fd8d30a124148bcf2988c5dfc5232.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1f3e272ecb43497aad37bc2e01bff764.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e5a6a2bc1d034a6a85e2ec6c677522d9.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=3e88a1ea1a7d46fead4368d77f6e8aba.wav"
-  ],
   "duracoes": [
     192.912,
     202.161,
@@ -39,6 +32,36 @@
   ],
   "thumbnail": "videos/colonia-roanoke/thumb/roanoke_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=da467df048da40aaa840be1746603624.wav",
-  "ganchos_duracao": 25.05
+  "ganchos_duracao": 25.05,
+  "video_id": "iuMMpqpJcAk",
+  "url": "https://youtu.be/iuMMpqpJcAk",
+  "agendado_para": "2026-11-10T18:00:00-03:00",
+  "enviado_em": "2026-11-09T21:32:48-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "abertura",
+      "video_id": "sIiQEEyVydc",
+      "url": "https://youtu.be/sIiQEEyVydc",
+      "titulo": "115 pessoas sumiram e deixaram só uma palavra #Shorts",
+      "duracao": 92.2,
+      "agendado_para": "2026-11-11T12:00:00-03:00"
+    },
+    {
+      "id": "forja",
+      "video_id": "Xh-cwCauohk",
+      "url": "https://youtu.be/Xh-cwCauohk",
+      "titulo": "Uma forja pode ter resolvido o mistério de Roanoke #Shorts",
+      "duracao": 85.9,
+      "agendado_para": "2026-11-12T12:00:00-03:00"
+    },
+    {
+      "id": "mapa",
+      "video_id": "CBvI19m1gzI",
+      "url": "https://youtu.be/CBvI19m1gzI",
+      "titulo": "O remendo de papel que escondia um forte num mapa #Shorts",
+      "duracao": 100.2,
+      "agendado_para": "2026-11-13T12:00:00-03:00"
+    }
+  ]
 }
