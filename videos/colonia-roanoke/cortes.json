@@ -1,0 +1,20 @@
+{"serie": "A COLÔNIA PERDIDA", "cortes": [
+ {"id": "abertura", "inicio": 0.0, "fim": 84.9, "titulo": "115 PESSOAS\\NSUMIRAM",
+  "gancho": "Cento e quinze pessoas sumiram de uma ilha. E deixaram só uma palavra, entalhada num poste.",
+  "gancho_audio": [0.11, 7.05], "gancho_tela": "115 PESSOAS\\NSUMIRAM", "gancho_t": 73.6,
+  "capa": ["115 PESSOAS", "SUMIRAM", "E DEIXARAM 1 PALAVRA"],
+  "titulo_post": "115 pessoas sumiram e deixaram só uma palavra",
+  "post": "Em 1590, John White voltou à ilha de Roanoke e não achou ninguém. Só uma palavra entalhada num poste: CROATOAN. #misterio #historia #roanoke #pontocego"},
+ {"id": "forja", "inicio": 943.9, "fim": 1020.5, "titulo": "A FORJA DE\\NHATTERAS",
+  "gancho": "Numa ilha da Carolina do Norte, arqueólogos acharam restos de uma forja. E eles podem resolver um mistério de quatrocentos anos.",
+  "gancho_audio": [15.89, 24.8], "gancho_tela": "RESTOS DE\\NUMA FORJA", "gancho_t": 967.0,
+  "capa": ["RESTOS DE", "UMA FORJA", "RESOLVEM ROANOKE?"],
+  "titulo_post": "Uma forja pode ter resolvido o mistério de Roanoke",
+  "post": "Lascas de ferro de ferreiro achadas em Hatteras podem mostrar para onde foi a Colônia Perdida. Mas nem todo mundo concorda. #misterio #historia #arqueologia #roanoke #pontocego"},
+ {"id": "mapa", "inicio": 715.5, "fim": 806.9, "titulo": "O SEGREDO\\NDO MAPA",
+  "gancho": "Um mapa de mais de quatrocentos anos tinha um remendo de papel colado. E, debaixo dele, um forte escondido.",
+  "gancho_audio": [7.29, 15.69], "gancho_tela": "UM FORTE\\NESCONDIDO", "gancho_t": 760.0,
+  "capa": ["UM REMENDO", "NO MAPA", "ESCONDIA UM FORTE"],
+  "titulo_post": "O remendo de papel que escondia um forte num mapa",
+  "post": "Em 2012, pesquisadores olharam o mapa de John White contra a luz e acharam um forte escondido debaixo de um remendo. #misterio #historia #roanoke #pontocego"}
+]}

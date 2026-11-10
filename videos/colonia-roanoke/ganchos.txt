@@ -1,0 +1,5 @@
+# Ganchos dos cortes — bloco extra HeyGen (Pedro Lima - Serious), 25.050 s
+# https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=da467df048da40aaa840be1746603624.wav
+abertura     0.11-7.05  Cento e quinze pessoas sumiram de uma ilha. E deixaram só uma palavra, entalhada num poste.
+mapa         7.29-15.69  Um mapa de mais de quatrocentos anos tinha um remendo de papel colado. E, debaixo dele, um forte escondido.
+forja        15.89-24.80  Numa ilha da Carolina do Norte, arqueólogos acharam restos de uma forja. E eles podem resolver um mistério de quatrocentos anos.

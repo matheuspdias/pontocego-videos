@@ -1235,6 +1235,13 @@ def placa(c, titulo, sub=None, w=None, size=40):
     """cartão de pergaminho com título e sobretítulo (centrado na origem)"""
     _bold(c, SERIF); c.set_font_size(size)
     tw = c.text_extents(titulo).x_advance
+    if sub and not w:
+        c.select_font_face(TYPE); c.set_font_size(size * 0.5)
+        tw = max(tw, c.text_extents(sub).x_advance)
+        _bold(c, SERIF); c.set_font_size(size)
+        tw2 = c.text_extents(titulo).x_advance
+    else:
+        tw2 = tw
     w = w or tw + 80
     h = size * 2.4 + (size * 0.8 if sub else 0)
     c.save(); c.rotate(-0.012)
@@ -1248,7 +1255,7 @@ def placa(c, titulo, sub=None, w=None, size=40):
         c.move_to(-sw_ / 2, yy - size * 0.2); rgb(c, (0.55, 0.40, 0.22)); c.show_text(sub)
         yy += size * 0.9
     _bold(c, SERIF); c.set_font_size(size)
-    c.move_to(-tw / 2, yy + size * 0.2); rgb(c, (0.20, 0.13, 0.08)); c.show_text(titulo)
+    c.move_to(-tw2 / 2, yy + size * 0.2); rgb(c, (0.20, 0.13, 0.08)); c.show_text(titulo)
     c.restore()
 
 
@@ -1855,3 +1862,390 @@ def onda_gigante(c, t, t0, x=900, y=900, w=1400, h=520, d=1.6):
         px = x + w * (0.05 + 0.3 * a) + math.sin(t * 3 + i) * 6
         py = y - hh * (1.0 - 0.15 * abs(a - 0.6)) + rnd.uniform(-10, 18)
         c.new_sub_path(); c.arc(px, py, rnd.uniform(8, 20) * k, 0, 6.283); rgb(c, (0.95, 0.97, 0.98), 0.8); c.fill()
+
+
+# ================================================================ ROANOKE (A Colônia Perdida, 1587)
+def palicada_i(c, t, x0, x1, y, h=300, depth=0.0, portao=None, seed=31, col=(0.46, 0.33, 0.22)):
+    """paliçada de troncos com ponta (forte colonial ou aldeia). portao = x do vão de entrada (ou None)"""
+    rnd = random.Random(seed)
+    x = x0
+    while x < x1:
+        w = rnd.uniform(26, 36)
+        if portao is not None and portao - 70 < x + w / 2 < portao + 70:
+            x += w; continue
+        hh = h * rnd.uniform(0.9, 1.06)
+        cc = P(mix(col, (0.36, 0.26, 0.18), rnd.uniform(0, 0.6)), depth)
+        pg(c, [(x, y), (x, y - hh), (x + w / 2, y - hh - w * 0.8), (x + w, y - hh), (x + w, y)]); rgb(c, cc); c.fill()
+        c.rectangle(x + w * 0.62, y - hh, w * 0.38, hh); rgb(c, dk(cc, 0.18)); c.fill()
+        x += w
+    for yy in (y - h * 0.28, y - h * 0.72):  # travessas
+        c.rectangle(x0, yy, x1 - x0, 10); rgb(c, P((0.30, 0.21, 0.14), depth), 0.8); c.fill()
+
+
+def poste_entalhado(c, t, x, y, h=520, w=150, texto="CROATOAN", p=1.0, depth=0.0, cruz=False):
+    """poste descascado (madeira clara) com letras entalhadas na vertical; p 0..1 revela as letras"""
+    cc = P((0.86, 0.76, 0.58), depth)
+    c.save(); c.translate(x, y)
+    rr(c, -w / 2, -h, w, h, 18); rgb(c, cc); c.fill()
+    c.rectangle(w * 0.18, -h, w * 0.32, h); rgb(c, dk(cc, 0.10)); c.fill()
+    for k in range(7):  # veios
+        xx = -w / 2 + 12 + k * (w - 24) / 6
+        c.move_to(xx, -h + 20); c.curve_to(xx + 6, -h * 0.6, xx - 6, -h * 0.3, xx + 2, -10)
+        rgb(c, dk(cc, 0.22), 0.35); c.set_line_width(2); c.stroke()
+    n = len(texto)
+    vis = int(round(n * max(0.0, min(1.0, p))))
+    size = min(w * 0.62, (h - 60) / n * 0.95)
+    _bold(c, SERIF); c.set_font_size(size)
+    for i, ch in enumerate(texto[:vis]):
+        e = c.text_extents(ch)
+        yy = -h + 40 + (i + 0.85) * (h - 60) / n
+        c.move_to(-e.x_advance / 2 + 3, yy + 3); rgb(c, (1, 1, 1), 0.35); c.show_text(ch)
+        c.move_to(-e.x_advance / 2, yy); rgb(c, P((0.24, 0.15, 0.08), depth)); c.show_text(ch)
+    if cruz:
+        line(c, -w * 0.3, -h * 0.5, w * 0.3, -h * 0.5, 10, P((0.24, 0.15, 0.08)))
+    c.restore()
+
+
+def tronco_entalhado(c, t, x, y, h=900, w=170, texto="CRO", p=1.0, depth=0.0):
+    """tronco grosso de árvore com um retângulo sem casca e letras entalhadas"""
+    c.save(); c.translate(x, y)
+    tr = P((0.36, 0.26, 0.18), depth)
+    pg(c, [(-w / 2 - 30, 0), (-w / 2, -h * 0.2), (-w / 2 + 10, -h), (w / 2 - 10, -h), (w / 2, -h * 0.2), (w / 2 + 30, 0)]); rgb(c, tr); c.fill()
+    c.rectangle(w * 0.15, -h, w * 0.35, h); rgb(c, dk(tr, 0.2)); c.fill()
+    rnd = random.Random(7)
+    for i in range(16):
+        xx = rnd.uniform(-w / 2 + 10, w / 2 - 10); yy = rnd.uniform(-h, -20)
+        c.move_to(xx, yy); c.line_to(xx + rnd.uniform(-4, 4), yy + rnd.uniform(40, 110))
+        rgb(c, dk(tr, 0.35), 0.6); c.set_line_width(3); c.stroke()
+    rr(c, -w * 0.38, -h * 0.62, w * 0.76, h * 0.34, 20); rgb(c, P((0.84, 0.72, 0.52), depth)); c.fill()
+    vis = texto[:int(round(len(texto) * max(0.0, min(1.0, p))))]
+    _bold(c, SERIF); c.set_font_size(w * 0.24)
+    e = c.text_extents(texto)
+    c.move_to(-e.x_advance / 2, -h * 0.45 + e.height / 2); rgb(c, P((0.24, 0.15, 0.08), depth)); c.show_text(vis)
+    c.restore()
+
+
+def casa_arco(c, x, y, w=300, h=170, depth=0.0, col=(0.66, 0.56, 0.40)):
+    """casa algonquina de teto em arco coberta de esteiras (como nas aquarelas de John White)"""
+    cc = P(col, depth)
+    c.save(); c.translate(x, y)
+    c.move_to(-w / 2, 0); c.line_to(-w / 2, -h * 0.5); c.curve_to(-w / 2, -h * 1.1, w / 2, -h * 1.1, w / 2, -h * 0.5)
+    c.line_to(w / 2, 0); c.close_path(); rgb(c, cc); c.fill()
+    for k in range(1, 5):
+        yy = -h * 0.18 * k
+        c.move_to(-w / 2, yy); c.line_to(w / 2, yy); rgb(c, dk(cc, 0.18), 0.6); c.set_line_width(3); c.stroke()
+    rr(c, -w * 0.08, -h * 0.55, w * 0.16, h * 0.55, 6); rgb(c, P((0.14, 0.10, 0.08), depth)); c.fill()
+    c.restore()
+
+
+def aldeia_i(c, t, y=880, seed=41, depth=0.2, cerca=True, fogueira=True):
+    """aldeia algonquina: casas em arco, fogueira com fumaça e paliçada ao fundo"""
+    rnd = random.Random(seed)
+    if cerca:
+        palicada_i(c, t, 300, 1880, y - 120, 230, depth=depth + 0.25, seed=seed)
+    for i, xx in enumerate((520, 900, 1300, 1660)):
+        casa_arco(c, xx + rnd.uniform(-40, 40), y - 40 + rnd.uniform(-10, 10), rnd.uniform(260, 340), rnd.uniform(150, 190), depth=depth + 0.1)
+    if fogueira:
+        x0 = 1100
+        smoke(c, t, x0, y - 10, 300, 0.18, seed=seed)
+        for k in range(3):
+            fl = 30 + 10 * math.sin(t * 9 + k)
+            pg(c, [(x0 - 24 + k * 16, y), (x0 - 12 + k * 16, y - fl), (x0 + k * 16, y)]); rgb(c, (1.0, 0.62 + 0.1 * k, 0.2), 0.95); c.fill()
+        rglow(c, x0, y - 20, 140, (1.0, 0.65, 0.3), 0.35)
+
+
+def bau_i(c, x, y, s=1.0, aberto=False, revirado=False, depth=0.0):
+    """baú de madeira com ferragens; revirado = tombado e com papéis espalhados"""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    if revirado:
+        c.rotate(-0.25)
+    mad = P((0.48, 0.32, 0.18), depth); fer = P((0.30, 0.28, 0.26), depth)
+    rr(c, -150, -150, 300, 150, 10); rgb(c, mad); c.fill()
+    if aberto:
+        pg(c, [(-150, -150), (-130, -260), (170, -250), (150, -150)]); rgb(c, dk(mad, 0.2)); c.fill()
+        c.rectangle(-140, -150, 280, 16); rgb(c, (0.08, 0.06, 0.05), 0.8); c.fill()
+    else:
+        c.move_to(-150, -150); c.curve_to(-150, -215, 150, -215, 150, -150); c.close_path(); rgb(c, lt(mad, 0.06)); c.fill()
+    for xx in (-110, 100):
+        c.rectangle(xx, -200 if not aberto else -150, 14, 200 if not aberto else 150); rgb(c, fer); c.fill()
+    c.rectangle(-150, -24, 300, 12); rgb(c, fer); c.fill()
+    rr(c, -16, -170, 32, 36, 4); rgb(c, P((0.72, 0.58, 0.30), depth)); c.fill()
+    c.restore()
+    if revirado:
+        rnd = random.Random(int(x))
+        for i in range(7):
+            px, py = x + rnd.uniform(-60, 260), y + rnd.uniform(-20, 30)
+            c.save(); c.translate(px, py); c.rotate(rnd.uniform(-0.6, 0.6))
+            c.rectangle(-36, -24, 72, 48); rgb(c, P((0.88, 0.84, 0.72) if i % 2 else (0.80, 0.74, 0.60), depth)); c.fill()
+            for k in range(3):
+                c.rectangle(-28, -14 + k * 12, 50, 3); rgb(c, P((0.35, 0.30, 0.25), depth), 0.6); c.fill()
+            c.restore()
+
+
+def armadura_i(c, x, y, s=1.0, ferrugem=0.0, depth=0.0):
+    """peitoral e capacete (morrião) caídos no chão; ferrugem 0..1"""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    met = P(mix((0.66, 0.68, 0.72), (0.55, 0.30, 0.16), ferrugem), depth)
+    c.move_to(-90, 0); c.curve_to(-110, -120, -70, -190, 0, -200); c.curve_to(70, -190, 110, -120, 90, 0); c.close_path()
+    rgb(c, met); c.fill()
+    c.move_to(0, -200); c.line_to(0, -10); rgb(c, dk(met, 0.25)); c.set_line_width(5); c.stroke()
+    c.restore()
+    c.save(); c.translate(x + 170 * s, y); c.scale(s, s)
+    c.move_to(-110, 0); c.curve_to(-60, -20, 60, -20, 110, 0); c.curve_to(60, 10, -60, 10, -110, 0); rgb(c, met); c.fill()
+    c.move_to(-60, -6); c.curve_to(-60, -120, 60, -120, 60, -6); rgb(c, lt(met, 0.05)); c.fill()
+    pg(c, [(-6, -110), (0, -150), (6, -110)]); rgb(c, met); c.fill()
+    c.restore()
+    if ferrugem > 0:
+        rnd = random.Random(3)
+        for i in range(int(40 * ferrugem)):
+            c.new_sub_path(); c.arc(x + rnd.uniform(-80, 260) * s, y - rnd.uniform(5, 160) * s, rnd.uniform(4, 12) * s, 0, 6.283)
+            rgb(c, P((0.50, 0.24, 0.10), depth), 0.7); c.fill()
+
+
+def aneis_i(c, r=300, n=26, seca=(19, 20, 21), t=0, hl=1.0):
+    """corte de tronco com anéis; os anéis em `seca` ficam finos e marcados em vermelho (hl 0..1)"""
+    rnd = random.Random(4)
+    larg = [rnd.uniform(0.8, 1.3) if i not in seca else 0.25 for i in range(n)]
+    tot = sum(larg)
+    rr_ = r
+    ellipse(c, 0, 0, r + 26, r + 20); rgb(c, P((0.36, 0.24, 0.15))); c.fill()
+    acc = tot
+    for i in reversed(range(n)):
+        rad = r * acc / tot
+        ellipse(c, 0, 0, rad, rad * 0.94); rgb(c, P((0.86, 0.72, 0.52) if i % 2 else (0.80, 0.64, 0.44))); c.fill()
+        ellipse(c, 0, 0, rad, rad * 0.94); rgb(c, P((0.55, 0.38, 0.24)), 0.7); c.set_line_width(2); c.stroke()
+        if i in seca and hl > 0:
+            ellipse(c, 0, 0, rad, rad * 0.94); rgb(c, (0.85, 0.18, 0.12), hl); c.set_line_width(5); c.stroke()
+        acc -= larg[i]
+    c.new_sub_path(); c.arc(0, 0, 8, 0, 6.283); rgb(c, P((0.45, 0.30, 0.18))); c.fill()
+
+
+def mapa_white(c, t, w=1300, h=760, remendo=1.0, estrela=0.0, rotulos=True, rota=None):
+    """mapa no estilo do mapa de John White (La Virginea Pars): litoral da Carolina do Norte,
+    ilhas-barreira, Roanoke, Croatoan, a baía de Chesapeake ao norte e o 'Sítio X' no interior.
+    Origem = centro. remendo 1 = remendo de papel cobrindo o forte; estrela 0..1 revela o forte.
+    rota: lista de (nome_origem, nome_destino, p) para desenhar setas tracejadas."""
+    c.save()
+    rr(c, -w / 2 + 10, -h / 2 + 14, w, h, 8); rgb(c, (0, 0, 0), 0.35); c.fill()
+    rr(c, -w / 2, -h / 2, w, h, 8); rgb(c, (0.93, 0.87, 0.72)); c.fill()
+    sx, sy = w / 1300, h / 760
+    c.scale(sx, sy)
+    mar = (0.62, 0.74, 0.76)
+    terra = (0.80, 0.78, 0.58)
+    # mar à direita (leste) e estuários
+    pg(c, [(250, -380), (650, -380), (650, 380), (120, 380), (200, 120), (150, -60), (230, -230)]); rgb(c, mar); c.fill()
+    # sounds (lagoas) entre a terra e as ilhas
+    pg(c, [(-120, -130), (130, -160), (170, 40), (90, 260), (-60, 230), (-30, 60)]); rgb(c, mar); c.fill()
+    # estuário do Albemarle para o interior (oeste)
+    pg(c, [(-520, -150), (-120, -150), (-110, -95), (-500, -100)]); rgb(c, mar); c.fill()
+    pg(c, [(-520, -150), (-470, -150), (-460, -300), (-500, -300)]); rgb(c, mar); c.fill()  # rio Chowan
+    # Chesapeake ao norte
+    pg(c, [(40, -380), (110, -380), (90, -260), (60, -240)]); rgb(c, mar); c.fill()
+    # ilhas-barreira
+    for pts in ([(180, -240), (215, -240), (175, 40), (150, 40)], [(160, 60), (180, 60), (130, 250), (110, 240)],
+                [(120, 260), (140, 262), (40, 330), (30, 320)]):
+        pg(c, pts); rgb(c, terra); c.fill()
+    ellipse(c, 60, -10, 22, 60); rgb(c, (0.62, 0.66, 0.44)); c.fill()  # Roanoke
+    # ondas e linhas do mar
+    for i in range(18):
+        xx, yy = 300 + (i % 6) * 55, -320 + (i // 6) * 240 + (i % 2) * 40
+        c.move_to(xx, yy); c.curve_to(xx + 10, yy - 8, xx + 20, yy + 8, xx + 30, yy)
+        rgb(c, (0.40, 0.52, 0.56), 0.6); c.set_line_width(2); c.stroke()
+    # rosa dos ventos
+    c.save(); c.translate(470, 260)
+    for a in range(8):
+        r_ = 70 if a % 2 == 0 else 40
+        ang = a * math.pi / 4
+        pg(c, [(0, 0), (math.cos(ang - 0.15) * 14, math.sin(ang - 0.15) * 14), (math.cos(ang) * r_, math.sin(ang) * r_),
+               (math.cos(ang + 0.15) * 14, math.sin(ang + 0.15) * 14)])
+        rgb(c, (0.55, 0.36, 0.20) if a % 2 == 0 else (0.75, 0.58, 0.34)); c.fill()
+    c.restore()
+    # navio pequeno
+    c.save(); c.translate(400, -90); nau(c, t, 0.16, balanco=False); c.restore()
+    # Sítio X: estrela vermelha e azul
+    sxx, syy = -470, -125
+    if estrela > 0:
+        k = estrela
+        c.save(); c.translate(sxx, syy); c.scale(k, k)
+        for ang, col in ((0, (0.80, 0.16, 0.12)), (math.pi / 4, (0.20, 0.32, 0.62))):
+            pts = []
+            for a in range(8):
+                rr2 = 34 if a % 2 == 0 else 9
+                pts.append((math.cos(ang + a * math.pi / 4) * rr2, math.sin(ang + a * math.pi / 4) * rr2))
+            pg(c, pts); rgb(c, col); c.fill()
+        c.restore()
+    if remendo > 0:
+        c.save(); c.translate(sxx, syy); c.rotate(-0.05)
+        rr(c, -60, -48, 120, 96, 4); rgb(c, (0.95, 0.90, 0.76), remendo); c.fill()
+        rr(c, -60, -48, 120, 96, 4); rgb(c, (0.55, 0.42, 0.26), 0.6 * remendo); c.set_line_width(2); c.stroke()
+        c.restore()
+    LUG = {"roanoke": (60, -10), "croatoan": (130, 250), "chesapeake": (75, -330), "sitiox": (sxx, syy)}
+    if rota:
+        for a, b, p in rota:
+            (x0, y0), (x1, y1) = LUG[a], LUG[b]
+            p = max(0.0, min(1.0, p))
+            if p <= 0:
+                continue
+            c.move_to(x0, y0); c.line_to(x0 + (x1 - x0) * p, y0 + (y1 - y0) * p)
+            rgb(c, (0.62, 0.14, 0.10)); c.set_line_width(6); c.set_dash([16, 12]); c.stroke(); c.set_dash([])
+    if rotulos:
+        c.select_font_face(TYPE); c.set_font_size(30)
+        for nome, (x, y), dx in (("ROANOKE", LUG["roanoke"], -170), ("CROATOAN", LUG["croatoan"], -200),
+                                 ("CHESAPEAKE", LUG["chesapeake"], 50)):
+            c.move_to(x + dx, y + 10); rgb(c, (0.25, 0.16, 0.08)); c.show_text(nome)
+        c.new_sub_path(); c.arc(*LUG["roanoke"], 8, 0, 6.283); rgb(c, (0.62, 0.14, 0.10)); c.fill()
+        c.new_sub_path(); c.arc(*LUG["croatoan"], 8, 0, 6.283); c.fill()
+        if estrela > 0.5:
+            c.move_to(sxx - 70, syy + 80); rgb(c, (0.62, 0.14, 0.10)); c.set_font_size(34); c.show_text("SÍTIO X")
+    c.restore()
+
+
+def lascas_ferro(c, t, w=420, n=160, seed=5, p=1.0):
+    """lascas minúsculas de ferro (resíduo de forja) numa placa de terra; origem = centro"""
+    rnd = random.Random(seed)
+    ellipse(c, 0, 0, w / 2, w / 4); rgb(c, P((0.50, 0.38, 0.26))); c.fill()
+    for i in range(int(n * p)):
+        a = rnd.uniform(0, 6.283); r = rnd.uniform(0, 1) ** 0.6
+        x, y = math.cos(a) * r * w * 0.45, math.sin(a) * r * w * 0.22
+        c.save(); c.translate(x, y); c.rotate(rnd.uniform(0, 3))
+        pg(c, [(-6, -2), (4, -5), (7, 2), (-3, 5)]); rgb(c, P((0.14, 0.14, 0.16)), 0.95); c.fill()
+        c.rectangle(-3, -2, 4, 1.5); rgb(c, (0.6, 0.62, 0.66), 0.6); c.fill()
+        c.restore()
+
+
+def bigorna_i(c, t, s=1.0, martelo=True):
+    """bigorna com martelo batendo e faíscas; origem = base da bigorna"""
+    c.save(); c.scale(s, s)
+    fer = P((0.22, 0.22, 0.24))
+    c.rectangle(-60, -120, 120, 120); rgb(c, P((0.40, 0.28, 0.18))); c.fill()  # cepo
+    pg(c, [(-150, -170), (120, -170), (160, -150), (60, -140), (40, -120), (-40, -120), (-60, -140), (-120, -150)]); rgb(c, fer); c.fill()
+    rr(c, -40, -150, 80, 30, 4); c.fill()
+    c.rectangle(-30, -60, 60, 14); rgb(c, (1.0, 0.55, 0.18)); c.fill()
+    if martelo:
+        ph = (t * 1.6) % 1.0
+        ang = -1.2 + 1.2 * (ph / 0.3 if ph < 0.3 else 1 - (ph - 0.3) / 0.7)
+        c.save(); c.translate(140, -260); c.rotate(-ang)
+        c.rectangle(-8, 0, 16, 120); rgb(c, P((0.50, 0.36, 0.22))); c.fill()
+        c.rectangle(-30, 100, 60, 40); rgb(c, fer); c.fill()
+        c.restore()
+        if ph < 0.25:
+            rnd = random.Random(int(t * 1.6))
+            for i in range(12):
+                a = rnd.uniform(-3.0, -0.2); r = 30 + 140 * ph / 0.25 * rnd.uniform(0.5, 1)
+                c.new_sub_path(); c.arc(math.cos(a) * r, -175 + math.sin(a) * r, 3, 0, 6.283)
+                rgb(c, (1.0, 0.8, 0.3), 0.9); c.fill()
+            rglow(c, 0, -175, 120, (1.0, 0.6, 0.2), 0.5 * (1 - ph / 0.25))
+    c.restore()
+
+
+def anel_leao(c, s=1.0):
+    """anel de sinete com um leão estilizado (latão)"""
+    c.save(); c.scale(s, s)
+    met = P((0.80, 0.64, 0.30))
+    c.new_sub_path(); c.arc(0, 40, 70, 0, 6.283); rgb(c, met); c.set_line_width(22); c.stroke()
+    ellipse(c, 0, -40, 62, 50); rgb(c, lt(met, 0.08)); c.fill()
+    ellipse(c, 0, -40, 46, 36); rgb(c, dk(met, 0.25)); c.fill()
+    pg(c, [(-26, -24), (-20, -50), (-6, -56), (0, -66), (12, -56), (16, -40), (28, -30), (20, -22), (6, -32), (-10, -26)])
+    rgb(c, lt(met, 0.15)); c.fill()
+    c.restore()
+
+
+def ardosia_i(c, s=1.0):
+    """plaquinha de ardósia de escrever, com um 'M' riscado"""
+    c.save(); c.scale(s, s); c.rotate(-0.08)
+    pg(c, [(-110, -80), (100, -90), (115, 70), (-90, 85)]); rgb(c, P((0.26, 0.28, 0.30))); c.fill()
+    c.move_to(-60, 30); c.line_to(-50, -30); c.line_to(-20, 10); c.line_to(10, -32); c.line_to(18, 26)
+    rgb(c, (0.85, 0.85, 0.82), 0.8); c.set_line_width(5); c.stroke()
+    c.restore()
+
+
+def espada_i(c, s=1.0, ferrugem=0.6):
+    """punho de espada (rapieira) enferrujado, com lâmina quebrada"""
+    c.save(); c.scale(s, s)
+    met = P(mix((0.62, 0.64, 0.68), (0.52, 0.30, 0.16), ferrugem))
+    pg(c, [(-12, 0), (12, 0), (8, 180), (-6, 170)]); rgb(c, met); c.fill()
+    c.rectangle(-80, -10, 160, 16); c.fill()
+    c.move_to(-60, -2); c.curve_to(-70, -80, 60, -80, 60, -2); c.set_line_width(8); rgb(c, met); c.stroke()
+    c.rectangle(-10, -90, 20, 80); rgb(c, P((0.30, 0.20, 0.12))); c.fill()
+    c.new_sub_path(); c.arc(0, -100, 16, 0, 6.283); rgb(c, met); c.fill()
+    c.restore()
+
+
+def COLONO(i=0, mulher=False):
+    """figurino de colono inglês da era elisabetana (variação por i)"""
+    cores = [(0.36, 0.28, 0.22), (0.30, 0.34, 0.26), (0.44, 0.24, 0.20), (0.26, 0.28, 0.36), (0.50, 0.42, 0.30)]
+    if mulher:
+        return dict(roupa="vestido", cor_roupa=cores[(i + 2) % 5], cabelo="coque", mulher=True, chapeu="touca")
+    return dict(roupa="jaqueta", cor_roupa=cores[i % 5], cor_calca=dk(cores[(i + 1) % 5], 0.2), chapeu="boina",
+                cor_chapeu=(0.18 + 0.05 * (i % 3), 0.14, 0.10), barba=["cheia", "curta", None, "cavanhaque"][i % 4],
+                camisa=(0.94, 0.92, 0.86))
+
+
+def NATIVO(i=0):
+    """figurino de homem algonquino (couro de cervo), sem caricatura"""
+    return dict(roupa="tunica", cor_roupa=[(0.62, 0.46, 0.30), (0.56, 0.40, 0.26), (0.66, 0.50, 0.34)][i % 3],
+                pele="morena", cabelo="coque", cor_cabelo="preto", cor_calca=(0.50, 0.36, 0.22))
+
+
+JOHN_WHITE = dict(roupa="jaqueta", cor_roupa=(0.20, 0.18, 0.20), cor_calca=(0.18, 0.16, 0.16), chapeu="boina",
+                  cor_chapeu=(0.14, 0.12, 0.12), barba="cheia", cor_cabelo="castanho", idade=0.35, camisa=(0.96, 0.95, 0.90))
+
+
+def bebe_i(c, s=1.0):
+    """bebê enrolado em manta clara (origem = centro)"""
+    c.save(); c.scale(s, s)
+    ellipse(c, 0, 0, 70, 40); rgb(c, P((0.95, 0.93, 0.86))); c.fill()
+    for k in range(3):
+        c.move_to(-40 + k * 25, -30); c.curve_to(-30 + k * 25, 0, -40 + k * 25, 20, -30 + k * 25, 36)
+        rgb(c, P((0.82, 0.78, 0.70)), 0.8); c.set_line_width(3); c.stroke()
+    c.new_sub_path(); c.arc(-52, -6, 26, 0, 6.283); rgb(c, P(PELES["clara"])); c.fill()
+    c.new_sub_path(); c.arc(-60, -10, 2.5, 0, 6.283); c.new_sub_path(); c.arc(-48, -12, 2.5, 0, 6.283); rgb(c, (0.2, 0.15, 0.1)); c.fill()
+    c.restore()
+
+
+def corca_i(c, t, x, y, s=1.0, branca=True, alpha=1.0, look=1):
+    """corça (cervo fêmea) de perfil; branca = a lenda de Virginia Dare"""
+    c.save(); c.translate(x, y); c.scale(s * look, s)
+    col = (0.96, 0.95, 0.92) if branca else (0.62, 0.44, 0.28)
+    cc = P(col) if not branca else col
+    def F():
+        rgb(c, cc, alpha); c.fill()
+    ellipse(c, 0, -200, 150, 70); F()
+    for lx in (-110, -80, 90, 120):
+        pg(c, [(lx - 10, -180), (lx + 10, -180), (lx + 6, 0), (lx - 4, 0)]); F()
+    pg(c, [(100, -235), (140, -300), (175, -292), (160, -215)]); F()
+    ellipse(c, 180, -300, 46, 24); F()
+    pg(c, [(150, -312), (128, -350), (162, -320)]); F()
+    pg(c, [(162, -318), (150, -356), (176, -322)]); F()
+    pg(c, [(-150, -215), (-178, -238), (-150, -195)]); F()
+    c.new_sub_path(); c.arc(192, -306, 5, 0, 6.283); rgb(c, (0.1, 0.1, 0.1), alpha); c.fill()
+    if branca:
+        rglow(c, 40, -230, 330, (0.9, 0.95, 1.0), 0.25 * alpha)
+    c.restore()
+
+
+def cena_ilha(c, t, hora="dia", seed=51, agua=True, chao_tipo="grama", chao_y=900, arvores=True):
+    """ilha de Roanoke: céu, o estreito ao fundo, mata de pinheiros e carvalhos, chão de grama/areia"""
+    luz(hora)
+    ceu(c, t, seed=seed, passaros=not _L["noite"])
+    if agua:
+        mar_i(c, t, 600, reflexo=True)
+        floresta(c, t, 640, 26, (40, 70), ("pinheiro", "redonda"), seed=seed + 1, depth=0.85)
+    else:
+        colinas(c, 640, 20, seed=seed, col=(0.30, 0.44, 0.30), depth=0.7)
+    floresta(c, t, 730, 20, (170, 260), ("pinheiro", "redonda"), seed=seed + 2, depth=0.5)
+    colinas(c, 760, 18, seed=seed + 3, col=(0.34, 0.48, 0.30), depth=0.3)
+    if arvores:
+        floresta(c, t, 800, 10, (300, 420), ("pinheiro", "redonda"), seed=seed + 4, depth=0.25)
+    chao(c, t, chao_y, chao_tipo, seed=seed)
+
+
+def cena_praia_ilha(c, t, hora="dia", seed=52):
+    """praia arenosa da ilha vista do mar: mar na frente, areia e mata ao fundo"""
+    luz(hora)
+    ceu(c, t, seed=seed)
+    floresta(c, t, 640, 24, (150, 240), ("pinheiro", "redonda"), seed=seed + 1, depth=0.45)
+    lgrad(c, 0, 620, 0, 760, [(0, P(AREIA), 1), (1, P(dk(AREIA, 0.15)), 1)])
+    c.rectangle(-20, 620, W + 40, 160); c.fill()
+    mar_i(c, t, 760)
+    chao(c, t, 960, "areia", seed=seed)

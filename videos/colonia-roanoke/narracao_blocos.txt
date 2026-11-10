@@ -1,0 +1,212 @@
+# A Colônia Perdida de Roanoke — voz "Pedro Lima - Serious" (HeyGen), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  192.912s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1191ca2f6d4f4650a7b5f4516b1e6544.wav
+# bloco2  202.161s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e54fd8d30a124148bcf2988c5dfc5232.wav
+# bloco3  257.973s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=1f3e272ecb43497aad37bc2e01bff764.wav
+# bloco4  236.721s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=e5a6a2bc1d034a6a85e2ec6c677522d9.wav
+# bloco5  214.005s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=3e88a1ea1a7d46fead4368d77f6e8aba.wav
+# Offsets absolutos: B1=0.000  B2=193.912  B3=397.073  B4=656.046  B5=893.767  (fim ~1107.77)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.21|No dia dezoito de agosto de mil quinhentos e noventa, um homem chamado John White desembarcou numa pequena ilha da costa da América do Norte. [mil@1.96] [chamado@4.31] [ilha@7.08] [Norte@8.66]
+1|9.25|Era o aniversário de três anos da neta dele. [da@11.98]
+1|13.34|E ele não via a menina desde que ela tinha nove dias de vida. [desde@15.61] [de@17.44]
+1|18.36|Três anos antes, John White tinha deixado naquela ilha mais de cem pessoas. [deixado@21.90] [pessoas@23.91]
+1|25.14|Homens, mulheres e crianças.
+1|28.12|A filha dele, o genro, e a neta recém-nascida. [a@31.20]
+1|33.12|Ele tinha prometido voltar em poucos meses, com comida e suprimentos. [meses@35.59]
+1|38.24|Mas, quando chegou, não havia ninguém.
+1|42.42|Nenhuma voz, nenhum fogo aceso, nenhum barco na praia. [barco@45.58]
+1|47.20|As casas tinham sido desmontadas.
+1|50.21|E não havia sinal de luta, nem um único túmulo novo. [nem@53.19]
+1|55.84|Só havia uma pista.
+1|58.55|Numa árvore, alguém tinha entalhado três letras: [letras@62.22]
+1|63.58|C, R, O.
+1|66.09|E, num dos postes da cerca de madeira que protegia a vila, uma palavra inteira: [de@68.69] [uma@70.66]
+1|72.45|CROATOAN.
+1|74.07|Cento e quinze pessoas sumiram sem deixar rastro. [deixar@76.76]
+1|78.06|Mais de quatrocentos anos depois, ninguém sabe ao certo o que aconteceu com elas. [sabe@81.98] [com@83.61]
+1|85.10|Esta é a história da Colônia Perdida de Roanoke. [Perdida@87.36]
+1|89.34|Para entender esse mistério, a gente precisa voltar alguns anos. [precisa@92.29]
+1|94.25|Na década de mil quinhentos e oitenta, a Inglaterra da rainha Elizabeth Primeira queria uma colônia na América. [oitenta@96.04] [Primeira@98.81]
+1|101.62|A Espanha já dominava boa parte do continente, e os ingleses estavam ficando para trás. [do@104.61] [ficando@107.29]
+1|108.78|Em mil quinhentos e oitenta e quatro, a rainha deu uma autorização a um dos seus favoritos, Walter Raleigh. [quatro@111.08] [a@113.68] [Raleigh@115.99]
+1|116.78|Ele podia ocupar terras no Novo Mundo em nome da Inglaterra. [Mundo@119.60]
+1|121.86|Raleigh nunca pisou na colônia.
+1|125.12|Mas mandou dois navios para explorar a costa do que hoje é a Carolina do Norte. [a@128.45] [a@130.03]
+1|131.59|Ali, uma fileira de ilhas compridas e estreitas separa o oceano de lagoas rasas. [e@135.43] [lagoas@137.87]
+1|139.21|Entre elas fica a ilha de Roanoke, com uns doze quilômetros de comprimento, coberta de floresta. [Roanoke@141.77] [comprimento@144.12]
+1|146.50|A região era habitada havia séculos por povos algonquinos, que plantavam milho, pescavam e viviam em aldeias cercadas de paliçadas. [por@150.21] [pescavam@153.20] [de@156.02]
+1|157.35|Os exploradores voltaram para a Inglaterra animados. [animados@160.43]
+1|161.92|E levaram junto dois homens da terra. [terra@165.12]
+1|165.70|Um se chamava Manteo, e era de uma ilha mais ao sul, a ilha de Croatoan. [de@169.71] [a@171.59]
+1|173.43|O outro se chamava Wanchese, e era da própria Roanoke. [era@176.75]
+1|178.39|Os dois aprenderam inglês, e voltaram para casa na expedição seguinte. [para@181.03]
+1|183.59|Manteo se tornou um aliado fiel dos ingleses. [dos@186.75]
+1|187.97|Wanchese passou a desconfiar deles.
+2|0.21|A primeira tentativa de colônia chegou em mil quinhentos e oitenta e cinco. [em@2.56] [cinco@4.14]
+2|5.04|Eram cerca de cento e oito homens, quase todos soldados, comandados por Ralph Lane. [homens@8.19] [Ralph@11.52]
+2|12.31|Entre eles estavam dois homens que deixaram registros preciosos: [deixaram@15.55]
+2|17.94|o cientista Thomas Harriot, que descreveu as plantas, os animais e os costumes da região, e um artista chamado John White, que pintou as aldeias, a pesca e as pessoas que viviam ali. [as@21.48] [costumes@23.61] [chamado@26.64] [aldeias@28.90] [que@31.41]
+2|32.99|Mas a colônia de Lane foi um fracasso. [um@36.28]
+2|37.21|Os soldados não sabiam plantar, dependiam da comida das aldeias vizinhas, e a relação com os povos da região azedou rápido. [da@40.96] [a@43.18] [região@44.46]
+2|46.33|As desconfianças viraram ataques dos dois lados. [lados@49.91]
+2|50.72|Em mil quinhentos e oitenta e seis, os ingleses mataram Wingina, o líder de Roanoke. [seis@53.20] [líder@56.22]
+2|58.43|Poucas semanas depois, a frota do corsário Francis Drake passou pela costa. [corsário@61.16]
+2|64.27|E os colonos, cansados e com fome, foram embora com ele. [fome@67.26]
+2|69.35|Logo em seguida, chegou um navio de suprimentos. [de@71.57]
+2|72.93|Encontrou a ilha vazia, e deixou ali uma guarnição de quinze homens para guardar a posse da Inglaterra. [ali@76.13] [para@78.09]
+2|80.38|A segunda tentativa, a que ficou famosa, foi diferente. [famosa@83.45]
+2|85.88|Desta vez não iam só soldados.
+2|89.42|Iam famílias inteiras, com mulheres e crianças, que receberiam terras para viver de verdade no Novo Mundo. [crianças@93.38] [de@96.46]
+2|98.48|E o governador escolhido foi justamente o artista, John White. [o@101.60]
+2|103.82|O plano era outro lugar.
+2|107.87|Eles não deviam ficar em Roanoke.
+2|110.35|Deviam só passar por lá para buscar os quinze homens, e depois seguir para a baía de Chesapeake, mais ao norte, onde havia terras melhores e um porto mais fundo. [buscar@111.97] [seguir@114.19] [mais@116.41] [melhores@118.33]
+2|120.91|Mas, em julho de mil quinhentos e oitenta e sete, quando os navios chegaram a Roanoke, o piloto português Simão Fernandes se recusou a seguir viagem. [e@124.11] [navios@125.69] [português@128.08] [seguir@130.64]
+2|131.77|Ele queria aproveitar o resto do verão para caçar navios espanhóis. [verão@133.52]
+2|136.29|E deixou os colonos ali mesmo.
+2|140.03|Dos quinze homens da guarnição, não havia ninguém. [havia@142.76]
+2|144.38|Só os ossos de um deles.
+2|146.59|Mais tarde, os aliados de Croatoan contaram que o forte tinha sido atacado, e que os sobreviventes fugiram de barco. [contaram@150.22] [atacado@151.88] [de@154.53]
+2|155.72|Nunca mais foram vistos.
+2|158.17|Era um começo assustador.
+2|160.95|Poucos dias depois, um dos colonos, George Howe, foi morto enquanto pescava sozinho, longe do grupo. [George@164.06] [sozinho@166.75]
+2|168.68|O clima de medo tomou conta da ilha. [da@171.54]
+2|173.34|Mesmo assim, houve momentos de esperança.
+2|177.23|Manteo foi batizado, e recebeu dos ingleses o título de senhor de Roanoke. [ingleses@180.48] [Roanoke@182.99]
+2|184.13|E, no dia dezoito de agosto de mil quinhentos e oitenta e sete, Eleanor Dare, a filha de John White, deu à luz uma menina. [de@186.91] [sete@188.44] [John@191.04] [menina@192.79]
+2|193.94|O nome dela foi Virginia.
+2|196.40|Virginia Dare foi a primeira criança inglesa nascida nas Américas. [inglesa@199.00]
+3|0.21|Só que a colônia tinha chegado tarde demais para plantar. [tarde@1.96]
+3|4.18|O inverno estava vindo, e os suprimentos não iam durar. [suprimentos@7.12]
+3|8.81|Alguém precisava voltar à Inglaterra e trazer ajuda. [trazer@12.01]
+3|13.37|Os colonos insistiram que fosse o próprio governador, porque ele tinha a confiança de Walter Raleigh. [próprio@15.63] [confiança@17.90]
+3|20.27|John White não queria ir.
+3|23.12|Tinha medo de que dissessem que ele abandonou a colônia. [ele@25.64]
+3|27.99|Mas acabou aceitando.
+3|30.28|Antes de partir, ele combinou um sinal com os colonos. [sinal@33.14]
+3|34.97|Se eles saíssem da ilha, deveriam entalhar numa árvore ou num poste o nome do lugar para onde tinham ido. [entalhar@37.96] [o@40.35] [tinham@41.76]
+3|42.72|E, se tivessem saído por causa de algum perigo, deveriam entalhar também uma cruz. [de@45.83] [uma@48.48]
+3|49.97|No fim de agosto de mil quinhentos e oitenta e sete, John White embarcou. [quinhentos@52.32] [White@54.54]
+3|55.98|A neta tinha nove dias de vida. [vida@58.33]
+3|59.65|E aí o mundo virou de cabeça para baixo. [cabeça@62.00]
+3|63.47|Quando ele chegou à Inglaterra, o país estava à beira da guerra com a Espanha. [país@65.48] [com@67.19]
+3|68.47|A rainha proibiu que qualquer navio grande saísse dos portos ingleses. [grande@71.41]
+3|73.87|Todos seriam necessários para enfrentar a Invencível Armada, a enorme frota espanhola que vinha invadir a Inglaterra. [Invencível@77.11] [que@80.44]
+3|82.50|Em mil quinhentos e oitenta e oito, White ainda conseguiu sair com dois navios pequenos. [oito@84.94] [dois@87.58]
+3|89.45|Mas um deles foi atacado e saqueado por piratas franceses no meio do caminho. [saqueado@92.18] [do@94.53]
+3|95.89|E os dois tiveram que voltar.
+3|98.56|A Armada foi derrotada naquele mesmo ano, mas a guerra continuou. [ano@101.77]
+3|104.24|E John White ficou preso na Inglaterra por mais dois anos. [Inglaterra@106.42]
+3|108.70|Só em mil quinhentos e noventa ele conseguiu lugar numa expedição de corsários, que estava indo ao Caribe atrás de navios espanhóis. [ele@111.65] [corsários@113.69] [atrás@116.00]
+3|117.91|A ida para Roanoke era um desvio, quase um favor. [desvio@120.42]
+3|123.24|Na noite de dezessete de agosto, os navios ancoraram perto da ilha. [os@126.35]
+3|128.94|E os marinheiros viram uma coluna de fumaça subindo da floresta. [de@131.46]
+3|133.93|Na esperança de que fossem os colonos, tocaram uma trombeta e cantaram canções inglesas conhecidas. [colonos@136.79] [canções@139.69]
+3|141.87|Ninguém respondeu.
+3|144.86|De manhã, eles desembarcaram.
+3|147.93|Encontraram pegadas na areia, mas eram de pessoas da região. [de@150.92]
+3|152.24|Subiram a encosta e, numa árvore, viram as letras C, R, O. [viram@155.57]
+3|159.19|Seguiram até o lugar da vila.
+3|162.09|As casas tinham sido desmontadas, e no lugar delas havia uma paliçada alta, feita de troncos. [no@166.06] [alta@168.19]
+3|170.35|Num dos postes da entrada, sem casca, estava entalhado em letras maiúsculas: [casca@172.48]
+3|176.15|CROATOAN.
+3|177.77|E não havia cruz.
+3|180.19|Para John White, aquilo era um alívio. [alívio@182.66]
+3|183.73|Croatoan era a ilha de Manteo, o grande aliado dos ingleses, a uns oitenta quilômetros ao sul. [o@186.54] [uns@188.93]
+3|190.72|Os colonos tinham ido para lá, e não estavam em perigo. [e@192.94]
+3|195.37|Mas havia um detalhe triste.
+3|198.78|Perto dali, White encontrou os baús que ele tinha escondido. [que@201.60]
+3|202.88|Tinham sido desenterrados e revirados.
+3|206.04|Os livros estavam rasgados.
+3|208.51|Os quadros e mapas, estragados pela chuva. [chuva@211.50]
+3|212.38|E a armadura dele, toda enferrujada.
+3|216.52|No dia seguinte, ele pediu para ir até Croatoan. [ir@219.38]
+3|221.51|Mas uma tempestade forte atingiu os navios. [navios@224.11]
+3|224.83|Os cabos arrebentaram, e eles perderam âncoras. [âncoras@228.25]
+3|229.35|O capitão decidiu que era perigoso demais ficar naquela costa, e voltou para o mar aberto. [demais@231.96] [para@234.56]
+3|235.73|John White nunca chegou a Croatoan.
+3|239.78|Ele nunca mais voltou à América.
+3|242.76|Numa carta de mil quinhentos e noventa e três, escrita na Irlanda, ele contou essa viagem, e entregou a colônia, nas palavras dele, à vontade de Deus. [noventa@244.55] [ele@247.19] [a@249.71] [vontade@252.14]
+3|253.61|Depois disso, John White some dos registros. [registros@256.72]
+4|0.21|Então, o que aconteceu com os cento e quinze colonos de Roanoke? [cento@2.26]
+4|4.99|Existem várias teorias.
+4|8.40|E nenhuma delas foi provada até hoje. [hoje@11.05]
+4|11.58|A primeira é a mais simples:
+4|14.74|eles fizeram exatamente o que estava escrito no poste. [escrito@16.88]
+4|18.09|Foram para Croatoan, a ilha que hoje se chama Hatteras, e passaram a viver com o povo de Manteo. [hoje@20.40] [a@22.96] [Manteo@24.24]
+4|25.08|Com o tempo, sem notícias da Inglaterra, teriam se misturado à comunidade, aprendido a língua, e formado famílias ali. [Inglaterra@27.17] [aprendido@30.32] [ali@32.88]
+4|33.77|Mais de cem anos depois, em mil setecentos e nove, o explorador inglês John Lawson contou que os moradores de Hatteras diziam ter antepassados brancos, que sabiam ler em livros. [mil@36.72] [inglês@39.27] [moradores@41.28] [brancos@43.97]
+4|46.95|E que alguns deles tinham olhos claros. [claros@50.36]
+4|51.30|É um relato de segunda mão, e precisa ser lido com cuidado. [e@53.98]
+4|56.23|Mas ele combina com essa teoria.
+4|59.68|A segunda teoria vem de um mapa. [mapa@62.58]
+4|63.38|John White desenhou um mapa da região, que hoje está no Museu Britânico, em Londres. [região@65.52] [Britânico@67.78]
+4|69.91|Esse mapa tem dois pequenos remendos de papel colados por cima. [de@72.77]
+4|74.75|Durante séculos, ninguém achou isso importante.
+4|78.98|Mas, em dois mil e doze, pesquisadores examinaram o mapa contra a luz e com outras técnicas de imagem. [pesquisadores@81.75] [luz@83.97] [imagem@85.76]
+4|86.37|E, debaixo de um dos remendos, encontraram um símbolo escondido: [encontraram@89.66]
+4|92.35|uma pequena estrela de quatro pontas, desenhada em vermelho e azul, que parece marcar um forte. [desenhada@95.59] [parece@97.94]
+4|99.38|Ela fica no interior, na margem de um grande estuário, a uns oitenta quilômetros de Roanoke. [de@102.53] [oitenta@104.75]
+4|108.38|Por que alguém desenharia um forte e depois esconderia? [e@110.64]
+4|112.36|Talvez fosse um segredo, para que os espanhóis não descobrissem. [os@115.82]
+4|118.64|Talvez fosse só um plano que mudou. [mudou@120.90]
+4|121.48|Os colonos tinham comentado com White que pensavam em se mudar uns oitenta quilômetros para o interior. [que@123.91] [oitenta@125.45]
+4|128.48|E o lugar marcado no mapa ficou conhecido como Sítio X. [ficou@130.48]
+4|133.10|Arqueólogos escavaram ali, e encontraram cacos de cerâmica inglesa daquela época. [de@137.88]
+4|140.44|Mas cerâmica também podia chegar por comércio. [comércio@143.47]
+4|144.18|Até hoje, não apareceu uma prova definitiva de que os colonos viveram naquele lugar. [definitiva@147.60] [naquele@149.65]
+4|151.05|A terceira teoria é a mais sombria. [sombria@154.38]
+4|155.09|Quando os ingleses fundaram Jamestown, em mil seiscentos e sete, eles ouviram relatos de que alguns colonos de Roanoke teriam vivido mais ao norte, entre outros povos. [mil@157.95] [relatos@160.42] [Roanoke@162.51] [entre@164.99]
+4|166.54|E um cronista inglês da época, William Strachey, escreveu que o grande chefe Powhatan teria contado que os mandou matar. [William@169.57] [chefe@172.17] [mandou@174.56]
+4|175.66|Mas esses relatos vêm de terceiros, foram escritos anos depois, e os historiadores discordam muito sobre eles. [foram@179.24] [historiadores@181.59]
+4|184.30|E há uma quarta pista, que vem das árvores. [vem@187.80]
+4|189.29|Em mil novecentos e noventa e oito, cientistas estudaram os anéis de ciprestes muito antigos da região. [oito@191.08] [ciprestes@193.51]
+4|195.90|Os anéis mostram os anos de chuva e os anos de seca. [chuva@198.59]
+4|200.81|E revelaram algo impressionante:
+4|204.60|os anos de mil quinhentos e oitenta e sete a mil quinhentos e oitenta e nove tiveram a pior seca em oitocentos anos. [oitenta@206.35] [e@208.36] [pior@210.11]
+4|212.95|Ou seja, os colonos chegaram no pior momento possível. [pior@216.15]
+4|218.41|Sem chuva, as plantações falhavam.
+4|221.64|E os povos da região, que também passavam fome, não tinham comida para dividir. [também@223.98] [para@226.67]
+4|228.34|A seca não explica para onde eles foram. [eles@230.38]
+4|231.47|Mas explica por que talvez não tivessem como ficar. [tivessem@233.95]
+5|0.21|Nas últimas décadas, a teoria de Croatoan ganhou força. [Croatoan@2.43]
+5|4.44|Na ilha de Hatteras, uma equipe liderada pelo arqueólogo britânico Mark Horton vem escavando há anos. [liderada@6.78] [vem@9.69]
+5|11.51|E encontrou objetos europeus do fim do século dezesseis no meio de uma antiga aldeia. [do@14.07] [uma@16.25]
+5|17.65|Pedaços de espadas, peças de armas de fogo, e uma pequena placa de ardósia, do tipo usado para escrever. [de@20.29] [de@22.51] [escrever@24.90]
+5|25.95|Em mil novecentos e noventa e oito, um anel com o desenho de um leão foi encontrado na ilha. [oito@28.30] [de@30.43] [ilha@32.09]
+5|32.73|Durante anos, se disse que era de ouro, e que podia ter pertencido a um dos colonos. [de@35.20] [pertencido@36.99]
+5|39.04|Mas uma análise mais recente mostrou que ele era de latão, um metal comum no comércio da época. [que@42.70] [metal@44.50]
+5|47.01|Ou seja, também podia ter chegado por troca. [por@49.53]
+5|50.32|Mas, em dois mil e vinte e cinco, a equipe de Horton anunciou uma descoberta diferente. [e@52.50] [anunciou@54.46]
+5|56.88|Num buraco na terra, em Hatteras, eles acharam grandes quantidades de lascas minúsculas de ferro. [eles@60.04] [minúsculas@62.55]
+5|64.35|É o resíduo que se solta quando um ferreiro bate no metal quente. [quando@67.16] [quente@69.00]
+5|70.03|E, junto delas, objetos ingleses daquela época. [época@74.34]
+5|75.45|Para Horton, isso muda tudo.
+5|79.38|Ninguém troca lixo de forja.
+5|81.50|Se havia alguém trabalhando ferro ali, com técnicas europeias, é sinal de que os próprios colonos estavam na ilha. [com@83.97] [que@86.58] [ilha@88.41]
+5|89.60|Para ele, a colônia nunca esteve perdida. [perdida@91.91]
+5|92.71|Ela simplesmente foi para Croatoan, como dizia o poste. [dizia@96.64]
+5|98.47|Mas nem todo mundo concorda.
+5|101.83|Outros arqueólogos lembram que a descoberta ainda não foi publicada numa revista científica. [ainda@104.61] [científica@106.78]
+5|108.10|Eles querem ver a fornalha, e não só os resíduos. [não@110.15]
+5|111.75|E lembram que outros europeus também passavam por aquela costa. [passavam@115.68]
+5|117.58|Para eles, ainda falta uma prova que não deixe dúvida, como um túmulo de um colono, ou o DNA dos descendentes. [que@120.61] [túmulo@122.75] [DNA@125.01]
+5|126.91|É bem possível que a resposta não seja uma só. [não@129.64]
+5|131.56|Talvez os colonos tenham se dividido.
+5|135.49|Um grupo pode ter ido para Croatoan, com Manteo. [Croatoan@137.07]
+5|139.10|Outro, para o interior, perto do Sítio X. [Sítio@141.84]
+5|143.37|E alguns podem ter morrido de fome, de doença ou em conflitos, sem que ninguém escrevesse uma linha sobre isso. [fome@145.50] [sem@148.70] [sobre@150.54]
+5|151.60|Enquanto isso, a história virou lenda.
+5|155.66|Na Carolina do Norte, há quem conte que Virginia Dare cresceu entre os povos da região e se transformou numa corça branca. [conte@158.69] [os@160.99] [transformou@162.61]
+5|164.73|Vinte anos depois de Roanoke, os ingleses fundaram Jamestown, a primeira colônia inglesa permanente na América. [ingleses@167.41] [inglesa@170.70]
+5|173.04|Mas os primeiros colonos da Inglaterra no Novo Mundo continuam desaparecidos. [no@176.11]
+5|179.30|Cento e quinze pessoas, uma menina de nove dias, e uma única palavra entalhada num poste. [de@181.82] [palavra@184.08]
+5|186.42|E você?
+5|188.24|O que acha que aconteceu com os colonos de Roanoke? [os@190.04]
+5|191.96|Eles foram para Croatoan, como o poste dizia? [poste@194.39]
+5|195.75|Se esconderam no interior?
+5|197.78|Ou a resposta está em algum lugar que ninguém procurou ainda? [lugar@200.30]
+5|202.99|Deixa a sua teoria nos comentários.
+5|206.48|Eu sou o Historiador.
+5|208.21|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@210.86] [conseguiu@212.73]

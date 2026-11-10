@@ -216,3 +216,11 @@ No TikTok o canal usa vídeos curtos com roteiro próprio (60-80 s), não cortes
 Produção automática: `automacao/AUTOMATICO_TIKTOK.md`, temas em `automacao/temas_tiktok.md`, render e release no workflow `tiktok.yml`.
 Novos no `ilustrado.py`: `farol_i(c, t, x, y, s, aceso)`, `ilha_rochosa`, `cena_ilha_farol(c, t, hora, aceso)`, `cena_praia(c, t, hora)`,
 `papel_nota(c, linhas, w, h, size)` (papel rasgado com texto), `quadro_giz(c, linhas)`, `dna_i(c, t)` e `onda_gigante(c, t, t0, x, y, w, h)`.
+
+## Carolina do Norte, 1587 (A Colônia Perdida de Roanoke)
+- Cenários (seção ROANOKE do `ilustrado.py`): `cena_ilha(c, t, hora, agua, chao_tipo, arvores)` (mata de pinheiros e carvalhos com o estreito ao fundo) e `cena_praia_ilha(c, t, hora)` (vista do mar: mata, areia, água e faixa de areia na frente para os personagens).
+- Peças: `palicada_i(c, t, x0, x1, y, h, portao=)` (paliçada de troncos), `poste_entalhado(c, t, x, y, h, w, "CROATOAN", p=)` (letras entalhadas na vertical, `p` revela), `tronco_entalhado(..., "CRO", p=)`, `casa_arco` + `aldeia_i` (aldeia algonquina com casas de teto em arco), `bau_i(aberto, revirado)`, `armadura_i(ferrugem)`, `aneis_i(r, seca, hl)` (corte de tronco com anéis de seca marcados), `mapa_white(c, t, w, h, remendo, estrela, rotulos, rota)` (mapa no estilo de John White: Roanoke, Croatoan, Chesapeake e o Sítio X sob o remendo), `lascas_ferro`, `bigorna_i` (martelo batendo com faíscas), `anel_leao`, `ardosia_i`, `espada_i`, `bebe_i`, `corca_i` (corça branca da lenda).
+- Figurinos: `COLONO(i, mulher)` (colono elisabetano de boina), `NATIVO(i)` (homem algonquino de couro de cervo, sem caricatura) e `JOHN_WHITE`.
+- `placa` agora mede também o subtítulo (antes um subtítulo maior que o título vazava do cartão).
+- Vídeos com mais de 999 s: a última cena termina em `9999.0` (o fim só regula o zoom lento).
+- `videos/colonia-roanoke/tempos.py` lê as respostas do HeyGen salvas em `ts/bN.json` (`words` = [texto, início, fim], com as tags faladas) e casa com o roteiro, pulando tags e juntando palavras com hífen. A ferramenta `create_speech` atual não tem mais `engine`/`settings`: a voz Pedro Lima é chamada só com `voiceId`, `language: "pt"` e `withTimestamps: true`. A resposta passa de 180 mil caracteres por bloco, então cada bloco foi gerado por um subagente que gravou só as palavras em `ts/bN.json`.
