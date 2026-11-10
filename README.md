@@ -17,6 +17,7 @@ Entrada: **transcrição com tempos** + **áudio da narração**. Saída: **MP4 
    `SCENES = [(inicio, fim, funcao), ...]`, onde a última cena termina em `999.0`.
 4. Gere as prévias: `python render.py sheet videos/<slug>/scenes.py out/preview.png t1 t2 ...`
 5. Gere o vídeo final: `python render.py build videos/<slug>/scenes.py audio.mp3 out/<slug>.mp4`
+   Qualidade: desde 10/11/2026 o MP4 final sai em **2560x1440, CRF 17** (o quadro é desenhado em 1080p e ampliado na compressão; em 1440p o YouTube usa VP9/AV1 e mais bitrate, sem blocos nos degradês). Os segmentos intermediários usam CRF 10. Para o arquivo pequeno do chat (~25 MB): `CRF=26 SAIDA_H=1080 python render.py build ...`.
    (prévia muda: `silent:30` no lugar do áudio).
 
 ## Identidade visual

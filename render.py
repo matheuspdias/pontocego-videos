@@ -159,7 +159,7 @@ def _segment(args):
     scenes_path, t0, t1, path = args
     S = load_scenes(scenes_path)
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr0", "-s", f"{W}x{H}", "-r", str(FPS),
-           "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p", path]
+           "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "10", "-pix_fmt", "yuv420p", path]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     surf = cairo.ImageSurface(cairo.FORMAT_RGB24, W, H); c = cairo.Context(surf)
     for f in range(round(t0 * FPS), round(t1 * FPS)):
@@ -169,8 +169,15 @@ def _segment(args):
     return path
 
 
-def build(scenes_path, audio, out_mp4, crf=26):
-    """audio pode ser 'silent:<segundos>' para gerar prévia sem som"""
+def build(scenes_path, audio, out_mp4, crf=None):
+    """audio pode ser 'silent:<segundos>' para gerar prévia sem som.
+    Qualidade (variáveis de ambiente): CRF (padrão 17) e SAIDA_H (altura do MP4 final; padrão 1440).
+    O quadro é desenhado em 1920x1080 e ampliado para 2560x1440 só na compressão final: em 1440p o YouTube
+    usa um codec melhor (VP9/AV1) e dá mais bitrate, o que tira os blocos dos degradês e do grão.
+    O antigo CRF 26 vinha do limite de ~25 MB do chat, que não vale para a publicação automática."""
+    crf = crf if crf is not None else int(os.environ.get("CRF", "17"))
+    saida_h = int(os.environ.get("SAIDA_H", "1440"))
+    vf = [] if saida_h == H else ["-vf", f"scale={saida_h * 16 // 9}:{saida_h}:flags=lanczos"]
     silent = audio.startswith("silent:")
     if silent:
         dur = float(audio.split(":")[1])
@@ -198,7 +205,7 @@ def build(scenes_path, audio, out_mp4, crf=26):
     print(f"efeitos sonoros: {ncues} eventos, volume {vol:.2f}")
     mix = mix_graph(vol)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
-                    *ain, "-i", sfx_wav, "-filter_complex", mix, "-map", "0:v", "-map", "[a]", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
+                    *ain, "-i", sfx_wav, "-filter_complex", mix, "-map", "0:v", "-map", "[a]", *vf, "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
                     "-tune", "animation", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-shortest",
                     "-movflags", "+faststart", out_mp4], check=True)
     print(out_mp4, os.path.getsize(out_mp4) // 1024 // 1024, "MB")
