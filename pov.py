@@ -208,6 +208,8 @@ def cartao_escolha(c, t, t0, pergunta="O QUE VOCÊ FARIA?", a="ABRIR O CARRINHO"
     for k, (letra, txt, col) in enumerate((("A", a, (0.80, 0.16, 0.14)), ("B", b, (0.16, 0.34, 0.74)))):
         y = yb + k * 200
         q = ease_out_back(prog(t, t0 + 0.3 + k * 0.2, 0.4))
+        if q < 0.01:
+            continue
         c.save(); c.translate(W / 2, y + 80); c.scale(q, q); c.translate(-W / 2, -(y + 80))
         rr(c, 110 + 8, y + 10, W - 220, 160, 26); rgb(c, (0, 0, 0), 0.4); c.fill()
         rr(c, 110, y, W - 220, 160, 26); rgb(c, col); c.fill()
