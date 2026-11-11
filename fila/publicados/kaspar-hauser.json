@@ -1,12 +1,6 @@
 {
   "slug": "kaspar-hauser",
   "publicar_em": "2026-11-12T18:00:00-03:00",
-  "audio_blocos": [
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=a5f2dce9638642119e4aa9b963cd7492.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f84cb8e322c34315a3a333761534a55d.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=0eeae5ee632f4d8aa3d9027e54903126.wav",
-    "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=4e1e994446524a2f868b4d1dd1113924.wav"
-  ],
   "duracoes": [
     198.474,
     185.199,
@@ -35,6 +29,36 @@
   ],
   "thumbnail": "videos/kaspar-hauser/thumb/kaspar_thumb_A.png",
   "categoria": "27",
-  "ganchos_audio": "https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=cf8a5c2434264b2f8996025d6247b835.wav",
-  "ganchos_duracao": 25.189
+  "ganchos_duracao": 25.189,
+  "video_id": "5urbL3mlQmY",
+  "url": "https://youtu.be/5urbL3mlQmY",
+  "agendado_para": "2026-11-12T18:00:00-03:00",
+  "enviado_em": "2026-11-11T17:12:34-03:00",
+  "avisos": [],
+  "shorts": [
+    {
+      "id": "abertura",
+      "video_id": "wog9CXA8dgs",
+      "url": "https://youtu.be/wog9CXA8dgs",
+      "titulo": "Ele apareceu numa praça com uma carta e quase não falava #Shorts",
+      "duracao": 83.5,
+      "agendado_para": "2026-11-14T12:00:00-03:00"
+    },
+    {
+      "id": "bilhete",
+      "video_id": "c-mih9-ZsSA",
+      "url": "https://youtu.be/c-mih9-ZsSA",
+      "titulo": "O bilhete em escrita de espelho que ninguém explicou #Shorts",
+      "duracao": 100.1,
+      "agendado_para": "2026-11-15T12:00:00-03:00"
+    },
+    {
+      "id": "dna",
+      "video_id": "jqtiYUa5aCo",
+      "url": "https://youtu.be/jqtiYUa5aCo",
+      "titulo": "Ele era um príncipe escondido? O DNA respondeu #Shorts",
+      "duracao": 82.9,
+      "agendado_para": "2026-11-16T12:00:00-03:00"
+    }
+  ]
 }

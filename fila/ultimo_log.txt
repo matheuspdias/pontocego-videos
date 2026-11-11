@@ -1,60 +1,60 @@
-Traceback (most recent call last):
-  File "/usr/lib/python3.14/concurrent/futures/process.py", line 254, in _process_worker
-    r = call_item.fn(*call_item.args, **call_item.kwargs)
-  File "/usr/lib/python3.14/concurrent/futures/process.py", line 203, in _process_chunk
-    return [fn(*args) for args in chunk]
-            ~~^^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/render.py", line 169, in _segment
-    render_frame(c, f / FPS, S)
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/render.py", line 137, in render_frame
-    draw_scene(c, fn, t, st, en)
-    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/render.py", line 118, in draw_scene
-    fn(c, t)
-    ~~^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/videos/kaspar-hauser/scenes.py", line 592, in s35
-    bilhete_espelho(c, t, NOTA_LINHAS, w=860, size=50, espelho=esp, p=p if t > 566.6 else 1.0)
-    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/ilustrado.py", line 2390, in bilhete_espelho
-    c.move_to(-e.x_advance / 2, y0 + i * size * 1.55); rgb(c, (0.28, 0.27, 0.30)); c.show_text(s)
-                                                                                   ~~~~~~~~~~~^^^
-cairo.Error: error occurred in libfreetype
-"""
+=== bilhete: 8:34 - 10:07 do vídeo | 100 s no corte
+Gancho: Ele foi ferido num jardim. E, numa bolsa, deixaram um bilhete escrito ao contrário, como num espelho.
+Trecho começa em: Cinco dias depois, no sábado, catorze de dezembro de mil oitocentos e trinta e três, Kaspar entrou correndo na casa de Meyer.
+Título (Shorts): O bilhete em escrita de espelho que ninguém explicou
+Descrição: Ansbach, 1833: Kaspar Hauser volta ferido do jardim do palácio. Na bolsa deixada lá, um bilhete escrito ao contrário, assinado só M. L. Ö. #misterio #historia #kasparhauser #pontocego
 
-The above exception was the direct cause of the following exception:
+=== dna: 12:22 - 13:37 do vídeo | 83 s no corte
+Gancho: Durante dois séculos, disseram que ele era um príncipe escondido. Em dois mil e vinte e quatro, o DNA respondeu.
+Trecho começa em: Até que a ciência entrou no caso.
+Título (Shorts): Ele era um príncipe escondido? O DNA respondeu
+Descrição: Por 200 anos, Kaspar Hauser foi apontado como o herdeiro perdido de Baden. Um estudo de 2024 analisou mechas do cabelo dele. #misterio #historia #dna #kasparhauser #pontocego
 
-Traceback (most recent call last):
-  File "/home/runner/work/pontocego-videos/pontocego-videos/render.py", line 225, in <module>
-    build(sys.argv[2], sys.argv[3], sys.argv[4])
-    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/render.py", line 197, in build
-    segs = list(ex.map(_segment, jobs))
-  File "/usr/lib/python3.14/concurrent/futures/process.py", line 617, in _chain_from_iterable_of_lists
-    for element in iterable:
-                   ^^^^^^^^
-  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 639, in result_iterator
-    yield _result_or_cancel(fs.pop())
-          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 311, in _result_or_cancel
-    return fut.result(timeout)
-           ~~~~~~~~~~^^^^^^^^^
-  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 443, in result
-    return self.__get_result()
-           ~~~~~~~~~~~~~~~~~^^
-  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 395, in __get_result
-    raise self._exception
-cairo.Error: error occurred in libfreetype
-Traceback (most recent call last):
-  File "/home/runner/work/pontocego-videos/pontocego-videos/automacao/publicar.py", line 430, in <module>
-    main()
-    ~~~~^^
-  File "/home/runner/work/pontocego-videos/pontocego-videos/automacao/publicar.py", line 399, in main
-    video = produzir(m, cenas, a.audio)
-  File "/home/runner/work/pontocego-videos/pontocego-videos/automacao/publicar.py", line 140, in produzir
-    subprocess.run([sys.executable, os.path.join(RAIZ, "render.py"), "build", cenas, narracao, video], check=True, cwd=RAIZ)
-    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.14/subprocess.py", line 578, in run
-    raise CalledProcessError(retcode, process.args,
-                             output=stdout, stderr=stderr)
-subprocess.CalledProcessError: Command '['/usr/bin/python', '/home/runner/work/pontocego-videos/pontocego-videos/render.py', 'build', '/home/runner/work/pontocego-videos/pontocego-videos/videos/kaspar-hauser/scenes.py', '/home/runner/work/pontocego-videos/pontocego-videos/out/kaspar-hauser_narracao.wav', '/home/runner/work/pontocego-videos/pontocego-videos/out/kaspar-hauser.mp4']' returned non-zero exit status 1.
+/home/runner/work/pontocego-videos/pontocego-videos/out/kaspar-hauser_corte_bilhete.mp4 6.2 MB 100.1 s
+Cortes selecionados de kaspar-hauser (3 cortes independentes)
+Lembrete: no TikTok, ativar o selo de conteúdo gerado por IA (voz). Os mesmos arquivos servem para Shorts e Reels.
+
+=== abertura: 0:00 - 1:13 do vídeo | 84 s no corte
+Gancho: Em mil oitocentos e vinte e oito, um rapaz apareceu numa praça da Alemanha. Ele quase não falava. E trazia uma carta estranha na mão.
+Trecho começa em: Na tarde de vinte e seis de maio de mil oitocentos e vinte e oito, um feriado, as ruas de Nuremberg, na Alemanha, estavam quase vazias.
+Título (Shorts): Ele apareceu numa praça com uma carta e quase não falava
+Descrição: Nuremberg, 1828: um rapaz de uns 16 anos surge cambaleando, com uma carta sem assinatura. Ninguém nunca descobriu quem ele era. #misterio #historia #kasparhauser #pontocego
+
+=== bilhete: 8:34 - 10:07 do vídeo | 100 s no corte
+Gancho: Ele foi ferido num jardim. E, numa bolsa, deixaram um bilhete escrito ao contrário, como num espelho.
+Trecho começa em: Cinco dias depois, no sábado, catorze de dezembro de mil oitocentos e trinta e três, Kaspar entrou correndo na casa de Meyer.
+Título (Shorts): O bilhete em escrita de espelho que ninguém explicou
+Descrição: Ansbach, 1833: Kaspar Hauser volta ferido do jardim do palácio. Na bolsa deixada lá, um bilhete escrito ao contrário, assinado só M. L. Ö. #misterio #historia #kasparhauser #pontocego
+
+=== dna: 12:22 - 13:37 do vídeo | 83 s no corte
+Gancho: Durante dois séculos, disseram que ele era um príncipe escondido. Em dois mil e vinte e quatro, o DNA respondeu.
+Trecho começa em: Até que a ciência entrou no caso.
+Título (Shorts): Ele era um príncipe escondido? O DNA respondeu
+Descrição: Por 200 anos, Kaspar Hauser foi apontado como o herdeiro perdido de Baden. Um estudo de 2024 analisou mechas do cabelo dele. #misterio #historia #dna #kasparhauser #pontocego
+
+/home/runner/work/pontocego-videos/pontocego-videos/out/kaspar-hauser_corte_dna.mp4 4.2 MB 82.9 s
+Cortes selecionados de kaspar-hauser (3 cortes independentes)
+Lembrete: no TikTok, ativar o selo de conteúdo gerado por IA (voz). Os mesmos arquivos servem para Shorts e Reels.
+
+=== abertura: 0:00 - 1:13 do vídeo | 84 s no corte
+Gancho: Em mil oitocentos e vinte e oito, um rapaz apareceu numa praça da Alemanha. Ele quase não falava. E trazia uma carta estranha na mão.
+Trecho começa em: Na tarde de vinte e seis de maio de mil oitocentos e vinte e oito, um feriado, as ruas de Nuremberg, na Alemanha, estavam quase vazias.
+Título (Shorts): Ele apareceu numa praça com uma carta e quase não falava
+Descrição: Nuremberg, 1828: um rapaz de uns 16 anos surge cambaleando, com uma carta sem assinatura. Ninguém nunca descobriu quem ele era. #misterio #historia #kasparhauser #pontocego
+
+=== bilhete: 8:34 - 10:07 do vídeo | 100 s no corte
+Gancho: Ele foi ferido num jardim. E, numa bolsa, deixaram um bilhete escrito ao contrário, como num espelho.
+Trecho começa em: Cinco dias depois, no sábado, catorze de dezembro de mil oitocentos e trinta e três, Kaspar entrou correndo na casa de Meyer.
+Título (Shorts): O bilhete em escrita de espelho que ninguém explicou
+Descrição: Ansbach, 1833: Kaspar Hauser volta ferido do jardim do palácio. Na bolsa deixada lá, um bilhete escrito ao contrário, assinado só M. L. Ö. #misterio #historia #kasparhauser #pontocego
+
+=== dna: 12:22 - 13:37 do vídeo | 83 s no corte
+Gancho: Durante dois séculos, disseram que ele era um príncipe escondido. Em dois mil e vinte e quatro, o DNA respondeu.
+Trecho começa em: Até que a ciência entrou no caso.
+Título (Shorts): Ele era um príncipe escondido? O DNA respondeu
+Descrição: Por 200 anos, Kaspar Hauser foi apontado como o herdeiro perdido de Baden. Um estudo de 2024 analisou mechas do cabelo dele. #misterio #historia #dna #kasparhauser #pontocego
+
+[publicar] cortes prontos em 2.3 min
+[publicar] Short abertura (84s): https://youtu.be/wog9CXA8dgs  (publica em 14/11 12:00)
+[publicar] Short bilhete (100s): https://youtu.be/c-mih9-ZsSA  (publica em 15/11 12:00)
+[publicar] Short dna (83s): https://youtu.be/jqtiYUa5aCo  (publica em 16/11 12:00)
