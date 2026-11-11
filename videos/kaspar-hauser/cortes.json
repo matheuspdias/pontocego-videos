@@ -1,0 +1,20 @@
+{"serie": "KASPAR HAUSER", "cortes": [
+ {"id": "abertura", "inicio": 0.0, "fim": 73.8, "titulo": "O RAPAZ QUE\\NSAIU DO ESCURO",
+  "gancho": "Em mil oitocentos e vinte e oito, um rapaz apareceu numa praça da Alemanha. Ele quase não falava. E trazia uma carta estranha na mão.",
+  "gancho_audio": [0.2, 9.62], "gancho_tela": "ELE QUASE\\NNÃO FALAVA", "gancho_t": 32.0,
+  "capa": ["ELE APARECEU", "DO NADA", "COM UMA CARTA"],
+  "titulo_post": "Ele apareceu numa praça com uma carta e quase não falava",
+  "post": "Nuremberg, 1828: um rapaz de uns 16 anos surge cambaleando, com uma carta sem assinatura. Ninguém nunca descobriu quem ele era. #misterio #historia #kasparhauser #pontocego"},
+ {"id": "bilhete", "inicio": 514.8, "fim": 607.2, "titulo": "O BILHETE\\NAO CONTRÁRIO",
+  "gancho": "Ele foi ferido num jardim. E, numa bolsa, deixaram um bilhete escrito ao contrário, como num espelho.",
+  "gancho_audio": [9.67, 17.0], "gancho_tela": "ESCRITO AO\\NCONTRÁRIO", "gancho_t": 580.0,
+  "capa": ["UM BILHETE", "ESCRITO", "AO CONTRÁRIO"],
+  "titulo_post": "O bilhete em escrita de espelho que ninguém explicou",
+  "post": "Ansbach, 1833: Kaspar Hauser volta ferido do jardim do palácio. Na bolsa deixada lá, um bilhete escrito ao contrário, assinado só M. L. Ö. #misterio #historia #kasparhauser #pontocego"},
+ {"id": "dna", "inicio": 742.4, "fim": 817.3, "titulo": "O DNA\\NRESPONDEU",
+  "gancho": "Durante dois séculos, disseram que ele era um príncipe escondido. Em dois mil e vinte e quatro, o DNA respondeu.",
+  "gancho_audio": [17.34, 24.92], "gancho_tela": "UM PRÍNCIPE\\NESCONDIDO?", "gancho_t": 790.0,
+  "capa": ["PRÍNCIPE", "ESCONDIDO?", "O DNA RESPONDEU"],
+  "titulo_post": "Ele era um príncipe escondido? O DNA respondeu",
+  "post": "Por 200 anos, Kaspar Hauser foi apontado como o herdeiro perdido de Baden. Um estudo de 2024 analisou mechas do cabelo dele. #misterio #historia #dna #kasparhauser #pontocego"}
+]}

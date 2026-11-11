@@ -16,6 +16,7 @@ O Matheus pode mexer à vontade: mover ideias, apagar, marcar como proibido.
 - A Praga da Dança de 1518, Estrasburgo (`praga-da-danca`), tema `cidade` (fenômeno sem explicação)
 - As Linhas de Nazca, Peru (`linhas-de-nazca`), tema `deserto` (enigma arqueológico)
 - A Colônia Perdida de Roanoke, 1587-1590 (`colonia-roanoke`), tema `selva`, tom `misterioso` (desaparecimento)
+- Kaspar Hauser, Nuremberg/Ansbach 1828-1833 (`kaspar-hauser`), tema `cidade`, tom `misterioso` (caso histórico / identidade desconhecida)
 
 ## Ideias (opcional, o Matheus pode preencher)
 - 

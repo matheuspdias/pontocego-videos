@@ -1,0 +1,183 @@
+# Kaspar Hauser — voz "Pedro Lima - Serious" (HeyGen), sem [whispers]
+# Áudios (baixar e juntar nesta ordem com juntar_blocos.py, 1,0 s de silêncio entre blocos):
+# bloco1  198.474s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=a5f2dce9638642119e4aa9b963cd7492.wav
+# bloco2  185.199s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=f84cb8e322c34315a3a333761534a55d.wav
+# bloco3  200.655s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=0eeae5ee632f4d8aa3d9027e54903126.wav
+# bloco4  266.611s https://resource2.heygen.ai/text_to_speech/cdea5e656a244864a1032edcb4fae01d/0d0e23e8170446e38b18a7380b2d30a8/id=4e1e994446524a2f868b4d1dd1113924.wav
+# Offsets absolutos: B1=0.000  B2=199.474  B3=385.673  B4=587.328  (fim ~853.94)
+# Formato: bloco | início local (s) | frase [palavra@t local]
+1|0.30|Na tarde de vinte e seis de maio de mil oitocentos e vinte e oito, um feriado, as ruas de Nuremberg, na Alemanha, estavam quase vazias. [de@1.96] [vinte@4.10] [ruas@6.36] [quase@9.00]
+1|10.57|Foi então que um sapateiro viu um rapaz parado numa praça. [um@12.75]
+1|14.88|Ele tinha uns dezesseis anos e mal conseguia ficar em pé. [mal@18.04]
+1|19.94|O rapaz andava como uma criança pequena, cambaleando. [pequena@22.67]
+1|24.59|Os pés estavam cheios de bolhas, como se nunca tivessem usado sapatos. [como@27.11]
+1|29.70|E, na mão, ele trazia uma carta endereçada a um capitão da cavalaria da cidade. [carta@31.70] [cavalaria@33.71]
+1|35.92|Quando o levaram até a casa do capitão, o rapaz quase não sabia falar. [do@38.10] [sabia@40.53]
+1|41.66|Repetia sempre a mesma frase:
+1|44.65|quero ser cavaleiro, como o meu pai foi. [pai@47.12]
+1|47.93|E, quando não entendia uma pergunta, dizia só uma palavra: [dizia@50.70]
+1|52.45|cavalo.
+1|53.41|Na delegacia, alguém deu a ele papel e caneta. [papel@56.65]
+1|58.10|E, com uma letra firme, ele escreveu um nome. [escreveu@60.32]
+1|61.86|Kaspar Hauser.
+1|63.55|Ninguém sabia de onde ele tinha vindo. [vindo@65.77]
+1|66.79|Ninguém sabia quem eram os pais dele. [dele@68.93]
+1|69.61|E, quase duzentos anos depois, ainda não sabemos. [não@72.77]
+1|74.03|Esta é a história de Kaspar Hauser, o rapaz que saiu do escuro. [Hauser@75.99] [escuro@77.91]
+1|79.45|Para entender o mistério, a gente precisa começar pela carta. [precisa@81.88]
+1|83.82|Ela não tinha assinatura.
+1|85.74|O autor dizia ser um trabalhador pobre, com dez filhos, e contava que o menino tinha sido deixado com ele em outubro de mil oitocentos e doze, ainda bebê. [pobre@88.64] [que@91.79] [com@93.37] [oitocentos@95.24]
+1|98.57|E fazia uma confissão estranha.
+1|101.83|Dizia que, desde então, nunca tinha deixado o menino dar um único passo para fora de casa. [deixado@104.94] [passo@106.57]
+1|108.36|Que ninguém sabia onde ele tinha sido criado. [sido@110.88]
+1|112.05|E terminava com uma frase fria:
+1|114.87|se o capitão não quisesse ficar com o rapaz, podia matá-lo, ou pendurá-lo na chaminé. [com@117.09] [pendurá-lo@119.52]
+1|121.21|Junto vinha um segundo bilhete, bem mais curto, que parecia escrito pela mãe. [mais@124.46] [mãe@126.72]
+1|127.43|Dizia que o menino se chamava Kaspar, que tinha nascido em trinta de abril de mil oitocentos e doze, e que o pai, já morto, tinha sido soldado da cavalaria. [Kaspar@129.61] [de@132.00] [doze@133.71] [morto@135.54]
+1|138.42|Mas quem examinou os dois papéis desconfiou de uma coisa. [desconfiou@141.07]
+1|142.90|Os dois pareciam ter sido escritos pela mesma mão. [pela@145.33]
+1|146.93|Sem saber o que fazer, as autoridades trataram o rapaz como um vagabundo. [autoridades@149.45] [vagabundo@152.01]
+1|153.28|E ele foi levado para uma torre do castelo de Nuremberg, a torre Luginsland, onde ficou sob os cuidados de um carcereiro. [torre@155.29] [torre@157.59] [cuidados@160.06]
+1|161.88|Ali, os guardas perceberam que aquele não era um rapaz comum. [não@164.79]
+1|166.37|Ele só aceitava comer pão e beber água. [beber@168.58]
+1|169.56|Carne ou cerveja o deixavam enjoado.
+1|172.91|A luz do dia parecia machucar os olhos dele. [os@175.17]
+1|176.20|E ele brincava por horas com um cavalinho de madeira, como uma criança de três anos. [um@178.50] [criança@180.63]
+1|182.50|A notícia correu.
+1|184.71|Logo, gente de toda a cidade subia a torre só para ver o menino misterioso. [subia@187.44] [o@189.24]
+1|190.88|E, aos poucos, enquanto aprendia as primeiras palavras, Kaspar começou a contar a história dele. [primeiras@193.96] [a@196.73]
+2|0.30|Segundo Kaspar, ele tinha passado a vida inteira num quarto pequeno e escuro. [vida@2.65] [escuro@5.04]
+2|6.44|Tão baixo que não dava para ficar em pé. [ficar@8.32]
+2|9.04|Ele vivia sentado no chão, sobre palha, com dois cavalinhos de madeira. [palha@11.26]
+2|14.68|Ele nunca viu o rosto de quem cuidava dele. [quem@16.47]
+2|17.77|Quando acordava, encontrava pão e uma jarra de água. [jarra@20.88]
+2|22.03|Às vezes, a água tinha um gosto amargo. [gosto@24.30]
+2|25.56|Ele dormia pesado, e, ao acordar, estava com a roupa trocada, o cabelo e as unhas cortados. [estava@28.59] [cabelo@30.34]
+2|32.43|Um dia, contou ele, o homem entrou no quarto. [entrou@35.67]
+2|37.02|Colocou um papel na frente dele e guiou a mão dele até ele aprender a escrever o nome. [e@38.64] [ele@40.60]
+2|42.52|Ensinou aquela frase sobre ser cavaleiro.
+2|45.91|E, pouco depois, o levou para fora, pela primeira vez na vida, e o fez andar até chegar perto de Nuremberg. [fora@48.26] [e@50.69] [perto@52.31]
+2|53.72|Lá, o homem desapareceu.
+2|56.52|Em julho de mil oitocentos e vinte e oito, o prefeito da cidade tornou essa história pública, num aviso oficial. [vinte@58.78] [cidade@60.62] [aviso@63.05]
+2|64.40|E, de repente, Kaspar Hauser virou assunto em toda a Europa. [assunto@67.38]
+2|69.17|Jornais de vários países chamaram o rapaz de a criança da Europa. [rapaz@71.69]
+2|74.49|Nuremberg decidiu adotar o rapaz.
+2|77.90|E o entregou a um professor, Georg Friedrich Daumer, que o levou para morar na casa dele. [Georg@80.37] [para@82.98]
+2|84.62|Com Daumer, Kaspar aprendeu a ler, a escrever e a desenhar. [a@87.44]
+2|89.82|E aprendeu rápido.
+2|92.46|Em poucos meses, já conversava, e fazia desenhos delicados de flores e de paisagens. [fazia@95.32] [de@97.97]
+2|100.06|Daumer ficou fascinado.
+2|102.64|Ele acreditava que Kaspar tinha sentidos fora do comum. [fora@105.58]
+2|106.99|Que enxergava no escuro, e que sentia o metal escondido debaixo de um papel. [sentia@109.46] [um@111.77]
+2|112.61|Outros, porém, começaram a desconfiar.
+2|115.93|Para eles, o rapaz sabia exatamente o que as pessoas queriam ouvir. [o@118.96]
+2|120.87|E então, em dezessete de outubro de mil oitocentos e vinte e nove, aconteceu a primeira coisa estranha. [de@124.46] [nove@126.42]
+2|129.85|Kaspar foi encontrado no porão da casa de Daumer, com um corte na testa. [casa@131.99] [na@133.74]
+2|135.14|Ele contou que um homem encapuzado o tinha atacado. [o@138.13]
+2|139.79|E disse mais.
+2|141.31|Que tinha reconhecido a voz.
+2|143.83|Era o mesmo homem que o tinha mantido preso a vida inteira. [tinha@145.79]
+2|148.89|Segundo Kaspar, o homem disse:
+2|151.58|você ainda vai morrer, antes de sair de Nuremberg. [sair@153.54]
+2|155.72|A polícia procurou o agressor, mas não encontrou ninguém. [não@159.26]
+2|160.69|E, para os céticos, o corte podia ter sido feito pelo próprio Kaspar. [podia@163.12] [Kaspar@164.83]
+2|165.64|Dias antes, ele tinha sido pego numa mentira, e Daumer estava irritado com ele. [numa@168.12] [com@171.23]
+2|172.15|Mesmo assim, a cidade colocou guardas para proteger o rapaz. [para@175.69]
+2|177.48|E ele passou a morar em outras casas. [outras@179.14]
+2|181.02|Mas os incidentes estranhos continuaram.
+3|0.26|Enquanto isso, um boato se espalhava por toda a Alemanha. [por@2.73]
+3|4.39|Diziam que Kaspar Hauser não era um rapaz qualquer. [um@7.00]
+3|8.28|Que ele era um príncipe.
+3|10.36|A história era assim.
+3|12.79|Em vinte e nove de setembro de mil oitocentos e doze, nasceu um menino na família que governava Baden, um dos estados alemães da época. [de@14.63] [um@17.19] [Baden@19.07] [época@21.44]
+3|22.64|Era o herdeiro do trono.
+3|24.56|Mas o bebê morreu duas semanas e meia depois. [e@27.25]
+3|28.53|Segundo a lenda, ele não morreu.
+3|32.47|Teria sido trocado por um bebê doente, por ordem de uma condessa da corte, que queria o trono para os próprios filhos. [doente@34.13] [da@36.22] [para@37.97]
+3|39.62|E o detalhe que alimentava o boato era real: [boato@41.67]
+3|43.33|em mil oitocentos e trinta, um filho dessa condessa se tornou, de fato, o grão-duque de Baden. [filho@45.72] [fato@47.85]
+3|50.56|Kaspar tinha a idade certa.
+3|53.03|E, para muita gente, isso explicava tudo. [tudo@55.98]
+3|56.57|O quarto escuro.
+3|58.15|O segredo.
+3|59.50|E alguém que queria vê-lo morto.
+3|62.58|No fim de mil oitocentos e trinta e um, um nobre inglês, Lorde Stanhope, se interessou pelo caso. [trinta@65.43] [Lorde@67.82]
+3|70.79|Ele pagou as despesas do rapaz, prometeu levá-lo para a Inglaterra, e o mudou para a cidade de Ansbach, perto dali. [prometeu@73.48] [o@75.57] [Ansbach@76.85]
+3|78.72|Lá, Kaspar foi morar com um professor, Johann Georg Meyer, e conseguiu um emprego de copista num escritório da justiça. [professor@81.15] [um@84.82] [da@87.08]
+3|88.26|Em Ansbach também vivia o juiz Anselm von Feuerbach, um dos juristas mais respeitados da Alemanha. [Anselm@91.03] [mais@93.94]
+3|96.02|Em mil oitocentos e trinta e dois, ele publicou um livro sobre Kaspar. [dois@98.02] [Kaspar@100.07]
+3|100.88|E chamou o caso de um crime contra a alma de um ser humano. [crime@102.46] [ser@104.08]
+3|105.21|Mas a promessa da Inglaterra nunca se cumpriu. [se@108.33]
+3|109.44|Stanhope foi perdendo a confiança no rapaz e parou de visitá-lo. [rapaz@112.17]
+3|114.67|Feuerbach morreu em maio de mil oitocentos e trinta e três. [oitocentos@117.06]
+3|119.06|E o professor Meyer, que era rígido, vivia em atrito com Kaspar. [rígido@121.41]
+3|124.50|No dia nove de dezembro, os dois tiveram uma briga séria. [dois@126.98]
+3|129.32|Cinco dias depois, no sábado, catorze de dezembro de mil oitocentos e trinta e três, Kaspar entrou correndo na casa de Meyer. [de@132.69] [trinta@134.52] [na@137.21]
+3|138.36|Estava pálido, e sangrava.
+3|141.59|Tinha um ferimento fundo no peito.
+3|144.44|Ele contou que um desconhecido tinha pedido que fosse até o jardim do palácio de Ansbach, prometendo notícias sobre a mãe dele. [pedido@147.69] [do@149.52] [sobre@152.75]
+3|153.99|Lá, o homem entregou a ele uma pequena bolsa. [uma@156.50]
+3|157.91|E, enquanto Kaspar segurava a bolsa, o homem o golpeou e fugiu. [o@161.03]
+3|163.61|Um policial foi até o jardim e encontrou a bolsa, de seda roxa. [e@165.91] [roxa@168.00]
+3|168.85|Dentro dela, havia um bilhete.
+3|171.48|Escrito a lápis, e ao contrário, em escrita de espelho. [em@174.77]
+3|176.90|Dizia mais ou menos assim:
+3|179.58|Hauser vai poder contar a vocês exatamente como eu sou e de onde eu venho. [exatamente@182.27] [onde@184.70]
+3|185.83|Para poupar o trabalho dele, eu mesmo digo. [mesmo@188.05]
+3|189.12|Eu venho da fronteira da Baviera, perto de um rio. [perto@191.93]
+3|193.17|E vou dizer até o meu nome. [nome@195.31]
+3|195.97|E o nome eram só três letras: [letras@197.76]
+3|198.79|M, L, Ó.
+4|0.26|O bilhete tinha um problema.
+4|2.94|Estava dobrado num formato de triângulo, do jeito que o próprio Kaspar costumava dobrar as cartas dele. [do@6.36] [costumava@7.94]
+4|9.89|E tinha os mesmos erros de escrita que ele cometia. [escrita@11.86]
+4|13.65|Segundo alguns relatos, havia neve no jardim, e só se viam as pegadas de uma pessoa. [jardim@16.59] [pegadas@18.43]
+4|20.08|Kaspar Hauser morreu três dias depois, em dezessete de dezembro de mil oitocentos e trinta e três. [em@23.49] [oitocentos@26.09]
+4|28.44|Tinha uns vinte e um anos.
+4|31.19|Ele foi enterrado no cemitério de Ansbach. [Ansbach@33.16]
+4|34.14|E a lápide, em latim, diz:
+4|37.34|aqui jaz Kaspar Hauser, enigma do seu tempo. [seu@40.75]
+4|41.67|Nascimento desconhecido, morte misteriosa.
+4|46.19|A investigação da época concluiu que o ferimento provavelmente tinha sido feito pelo próprio Kaspar, talvez para chamar atenção, e que o golpe foi mais fundo do que ele pretendia. [o@49.05] [pelo@51.69] [atenção@54.64] [mais@56.45]
+4|58.67|Mas os médicos nunca chegaram a um acordo. [um@61.36]
+4|62.33|Um estudo de dois mil e cinco achou improvável que ele tivesse se ferido sozinho daquele jeito, mas também não descartou a hipótese. [cinco@64.04] [se@66.51] [também@69.24]
+4|71.31|Então, o que aconteceu de verdade?
+4|74.55|Existem três explicações principais.
+4|77.54|A primeira é a do príncipe de Baden. [de@79.46]
+4|80.38|Ela atravessou dois séculos, em livros e filmes. [e@83.28]
+4|84.31|Mas esbarra num problema.
+4|86.93|Em mil oitocentos e setenta e seis, documentos oficiais da corte, com o registro do batismo, da autópsia e do enterro do bebê, foram publicados. [seis@88.94] [o@91.71] [e@94.10] [publicados@95.89]
+4|96.98|E, mais tarde, cartas da avó do bebê descreveram a doença dele dia após dia. [do@99.58] [dia@101.67]
+4|103.77|A segunda explicação é a de que Kaspar era um impostor. [que@105.90]
+4|108.48|Um rapaz fugido, talvez de uma família pobre, que inventou a história do quarto escuro e foi melhorando a versão conforme a fama crescia. [família@111.13] [do@113.34] [a@115.44]
+4|117.94|Meyer, Stanhope e vários médicos da época pensavam assim. [época@121.22]
+4|123.27|Já na época, os médicos notaram, no braço dele, a marca de uma vacina, coisa estranha para alguém que nunca teria visto ninguém. [no@126.13] [uma@128.13] [que@130.86]
+4|132.85|A terceira fica no meio do caminho. [caminho@135.07]
+4|136.27|Kaspar teria sido mesmo uma criança escondida e maltratada, talvez por vergonha, talvez por dinheiro. [escondida@138.78] [talvez@143.35]
+4|145.17|E, depois de solto, teria exagerado partes da própria história. [partes@148.19]
+4|150.07|O quarto pode ter existido.
+4|152.68|Só que não do jeito que ele contou. [ele@154.21]
+4|155.26|Até que a ciência entrou no caso. [caso@158.37]
+4|159.31|Em mil novecentos e noventa e seis, uma mancha de sangue numa roupa de Kaspar, guardada num museu de Ansbach, foi comparada com o DNA de descendentes da família de Baden. [seis@161.57] [roupa@164.00] [de@166.35] [DNA@168.48] [Baden@170.57]
+4|171.36|Não bateu.
+4|172.77|Mas, em dois mil e dois, outro teste, feito com fios de cabelo, deu um resultado parecido com o da família. [outro@174.82] [cabelo@176.78] [o@179.08]
+4|179.94|E a discussão recomeçou.
+4|182.35|Em dois mil e vinte e quatro, uma equipe internacional, liderada pelo geneticista Walther Parson, da Universidade de Innsbruck, analisou várias mechas de cabelo de Kaspar com técnicas modernas. [quatro@183.63] [geneticista@187.00] [Innsbruck@190.15] [de@193.30]
+4|195.77|As amostras combinavam entre si, e com a de mil novecentos e noventa e seis. [com@198.84] [noventa@200.63]
+4|202.06|E o DNA da linhagem materna de Kaspar era de um tipo bem diferente do da família de Baden. [de@204.71] [bem@206.46] [Baden@208.38]
+4|209.23|Ele não era o príncipe.
+4|211.48|Mas os próprios cientistas fizeram questão de dizer: [de@215.06]
+4|216.17|isso não prova que ele era um impostor. [um@218.01]
+4|218.95|Ele pode ter sido, sim, vítima de um crime. [de@221.08]
+4|222.28|Só que ninguém sabe qual, nem cometido por quem. [cometido@225.14]
+4|226.25|A identidade de Kaspar Hauser continua desconhecida. [desconhecida@228.90]
+4|230.17|No jardim do palácio de Ansbach, onde ele foi ferido, existe uma pedra com uma frase em latim. [onde@232.77] [pedra@234.90]
+4|237.04|Aqui, um desconhecido foi morto por um desconhecido. [um@239.94]
+4|241.32|E você?
+4|243.20|Quem você acha que era Kaspar Hauser? [Hauser@245.46]
+4|246.14|Uma criança escondida a vida inteira?
+4|248.96|Um rapaz que inventou a própria lenda? [lenda@251.31]
+4|252.09|Ou alguém que alguém precisava esconder?
+4|255.72|Deixa a sua teoria nos comentários.
+4|258.87|Eu sou o Historiador.
+4|261.21|E aqui no Ponto Cego, a gente olha para aquilo que ninguém conseguiu explicar. [gente@263.21] [conseguiu@265.26]

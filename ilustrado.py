@@ -2285,3 +2285,168 @@ def cena_praia_ilha(c, t, hora="dia", seed=52):
     c.rectangle(-20, 620, W + 40, 160); c.fill()
     mar_i(c, t, 760)
     chao(c, t, 960, "areia", seed=seed)
+
+
+# ================================================================ Kaspar Hauser (Nuremberg e Ansbach, 1828-1833)
+KASPAR = dict(roupa="jaqueta", cor_roupa=(0.46, 0.44, 0.40), cor_calca=(0.36, 0.32, 0.28), cabelo="curto",
+              cor_cabelo=(0.50, 0.36, 0.22), chapeu="boina", cor_chapeu=(0.30, 0.28, 0.26), largura=0.9)
+KASPAR_ANSBACH = dict(roupa="casaco", cor_roupa=(0.18, 0.20, 0.26), cor_calca=(0.22, 0.22, 0.24), cabelo="curto",
+                      cor_cabelo=(0.50, 0.36, 0.22), gravata=(0.92, 0.90, 0.84), largura=0.92)
+
+
+def cavalinho_i(c, s=1.0, depth=0.0, col=(0.66, 0.46, 0.26)):
+    """cavalinho de madeira com rodinhas (origem = chão, no centro)"""
+    c.save(); c.scale(s, s)
+    b = P(col, depth); d = P(dk(col, 0.25), depth)
+    c.rectangle(-90, -40, 180, 14); rgb(c, d); c.fill()                       # prancha
+    for x in (-62, 62):
+        c.new_sub_path(); c.arc(x, -14, 14, 0, 6.283); rgb(c, P((0.30, 0.22, 0.16), depth)); c.fill()
+    for x in (-50, -30, 30, 50):
+        c.rectangle(x - 7, -110, 14, 72); rgb(c, b if x in (-30, 50) else d); c.fill()   # pernas
+    rr(c, -70, -150, 140, 56, 26); rgb(c, b); c.fill()                         # corpo
+    pg(c, [(40, -140), (70, -200), (102, -206), (108, -186), (80, -160), (66, -126)]); rgb(c, b); c.fill()  # pescoço/cabeça
+    pg(c, [(64, -196), (54, -170), (40, -150), (52, -142), (68, -168)]); rgb(c, P((0.22, 0.16, 0.12), depth)); c.fill()  # crina
+    c.new_sub_path(); c.arc(90, -194, 4, 0, 6.283); rgb(c, (0.1, 0.08, 0.06)); c.fill()
+    pg(c, [(-70, -138), (-104, -110), (-96, -104), (-68, -124)]); rgb(c, P((0.22, 0.16, 0.12), depth)); c.fill()  # rabo
+    c.restore()
+
+
+def pao_i(c, s=1.0, depth=0.0):
+    """pão redondo (origem = centro da base)"""
+    c.save(); c.scale(s, s)
+    ellipse(c, 0, -26, 70, 30); rgb(c, P((0.74, 0.50, 0.26), depth)); c.fill()
+    ellipse(c, -6, -34, 52, 16); rgb(c, P((0.84, 0.62, 0.34), depth)); c.fill()
+    for k in (-24, 0, 24):
+        line(c, k - 8, -46, k + 8, -30, 4, P((0.95, 0.82, 0.58), depth))
+    c.restore()
+
+
+def jarra_i(c, s=1.0, depth=0.0, col=(0.62, 0.50, 0.40)):
+    """jarra de barro com água (origem = base)"""
+    c.save(); c.scale(s, s)
+    b = P(col, depth)
+    c.move_to(-30, 0); c.curve_to(-62, -40, -50, -100, -26, -120); c.line_to(-26, -140); c.line_to(26, -140)
+    c.line_to(26, -120); c.curve_to(50, -100, 62, -40, 30, 0); c.close_path(); rgb(c, b); c.fill()
+    c.move_to(46, -104); c.curve_to(84, -100, 80, -40, 42, -36); rgb(c, b); c.set_line_width(12); c.stroke()
+    ellipse(c, 0, -140, 26, 7); rgb(c, P((0.30, 0.45, 0.58), depth)); c.fill()
+    c.move_to(-36, -84); c.curve_to(-40, -60, -36, -36, -24, -20); rgb(c, lt(b, 0.25)); c.set_line_width(6); c.stroke()
+    c.restore()
+
+
+def palha_i(c, x0, x1, y, depth=0.0, seed=7, h=40):
+    """monte baixo de palha no chão"""
+    rnd = random.Random(seed)
+    ellipse(c, (x0 + x1) / 2, y, (x1 - x0) / 2, h * 0.5); rgb(c, P((0.70, 0.58, 0.30), depth)); c.fill()
+    for i in range(70):
+        x = rnd.uniform(x0 + 20, x1 - 20); yy = y + rnd.uniform(-h * 0.4, h * 0.3)
+        a = rnd.uniform(-0.6, 0.6); L = rnd.uniform(30, 70)
+        line(c, x, yy, x + math.cos(a) * L, yy + math.sin(a) * L * 0.3 - 4, 3,
+             P(rnd.choice([(0.86, 0.74, 0.40), (0.62, 0.50, 0.24), (0.92, 0.82, 0.50)]), depth))
+
+
+def bolsa_seda(c, s=1.0, depth=0.0, col=(0.48, 0.24, 0.56)):
+    """bolsinha de seda roxa fechada com cordão (origem = centro)"""
+    c.save(); c.scale(s, s)
+    b = P(col, depth)
+    c.move_to(-34, -50); c.curve_to(-80, -10, -70, 70, 0, 74); c.curve_to(70, 70, 80, -10, 34, -50); c.close_path()
+    rgb(c, b); c.fill()
+    pg(c, [(-34, -50), (-46, -86), (-14, -70), (0, -92), (14, -70), (46, -86), (34, -50)]); rgb(c, lt(b, 0.12)); c.fill()
+    c.rectangle(-38, -56, 76, 10); rgb(c, dk(b, 0.3)); c.fill()
+    c.move_to(30, -50); c.curve_to(60, -40, 64, -10, 48, 6); rgb(c, P((0.88, 0.78, 0.52), depth)); c.set_line_width(4); c.stroke()
+    c.move_to(-30, 10); c.curve_to(-26, 40, -10, 56, 10, 60); rgb(c, lt(b, 0.28)); c.set_line_width(8); c.stroke()
+    c.restore()
+
+
+def mecha_i(c, s=1.0, col=(0.50, 0.36, 0.22), fita=(0.75, 0.16, 0.16)):
+    """mecha de cabelo amarrada com fita (origem = centro)"""
+    c.save(); c.scale(s, s)
+    for k in range(9):
+        dx = (k - 4) * 5
+        c.move_to(dx * 0.4, -10); c.curve_to(dx - 20, 40, dx + 24, 90, dx * 1.6, 140)
+        rgb(c, dk(col, 0.25) if k % 2 else col); c.set_line_width(7); c.stroke()
+        c.move_to(dx * 0.4, -10); c.curve_to(dx + 16, -50, dx - 18, -90, dx * 1.4, -120)
+        c.stroke()
+    rr(c, -22, -22, 44, 26, 6); rgb(c, fita); c.fill()
+    pg(c, [(-6, -6), (-46, -36), (-40, 10)]); c.fill(); pg(c, [(6, -6), (46, -36), (40, 10)]); c.fill()
+    c.restore()
+
+
+def bilhete_espelho(c, t, linhas, w=820, size=46, espelho=1.0, p=1.0):
+    """bilhete a lápis em escrita de espelho (centrado). espelho=1 invertido, 0 legível (vira no meio).
+    p = fração das linhas visíveis"""
+    h = size * 1.55 * len(linhas) + 90
+    c.save(); c.rotate(-0.02)
+    c.save(); c.translate(12, 16); rr(c, -w / 2, -h / 2, w, h, 4); rgb(c, (0, 0, 0), 0.3); c.fill(); c.restore()
+    rr(c, -w / 2, -h / 2, w, h, 4); rgb(c, (0.95, 0.92, 0.82)); c.fill()
+    for k in range(1, 4):   # vincos da dobra em triângulo
+        line(c, -w / 2 + w * k / 4, -h / 2, -w / 2 + w * (k - 1) / 4 + 30, h / 2, 2, (0.80, 0.75, 0.62))
+    fx = math.cos(espelho * math.pi)   # 1 legível, -1 espelhado
+    c.save(); c.scale(fx if abs(fx) > 0.02 else 0.02, 1)
+    c.select_font_face(HAND); c.set_font_size(size)
+    n = int(len(linhas) * p + 0.999)
+    y0 = -h / 2 + 50 + size
+    for i, s in enumerate(linhas[:n]):
+        e = c.text_extents(s)
+        c.move_to(-e.x_advance / 2, y0 + i * size * 1.55); rgb(c, (0.28, 0.27, 0.30)); c.show_text(s)
+    c.restore()
+    c.restore()
+
+
+def triangulo_dobrado(c, s=1.0):
+    """carta dobrada em triângulo (centro)"""
+    c.save(); c.scale(s, s)
+    pg(c, [(-120, 60), (120, 60), (0, -110)]); rgb(c, (0.95, 0.92, 0.82)); c.fill()
+    pg(c, [(-120, 60), (0, -10), (120, 60)]); rgb(c, (0.86, 0.82, 0.70)); c.fill()
+    line(c, -60, -25, 0, -10, 2, (0.70, 0.66, 0.55)); line(c, 60, -25, 0, -10, 2, (0.70, 0.66, 0.55))
+    c.restore()
+
+
+def pegadas_i(c, t, x0, y0, x1, y1, n=10, p=1.0, col=(0.62, 0.66, 0.74)):
+    """trilha de pegadas na neve, de (x0,y0) a (x1,y1), aparecendo até a fração p"""
+    for i in range(int(n * p)):
+        k = i / max(1, n - 1)
+        x = x0 + (x1 - x0) * k; y = y0 + (y1 - y0) * k
+        sx = 1 if i % 2 else -1
+        ellipse(c, x + sx * 14, y + sx * 4, 16, 7); rgb(c, P(col), 0.85); c.fill()
+
+
+def pedra_memorial(c, x, y, linhas, s=1.0, depth=0.0, size=26):
+    """pedra memorial do jardim de Ansbach com inscrição (origem = base)"""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    col = P((0.70, 0.68, 0.64), depth)
+    rr(c, -200, -40, 400, 40, 4); rgb(c, dk(col, 0.2)); c.fill()
+    rr(c, -150, -330, 300, 300, 10); rgb(c, col); c.fill()
+    c.rectangle(110, -330, 40, 300); rgb(c, dk(col, 0.12)); c.fill()
+    c.select_font_face(SERIF); c.set_font_size(size)
+    for i, s_ in enumerate(linhas):
+        e = c.text_extents(s_)
+        c.move_to(-e.x_advance / 2 - 10, -260 + i * size * 1.6); rgb(c, dk(col, 0.55)); c.show_text(s_)
+    c.restore()
+
+
+def berco_i(c, s=1.0, depth=0.0, col=(0.62, 0.42, 0.24)):
+    """berço de madeira com o bebê (origem = chão)"""
+    c.save(); c.scale(s, s)
+    b = P(col, depth)
+    c.move_to(-150, -20); c.curve_to(-100, 10, 100, 10, 150, -20); rgb(c, dk(b, 0.2)); c.set_line_width(10); c.stroke()
+    rr(c, -130, -150, 260, 120, 18); rgb(c, b); c.fill()
+    c.save(); c.translate(0, -150); bebe_i(c, 1.0); c.restore()
+    rr(c, -130, -110, 260, 80, 14); rgb(c, b); c.fill()
+    for x in range(-110, 120, 36):
+        c.rectangle(x, -100, 10, 60); rgb(c, dk(b, 0.25)); c.fill()
+    c.restore()
+
+
+def cela_baixa(c, t, hora="sombrio", feixe=0.0, teto=560):
+    """o quarto escuro que Kaspar descreveu: pedra, teto baixo de vigas, palha e uma frestinha de luz"""
+    luz(hora)
+    interior(c, t, "pedra", "pedra", None, piso_y=900, raio=False)
+    c.rectangle(0, 0, W, teto); rgb(c, P((0.24, 0.17, 0.12))); c.fill()       # teto baixo
+    for x in range(-40, W + 80, 210):
+        c.rectangle(x, teto - 30, 120, 50); rgb(c, P((0.34, 0.24, 0.16))); c.fill()
+    c.rectangle(0, teto + 10, W, 18); rgb(c, (0, 0, 0), 0.35); c.fill()
+    palha_i(c, 700, 1500, 930, seed=3, h=60)
+    if feixe > 0:
+        rglow(c, 1640, teto + 70, 260, (1.0, 0.86, 0.6), 0.25 * feixe)
+        pg(c, [(1610, teto + 40), (1670, teto + 40), (1500, 1080), (1300, 1080)]); rgb(c, (1.0, 0.9, 0.7), 0.10 * feixe); c.fill()
+    c.rectangle(1610, teto + 30, 60, 20); rgb(c, (1.0, 0.85, 0.55), 0.8 * max(0.2, feixe)); c.fill()
