@@ -2381,7 +2381,10 @@ def bilhete_espelho(c, t, linhas, w=820, size=46, espelho=1.0, p=1.0):
     for k in range(1, 4):   # vincos da dobra em triângulo
         line(c, -w / 2 + w * k / 4, -h / 2, -w / 2 + w * (k - 1) / 4 + 30, h / 2, 2, (0.80, 0.75, 0.62))
     fx = math.cos(espelho * math.pi)   # 1 legível, -1 espelhado
-    c.save(); c.scale(fx if abs(fx) > 0.02 else 0.02, 1)
+    if abs(fx) < 0.15:   # papel de perfil no meio da virada: sem texto (escala quase zero quebra o freetype)
+        c.restore()
+        return
+    c.save(); c.scale(fx, 1)
     c.select_font_face(HAND); c.set_font_size(size)
     n = int(len(linhas) * p + 0.999)
     y0 = -h / 2 + 50 + size
