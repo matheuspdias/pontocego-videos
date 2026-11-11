@@ -1,0 +1,108 @@
+{
+ "serie": "A última corrida",
+ "episodio": 2,
+ "escolha_anterior": "B · levar até o portão",
+ "vozes": {
+  "voce": {
+   "voice_id": "0d0e23e8170446e38b18a7380b2d30a8",
+   "nome": "Pedro Lima (você)"
+  },
+  "passageiro": {
+   "voice_id": "3b2a59d6edb54e79a40b29726a12d1c3",
+   "nome": "Calm Carlos (Seu Antônio)"
+  }
+ },
+ "cauda": 9.0,
+ "falas": [
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Eu não parei o carro. Três e três da manhã. O portão do cemitério."
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "E o portão... abriu sozinho.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Olhei pelo retrovisor. As flores tinham sumido.",
+   "pausa": 1.0
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "E o banco de trás ainda tava gelado."
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Obrigado, meu filho. Você foi o primeiro que chegou até aqui.",
+   "pausa": 0.9
+  },
+  {
+   "quem": "voce",
+   "texto": "Seu Antônio? Cadê o senhor?"
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Tô em casa.",
+   "pausa": 0.7
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Aí o celular vibrou.",
+   "pausa": 1.0
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Pix recebido. Quarenta reais. De Antônio Carlos Ferreira."
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "E embaixo, em vermelho: conta encerrada em dois mil e seis.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Vinte anos atrás."
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Eu sempre paguei as minhas corridas, meu filho.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "E o celular vibrou de novo. Nova corrida.",
+   "pausa": 1.0
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Embarque: Cemitério da Consolação. Destino... o meu endereço."
+  },
+  {
+   "quem": "voce",
+   "pensa": true,
+   "texto": "Passageiro: Seu Antônio.",
+   "pausa": 0.8
+  },
+  {
+   "quem": "passageiro",
+   "texto": "Me leva pra conhecer a sua casa, meu filho?",
+   "pausa": 0.9
+  },
+  {
+   "quem": "voce",
+   "texto": "E aí? Aceita ou recusa?",
+   "pausa": 1.0
+  }
+ ]
+}

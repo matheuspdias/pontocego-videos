@@ -437,7 +437,8 @@ def tela_chat(contato="Mãe", mensagens=(("ela", "Cadê tu?"), ("eu", "Tô chega
 
 
 def tela_corrida(estado="pedido", passageiro="Seu Antônio", nota="5,0", destino="Cemitério da Consolação",
-                 valor="R$ 40,00", espera="07:12", t_aceite=None, hora="02:47"):
+                 valor="R$ 40,00", espera="07:12", t_aceite=None, hora="02:47", embarque=None, recusar=False,
+                 destaque=None):
     """app de corrida: "pedido" (nova corrida com botão ACEITAR), "aceita", "aguardando" (passageiro não embarcou)"""
     def f(c, t, w, h):
         # mapa
@@ -470,9 +471,24 @@ def tela_corrida(estado="pedido", passageiro="Seu Antônio", nota="5,0", destino
         rgb(c, (0.20, 0.55, 0.30) if estado != "pedido" else (0.25, 0.45, 0.9)); c.show_text(tag)
         c.set_font_size(w * 0.075); c.move_to(w * 0.08, y0 + h * 0.12); rgb(c, (0.1, 0.1, 0.12)); c.show_text(passageiro)
         c.set_font_size(w * 0.045); c.move_to(w * 0.08, y0 + h * 0.165); rgb(c, (0.45, 0.45, 0.5)); c.show_text("nota " + nota + " · 1 passageiro")
-        c.new_sub_path(); c.arc(w * 0.1, y0 + h * 0.215, w * 0.02, 0, 6.283); rgb(c, (0.92, 0.22, 0.20)); c.fill()
-        c.set_font_size(w * 0.052); c.move_to(w * 0.16, y0 + h * 0.228); rgb(c, (0.1, 0.1, 0.12)); c.show_text(destino[:26])
+        if embarque:
+            c.new_sub_path(); c.arc(w * 0.1, y0 + h * 0.195, w * 0.02, 0, 6.283); rgb(c, (0.25, 0.45, 0.9)); c.fill()
+            c.set_font_size(w * 0.045); c.move_to(w * 0.16, y0 + h * 0.207); rgb(c, (0.3, 0.3, 0.35)); c.show_text(embarque[:28])
+            yd = y0 + h * 0.245
+        else:
+            yd = y0 + h * 0.215
+        if destaque is not None and t >= destaque:
+            rr(c, w * 0.05, yd - h * 0.03, w * 0.9, h * 0.05, 10); rgb(c, (1.0, 0.85, 0.85)); c.fill()
+        c.new_sub_path(); c.arc(w * 0.1, yd, w * 0.02, 0, 6.283); rgb(c, (0.92, 0.22, 0.20)); c.fill()
+        c.set_font_size(w * 0.052); c.move_to(w * 0.16, yd + h * 0.013); rgb(c, (0.1, 0.1, 0.12)); c.show_text(destino[:26])
         c.set_font_size(w * 0.09); c.move_to(w * 0.08, y0 + h * 0.31); rgb(c, (0.1, 0.1, 0.12)); c.show_text(valor)
+        if recusar:
+            for k, (lab_, col_) in enumerate((("RECUSAR", (0.85, 0.25, 0.22)), ("ACEITAR", (0.10, 0.10, 0.12)))):
+                bx = w * 0.08 + k * w * 0.43
+                rr(c, bx, y0 + h * 0.35, w * 0.41, h * 0.08, 18); rgb(c, col_); c.fill()
+                c.set_font_size(w * 0.05); e = c.text_extents(lab_)
+                c.move_to(bx + w * 0.205 - e.x_advance / 2, y0 + h * 0.40); rgb(c, (1, 1, 1)); c.show_text(lab_)
+            return
         bc = (0.10, 0.10, 0.12) if estado == "pedido" else (0.20, 0.55, 0.30)
         apert = t_aceite is not None and t >= t_aceite
         rr(c, w * 0.08, y0 + h * 0.35, w * 0.84, h * 0.08, 18); rgb(c, (0.20, 0.55, 0.30) if apert else bc); c.fill()
@@ -547,8 +563,9 @@ def banco_tras(passageiro=True, flores=True, olhos=False, quem=None, expr="neutr
     return f
 
 
-def portao_cemiterio(c, t, x, y, s=1.0, nome="CEMITÉRIO", depth=0.0):
-    """portão de ferro com arco de pedra (origem = base no centro)"""
+def portao_cemiterio(c, t, x, y, s=1.0, nome="CEMITÉRIO", depth=0.0, abertura=0.0, dentro=None):
+    """portão de ferro com arco de pedra (origem = base no centro). abertura 0..1 abre as duas folhas;
+    dentro(c, t) desenha o que aparece pelo vão (névoa, alguém entrando), em coordenadas do portão."""
     c.save(); c.translate(x, y); c.scale(s, s)
     pedra = P((0.50, 0.50, 0.52), depth)
     for sx in (-1, 1):
@@ -560,11 +577,70 @@ def portao_cemiterio(c, t, x, y, s=1.0, nome="CEMITÉRIO", depth=0.0):
     e = _txt(c, nome, 52, SERIF)
     c.move_to(-e.x_advance / 2, -720); rgb(c, dk(pedra, 0.5)); c.show_text(nome)
     ferro = (0.04, 0.04, 0.05)
-    for k in range(-10, 11):
-        x_ = k * 24
-        c.rectangle(x_ - 3, -560, 6, 560); rgb(c, ferro); c.fill()
-        pg(c, [(x_ - 8, -560), (x_, -584), (x_ + 8, -560)]); c.fill()
-    for yy in (-500, -260, -40):
-        c.rectangle(-240, yy, 480, 8); rgb(c, ferro); c.fill()
-    c.move_to(0, -560); c.line_to(0, 0); rgb(c, (0.15, 0.15, 0.17)); c.set_line_width(4); c.stroke()
+    if abertura > 0 or dentro:
+        c.save(); c.rectangle(-240, -600, 480, 600); c.clip()
+        lgrad(c, 0, -600, 0, 0, [(0, (0.22, 0.26, 0.30), 1), (1, (0.42, 0.46, 0.50), 1)]); c.paint()
+        # o cemitério lá dentro: caminho, árvores secas e túmulos na névoa
+        for xx, hh in ((-170, 330), (150, 380), (-60, 260)):
+            arvore_morta(c, t, xx, -250, hh, depth=0.0, seed=int(abs(xx)), col=(0.16, 0.18, 0.21))
+        pg(c, [(-26, -250), (26, -250), (150, 0), (-150, 0)]); rgb(c, (0.50, 0.52, 0.54)); c.fill()
+        for i, (xx, yy, ss, tp) in enumerate(((-200, -170, 0.5, "cruz"), (-140, -110, 0.6, "arco"), (-210, -40, 0.75, "arco"),
+                                              (190, -150, 0.5, "arco"), (150, -80, 0.65, "cruz"), (215, -10, 0.8, "obelisco"))):
+            lapide(c, xx, yy, ss, tp, (i % 3 - 1) * 0.06)
+        lgrad(c, 0, -600, 0, 0, [(0, (0.60, 0.65, 0.70), 0.0), (0.55, (0.60, 0.65, 0.70), 0.35), (1, (0.70, 0.74, 0.78), 0.55)])
+        c.paint()
+        if dentro:
+            dentro(c, t)
+        c.restore()
+    for lado in (-1, 1):
+        w_ = 240 * (1 - 0.85 * abertura)  # a folha "gira" e fica estreita
+        c.save(); c.translate(lado * 240, 0); c.scale(-lado * w_ / 240, 1)
+        for k in range(0, 11):
+            x_ = k * 24
+            c.rectangle(x_ - 3, -560, 6, 560); rgb(c, ferro); c.fill()
+            pg(c, [(x_ - 8, -560), (x_, -584), (x_ + 8, -560)]); c.fill()
+        for yy in (-500, -260, -40):
+            c.rectangle(0, yy, 240, 8); rgb(c, ferro); c.fill()
+        c.restore()
     c.restore()
+
+
+def tela_pix(valor="R$ 40,00", de="Antônio Carlos Ferreira", banco="Banco", aviso=None, t_aviso=None, hora="03:03"):
+    """app de banco: Pix recebido; aviso (ex.: "Conta encerrada em 2006") aparece em vermelho a partir de t_aviso"""
+    def f(c, t, w, h):
+        c.rectangle(0, 0, w, h); rgb(c, (0.97, 0.97, 0.96)); c.fill()
+        c.rectangle(0, 0, w, h * 0.30); rgb(c, (0.42, 0.18, 0.62)); c.fill()
+        _status(c, w, hora, escuro=True)
+        c.select_font_face(FONTE); c.set_font_size(w * 0.06); c.move_to(w * 0.08, h * 0.13); rgb(c, (1, 1, 1), 0.85); c.show_text(banco)
+        c.new_sub_path(); c.arc(w / 2, h * 0.30, w * 0.12, 0, 6.283); rgb(c, (0.20, 0.70, 0.45)); c.fill()
+        c.move_to(w / 2 - w * 0.05, h * 0.30); c.line_to(w / 2 - w * 0.01, h * 0.325); c.line_to(w / 2 + w * 0.06, h * 0.28)
+        rgb(c, (1, 1, 1)); c.set_line_width(w * 0.022); c.stroke()
+        c.set_font_size(w * 0.065); e = c.text_extents("Pix recebido")
+        c.move_to(w / 2 - e.x_advance / 2, h * 0.45); rgb(c, (0.1, 0.1, 0.12)); c.show_text("Pix recebido")
+        c.set_font_size(w * 0.14); e = c.text_extents(valor)
+        c.move_to(w / 2 - e.x_advance / 2, h * 0.56); rgb(c, (0.1, 0.1, 0.12)); c.show_text(valor)
+        c.set_font_size(w * 0.045); e = c.text_extents("de"); c.move_to(w / 2 - e.x_advance / 2, h * 0.63); rgb(c, (0.45, 0.45, 0.5)); c.show_text("de")
+        c.set_font_size(w * 0.058); e = c.text_extents(de)
+        c.move_to(w / 2 - e.x_advance / 2, h * 0.68); rgb(c, (0.1, 0.1, 0.12)); c.show_text(de)
+        if aviso and (t_aviso is None or t >= t_aviso):
+            k = min(1.0, (t - (t_aviso or 0)) / 0.3)
+            rr(c, w * 0.06, h * 0.74, w * 0.88, h * 0.10, 14); rgb(c, (1.0, 0.90, 0.88), k); c.fill()
+            c.set_font_size(w * 0.052); e = c.text_extents(aviso)
+            c.move_to(w / 2 - e.x_advance / 2, h * 0.80); rgb(c, (0.80, 0.15, 0.12), k); c.show_text(aviso)
+    return f
+
+
+def resultado_voto(c, t, letra="B", texto="LEVAR ATÉ O PORTÃO", t1=3.2, y=300, cor=(0.16, 0.34, 0.74)):
+    """faixa "VOCÊS ESCOLHERAM: B" no começo do episódio (recompensa quem votou)"""
+    if t > t1:
+        return
+    a = min(1.0, t / 0.3, (t1 - t) / 0.4)
+    c.save(); c.push_group()
+    tit = "VOCÊS ESCOLHERAM"
+    e = _txt(c, tit, 34)
+    c.move_to(W / 2 - e.x_advance / 2, y); rgb(c, (0.98, 0.95, 0.88)); c.show_text(tit)
+    s_ = letra + " · " + texto
+    e = _txt(c, s_, 46)
+    rr(c, W / 2 - e.x_advance / 2 - 30, y + 24, e.x_advance + 60, 80, 20); rgb(c, cor); c.fill()
+    c.move_to(W / 2 - e.x_advance / 2, y + 80); rgb(c, (1, 1, 1)); c.show_text(s_)
+    c.pop_group_to_source(); c.paint_with_alpha(a); c.restore()
