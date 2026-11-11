@@ -19,6 +19,7 @@ import json
 import math
 import os
 import random
+import zlib
 
 import cairo
 from engine import *
@@ -156,7 +157,7 @@ def legendas(c, t, LN, y=1430, size=74, cores=None, tag_quem=True):
             atual = grupo
             break
     quem = ln["quem"]
-    col = cores["pensa"] if ln.get("pensa") else cores.get(quem, CORES_FALA_PADRAO[hash(quem) % len(CORES_FALA_PADRAO)])
+    col = cores["pensa"] if ln.get("pensa") else cores.get(quem, CORES_FALA_PADRAO[zlib.crc32(quem.encode()) % len(CORES_FALA_PADRAO)])  # crc32: mesma cor em todo render
     texto = " ".join(w["w"] for w in atual)
     if ln.get("pensa"):
         texto = "(" + texto + ")"
@@ -169,7 +170,7 @@ def legendas(c, t, LN, y=1430, size=74, cores=None, tag_quem=True):
     _contorno(c, texto, -e.x_advance / 2, sz * 0.35, sz, col)
     c.restore()
     if tag_quem and quem not in ("voce",) and not ln.get("pensa"):
-        nome = quem.upper()
+        nome = quem.replace("_", " ").upper()
         en = _txt(c, nome, 26)
         rr(c, W / 2 - en.x_advance / 2 - 16, y - sz * 0.95 - 34, en.x_advance + 32, 40, 10); rgb(c, col, 0.92); c.fill()
         c.move_to(W / 2 - en.x_advance / 2, y - sz * 0.95 - 5); rgb(c, (0.08, 0.06, 0.05)); c.show_text(nome)
