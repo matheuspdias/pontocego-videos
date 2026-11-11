@@ -796,11 +796,35 @@ def _limb(c, o, tgt, l1, l2, bend, w1, w2, col):
     return (ex, ey), (hx, hy)
 
 
+def _olho_terror(c, t, ex, ey, ol, skin, look=0.0):
+    """olho estranho para o tom de terror (desenhado no lugar do olho normal; nunca pisca)"""
+    # olheira funda em volta (vale para todos)
+    c.new_sub_path(); c.arc(ex, ey + 1, 12.5, 0, 6.283); rgb(c, dk(skin, 0.45), 0.55); c.fill()
+    if ol == "fixos":
+        c.new_sub_path(); c.arc(ex, ey, 10, 0, 6.283); rgb(c, (0.95, 0.94, 0.88)); c.fill()
+        c.new_sub_path(); c.arc(ex, ey, 10, 0, 6.283); rgb(c, (0.75, 0.25, 0.22), 0.18); c.fill()  # vermelhidão
+        tremor = 0.6 * math.sin(t * 37 + ex)
+        c.new_sub_path(); c.arc(ex + look * 2 + tremor, ey, 2.4, 0, 6.283); rgb(c, (0.02, 0.02, 0.02)); c.fill()
+    elif ol == "vazios":
+        ellipse(c, ex, ey, 9.5, 11); rgb(c, (0.01, 0.01, 0.02)); c.fill()
+        g = 0.55 + 0.25 * math.sin(t * 2.3 + ex)
+        c.new_sub_path(); c.arc(ex, ey + 1, 1.8, 0, 6.283); rgb(c, (0.85, 0.90, 0.95), g); c.fill()
+    elif ol == "brancos":
+        g = 0.85 + 0.15 * math.sin(t * 3.1)
+        rg = cairo.RadialGradient(ex, ey, 0, ex, ey, 26)
+        rg.add_color_stop_rgba(0, 0.85, 0.95, 1.0, 0.55 * g); rg.add_color_stop_rgba(1, 0.85, 0.95, 1.0, 0)
+        c.set_source(rg); c.arc(ex, ey, 26, 0, 6.283); c.fill()
+        ellipse(c, ex, ey, 8, 9.5); rgb(c, (0.96, 0.99, 1.0)); c.fill()
+    elif ol == "pretos":
+        ellipse(c, ex, ey, 9, 10.5); rgb(c, (0.0, 0.0, 0.0)); c.fill()
+        c.new_sub_path(); c.arc(ex - 3, ey - 4, 2.2, 0, 6.283); rgb(c, (1, 1, 1), 0.7); c.fill()
+
+
 def boneco(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "neutral"),), look=0.0,
            pele="clara", cabelo="curto", cor_cabelo=None, barba=None, bigode=False, idade=0.0,
            chapeu=None, cor_chapeu=None, roupa="camisa", cor_roupa=(0.30, 0.40, 0.55), cor_calca=(0.28, 0.24, 0.20),
            cor_sapato=(0.16, 0.11, 0.08), camisa=(0.92, 0.90, 0.84), gravata=None, oculos=False, cinto=None,
-           capa=None, prop=None, fid=0, appear=None, alpha=1.0, andar=False, mulher=False, largura=1.0):
+           capa=None, prop=None, fid=0, appear=None, alpha=1.0, andar=False, mulher=False, largura=1.0, olhos="normal"):
     """
     Personagem ilustrado (chapado, sem contorno), pés em (x, y), altura ~470 px em s=1.
     poses / exprs: as mesmas do boneco de giz (stand, point_r, think, shocked...).
@@ -809,6 +833,9 @@ def boneco(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "neutral"),), lo
     barba: cheia | curta | cavanhaque | longa | None    chapeu: fedora cartola quepe gorro capuz tiara palha
     turbante solideu touca explorador boina coroa elmo
     prop: ("r"|"l", fn(c, t)) desenha algo preso à mão (origem = mão).
+    olhos (terror; nunca piscam): normal | fixos (esbugalhados, pupila mínima) | vazios (órbitas pretas com
+    brilho fraco no fundo) | brancos (brancos brilhando, sem pupila) | pretos (todo preto, brilho úmido).
+    Pode ser uma função de t (ex.: normal e vira "vazios" num instante).
     """
     a_scale = 1.0
     if appear is not None:
@@ -966,13 +993,13 @@ def boneco(c, t, x, y, s=1.0, poses=((0, "stand"),), exprs=((0, "neutral"),), lo
             c.save(); c.translate(hx, hy); prop[1](c, t); c.restore()
     # cabeça
     _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, cor_chapeu, oculos, shy, ld,
-            roupa_c, mulher)
+            roupa_c, mulher, olhos)
     if alpha < 1:
         c.pop_group_to_source(); c.paint_with_alpha(alpha)
     c.restore()
 
 
-def _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, cor_chapeu, oculos, shy, ld, roupa_c, mulher):
+def _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, cor_chapeu, oculos, shy, ld, roupa_c, mulher, olhos="normal"):
     hy = shy - 82
     c.save()
     c.translate(look * 5, hy)
@@ -997,7 +1024,8 @@ def _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, co
     c.restore()
     # bochechas
     for sx in (-1, 1):
-        c.new_sub_path(); c.arc(sx * 25 + fx, 20, 9, 0, 6.283); rgb(c, (0.85, 0.35, 0.30), 0.16); c.fill()
+        if (olhos(t) if callable(olhos) else olhos) == "normal":  # rosto de terror não tem bochecha corada
+            c.new_sub_path(); c.arc(sx * 25 + fx, 20, 9, 0, 6.283); rgb(c, (0.85, 0.35, 0.30), 0.16); c.fill()
     # barba (antes da boca)
     if barba in ("cheia", "longa"):
         L_ = 78 if barba == "longa" else 64
@@ -1010,12 +1038,15 @@ def _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, co
     elif barba == "cavanhaque":
         ellipse(c, fx * 0.6, 48, 16, 12); rgb(c, hcol); c.fill()
     # olhos
-    blink = ((t * 1000 + fid * 1777) % 4300) < 120
+    ol = olhos(t) if callable(olhos) else olhos
+    blink = ((t * 1000 + fid * 1777) % 4300) < 120 and ol == "normal"
     ey_ = -2
     big = expr in ("shocked", "desperate")
     for sx in (-1, 1):
         ex = sx * 17 + fx
-        if blink:
+        if ol != "normal":
+            _olho_terror(c, t, ex, ey_, ol, skin, look)
+        elif blink:
             c.move_to(ex - 6, ey_); c.line_to(ex + 6, ey_); rgb(c, ink); c.set_line_width(3); c.stroke()
         elif big:
             c.new_sub_path(); c.arc(ex, ey_, 9, 0, 6.283); rgb(c, (0.98, 0.97, 0.94)); c.fill()
@@ -1054,6 +1085,11 @@ def _cabeca(c, t, expr, look, fid, skin, hcol, cabelo, barba, bigode, chapeu, co
     if expr in ("happy", "confident"):
         c.move_to(mx - 10, my - 2); c.curve_to(mx - 4, my + 6, mx + 4, my + 6, mx + 10, my - 2 - (4 if expr == "confident" else 0))
         rgb(c, mc_); c.set_line_width(4); c.stroke()
+    elif expr == "sinistro":  # sorriso fino e largo demais, cantos subindo
+        c.move_to(mx - 19, my - 6); c.curve_to(mx - 9, my + 5, mx + 9, my + 5, mx + 19, my - 6)
+        rgb(c, (0.18, 0.06, 0.06)); c.set_line_width(3); c.stroke()
+        for sx in (-1, 1):
+            c.move_to(mx + sx * 19, my - 6); c.line_to(mx + sx * 22, my - 10); c.stroke()
     elif expr == "grin":
         c.move_to(mx - 13, my - 3); c.curve_to(mx - 8, my + 12, mx + 8, my + 12, mx + 13, my - 3); c.close_path()
         rgb(c, (0.35, 0.12, 0.12)); c.fill()

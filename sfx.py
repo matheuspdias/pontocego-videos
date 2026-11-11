@@ -191,6 +191,69 @@ SOUNDS = dict(pop=pop, thud=thud, swish=swish, whoosh=whoosh, dark_whoosh=dark_w
               key=key, click=click, ding=ding, shimmer=shimmer, bell=bell, heartbeat=heartbeat, gust=gust, riser=riser, tum=tum, soft_ding=soft_ding)
 
 
+# ---------------------------------------------------------------- terror (todos tonais, sem ruído)
+def drone_terror(d=8.0):
+    """cama de terror: grave com segunda menor e trítono batendo devagar (incômodo, sem chiado)"""
+    t = _t(d)
+    f = 49.0
+    x = (np.sin(2 * np.pi * f * t) + 0.8 * np.sin(2 * np.pi * f * 1.06 * t) + 0.5 * np.sin(2 * np.pi * f * 1.414 * t)
+         + 0.25 * np.sin(2 * np.pi * f * 4.01 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.13 * t)))
+    x *= 0.75 + 0.25 * np.sin(2 * np.pi * 0.09 * t)
+    fade = np.minimum(1, t / 1.5) * np.minimum(1, (d - t) / 1.5)
+    return _norm(_lp(x, 900) * fade, 0.6)
+
+
+def coracao_acelerando(d=4.0, bpm0=60, bpm1=140):
+    """batimentos que aceleram até o susto"""
+    out = np.zeros(int(SR * d)); tt = 0.0
+    while tt < d - 0.3:
+        b = heartbeat(); i = int(tt * SR)
+        out[i:i + len(b)] += b[: len(out) - i] * (0.5 + 0.5 * tt / d)
+        bpm = bpm0 + (bpm1 - bpm0) * (tt / d) ** 1.5
+        tt += 60.0 / bpm
+    return _norm(out, 0.75)
+
+
+def cordas_subindo(d=3.0):
+    """cluster de cordas sintéticas subindo e abrindo em dissonância até cortar seco"""
+    t = _t(d); x = np.zeros(len(t))
+    for k, (f0, f1) in enumerate(((220, 330), (233, 370), (247, 415), (311, 466), (440, 698))):
+        ph = 2 * np.pi * np.cumsum(f0 * (f1 / f0) ** (t / d)) / SR
+        v = np.sin(ph + 0.4 * np.sin(2 * np.pi * (5.5 + k * 0.3) * t))  # vibrato
+        x += v * (0.6 + 0.1 * k)
+    x *= (t / d) ** 2.2
+    return _norm(x, 0.5)
+
+
+def susto(d=2.2):
+    """o 'susto': acorde dissonante agudo + pancada grave, ataque instantâneo"""
+    t = _t(d)
+    hi = sum(np.sin(2 * np.pi * f * t) for f in (1244, 1318, 1864, 1975)) * _env(len(t), 0.001, 0.6)
+    lo = _sweep(110, 32, d) * _env(len(t), 0.001, 0.5)
+    return _norm(hi * 0.45 + lo, 0.9)
+
+
+def sino_funebre():
+    """badalada lenta e grave"""
+    d = 5.0; t = _t(d)
+    x = sum(a * np.sin(2 * np.pi * f * t) for f, a in ((110, 1), (110 * 2.4, 0.5), (110 * 3.0, 0.35), (110 * 5.4, 0.15)))
+    return _norm(x * _env(len(t), 0.003, 1.8), 0.5)
+
+
+def vibra_celular(n=2):
+    """celular vibrando no suporte (zumbido grave em pulsos)"""
+    out = np.zeros(int(SR * (0.75 * n + 0.2)))
+    for k in range(n):
+        d = 0.45; t = _t(d)
+        z = np.sign(np.sin(2 * np.pi * 150 * t)) * _env(len(t), 0.01, 0.3)
+        i = int(k * 0.75 * SR); out[i:i + len(z)] += _lp(z, 500)
+    return _norm(out, 0.4)
+
+
+SOUNDS.update(drone_terror=drone_terror, coracao_acelerando=coracao_acelerando, cordas_subindo=cordas_subindo,
+              susto=susto, sino_funebre=sino_funebre, vibra_celular=vibra_celular)
+
+
 def ambience_dark(dur, theme=None, sig=25.0):
     """cama sonora sombria: grave contínuo + ventania.
     A ventania é a assinatura do canal: cheia nos primeiros e nos últimos `sig` segundos;
