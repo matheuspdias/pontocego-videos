@@ -12,7 +12,7 @@ TOM = "misterioso"
 def capa(c, t):
     estrada_noite(c, 0, 0.0, fim=lambda c, t, hz: portao_cemiterio(c, t, W / 2, hz + 420, 0.95, abertura=1.0))
     c.rectangle(0, 0, W, H); rgb(c, (0, 0, 0), 0.45); c.fill()
-    celular_mao(c, 0, tela_pix(aviso="Conta encerrada em 2006", t_aviso=0), y=1150, s=0.82)
+    celular_mao(c, 0, tela_pix(aviso="Conta encerrada em 2006", t_aviso=-1), y=1150, s=0.82)
     for s, col, y, sz in (("PIX DE QUEM", (1, 1, 1), 300, 110), ("MORREU HÁ", (1, 1, 1), 420, 110), ("20 ANOS", (1.0, 0.80, 0.36), 560, 140)):
         c.select_font_face(FONTE); c.set_font_size(sz); e = c.text_extents(s)
         pov._contorno(c, s, W / 2 - e.x_advance / 2, y, sz, col)
