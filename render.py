@@ -37,7 +37,7 @@ def load_scenes(path):
     engine.set_theme(theme_of(m))
     engine.STYLE = getattr(m, "STYLE", "giz")
     engine.TOM = getattr(m, "TOM", "normal")
-    if VERTICAL and engine.TOM != "sombrio":  # TikTok do Ponto Cego (Você decide) é sempre sombrio/terror
+    if VERTICAL and engine.TOM != "sombrio" and not str(getattr(m, "__file__", "")).endswith("capa.py"):  # capa: texto não pode desbotar  # TikTok do Ponto Cego (Você decide) é sempre sombrio/terror
         print(f"aviso: TOM {engine.TOM!r} trocado por 'sombrio' (regra do TikTok do Ponto Cego)")
         engine.TOM = "sombrio"
     return m.SCENES

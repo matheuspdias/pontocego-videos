@@ -538,6 +538,29 @@ def homem_poste(c, t, x, y, s=1.0, quem=None, flores=True, luz_poste=True, look=
     _il._L = old
 
 
+def close_terror(c, t, t0, quem=None, olhos_="vazios", expr="sinistro", fundo=None):
+    """o susto: close em tela cheia no rosto (olhos estranhos), com flash branco curto, tremida e vermelho.
+    Use num trecho curto (0,8 a 2 s) começando em t0, com sfx "susto" em t0 e "cordas_subindo" 3 s antes."""
+    k = max(0.0, t - t0)
+    shake = 14 * max(0, 1 - k / 0.5)
+    c.save(); c.translate(math.sin(t * 90) * shake, math.cos(t * 77) * shake)
+    if fundo:
+        fundo(c, t)
+    else:
+        lgrad(c, 0, 0, 0, H, [(0, (0.10, 0.11, 0.16), 1), (1, (0.02, 0.02, 0.03), 1)]); c.paint()
+        for k2 in range(3):  # encosto do banco de trás atrás dele
+            rr(c, -100 + k2 * 460, 520, 420, 1100, 60); rgb(c, (0.13, 0.10, 0.09)); c.fill()
+    o = dict(quem or SENHOR); o["olhos"] = olhos_
+    old = _il._L; _il._L = LUZES["sombrio"]
+    s = 7.0 + 0.3 * k
+    boneco(c, t, W / 2, 820 + 403 * s, s, exprs=((0, expr),), look=0.0, **o)
+    _il._L = old
+    c.restore()
+    if k < 0.18:
+        c.set_source_rgba(1, 1, 1, 0.85 * (1 - k / 0.18)); c.paint()
+    c.set_source_rgba(0.6, 0, 0, 0.18 * max(0, 1 - k / 1.2)); c.paint()
+
+
 def banco_tras(passageiro=True, flores=True, olhos=False, quem=None, expr="neutral", look=0.0):
     """o que aparece no retrovisor: banco de trás, com ou sem o passageiro"""
     def f(c, t, w, h):
@@ -556,7 +579,7 @@ def banco_tras(passageiro=True, flores=True, olhos=False, quem=None, expr="neutr
             o = dict(quem or SENHOR)
             s_ = h / 210
             c.save(); c.translate(w * 0.62, h * 0.10 + 470 * s_)
-            boneco(c, t, 0, 0, s_, poses=((0, "stand"),), exprs=((0, expr),), look=look, **o)
+            boneco(c, t, 0, 0, s_, poses=((0, "stand"),), exprs=((0, expr(t) if callable(expr) else expr),), look=look, **o)
             c.restore()
         if olhos:
             silhueta(c, t, w * 0.62, h * 1.25, h / 420, 0.75, olhos=True)

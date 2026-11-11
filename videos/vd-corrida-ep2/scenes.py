@@ -6,9 +6,9 @@ from pov import *
 import ilustrado
 
 STYLE = "ilustrado"
-TOM = "misterioso"
+TOM = "sombrio"
 THEME = "cidade"
-SFX_OFF = True
+AMBIENCE = "terror"
 
 LN = linhas(__file__)
 T = LN.t0
@@ -78,8 +78,14 @@ def s03(c, t):  # retrovisor: as flores sumiram, banco gelado
     topo(c, t)
 
 
-def s04(c, t):  # a voz dele vem de fora: ele entra no cemitério
-    gate_scene(c, t, aberto=1.0, dentro=antonio_entrando(T(4) - 0.4, T(7) - 0.3))
+SUSTO1 = T(6) + 0.75   # logo depois do "Tô em casa": ele está no banco de trás
+
+
+def s04(c, t):  # a voz dele vem de fora: ele entra no cemitério... e aparece atrás de você
+    if t >= SUSTO1:
+        close_terror(c, t, SUSTO1, olhos_="vazios")
+        return
+    gate_scene(c, t, aberto=1.0, dentro=antonio_entrando(T(4) - 0.4, T(6) - 0.1))
     topo(c, t)
 
 
@@ -109,9 +115,22 @@ def s07(c, t):  # nova corrida: destino a sua casa
     topo(c, t, "CEMITÉRIO DA CONSOLAÇÃO · 03:05")
 
 
-def s08(c, t):  # ele está de volta no banco de trás
-    gate_scene(c, t, aberto=1.0, retro=banco_tras(True, True, expr="happy", look=0.3),
+SUSTO2 = T(15) + 1.25  # "...conhecer a SUA CASA": os olhos ficam pretos
+
+
+def s08(c, t):  # ele está de volta no banco de trás; a câmera vai até o retrovisor
+    quem = dict(SENHOR); quem["olhos"] = lambda tt: "normal" if tt < SUSTO2 else "pretos"
+    expr = lambda tt: "happy" if tt < SUSTO2 else "sinistro"
+    k = ease_io(prog(t, T(15) - 0.6, SUSTO2 - T(15) + 0.6)) * (1 - ease_io(prog(t, T(16) - 0.6, 0.6)))
+    z = 1 + 2.0 * k
+    sh = 10 * max(0, 1 - (t - SUSTO2) / 0.4) if t >= SUSTO2 else 0
+    c.save(); c.translate(math.sin(t * 90) * sh, 0)
+    c.translate(W / 2, 345 + (900 - 345) * k); c.scale(z, z); c.translate(-W / 2, -345)
+    gate_scene(c, t, aberto=1.0, retro=banco_tras(True, True, quem=quem, expr=expr, look=0.0),
                cel=tela_corrida("pedido", passageiro="Seu Antônio", destino="Minha casa", recusar=True, hora="03:05"))
+    c.restore()
+    if SUSTO2 <= t < SUSTO2 + 0.15:
+        c.set_source_rgba(1, 1, 1, 0.7 * (1 - (t - SUSTO2) / 0.15)); c.paint()
     topo(c, t, "CEMITÉRIO DA CONSOLAÇÃO · 03:05")
     cartao_escolha(c, t, T(16) - 0.2, "ACEITA OU RECUSA?", "RECUSAR A CORRIDA", "ACEITAR E LEVAR ELE",
                    segundos=LN.dur - T(16) - 0.4, nota="O mais votado vira o Ep. 3")
@@ -133,5 +152,14 @@ SCENES = [(0, T(1) - 0.2, _com_legenda(s01)),
           (T(12) - 0.2, T(15) - 0.2, _com_legenda(s07)),
           (T(15) - 0.2, 999.0, _com_legenda(s08))]
 
-SFX = [(T(1) + 0.4, "tum"), (T(2) + 1.2, "heartbeat"), (T(7) + 0.2, "ding"), (T(9) + 1.0, "boom"),
-       (T(12) + 0.2, "ding"), (T(14) + 0.5, "heartbeat"), (T(15) - 0.2, "boom"), (T(16) - 0.2, "tum")]
+# sons de terror (tonais, sem ruído). Cama: AMBIENCE = "terror". 2 sustos: SUSTO1 e SUSTO2.
+SFX = [(T(1) + 0.3, "sino_funebre"),                      # o portão abre sozinho
+       (T(2) + 1.4, "tum"),                               # as flores sumiram
+       (T(4) - 0.2, "coracao_acelerando:%.2f" % (SUSTO1 - T(4) + 0.2)),
+       (SUSTO1 - 3.0, "cordas_subindo"), (SUSTO1, "susto"),
+       (T(7) + 0.05, "vibra_celular"),                    # aí o celular vibrou
+       (T(9) + 1.2, "tum"),                               # conta encerrada em 2006
+       (T(12) + 0.25, "vibra_celular"),                   # vibrou de novo
+       (T(14) + 0.2, "coracao_acelerando:%.2f" % (SUSTO2 - T(14) - 0.2)),
+       (SUSTO2 - 3.0, "cordas_subindo"), (SUSTO2, "susto"),
+       (T(16) - 0.2, "sino_funebre")]                     # cartão da escolha

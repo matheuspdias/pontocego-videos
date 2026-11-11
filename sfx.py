@@ -317,12 +317,15 @@ def build_track(cues, dur, style="light", extra=(), ambience=None, sfx_gain=0.5,
         i = int(t0 * SR)
         out[i:i + len(s)] += s[: n - i]
     for t0, name in extra:
-        s = SOUNDS[name]()
+        nm, _, arg = name.partition(":")  # "coracao_acelerando:3.5" passa a duração
+        s = SOUNDS[nm](float(arg)) if arg else SOUNDS[nm]()
         i = int(t0 * SR)
         out[i:i + len(s)] += s[: n - i]
     out = out[: int(SR * dur)] * sfx_gain
     if ambience == "dark":
         out += ambience_dark(dur, theme) * amb_gain
+    elif ambience == "terror":  # só tons graves dissonantes, sem vento/ruído (TikTok Você decide)
+        out += drone_terror(dur) * amb_gain * 2.2
     return np.clip(out, -1, 1)
 
 
