@@ -1,12 +1,12 @@
 """
-Formato "VOCÊ DECIDE" (TikTok vertical 1080x1920 do Ponto Cego): histórias de suspense em primeira pessoa,
+Formato "VOCÊ DECIDE" (TikTok vertical 1080x1920 do Ponto Cego): histórias de TERROR em primeira pessoa,
 com várias vozes, legenda colorida por personagem e um cartão final "O QUE VOCÊ FARIA?" com opções A e B.
 
     from engine import *
     VERTICAL = True            # antes do import do ilustrado
     from ilustrado import *
     from pov import *
-    STYLE = "ilustrado"; TOM = "sombrio"
+    STYLE = "ilustrado"; TOM = "sombrio"   # SEMPRE sombrio no TikTok (o render.py força); efeitos sonoros sempre ligados
     LN = linhas(__file__)       # tempos de cada fala (videos/<slug>/linhas.json, gerado pelo montar_falas.py)
     ...  LN.t0(3), LN.t1(3), LN.fim, LN.dur
 

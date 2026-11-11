@@ -37,6 +37,9 @@ def load_scenes(path):
     engine.set_theme(theme_of(m))
     engine.STYLE = getattr(m, "STYLE", "giz")
     engine.TOM = getattr(m, "TOM", "normal")
+    if VERTICAL and engine.TOM != "sombrio":  # TikTok do Ponto Cego (Você decide) é sempre sombrio/terror
+        print(f"aviso: TOM {engine.TOM!r} trocado por 'sombrio' (regra do TikTok do Ponto Cego)")
+        engine.TOM = "sombrio"
     return m.SCENES
 
 
@@ -59,7 +62,7 @@ def make_sfx(scenes_path, dur, out_wav):
             engine._CUES.append((st, "transition"))
     cues = engine._CUES
     engine._CUES = None
-    if getattr(m, "SFX_OFF", False):
+    if getattr(m, "SFX_OFF", False) and not getattr(m, "VERTICAL", False):
         cues = []
     track = sfx.build_track(cues, dur, getattr(m, "SFX_STYLE", SFX_STYLE), getattr(m, "SFX", ()),
                             getattr(m, "AMBIENCE", SFX_AMBIENCE), getattr(m, "SFX_GAIN", 0.5), theme=engine.THEMES[theme])

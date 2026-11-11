@@ -228,12 +228,13 @@ Novos no `ilustrado.py`: `farol_i(c, t, x, y, s, aceso)`, `ilha_rochosa`, `cena_
 
 
 ## Formato "Você decide" (TikTok vertical, histórias em primeira pessoa com escolha A/B)
+- **Identidade do TikTok: terror, não mistério.** Toda história é de terror (assombração, aparição, coisa que não devia estar ali), sempre `TOM = "sombrio"` com o kit de terror abaixo (olhos estranhos, 1 ou 2 sustos, sons de terror). O `render.py` força `sombrio` e liga os efeitos sonoros em todo vídeo vertical, mesmo que o `scenes.py` diga outra coisa.
 - Motor: `pov.py` (carro em primeira pessoa, retrovisor, celular nas mãos, telas de app de corrida, Pix, WhatsApp e bloqueio, portão de cemitério, legendas por personagem, etiqueta de lugar e hora, selo do episódio, faixa "Vocês escolheram", cartão final com contagem e A/B). Modelos: `videos/vd-corrida-ep1/` e `videos/vd-corrida-ep2/`.
 - Vozes: um bloco do HeyGen por personagem, com todas as falas dele na ordem; `montar_falas.py` recorta pelo tempo das palavras e monta na ordem do roteiro (`falas.json` -> `linhas.json` + narração). Antes do áudio: `--estimar`.
 - Gancho do episódio anterior: `resumo.py videos/<slug>` com `resumo.json` colado antes do episódio. Padrão aprovado: só o FINAL do episódio anterior (a última fala de tensão antes da escolha, uns 4 a 6 s), em velocidade normal, com som e legenda originais e o selo "NO EP. X": `{"velocidade": 1, "cortes": [{"t": .., "dur": ..}]}`. Nada de cortes acelerados (ficou ininteligível). O arquivo para postar é o `*_final.mp4`.
 
-### Terror de verdade (Você decide, a partir do ep. 3)
-- `TOM = "sombrio"` e `SFX_OFF = False`.
+### Kit de terror (obrigatório no Você decide desde o ep. 3)
+- `TOM = "sombrio"`; não use `SFX_OFF` (o som de terror é metade do susto).
 - Olhos estranhos no `boneco(..., olhos=...)`: `fixos`, `vazios`, `brancos`, `pretos` (nunca piscam e tiram a bochecha corada). Aceita função de t para virar no susto: `olhos=lambda t: "normal" if t < T0 else "vazios"`. Expressão `"sinistro"` = sorriso fino largo demais.
 - Sons de terror (todos tonais, sem ruído) em `sfx.SOUNDS`: `drone_terror`, `coracao_acelerando`, `cordas_subindo` (3 s antes do susto), `susto`, `sino_funebre`, `vibra_celular`.
 - Receita do susto: zoom lento no retrovisor + coração acelerando + cordas subindo, corte seco para o close com flash branco curto, tremida de 0,5 s e `susto`. No máximo 1 ou 2 sustos por episódio. Exemplo em `examples/teste_terror_demo.py`.
