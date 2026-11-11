@@ -1,0 +1,14 @@
+{
+ "anterior": "out/vd-corrida-ep1.mp4",
+ "atual": "out/vd-corrida-ep2.mp4",
+ "saida": "out/vd-corrida-ep2_final.mp4",
+ "selo": "NO EP. 1",
+ "velocidade": 2.3,
+ "cortes": [
+  {"t": 8.6, "dur": 2.3, "texto": "2H47: CORRIDA PRO CEMITÉRIO"},
+  {"t": 20.9, "dur": 2.3, "texto": "O PASSAGEIRO: SEU ANTÔNIO"},
+  {"t": 34.2, "dur": 2.3, "texto": "O APP: ELE NÃO EMBARCOU"},
+  {"t": 44.0, "dur": 2.3, "texto": "O BANCO FICOU VAZIO"},
+  {"t": 55.2, "dur": 2.3, "texto": "PARAR OU IR ATÉ O PORTÃO?"}
+ ]
+}

@@ -225,3 +225,9 @@ Novos no `ilustrado.py`: `farol_i(c, t, x, y, s, aceso)`, `ilha_rochosa`, `cena_
 - `placa` agora mede também o subtítulo (antes um subtítulo maior que o título vazava do cartão).
 - Vídeos com mais de 999 s: a última cena termina em `9999.0` (o fim só regula o zoom lento).
 - `videos/colonia-roanoke/tempos.py` lê as respostas do HeyGen salvas em `ts/bN.json` (`words` = [texto, início, fim], com as tags faladas) e casa com o roteiro, pulando tags e juntando palavras com hífen. A ferramenta `create_speech` atual não tem mais `engine`/`settings`: a voz Pedro Lima é chamada só com `voiceId`, `language: "pt"` e `withTimestamps: true`. A resposta passa de 180 mil caracteres por bloco, então cada bloco foi gerado por um subagente que gravou só as palavras em `ts/bN.json`.
+
+
+## Formato "Você decide" (TikTok vertical, histórias em primeira pessoa com escolha A/B)
+- Motor: `pov.py` (carro em primeira pessoa, retrovisor, celular nas mãos, telas de app de corrida, Pix, WhatsApp e bloqueio, portão de cemitério, legendas por personagem, etiqueta de lugar e hora, selo do episódio, faixa "Vocês escolheram", cartão final com contagem e A/B). Modelos: `videos/vd-corrida-ep1/` e `videos/vd-corrida-ep2/`.
+- Vozes: um bloco do HeyGen por personagem, com todas as falas dele na ordem; `montar_falas.py` recorta pelo tempo das palavras e monta na ordem do roteiro (`falas.json` -> `linhas.json` + narração). Antes do áudio: `--estimar`.
+- Resumo do episódio anterior: `resumo.py videos/<slug>` com `resumo.json` (4 a 6 cortes acelerados do episódio anterior, cada um com uma frase grande; 4 a 6 s no total) colado antes do episódio. O arquivo para postar é o `*_final.mp4`.
