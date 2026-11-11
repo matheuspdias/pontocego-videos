@@ -1,6 +1,8 @@
 """
-Resumo rápido do episódio anterior ("Você decide", TikTok vertical): 4 a 6 cortes acelerados do episódio
-anterior, cada um com uma frase grande, colados ANTES do episódio atual.
+Gancho do episódio anterior ("Você decide", TikTok vertical), colado ANTES do episódio atual.
+PADRÃO (o Matheus aprovou): só o FINAL do episódio anterior, em velocidade normal, com som e legenda originais e o
+selo "NO EP. X" (a última fala de tensão antes da escolha, uns 4 a 6 s): {"velocidade": 1, "cortes": [{"t": .., "dur": ..}]}.
+Cortes acelerados com frase (velocidade > 1, "texto") existem, mas ficaram ruins: não use.
 
     python resumo.py videos/<slug-atual>            # usa videos/<slug-atual>/resumo.json
     python resumo.py videos/<slug-atual> --so-resumo # gera só o resumo (out/<slug>_resumo.mp4) para conferir
@@ -15,8 +17,7 @@ videos/<slug>/resumo.json:
   "cortes": [{"t": 8.5, "dur": 2.2, "texto": "2H47: CORRIDA PRO CEMITÉRIO"}, ...]
 }
 O áudio do episódio anterior entra acelerado e baixo (efeito de "avançar"); a voz do episódio atual começa limpa.
-Regra de ouro: o resumo inteiro fica entre 4 e 6 s. Escolha os momentos com imagem forte (a corrida, o rosto,
-a virada, a escolha), não os de explicação.
+Regra de ouro: 4 a 6 s, a fala mais tensa do fim do episódio anterior, inteira, sem acelerar.
 """
 import argparse
 import json
@@ -34,6 +35,15 @@ FONTE = "Montserrat ExtraBold"
 def overlay_png(path, texto, selo, k, n):
     s = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     c = cairo.Context(s)
+    if not texto:  # trecho em velocidade normal: mantém a legenda original, só põe o selo no topo
+        c.select_font_face(FONTE); c.set_font_size(40)
+        e = c.text_extents(selo)
+        bw = e.x_advance + 60
+        c.set_source_rgba(0.80, 0.13, 0.12, 0.95)
+        _rr(c, W / 2 - bw / 2, 190, bw, 70, 16); c.fill()
+        c.set_source_rgb(1, 1, 1); c.move_to(W / 2 - e.x_advance / 2, 240); c.show_text(selo)
+        s.write_to_png(path)
+        return
     # cobre a legenda queimada do episódio anterior
     g = cairo.LinearGradient(0, 1220, 0, 1720)
     g.add_color_stop_rgba(0, 0, 0, 0, 0); g.add_color_stop_rgba(0.22, 0, 0, 0, 0.96)
@@ -90,13 +100,16 @@ def gerar_resumo(cfg, saida):
     ins, filt = [], []
     for k, ct in enumerate(cfg["cortes"]):
         png = os.path.join(tmp, f"o{k}.png")
-        overlay_png(png, ct["texto"], cfg.get("selo", "NO EPISÓDIO ANTERIOR"), k, n)
+        overlay_png(png, ct.get("texto", ""), cfg.get("selo", "NO EPISÓDIO ANTERIOR"), k, n)
         ins += ["-ss", str(ct["t"]), "-t", str(ct.get("dur", 2.2)), "-i", cfg["anterior"], "-i", png]
         a, b = 2 * k, 2 * k + 1
         # acelera, dá um leve zoom e põe a frase
-        filt.append(f"[{a}:v]setpts=(PTS-STARTPTS)/{v},scale={int(W * 1.06)}:{int(H * 1.06)},crop={W}:{H},fps=30[v{k}a];"
+        zoom = "" if v == 1 else f",scale={int(W * 1.06)}:{int(H * 1.06)},crop={W}:{H}"
+        filt.append(f"[{a}:v]setpts=(PTS-STARTPTS)/{v}{zoom},fps=30[v{k}a];"
                     f"[v{k}a][{b}:v]overlay=0:0,format=yuv420p[v{k}]")
-        filt.append(f"[{a}:a]asetpts=PTS-STARTPTS,{atempo(v)},volume=0.30[a{k}]")
+        vol = 1.0 if v == 1 else 0.30
+        tempo = "" if v == 1 else atempo(v) + ","
+        filt.append(f"[{a}:a]asetpts=PTS-STARTPTS,{tempo}volume={vol},afade=t=in:d=0.15,afade=t=out:st={ct.get('dur', 2.2) / v - 0.25:.2f}:d=0.25[a{k}]")
     cat = "".join(f"[v{k}][a{k}]" for k in range(n))
     filt.append(f"{cat}concat=n={n}:v=1:a=1[v][a]")
     subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, "-filter_complex", ";".join(filt), "-map", "[v]", "-map", "[a]",
