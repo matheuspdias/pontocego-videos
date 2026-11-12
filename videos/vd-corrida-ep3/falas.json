@@ -1,0 +1,30 @@
+{
+ "serie": "A última corrida",
+ "episodio": 3,
+ "escolha_anterior": "A · recusar a corrida",
+ "cauda": 9.0,
+ "vozes": {
+  "voce": {"voice_id": "0d0e23e8170446e38b18a7380b2d30a8", "nome": "Pedro Lima (você)"},
+  "passageiro": {"voice_id": "3b2a59d6edb54e79a40b29726a12d1c3", "nome": "Calm Carlos (Seu Antônio)"}
+ },
+ "falas": [
+  {"quem": "voce", "pensa": true, "texto": "Eu recusei a corrida. Desliguei o aplicativo e fui direto pra casa."},
+  {"quem": "voce", "pensa": true, "texto": "Tranquei a porta. Deixei a luz da sala acesa.", "pausa": 0.7},
+  {"quem": "voce", "pensa": true, "texto": "Acabou. Foi só uma noite estranha.", "pausa": 1.0},
+  {"quem": "voce", "pensa": true, "texto": "Três e trinta e três, o celular vibrou.", "pausa": 0.8},
+  {"quem": "voce", "pensa": true, "texto": "O aplicativo que eu tinha desligado."},
+  {"quem": "voce", "pensa": true, "texto": "Passageiro chegou ao destino.", "pausa": 0.8},
+  {"quem": "voce", "pensa": true, "texto": "Que destino? Eu recusei.", "pausa": 0.9},
+  {"quem": "voce", "pensa": true, "texto": "Aí veio o cheiro. Cheiro de flor. Igual no banco de trás.", "pausa": 0.8},
+  {"quem": "voce", "pensa": true, "texto": "Fui até a porta e olhei pelo olho mágico."},
+  {"quem": "voce", "pensa": true, "texto": "Tinha um buquê de flores no meu tapete.", "pausa": 0.8},
+  {"quem": "voce", "pensa": true, "texto": "E do outro lado da rua, embaixo do poste... ele.", "pausa": 0.9},
+  {"quem": "voce", "pensa": true, "texto": "Parado. De terno. Olhando pra minha janela."},
+  {"quem": "voce", "pensa": true, "texto": "Eu pisquei. E o poste tava vazio.", "pausa": 1.2},
+  {"quem": "voce", "pensa": true, "texto": "Três batidas na porta.", "pausa": 1.4},
+  {"quem": "passageiro", "texto": "Você não veio me buscar, meu filho...", "pausa": 0.8},
+  {"quem": "passageiro", "texto": "Então eu vim a pé.", "pausa": 1.0},
+  {"quem": "passageiro", "texto": "Abre a porta. Tá frio aqui fora.", "pausa": 1.0},
+  {"quem": "voce", "texto": "E aí? Abre a porta ou finge que não tem ninguém?", "pausa": 1.0}
+ ]
+}

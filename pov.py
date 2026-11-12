@@ -715,3 +715,146 @@ def resultado_voto(c, t, letra="B", texto="LEVAR ATÉ O PORTÃO", t1=3.2, y=300,
     rr(c, W / 2 - e.x_advance / 2 - 30, y + 24, e.x_advance + 60, 80, 20); rgb(c, cor); c.fill()
     c.move_to(W / 2 - e.x_advance / 2, y + 80); rgb(c, (1, 1, 1)); c.show_text(s_)
     c.pop_group_to_source(); c.paint_with_alpha(a); c.restore()
+
+
+# ================================================================ casa à noite (A última corrida, parte 3)
+MADEIRA_PORTA = (0.30, 0.20, 0.14)
+
+
+def sala_noite(c, t, abajur=1.0, porta_luz=0.0):
+    """sala do apartamento de madrugada em primeira pessoa: janela com o poste lá fora, sofá, abajur,
+    porta da frente à direita (com corrente). abajur 0..1 = luz quente acesa; porta_luz = fresta sob a porta"""
+    lgrad(c, 0, 0, 0, H, [(0, (0.09, 0.10, 0.14), 1), (0.62, (0.12, 0.12, 0.16), 1), (0.62, (0.16, 0.11, 0.08), 1), (1, (0.08, 0.06, 0.05), 1)]); c.paint()
+    # rodapé
+    c.rectangle(0, H * 0.62 - 14, W, 14); rgb(c, (0.06, 0.06, 0.08)); c.fill()
+    # janela (esquerda) com a rua e o poste
+    wx, wy, ww, wh = 70, 360, 430, 560
+    rr(c, wx - 16, wy - 16, ww + 32, wh + 32, 8); rgb(c, (0.05, 0.05, 0.07)); c.fill()
+    lgrad(c, wx, wy, wx, wy + wh, [(0, (0.04, 0.06, 0.12), 1), (1, (0.10, 0.10, 0.16), 1)]); c.rectangle(wx, wy, ww, wh); c.fill()
+    for i in range(4):
+        c.rectangle(wx + 20 + i * 105, wy + 300 - (i % 2) * 60, 80, 260 + (i % 2) * 60); rgb(c, (0.05, 0.05, 0.08)); c.fill()
+    rglow(c, wx + ww * 0.7, wy + 260, 120, (1.0, 0.85, 0.55), 0.35)
+    c.rectangle(wx + ww / 2 - 5, wy, 10, wh); c.rectangle(wx, wy + wh / 2 - 5, ww, 10); rgb(c, (0.05, 0.05, 0.07)); c.fill()
+    for lado in (0, 1):  # cortinas
+        x0 = wx - 40 if lado == 0 else wx + ww - 60
+        pg(c, [(x0, wy - 40), (x0 + 100, wy - 40), (x0 + 80 + 10 * math.sin(t * 0.8 + lado), wy + wh + 60), (x0 - 10, wy + wh + 60)])
+        rgb(c, (0.22, 0.10, 0.12)); c.fill()
+    # porta da frente (direita)
+    dx, dy, dw, dh = 690, 330, 330, 870
+    rr(c, dx - 20, dy - 20, dw + 40, dh + 20, 6); rgb(c, (0.07, 0.06, 0.06)); c.fill()
+    c.rectangle(dx, dy, dw, dh); rgb(c, P(MADEIRA_PORTA)); c.fill()
+    for yy in (dy + 60, dy + 480):
+        rr(c, dx + 40, yy, dw - 80, 340, 6); rgb(c, (0, 0, 0), 0.18); c.set_line_width(6); c.stroke()
+    c.new_sub_path(); c.arc(dx + dw - 50, dy + 470, 16, 0, 6.283); rgb(c, (0.78, 0.65, 0.35)); c.fill()
+    c.move_to(dx + dw - 70, dy + 380); c.line_to(dx + dw + 14, dy + 384)  # corrente passada
+    rgb(c, (0.70, 0.70, 0.72)); c.set_line_width(5); c.set_dash([10, 5]); c.stroke(); c.set_dash([])
+    c.new_sub_path(); c.arc(dx + dw / 2, dy + 260, 9, 0, 6.283); rgb(c, (0.80, 0.68, 0.38)); c.fill()  # olho mágico
+    if porta_luz > 0:
+        c.rectangle(dx, dy + dh - 6, dw, 6); rgb(c, (1.0, 0.86, 0.6), porta_luz); c.fill()
+        rglow(c, dx + dw / 2, dy + dh + 10, 220, (1.0, 0.86, 0.6), 0.25 * porta_luz)
+    # sofá
+    rr(c, 40, 1000, 620, 220, 40); rgb(c, (0.20, 0.22, 0.30)); c.fill()
+    rr(c, 20, 1120, 660, 200, 40); rgb(c, (0.24, 0.26, 0.34)); c.fill()
+    # abajur
+    c.rectangle(560, 840, 12, 380); rgb(c, (0.08, 0.08, 0.1)); c.fill()
+    pg(c, [(510, 760), (620, 760), (650, 860), (480, 860)]); rgb(c, (0.85, 0.75, 0.55) if abajur > 0.05 else (0.25, 0.22, 0.2)); c.fill()
+    if abajur > 0.05:
+        rglow(c, 565, 860, 520, (1.0, 0.80, 0.50), 0.45 * abajur)
+    # chão
+    c.rectangle(0, H * 0.62 + 600, W, H); rgb(c, (0.07, 0.05, 0.04)); c.fill()
+
+
+def porta_dentro(c, t, tremor=0.0, fresta=0.6, pes=False, corrente=True):
+    """a porta da frente vista de perto, por dentro (olho mágico na altura dos olhos). tremor 0..1 nas batidas.
+    pes=True: duas sombras de pés na luz da fresta (tem alguém do outro lado)"""
+    lgrad(c, 0, 0, 0, H, [(0, (0.08, 0.08, 0.11), 1), (1, (0.04, 0.04, 0.05), 1)]); c.paint()
+    sx = math.sin(t * 70) * 10 * tremor
+    c.save(); c.translate(sx, 0)
+    dx, dy, dw, dh = 150, 160, 780, 1640
+    c.rectangle(dx - 40, dy - 40, dw + 80, dh + 80); rgb(c, (0.06, 0.05, 0.05)); c.fill()
+    lgrad(c, dx, 0, dx + dw, 0, [(0, P((0.26, 0.17, 0.12)), 1), (0.5, P(MADEIRA_PORTA), 1), (1, P((0.24, 0.16, 0.11)), 1)])
+    c.rectangle(dx, dy, dw, dh); c.fill()
+    for yy, hh in ((dy + 120, 560), (dy + 820, 700)):
+        rr(c, dx + 90, yy, dw - 180, hh, 10); rgb(c, (0, 0, 0), 0.22); c.set_line_width(10); c.stroke()
+        rr(c, dx + 96, yy + 6, dw - 192, hh - 12, 8); rgb(c, (1, 1, 1), 0.04); c.set_line_width(3); c.stroke()
+    # olho mágico
+    c.new_sub_path(); c.arc(W / 2, 560, 30, 0, 6.283); rgb(c, (0.72, 0.60, 0.32)); c.fill()
+    c.new_sub_path(); c.arc(W / 2, 560, 15, 0, 6.283); rgb(c, (0.05, 0.05, 0.06)); c.fill()
+    c.new_sub_path(); c.arc(W / 2 - 5, 555, 4, 0, 6.283); rgb(c, (1, 1, 1), 0.5); c.fill()
+    # maçaneta e trava
+    c.new_sub_path(); c.arc(dx + dw - 90, 1060, 34, 0, 6.283); rgb(c, (0.75, 0.63, 0.34)); c.fill()
+    rr(c, dx + dw - 104, 900, 28, 70, 8); rgb(c, (0.70, 0.58, 0.30)); c.fill()
+    if corrente:
+        cx0, cy0, cx1, cy1 = dx + dw - 70, 760, dx + dw + 40, 780
+        for k in range(9):
+            q = k / 8; x = cx0 + (cx1 - cx0) * q; y = cy0 + (cy1 - cy0) * q + math.sin(q * 3.14) * 40 + math.sin(t * 50) * 6 * tremor
+            ellipse(c, x, y, 11, 7); rgb(c, (0.72, 0.72, 0.75)); c.set_line_width(4); c.stroke()
+    c.restore()
+    # fresta de luz embaixo
+    if fresta > 0:
+        c.rectangle(dx, dy + dh + 30, dw, 14); rgb(c, (1.0, 0.86, 0.62), fresta); c.fill()
+        g = cairo.LinearGradient(0, dy + dh + 44, 0, H); g.add_color_stop_rgba(0, 1.0, 0.86, 0.62, 0.30 * fresta); g.add_color_stop_rgba(1, 1, 0.86, 0.62, 0)
+        c.set_source(g); c.rectangle(dx - 100, dy + dh + 44, dw + 200, H); c.fill()
+        if pes:
+            for px in (W / 2 - 120, W / 2 + 60):
+                c.rectangle(px, dy + dh + 30, 70, 14); rgb(c, (0.02, 0.02, 0.02)); c.fill()
+                pg(c, [(px, dy + dh + 44), (px + 70, dy + dh + 44), (px + 110, H), (px - 40, H)]); rgb(c, (0, 0, 0), 0.35); c.fill()
+
+
+def rua_fora(c, t, poste=True, quem=None, flores_tapete=True, x_poste=650, olhar=0.0):
+    """o que se vê da porta: tapete com flores, a calçada, a rua e, do outro lado, o poste (com ele embaixo)"""
+    luz("noite")
+    lgrad(c, 0, 0, 0, 700, [(0, (0.02, 0.03, 0.07), 1), (1, (0.06, 0.07, 0.12), 1)]); c.rectangle(0, 0, W, 700); c.fill()
+    rnd = random.Random(11)
+    x = -40
+    while x < W:  # casas do outro lado
+        w_ = rnd.uniform(160, 260); h_ = rnd.uniform(220, 380)
+        c.rectangle(x, 700 - h_, w_ - 10, h_); rgb(c, (0.05, 0.05, 0.08)); c.fill()
+        for j in range(2):
+            if rnd.random() < 0.3:
+                c.rectangle(x + 30 + j * 80, 700 - h_ + 60, 40, 50); rgb(c, (0.9, 0.75, 0.45), 0.6); c.fill()
+        x += w_
+    c.rectangle(0, 700, W, 60); rgb(c, (0.12, 0.12, 0.14)); c.fill()               # calçada de lá
+    lgrad(c, 0, 760, 0, 1080, [(0, (0.08, 0.08, 0.10), 1), (1, (0.11, 0.11, 0.13), 1)]); c.rectangle(0, 760, W, 320); c.fill()
+    for i in range(5):
+        c.rectangle(80 + i * 220, 910, 120, 10); rgb(c, (0.75, 0.70, 0.45), 0.5); c.fill()
+    c.rectangle(0, 1080, W, 200); rgb(c, (0.17, 0.17, 0.19)); c.fill()            # calçada de cá
+    lgrad(c, 0, 1280, 0, H, [(0, (0.20, 0.17, 0.14), 1), (1, (0.12, 0.10, 0.08), 1)]); c.rectangle(0, 1280, W, H); c.fill()
+    if poste:
+        homem_poste(c, t, x_poste, 760, 0.62, quem=quem, flores=False, look=olhar)
+    else:  # só o poste aceso
+        _poste_vazio(c, x_poste, 760, 0.62)
+    # tapete com o buquê
+    pg(c, [(220, 1450), (860, 1450), (960, 1800), (120, 1800)]); rgb(c, (0.32, 0.14, 0.12)); c.fill()
+    pg(c, [(250, 1470), (830, 1470), (920, 1780), (160, 1780)]); rgb(c, (0.40, 0.20, 0.16)); c.set_line_width(6); c.stroke()
+    if flores_tapete:
+        c.save(); c.translate(560, 1640); c.rotate(-1.35); flores_i(c, 2.0); c.restore()
+
+
+def _poste_vazio(c, x, y, s):
+    c.move_to(x - 30 * s, y - 520 * s); c.line_to(x + 30 * s, y - 520 * s); c.line_to(x + 240 * s, y + 10); c.line_to(x - 240 * s, y + 10)
+    c.close_path(); lgrad(c, x, y - 520 * s, x, y, [(0, (1.0, 0.85, 0.55), 0.35), (1, (1.0, 0.85, 0.55), 0.06)]); c.fill()
+    c.rectangle(x - 140 * s, y - 560 * s, 10 * s, 560 * s); rgb(c, (0.05, 0.05, 0.06)); c.fill()
+    c.move_to(x - 135 * s, y - 560 * s); c.line_to(x, y - 540 * s); rgb(c, (0.05, 0.05, 0.06)); c.set_line_width(8 * s); c.stroke()
+    rglow(c, x, y - 530 * s, 120 * s, (1.0, 0.85, 0.55), 0.6)
+
+
+def olho_magico(c, t, fora, cx=None, cy=None, foco=(540, 960), zoom=1.0, r=470):
+    """a visão pelo olho mágico: tudo preto, um círculo com a cena lá fora encolhida e curvada (olho de peixe),
+    escurecida na borda. fora(c, t) desenha a cena em tela cheia; foco = ponto da cena que fica no centro."""
+    cx = W / 2 if cx is None else cx; cy = H * 0.46 if cy is None else cy
+    c.set_source_rgb(0, 0, 0); c.paint()
+    c.save()
+    c.new_sub_path(); c.arc(cx, cy, r, 0, 6.283); c.clip()
+    s = 0.62 * zoom
+    c.save(); c.translate(cx, cy); c.scale(s, s); c.translate(-foco[0], -foco[1])
+    fora(c, t)
+    c.restore()
+    g = cairo.RadialGradient(cx, cy, r * 0.45, cx, cy, r)
+    g.add_color_stop_rgba(0, 0, 0, 0, 0); g.add_color_stop_rgba(0.75, 0, 0, 0, 0.45); g.add_color_stop_rgba(1, 0, 0, 0, 0.97)
+    c.set_source(g); c.paint()
+    g = cairo.RadialGradient(cx - r * 0.35, cy - r * 0.4, 0, cx - r * 0.35, cy - r * 0.4, r * 0.5)  # reflexo da lente
+    g.add_color_stop_rgba(0, 1, 1, 1, 0.08); g.add_color_stop_rgba(1, 1, 1, 1, 0)
+    c.set_source(g); c.paint()
+    c.restore()
+    c.new_sub_path(); c.arc(cx, cy, r + 6, 0, 6.283); rgb(c, (0.35, 0.28, 0.15), 0.6); c.set_line_width(12); c.stroke()

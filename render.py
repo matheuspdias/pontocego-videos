@@ -84,7 +84,7 @@ def remix(scenes_path, audio, video_in, out_mp4, abr="160k"):
     tmp = tempfile.mkdtemp()
     sfx_wav = f"{tmp}/sfx.wav"
     ncues, sfx_peak = make_sfx(scenes_path, dur, sfx_wav)
-    vol = 10 ** ((max_db(audio) - float(os.environ.get("SFX_DB", "12")) - sfx_peak) / 20)
+    vol = 10 ** ((max_db(audio) - float(os.environ.get("SFX_DB", "6" if VERTICAL else "12")) - sfx_peak) / 20)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", video_in, "-i", audio, "-i", sfx_wav, "-filter_complex", mix_graph(vol),
                     "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", abr, "-ar", "48000", "-shortest",
                     "-movflags", "+faststart", out_mp4], check=True)
@@ -204,7 +204,7 @@ def build(scenes_path, audio, out_mp4, crf=None):
     ncues, sfx_peak = make_sfx(scenes_path, dur, sfx_wav)
     # efeitos ficam SFX_DB abaixo do pico da narração (padrão 12 dB) para nunca competir com a voz
     narr_peak = -3.0 if silent else max_db(audio)
-    sfx_db = float(os.environ.get("SFX_DB", "12"))
+    sfx_db = float(os.environ.get("SFX_DB", "6" if VERTICAL else "12"))
     vol = 10 ** ((narr_peak - sfx_db - sfx_peak) / 20)
     print(f"efeitos sonoros: {ncues} eventos, volume {vol:.2f}")
     mix = mix_graph(vol)

@@ -1,0 +1,8 @@
+{
+ "anterior": "out/vd-corrida-ep2.mp4",
+ "atual": "out/vd-corrida-ep3.mp4",
+ "saida": "out/vd-corrida-ep3_final.mp4",
+ "selo": "NA PARTE 2",
+ "velocidade": 1,
+ "cortes": [{"t": 46.2, "dur": 5.6}]
+}

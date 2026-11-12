@@ -250,7 +250,17 @@ def vibra_celular(n=2):
     return _norm(out, 0.4)
 
 
-SOUNDS.update(drone_terror=drone_terror, coracao_acelerando=coracao_acelerando, cordas_subindo=cordas_subindo,
+def batidas_porta(n=3, intervalo=0.32):
+    """batidas secas numa porta de madeira (tonal: baque grave + corpo da madeira, sem ruído)"""
+    out = np.zeros(int(SR * (n * intervalo + 0.6)))
+    for k in range(n):
+        d = 0.35; t = _t(d)
+        x = _sweep(150, 55, d) * _env(len(t), 0.001, 0.09) + 0.5 * np.sin(2 * np.pi * 310 * t) * _env(len(t), 0.001, 0.03)
+        i = int(k * intervalo * SR); out[i:i + len(x)] += x
+    return _norm(out, 0.9)
+
+
+SOUNDS.update(batidas_porta=batidas_porta, drone_terror=drone_terror, coracao_acelerando=coracao_acelerando, cordas_subindo=cordas_subindo,
               susto=susto, sino_funebre=sino_funebre, vibra_celular=vibra_celular)
 
 
