@@ -92,6 +92,53 @@ def tag_local(c, t, texto, y=118, t0=0.0):
     c.restore()
 
 
+def capa_serie(c, serie, parte, gancho, fundo=None, destaque=None, rodape="VOCÊ DECIDE O FINAL"):
+    """CAPA PADRÃO do Você decide (o grid do perfil mostra o miolo 3:4, y 240 a 1680: tudo importante fica lá).
+    Quem cai no perfil procura a SÉRIE e a PARTE, então as duas são as maiores coisas da capa, sempre no mesmo
+    lugar (o perfil vira uma coleção que se lê em ordem):
+      serie: nome fixo da série ("A ÚLTIMA CORRIDA"), igual em todas as partes
+      parte: número (int) → selo gigante "PARTE 2"
+      gancho: 1 ou 2 linhas curtas do episódio (["PIX DE QUEM", "MORREU HÁ 20 ANOS"]), a última em amarelo
+      fundo(c): a cena (fica escurecida); destaque(c): o objeto/rosto do episódio, desenhado na metade de baixo"""
+    if fundo:
+        fundo(c)
+    else:
+        lgrad(c, 0, 0, 0, H, [(0, (0.05, 0.06, 0.09), 1), (1, (0.01, 0.01, 0.02), 1)]); c.paint()
+    c.rectangle(0, 0, W, H); rgb(c, (0, 0, 0), 0.45); c.fill()
+    if destaque:
+        destaque(c)
+    # escurece atrás do texto (topo) e do rodapé
+    lgrad(c, 0, 240, 0, 1000, [(0, (0, 0, 0), 0.85), (0.75, (0, 0, 0), 0.55), (1, (0, 0, 0), 0.0)]); c.rectangle(0, 240, W, 760); c.fill()
+    # 1) nome da série: faixa vermelha
+    sz = 74; e = _txt(c, serie, sz)
+    while e.x_advance > W - 160 and sz > 44:
+        sz -= 4; e = _txt(c, serie, sz)
+    bw = e.x_advance + 70
+    rr(c, W / 2 - bw / 2, 285, bw, sz + 46, 14); rgb(c, (0.72, 0.10, 0.10), 0.97); c.fill()
+    c.move_to(W / 2 - e.x_advance / 2, 285 + (sz + 46) / 2 + sz * 0.36); rgb(c, (1, 1, 1)); c.show_text(serie)
+    # 2) PARTE N gigante
+    txt = "PARTE %d" % parte if isinstance(parte, int) else str(parte)
+    sz = 190; e = _txt(c, txt, sz)
+    while e.x_advance > W - 120:
+        sz -= 6; e = _txt(c, txt, sz)
+    _contorno(c, txt, W / 2 - e.x_advance / 2, 560, sz, (1.0, 0.82, 0.30))
+    # 3) gancho do episódio
+    gl = [gancho] if isinstance(gancho, str) else list(gancho)
+    y = 700
+    for i, ln in enumerate(gl):
+        sz = 78; e = _txt(c, ln, sz)
+        while e.x_advance > W - 120 and sz > 44:
+            sz -= 4; e = _txt(c, ln, sz)
+        col = (1.0, 0.82, 0.30) if (i == len(gl) - 1 and len(gl) > 1) else (0.98, 0.97, 0.94)
+        _contorno(c, ln, W / 2 - e.x_advance / 2, y, sz, col)
+        y += sz + 18
+    # 4) rodapé (dentro do miolo 3:4)
+    if rodape:
+        lgrad(c, 0, 1480, 0, 1680, [(0, (0, 0, 0), 0), (1, (0, 0, 0), 0.8)]); c.rectangle(0, 1480, W, 200); c.fill()
+        e = _txt(c, rodape, 44)
+        c.move_to(W / 2 - e.x_advance / 2, 1635); rgb(c, (0.98, 0.95, 0.88)); c.show_text(rodape)
+
+
 def selo_ep(c, texto="EP. 1", x=60, y=118):
     e = _txt(c, texto, 30)
     rr(c, x, y - 28, e.x_advance + 40, 56, 12); rgb(c, (0.75, 0.13, 0.12), 0.95); c.fill()

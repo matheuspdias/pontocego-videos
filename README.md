@@ -239,6 +239,11 @@ Novos no `ilustrado.py`: `farol_i(c, t, x, y, s, aceso)`, `ilha_rochosa`, `cena_
 - Vozes: um bloco do HeyGen por personagem, com todas as falas dele na ordem; `montar_falas.py` recorta pelo tempo das palavras e monta na ordem do roteiro (`falas.json` -> `linhas.json` + narração). Antes do áudio: `--estimar`.
 - Gancho do episódio anterior: `resumo.py videos/<slug>` com `resumo.json` colado antes do episódio. Padrão aprovado: só o FINAL do episódio anterior (a última fala de tensão antes da escolha, uns 4 a 6 s), em velocidade normal, com som e legenda originais e o selo "NO EP. X": `{"velocidade": 1, "cortes": [{"t": .., "dur": ..}]}`. Nada de cortes acelerados (ficou ininteligível). O arquivo para postar é o `*_final.mp4`.
 
+### Capa (thumbnail) do Você decide: série + parte em destaque
+Muita gente cai no perfil procurando a parte certa da história. Por isso a capa usa sempre `capa_serie(c, serie, parte, gancho, fundo, destaque)` (pov.py):
+nome fixo da série na faixa vermelha, "PARTE N" gigante logo abaixo, gancho curto do episódio, imagem na metade de baixo. Tudo importante no miolo 3:4 (y 240 a 1680), que é o que aparece no grid do perfil. O nome da série é o mesmo em todas as partes; série nova = nome novo. Modelos: `videos/vd-corrida-ep1/capa.py` e `ep2/capa.py` (as antigas ficaram em `capa_antiga.py`).
+Legenda do post começa com "<SÉRIE> · Parte N" e, a partir da parte 2, "Parte 1 fixada no perfil".
+
 ### Kit de terror (obrigatório no Você decide desde o ep. 3)
 - `TOM = "sombrio"`; não use `SFX_OFF` (o som de terror é metade do susto).
 - Olhos estranhos no `boneco(..., olhos=...)`: `fixos`, `vazios`, `brancos`, `pretos` (nunca piscam e tiram a bochecha corada). Aceita função de t para virar no susto: `olhos=lambda t: "normal" if t < T0 else "vazios"`. Expressão `"sinistro"` = sorriso fino largo demais.
